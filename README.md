@@ -169,7 +169,7 @@ class CmsApiClient extends WpApiClient {
     public product(): {
         find: () => Promise<WPProduct[]>
         findOne: (id: number) => Promise<WPProduct>
-        new: EndpointCreate<WPProduct>
+        create: EndpointCreate<WPProduct>
         update: EndpointUpdate<WPProduct>
     } {
         const getProduct = this.createEndpointGet<WPProduct>(EP_PRODUCTS)
@@ -178,7 +178,7 @@ class CmsApiClient extends WpApiClient {
         return {
             find: getProduct as () => Promise<WPProduct[]>,
             findOne: getProduct as (id: number) => Promise<WPProduct>,
-            new: newProduct,
+            create: newProduct,
             update: updateProduct,
         }
     }
@@ -226,7 +226,7 @@ class CmsApiClient extends WpApiClient {
     public page<P = CustomPage>(): {
         find: () => Promise<P[]>
         findOne: (id: number) => Promise<P>
-        new: EndpointCreate<P>
+        create: EndpointCreate<P>
         update: EndpointUpdate<P>
     } {
         return super.page<P>()

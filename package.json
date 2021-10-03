@@ -5,7 +5,7 @@
   "repository": "https://github.com/dkress59/wp-api-client",
   "author": "Damian Kress",
   "license": "MIT",
-  "main": "index.js",
+  "main": "src/index.js",
   "private": false,
   "dependencies": {
     "axios": "0.22.0"

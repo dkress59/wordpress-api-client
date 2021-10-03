@@ -1,12 +1,12 @@
-import { EP_PAGES, EP_POSTS } from './constants'
+import { EP_PAGES, EP_POSTS, ERROR_MESSAGE } from './constants'
 import { WPCreate, WPPage, WPPost } from './types'
 import axios, { AxiosInstance, AxiosResponse } from 'axios'
 
-export type EndpointCreate<B> = (body: WPCreate<B>) => Promise<B | null>
-export type EndpointUpdate<B> = (
-    body: WPCreate<B>,
+export type EndpointCreate<P> = (body: WPCreate<P>) => Promise<P | null>
+export type EndpointUpdate<P> = (
+    body: WPCreate<P>,
     id: number,
-) => Promise<B | null>
+) => Promise<P | null>
 
 export class WpApiClient {
     protected readonly axios: AxiosInstance
@@ -23,51 +23,55 @@ export class WpApiClient {
             error => {
                 const obj =
                     error && typeof error === 'object' && 'response' in error
-                        ? // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-                          (error.response.data as Record<string, string>)
+                        ? (Reflect.get(error, 'response') as AxiosResponse)
                         : (error as null | string | Record<string, string>)
+
                 const message = !obj
-                    ? 'WpApiClient error.'
+                    ? ''
                     : typeof obj === 'object'
                     ? (Reflect.get(obj, 'error') as string) ||
                       (Reflect.get(obj, 'message') as string)
                     : typeof obj === 'string'
                     ? obj
-                    : 'WpApiClient error.'
-                if (onError) onError(message)
-                else throw new Error(message)
+                    : ''
+                const errorMessage =
+                    ERROR_MESSAGE.DETAILED.replace('%error%', message) ||
+                    ERROR_MESSAGE.GENERIC
+
+                if (onError) onError(errorMessage)
+                else throw new Error(errorMessage)
             },
         )
     }
 
-    protected createEndpointGet<W>(
+    protected createEndpointGet<P>(
         endpoint: string,
         params = '?_embed&per_page=100&orderby=menu_order&order=asc',
-    ): (id?: number) => Promise<W | W[]> {
+    ): (id?: number) => Promise<P | P[]> {
         return async (id = 0) => {
             if (!id)
-                return (await this.axios.get<W[]>(`/${endpoint}/${params}`))
+                return (await this.axios.get<P[]>(`/${endpoint}/${params}`))
                     .data
             else
-                return (await this.axios.get<W>(`/${endpoint}/${id}?_embed`))
+                return (await this.axios.get<P>(`/${endpoint}/${id}?_embed`))
                     .data
         }
     }
 
-    protected createEndpointPost<W>(
+    protected createEndpointPost<P>(
         endpoint: string,
-    ): (body: WPCreate<W>, id?: number) => Promise<W> {
-        return async (body: WPCreate<W>, id = 0) => {
+    ): (body: WPCreate<P>, id?: number) => Promise<P> {
+        return async (body: WPCreate<P>, id = 0) => {
             if (id)
                 return (
-                    await this.axios.post<WPCreate<W>, AxiosResponse<W>>(
+                    await this.axios.post<WPCreate<P>, AxiosResponse<P>>(
                         `/${endpoint}/${id}`,
                         body,
                     )
                 ).data
             else
                 return (
-                    await this.axios.post<WPCreate<W>, AxiosResponse<W>>(
+                    await this.axios.post<WPCreate<P>, AxiosResponse<P>>(
                         `/${endpoint}`,
                         body,
                     )
@@ -79,9 +83,7 @@ export class WpApiClient {
         endPoint: string,
     ): (body: T) => Promise<T | R> {
         return async (): Promise<T | R> => {
-            return this.axios
-                .get(`/${endPoint}`)
-                .then((response: AxiosResponse<T>) => response.data)
+            return (await this.axios.get(`/${endPoint}`)).data
         }
     }
 
@@ -89,41 +91,43 @@ export class WpApiClient {
         endPoint: string,
     ): (body: T) => Promise<T | R> {
         return async (body: T): Promise<T | R> => {
-            return this.axios
-                .post(`/${endPoint}`, body)
-                .then((response: AxiosResponse<T>) => response.data)
+            return (await this.axios.post(`/${endPoint}`, body)).data
         }
     }
 
     public post<P = WPPost>(): {
         find: () => Promise<P[]>
         findOne: (id: number) => Promise<P>
-        new: EndpointCreate<P>
+        create: EndpointCreate<P>
         update: EndpointUpdate<P>
     } {
-        const endpoint = this.createEndpointGet<P>(EP_POSTS)
+        const find = this.createEndpointGet<P>(EP_POSTS)
+        const create = this.createEndpointPost<P>(EP_POSTS)
+        const update = this.createEndpointPost<P>(EP_POSTS)
         return {
             ...this,
-            find: endpoint as () => Promise<P[]>,
-            findOne: endpoint as (id: number) => Promise<P>,
-            new: this.createEndpointPost<P>(EP_POSTS),
-            update: this.createEndpointPost<P>(EP_POSTS),
+            find: find as () => Promise<P[]>,
+            findOne: find as (id: number) => Promise<P>,
+            create,
+            update,
         }
     }
 
     public page<P = WPPage>(): {
         find: () => Promise<P[]>
         findOne: (id: number) => Promise<P>
-        new: EndpointCreate<P>
+        create: EndpointCreate<P>
         update: EndpointUpdate<P>
     } {
-        const endpoint = this.createEndpointGet<P>(EP_PAGES)
+        const find = this.createEndpointGet<P>(EP_PAGES)
+        const create = this.createEndpointPost<P>(EP_PAGES)
+        const update = this.createEndpointPost<P>(EP_PAGES)
         return {
             ...this,
-            find: endpoint as () => Promise<P[]>,
-            findOne: endpoint as (id: number) => Promise<P>,
-            new: this.createEndpointPost<P>(EP_PAGES),
-            update: this.createEndpointPost<P>(EP_PAGES),
+            find: find as () => Promise<P[]>,
+            findOne: find as (id: number) => Promise<P>,
+            create,
+            update,
         }
     }
 }
