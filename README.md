@@ -1,6 +1,13 @@
 # WordPress-API Client
 
-The JavaScript Client for your WP-API.
+The last JavaScript Client for your WP-API. Super simple yet highly extensible.
+
+ToDo:
+
+- [ ] Improve typings: WPPost, WPPage
+- [ ] Constructor Validation
+- ([ ] Media Gallery)
+- [ ] Jest
 
 ## Installation
 
@@ -16,41 +23,163 @@ npm install wp-api-client
 
 ## Usage
 
-- Example
-- Defaults
-- Custom End Points
-- Custom Post Types
-- Advanced Custom Fields
-- JWT-Auth for WordPress
+- [Example](https://github.com/dkress59/wp-api-client#basic-example)
+- [Defaults](https://github.com/dkress59/wp-api-client#default-methods)
+- [Helper Methods](https://github.com/dkress59/wp-api-client#helper-methods)
+- [Custom End Points](https://github.com/dkress59/wp-api-client#custom-end-points)
+- [Custom Post Types](https://github.com/dkress59/wp-api-client#custom-post-types)
+- [Advanced Custom Fields](https://github.com/dkress59/wp-api-client#extend-default-routes)
+- [JWT-Auth for WordPress](https://github.com/dkress59/wp-api-client#default-custom-interceptors)
 
-### Basic Example
+### Default Methods
+
+To instantiate a WP-API Client you need to base the base URL of your WordPress website to the constructor. You can pass an `onError`-function as the second parameter and an exisitng axiosInstance as the third parameter (more on that here: [JWT-Auth for WordPress](https://github.com/dkress59/wp-api-client#jwt-auth-for-wordpress)).
+With a bare instance of WpApiClient you will get methods to retreive, add and update any post, page, post-category or post-tag.
+
+```typescript
+import { WpApiClient } from 'wp-api-client'
+const CmsClient = new WpApiClient('https://my-wordpress-website.com')
+
+// Methods:
+
+CmsClient.post().find()
+CmsClient.post().findOne(id)
+CmsClient.post().create()
+CmsClient.post().update(id)
+
+CmsClient.page().find()
+CmsClient.page().findOne(id)
+CmsClient.page().create()
+CmsClient.page().update(id)
+
+CmsClient.postCategory().find()
+CmsClient.postCategory().findOne(id)
+CmsClient.postCategory().create()
+CmsClient.postCategory().update(id)
+
+CmsClient.postTag().find()
+CmsClient.postTag().findOne(id)
+CmsClient.postTag().create()
+CmsClient.postTag().update(id)
+```
+
+### Helper Methods
+
+- EndpointCreate
+- EndpointUpdate
+- createEndpointGet
+- createEndpointPost
+- createEndpointCustomGet
+- createEndpointCustomPost
+
+[ ToDo ]
+
+### Custom End Points
+
+Let's say you have two navigation menus [registered](https://developer.wordpress.org/reference/functions/register_nav_menu/) in your WordPress-Theme's functions.php, and you have a [custom WP-API-route](https://developer.wordpress.org/reference/functions/register_rest_route/) registered like so:
+
+```php
+<?php
+
+use WP_REST_Response;
+
+class RESTEndpoints {
+    private string      $restApiSlug = '/wp-json';
+
+    public function __construct() {
+        add_action('rest_api_init', [$this, 'add_endpoints']);
+    }
+
+    public function add_endpoints(): void {
+        register_rest_route('my-plugin/v1', '/menu', [
+            'methods'             => 'GET',
+            'callback'            => [$this, 'menu_endpoint'],
+            'permission_callback' => '__return_true',
+        ]);
+    }
+
+    public function menu_endpoint(): WP_REST_Response {
+        $primary  = wp_get_nav_menu_items('primary-menu');
+        $footer   = wp_get_nav_menu_items('footer-menu');
+        $response = new WP_REST_Response([
+            'primary' => $primary,
+            'footer'  => $footer,
+        ]);
+        $response->status = !!$primary && !!$footer ? 200 : 500;
+        $response->header('Content-Type', 'application/json');
+        return $response;
+    }
+}
+
+?>
+```
+
+It is fairly easy to implement this in our WP-API Client:
+
+```typescript
+import { WpApiClient } from 'wp-api-client'
+const EP_MENU = 'my-plugin/v1/menu'
+
+class CmsApiClient extends WpApiClient {
+    constructor() {
+        super(
+            'https://my-wordpress-website.com',
+            (message: string) => console.error(message)
+        )
+    }
+
+    menu = this.createEndpointCustomGet<WPMenu>(EP_MENU) as () => Promise<WPMenu>
+}
+
+interface WPMenu {
+    primary: WPMenuItem[]
+    footer: WPMenuItem[]
+}
+
+interface WPMenuItem {
+    attr_title: string
+    classes: string[]
+    ID: number
+    menu_order: number
+    menu_item_parent: string
+    object: 'page' | 'post'
+    type: 'post_type' | 'post_type_archive'
+    url: string
+    target: '' | '_blank'
+    title: string
+}
+
+export const CmsClient = new CmsApiClient()
+```
+
+### Custom Post Types
+
+It does not take much to add the methods for any of your registered Custom Post Types.
 
 ```typescript
 import { EndpointCreate, EndpointUpdate, WpApiClient } from 'wp-api-client'
+import { baseURL, EP_PRODUCTS } from './constants'
 import { WPProduct } from './types'
 
-const baseURL = 'https://my-wordpress-website.com'
-const EP_PRODUCTS = 'my-plugin/v1/product'
-
 class CmsApiClient extends WpApiClient {
-    public static token?: string
-
     constructor() {
         super(baseURL, (message: string) => console.error(message))
     }
 
     public product(): {
-        find: () => Promise<P[]>
-        findOne: (id: number) => Promise<P>
-        new: EndpointCreate<P>
-        update: EndpointUpdate<P>
+        find: () => Promise<WPProduct[]>
+        findOne: (id: number) => Promise<WPProduct>
+        new: EndpointCreate<WPProduct>
+        update: EndpointUpdate<WPProduct>
     } {
-        const endpoint = this.createEndpointGet<WPProduct>(EP_PRODUCTS)
+        const getProduct = this.createEndpointGet<WPProduct>(EP_PRODUCTS)
+        const newProduct = this.createEndpointPost<WPProduct>(EP_PRODUCTS)
+        const updateProduct = this.createEndpointPost<WPProduct>(EP_PRODUCTS)
         return {
-            find: endpoint as () => Promise<WPProduct[]>,
-            findOne: endpoint as (id: number) => Promise<WPProduct>,
-            new: this.createEndpointPost<WPProduct>(EP_PRODUCTS),
-            update: this.createEndpointPost<WPProduct>(EP_PRODUCTS),
+            find: getProduct as () => Promise<WPProduct[]>,
+            findOne: getProduct as (id: number) => Promise<WPProduct>,
+            new: newProduct,
+            update: updateProduct,
         }
     }
 }
@@ -58,31 +187,56 @@ class CmsApiClient extends WpApiClient {
 export const CmsClient = new CmsApiClient()
 ```
 
-The example above will give you the following methods:
+### Extend Default Routes
+
+WordPress plugins, such as [Advanced Custom Fields](https://www.advancedcustomfields.com/), can extend/modify the WP-API's response of default obects (WPPage, WPPost, …), which of course needs to be reflected in the API client's responses. If you are using TypeScript, the default methods can be extended with your custom typing.
 
 ```typescript
-CmsClient.post.find()
-CmsClient.post.findOne(id)
-CmsClient.post.create()
-CmsClient.post.update(id)
+import { WpApiClient, WPPage } from 'wp-api-client'
+const CmsClient = new WpApiClient('https://my-wordpress-website.com')
 
-CmsClient.page.find()
-CmsClient.page.findOne(id)
-CmsClient.page.create()
-CmsClient.page.update(id)
+interface CustomPage extends WPPage {
+    acf: {
+        hideTitle: boolean,
+        gallery: string[],
+        // …
+    }
+}
 
-CmsClient.product.find()
-CmsClient.product.findOne(id)
-CmsClient.product.create()
-CmsClient.product.update(id)
+// The response object can be casted like this:
+
+CmsClient.page<CustomPage>().find()
+CmsClient.page<CustomPage>().findOne(id)
+CmsClient.page<CustomPage>().create()
+CmsClient.page<CustomPage>().update(id)
 ```
 
-### Defaults
+Or, you might prefer to do it this way:
 
-### Custom End Points
+```typescript
+import { EndpointCreate, EndpointUpdate, WpApiClient } from 'wp-api-client'
+import { baseURL } from './constants'
+import { CustomPage } from './types'
 
-### Custom Post Types
+class CmsApiClient extends WpApiClient {
+    constructor() {
+        super(baseURL, (message: string) => console.error(message))
+    }
 
-### Advanced Custom Fields
+    public page<P = CustomPage>(): {
+        find: () => Promise<P[]>
+        findOne: (id: number) => Promise<P>
+        new: EndpointCreate<P>
+        update: EndpointUpdate<P>
+    } {
+        return super.page<P>()
+    }
+}
 
-### JWT-Auth for WordPress
+export const CmsClient = new CmsApiClient()
+```
+
+### Default/Custom Intercepters
+
+[ ToDo ]
+JWT-Auth
