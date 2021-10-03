@@ -1,13 +1,12 @@
 {
   "name": "wp-api-client",
-  "version": "0.1",
+  "version": "0.0.1",
   "description": "WordPress-API Client for JS/TS",
   "repository": "https://github.com/dkress59/wp-api-client",
   "bugs": "https://github.com/dkress59/wp-api-client/issues",
   "author": "Damian Kress",
   "license": "MIT",
   "main": "src/index.js",
-  "private": true,
   "types": "src/index",
   "contributors": [
     {
@@ -21,6 +20,7 @@
   "devDependencies": {
     "@babel/eslint-parser": "7.15.7",
     "@sprylab/eslint-config": "1.5.7",
+    "@types/node": "^16.10.2",
     "eslint": "7.32.0",
     "eslint-import-resolver-typescript": "2.5.0",
     "eslint-plugin-sort-imports-es6-autofix": "0.6.0",

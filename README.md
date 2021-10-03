@@ -4,9 +4,10 @@ The last JavaScript Client for your WP-API. Super simple yet highly extensible.
 
 ToDo:
 
-- [ ] URLSearchParams
+- [X] URLSearchParams
+- [ ] Categories & Tags
 - [ ] Improve typings: WPPost, WPPage
-- [ ] Constructor Validation
+- [X] Constructor Validation
 - [ ] (Media Gallery)
 - [ ] Jest
 
@@ -61,6 +62,15 @@ CmsClient.postTag().find()
 CmsClient.postTag().findOne(id)
 CmsClient.postTag().create()
 CmsClient.postTag().update(id)
+```
+
+The methods are also chainable:
+
+```typescript
+const data: WPUpdate<WPPage> = {
+    content: 'Updated page content',
+}
+CmsClient.page().findOne(59).update(data)
 ```
 
 ### Helper Methods

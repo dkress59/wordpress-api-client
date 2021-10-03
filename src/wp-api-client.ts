@@ -1,6 +1,17 @@
-import { END_POINT, ERROR_MESSAGE } from './constants'
-import { EndpointCreate, EndpointUpdate } from '.'
-import { WPCreate, WPPage, WPPost } from './types'
+import { END_POINT } from './constants'
+import {
+    EndpointCreate,
+    EndpointUpdate,
+    WPCreate,
+    WPPage,
+    WPPost,
+} from './types'
+import {
+    getDefaultQueryList,
+    getDefaultQuerySingle,
+    handleWpApiError,
+    validateBaseUrl,
+} from './util'
 import axios, { AxiosInstance, AxiosResponse } from 'axios'
 
 export class WpApiClient {
@@ -12,47 +23,32 @@ export class WpApiClient {
         axiosInstance?: AxiosInstance,
     ) {
         this.axios = axiosInstance ?? axios.create()
-        this.axios.defaults.baseURL = baseURL
+        this.axios.defaults.baseURL = validateBaseUrl(baseURL)
         this.axios.interceptors.response.use(
             config => config,
             error => {
-                const obj =
-                    error && typeof error === 'object' && 'response' in error
-                        ? (Reflect.get(error, 'response') as AxiosResponse)
-                        : (error as null | string | Record<string, string>)
-
-                const message = obj
-                    ? typeof obj === 'object'
-                        ? (Reflect.get(obj, 'error') as string) ||
-                          (Reflect.get(obj, 'message') as string)
-                        : typeof obj === 'string'
-                        ? obj
-                        : ''
-                    : ''
-                const errorMessage = message
-                    ? ERROR_MESSAGE.DETAILED.replace(
-                          '%error%',
-                          JSON.stringify(message),
-                      )
-                    : ERROR_MESSAGE.GENERIC
-
-                if (onError) onError(errorMessage)
-                else throw new Error(errorMessage)
+                handleWpApiError(error, onError)
             },
         )
     }
 
     protected createEndpointGet<P>(
         endpoint: string,
-        params = '?_embed&per_page=100&orderby=menu_order&order=asc',
+        params?: Record<string, string>,
     ): (id?: number) => Promise<P | P[]> {
         return async (id = 0) => {
             if (!id)
-                return (await this.axios.get<P[]>(`/${endpoint}/${params}`))
-                    .data
+                return (
+                    await this.axios.get<P[]>(
+                        `/${endpoint}/${getDefaultQueryList(params)}`,
+                    )
+                ).data
             else
-                return (await this.axios.get<P>(`/${endpoint}/${id}?_embed`))
-                    .data
+                return (
+                    await this.axios.get<P>(
+                        `/${endpoint}/${id}/${getDefaultQuerySingle(params)}`,
+                    )
+                ).data
         }
     }
 
