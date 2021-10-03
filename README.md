@@ -6,7 +6,7 @@ ToDo:
 
 - [ ] Improve typings: WPPost, WPPage
 - [ ] Constructor Validation
-- ([ ] Media Gallery)
+- [ ] (Media Gallery)
 - [ ] Jest
 
 ## Installation
@@ -23,7 +23,6 @@ npm install wp-api-client
 
 ## Usage
 
-- [Example](https://github.com/dkress59/wp-api-client#basic-example)
 - [Defaults](https://github.com/dkress59/wp-api-client#default-methods)
 - [Helper Methods](https://github.com/dkress59/wp-api-client#helper-methods)
 - [Custom End Points](https://github.com/dkress59/wp-api-client#custom-end-points)
@@ -65,6 +64,8 @@ CmsClient.postTag().update(id)
 
 ### Helper Methods
 
+[ ToDo ]
+
 - EndpointCreate
 - EndpointUpdate
 - createEndpointGet
@@ -72,11 +73,9 @@ CmsClient.postTag().update(id)
 - createEndpointCustomGet
 - createEndpointCustomPost
 
-[ ToDo ]
-
 ### Custom End Points
 
-Let's say you have two navigation menus [registered](https://developer.wordpress.org/reference/functions/register_nav_menu/) in your WordPress-Theme's functions.php, and you have a [custom WP-API-route](https://developer.wordpress.org/reference/functions/register_rest_route/) registered like so:
+Let's say you have two [navigation menus](https://developer.wordpress.org/reference/functions/register_nav_menu/) registered in your WordPress-Theme's functions.php, and you have a [custom WP-API-route](https://developer.wordpress.org/reference/functions/register_rest_route/) registered like so:
 
 ```php
 <?php
@@ -120,17 +119,6 @@ It is fairly easy to implement this in our WP-API Client:
 import { WpApiClient } from 'wp-api-client'
 const EP_MENU = 'my-plugin/v1/menu'
 
-class CmsApiClient extends WpApiClient {
-    constructor() {
-        super(
-            'https://my-wordpress-website.com',
-            (message: string) => console.error(message)
-        )
-    }
-
-    menu = this.createEndpointCustomGet<WPMenu>(EP_MENU) as () => Promise<WPMenu>
-}
-
 interface WPMenu {
     primary: WPMenuItem[]
     footer: WPMenuItem[]
@@ -147,6 +135,18 @@ interface WPMenuItem {
     url: string
     target: '' | '_blank'
     title: string
+    // …
+}
+
+class CmsApiClient extends WpApiClient {
+    constructor() {
+        super(
+            'https://my-wordpress-website.com',
+            (message: string) => console.error(message)
+        )
+    }
+
+    menu = this.createEndpointCustomGet<WPMenu>(EP_MENU) as () => Promise<WPMenu>
 }
 
 export const CmsClient = new CmsApiClient()
