@@ -5,23 +5,25 @@
   "repository": "https://github.com/dkress59/wp-api-client",
   "author": "Damian Kress",
   "license": "MIT",
+  "main": "index.js",
   "private": false,
   "dependencies": {
     "axios": "0.22.0"
   },
   "devDependencies": {
     "@sprylab/eslint-config": "1.5.7",
-    "@types/node": "^16.10.2",
     "eslint": "7.32.0",
-    "eslint-import-resolver-typescript": "2.4.0",
+    "eslint-import-resolver-typescript": "2.5.0",
     "eslint-plugin-jam3": "0.2.3",
     "eslint-plugin-sort-imports-es6-autofix": "0.6.0",
-    "eslint-plugin-unused-imports": "1.1.4",
-    "prettier": "2.3.2",
+    "eslint-plugin-unused-imports": "1.1.5",
+    "prettier": "2.4.1",
     "typescript": "4.4.3"
   },
   "scripts": {
-    "check:script": "eslint src  --ext .js,.ts --fix-dry-run",
-    "lint:script": "eslint src  --ext .js,.ts --fix"
+    "build": "tsc",
+    "check:script": "eslint src --ext .js,.ts --fix-dry-run",
+    "lint:script": "eslint src --ext .js,.ts --fix",
+    "prepublish": "yarn build"
   }
 }

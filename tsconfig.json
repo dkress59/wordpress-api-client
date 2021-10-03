@@ -1,18 +1,15 @@
 {
 	"exclude": ["./node_modules"],
+	"include": ["./src"],
 	"compilerOptions": {
-		"allowJs": true,
 		"allowSyntheticDefaultImports": true,
-		"baseUrl": "./",
 		"esModuleInterop": true,
 		"forceConsistentCasingInFileNames": true,
-		"isolatedModules": true,
-		"lib": ["dom", "esnext"],
+		"lib": ["esnext"],
 		"moduleResolution": "node",
-		"noEmit": true,
 		"resolveJsonModule": true,
 		"skipLibCheck": true,
 		"strict": true,
 		"target": "ESNext",
-	},
+	}
 }
