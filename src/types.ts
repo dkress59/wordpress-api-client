@@ -152,3 +152,9 @@ export type WPCreate<W> = Record<string, unknown> &
             'title'
         >
     >
+
+export type EndpointCreate<P> = (body: WPCreate<P>) => Promise<P | null>
+export type EndpointUpdate<P> = (
+    body: WPCreate<P>,
+    id: number,
+) => Promise<P | null>

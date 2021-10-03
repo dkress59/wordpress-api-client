@@ -1,12 +1,7 @@
-import { EP_PAGES, EP_POSTS, ERROR_MESSAGE } from './constants'
+import { END_POINT, ERROR_MESSAGE } from './constants'
+import { EndpointCreate, EndpointUpdate } from '.'
 import { WPCreate, WPPage, WPPost } from './types'
 import axios, { AxiosInstance, AxiosResponse } from 'axios'
-
-export type EndpointCreate<P> = (body: WPCreate<P>) => Promise<P | null>
-export type EndpointUpdate<P> = (
-    body: WPCreate<P>,
-    id: number,
-) => Promise<P | null>
 
 export class WpApiClient {
     protected readonly axios: AxiosInstance
@@ -26,17 +21,20 @@ export class WpApiClient {
                         ? (Reflect.get(error, 'response') as AxiosResponse)
                         : (error as null | string | Record<string, string>)
 
-                const message = !obj
-                    ? ''
-                    : typeof obj === 'object'
-                    ? (Reflect.get(obj, 'error') as string) ||
-                      (Reflect.get(obj, 'message') as string)
-                    : typeof obj === 'string'
-                    ? obj
+                const message = obj
+                    ? typeof obj === 'object'
+                        ? (Reflect.get(obj, 'error') as string) ||
+                          (Reflect.get(obj, 'message') as string)
+                        : typeof obj === 'string'
+                        ? obj
+                        : ''
                     : ''
-                const errorMessage =
-                    ERROR_MESSAGE.DETAILED.replace('%error%', message) ||
-                    ERROR_MESSAGE.GENERIC
+                const errorMessage = message
+                    ? ERROR_MESSAGE.DETAILED.replace(
+                          '%error%',
+                          JSON.stringify(message),
+                      )
+                    : ERROR_MESSAGE.GENERIC
 
                 if (onError) onError(errorMessage)
                 else throw new Error(errorMessage)
@@ -101,9 +99,9 @@ export class WpApiClient {
         create: EndpointCreate<P>
         update: EndpointUpdate<P>
     } {
-        const find = this.createEndpointGet<P>(EP_POSTS)
-        const create = this.createEndpointPost<P>(EP_POSTS)
-        const update = this.createEndpointPost<P>(EP_POSTS)
+        const find = this.createEndpointGet<P>(END_POINT.POSTS)
+        const create = this.createEndpointPost<P>(END_POINT.POSTS)
+        const update = this.createEndpointPost<P>(END_POINT.POSTS)
         return {
             ...this,
             find: find as () => Promise<P[]>,
@@ -119,9 +117,9 @@ export class WpApiClient {
         create: EndpointCreate<P>
         update: EndpointUpdate<P>
     } {
-        const find = this.createEndpointGet<P>(EP_PAGES)
-        const create = this.createEndpointPost<P>(EP_PAGES)
-        const update = this.createEndpointPost<P>(EP_PAGES)
+        const find = this.createEndpointGet<P>(END_POINT.PAGES)
+        const create = this.createEndpointPost<P>(END_POINT.PAGES)
+        const update = this.createEndpointPost<P>(END_POINT.PAGES)
         return {
             ...this,
             find: find as () => Promise<P[]>,
