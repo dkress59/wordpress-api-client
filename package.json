@@ -11,10 +11,10 @@
     "axios": "0.22.0"
   },
   "devDependencies": {
+    "@babel/eslint-parser": "7.15.7",
     "@sprylab/eslint-config": "1.5.7",
     "eslint": "7.32.0",
     "eslint-import-resolver-typescript": "2.5.0",
-    "eslint-plugin-jam3": "0.2.3",
     "eslint-plugin-sort-imports-es6-autofix": "0.6.0",
     "eslint-plugin-unused-imports": "1.1.5",
     "prettier": "2.4.1",
@@ -22,8 +22,8 @@
   },
   "scripts": {
     "build": "tsc",
-    "check:script": "eslint src --ext .js,.ts --fix-dry-run",
-    "lint:script": "eslint src --ext .js,.ts --fix",
+    "check:script": "eslint src --ext .ts --fix-dry-run",
+    "lint:script": "eslint src --ext .ts --fix",
     "prepublish": "yarn build"
   }
 }
