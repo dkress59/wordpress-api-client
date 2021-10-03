@@ -4,6 +4,7 @@ The last JavaScript Client for your WP-API. Super simple yet highly extensible.
 
 ToDo:
 
+- [ ] URLSearchParams
 - [ ] Improve typings: WPPost, WPPage
 - [ ] Constructor Validation
 - [ ] (Media Gallery)
@@ -83,7 +84,7 @@ Let's say you have two [navigation menus](https://developer.wordpress.org/refere
 use WP_REST_Response;
 
 class RESTEndpoints {
-    private string      $restApiSlug = '/wp-json';
+    private string $restApiSlug = '/wp-json';
 
     public function __construct() {
         add_action('rest_api_init', [$this, 'add_endpoints']);

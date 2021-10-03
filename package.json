@@ -3,10 +3,18 @@
   "version": "0.1",
   "description": "WordPress-API Client for JS/TS",
   "repository": "https://github.com/dkress59/wp-api-client",
+  "bugs": "https://github.com/dkress59/wp-api-client/issues",
   "author": "Damian Kress",
   "license": "MIT",
   "main": "src/index.js",
-  "private": false,
+  "private": true,
+  "types": "src/index",
+  "contributors": [
+    {
+      "name": "Damian Kress",
+      "email": "mail@damiankress.de"
+    }
+  ],
   "dependencies": {
     "axios": "0.22.0"
   },
@@ -20,10 +28,21 @@
     "prettier": "2.4.1",
     "typescript": "4.4.3"
   },
+  "keywords": [
+    "wordpress",
+    "nodejs",
+    "REST",
+    "api client",
+    "wpapi",
+    "wp-api",
+    "typescript",
+    "js",
+    "ts",
+    "wp"
+  ],
   "scripts": {
     "build": "tsc",
     "check:script": "eslint src --ext .ts --fix-dry-run",
-    "lint:script": "eslint src --ext .ts --fix",
-    "prepublish": "yarn build"
+    "lint:script": "eslint src --ext .ts --fix"
   }
 }
