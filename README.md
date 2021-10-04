@@ -27,16 +27,16 @@ npm install wordpress-api-client
 
 ## Usage
 
-- [Defaults](https://github.com/dkress59/wordpress-api-client#default-methods)
-- [Helper Methods](https://github.com/dkress59/wordpress-api-client#helper-methods)
-- [Custom End Points](https://github.com/dkress59/wordpress-api-client#custom-end-points)
-- [Custom Post Types](https://github.com/dkress59/wordpress-api-client#custom-post-types)
-- [Advanced Custom Fields](https://github.com/dkress59/wordpress-api-client#extend-default-routes)
-- [JWT-Auth for WordPress](https://github.com/dkress59/wordpress-api-client#default-custom-interceptors)
+- [Defaults](#default-methods)
+- [Helper Methods](#helper-methods)
+- [Custom Post Types](#custom-post-types)
+- [Custom End Points](#custom-end-points)
+- [Advanced Custom Fields](#extend-default-routes)
+- [JWT-Auth for WordPress](#default-custom-interceptors)
 
 ### Default Methods
 
-To instantiate a WP-API Client you need to base the base URL of your WordPress website to the constructor. You can pass an `onError`-function as the second parameter and an exisitng axiosInstance as the third parameter (more on that here: [JWT-Auth for WordPress](https://github.com/dkress59/wordpress-api-client#jwt-auth-for-wordpress)).
+To instantiate a WP-API Client you need to base the base URL of your WordPress website to the constructor. You can pass an `onError`-function as the second parameter and an exisitng axiosInstance as the third parameter (more on that here: [JWT-Auth for WordPress](#jwt-auth-for-wordpress)).
 With a bare instance of WpApiClient you will get methods to retreive, add and update any post, page, post-category or post-tag.
 
 ```typescript
@@ -77,7 +77,7 @@ CmsClient.page().findOne(59).update(data)
 
 ### Helper Methods
 
-This package includes three utility types and four helper functions:
+The WpApiClient class uses three utility types and four helper methods:
 
 - WPCreate
 - EndpointCreate
@@ -87,7 +87,50 @@ This package includes three utility types and four helper functions:
 - createEndpointCustomGet
 - createEndpointCustomPost
 
-[ ToDo ]
+To understand `createEndpointGet` and `createEndpointPost`, one needs to know a few things about the WordPress API itself: To retreive a list of posts, one needs to GET-request the route `/posts`. For a specific post the route that needs to be requested `/posts/{id}`. The same goes for pages; `/pages`, `/pages/{id}`.
+
+To update a specific post or page, a POST request must be sent to `/posts{id}` or `/pages/{id}`, for a new post/page the POST request goes directly to `/posts`/`/pages`. This schema is valid for all WordPress-built-ins (Posts, Pages, Post-Categories, Post-Tags, Media), and also for all registered [Custom Post Types](https://developer.wordpress.org/reference/functions/register_post_type/) and [Custom Taxonomies](https://developer.wordpress.org/reference/functions/register_taxonomy/).
+
+For this recurring schema the WpApiClient class (and any sub-class) can use the methods `createEndpointGet` and `createEndpointPost`. Both methods responses' type can be casted on the respective method, and both methods need the path to your end point (starting after `/wp-json`) as parameter. See the [next chapter](#custom-post-types) for an example. The two POST-Methods use a utility type, `WPCreate`, because the output format of the `post_content` and `post_title` fields is an object (`{ rendered: string }`), but the input format for these fields must be a plain string.
+
+The utility type `EndpointCreate` will strip the `id` field from any type (e.g. POST to `/pages`), in accordance to the WP-API requirements. The `EndpointUpdate` utility type simply turns any type into a `Partial`, so that selective fields of any post type can be updated (e.g POST to. `/posts/{id}`)
+
+Of course, your are free to extend the WpApiClient class in any which way that suits you – but there are two more helpers that you can use, if you need to add methods for __custom__ wp-api end points. `createEndpointCustomGet` and `createEndpointCustomPost` also work very similarly; they both only take the respective path to the end point as a single, required argument, but they can be given up to two type arguments: The response type as the first, and a fallback type for errors as the second argument. You can find an [example here](#custom-end-points).
+
+### Custom Post Types
+
+It does not take much to add the methods for any of your registered Custom Post Types.
+
+```typescript
+import { EndpointCreate, EndpointUpdate, WpApiClient } from 'wordpress-api-client'
+import { baseURL, EP_PRODUCTS } from './constants'
+import { WPProduct } from './types'
+
+class CmsApiClient extends WpApiClient {
+    constructor() {
+        super(baseURL, (message: string) => console.error(message))
+    }
+
+    public product(): {
+        find: () => Promise<WPProduct[]>
+        findOne: (id: number) => Promise<WPProduct>
+        create: EndpointCreate<WPProduct>
+        update: EndpointUpdate<WPProduct>
+    } {
+        const getProduct = this.createEndpointGet<WPProduct>(EP_PRODUCTS)
+        const newProduct = this.createEndpointPost<WPProduct>(EP_PRODUCTS)
+        const updateProduct = this.createEndpointPost<WPProduct>(EP_PRODUCTS)
+        return {
+            find: getProduct as () => Promise<WPProduct[]>,
+            findOne: getProduct as (id: number) => Promise<WPProduct>,
+            create: newProduct,
+            update: updateProduct,
+        }
+    }
+}
+
+export const CmsClient = new CmsApiClient()
+```
 
 ### Custom End Points
 
@@ -162,42 +205,7 @@ class CmsApiClient extends WpApiClient {
         )
     }
 
-    menu = this.createEndpointCustomGet<WPMenu>(EP_MENU) as () => Promise<WPMenu>
-}
-
-export const CmsClient = new CmsApiClient()
-```
-
-### Custom Post Types
-
-It does not take much to add the methods for any of your registered Custom Post Types.
-
-```typescript
-import { EndpointCreate, EndpointUpdate, WpApiClient } from 'wordpress-api-client'
-import { baseURL, EP_PRODUCTS } from './constants'
-import { WPProduct } from './types'
-
-class CmsApiClient extends WpApiClient {
-    constructor() {
-        super(baseURL, (message: string) => console.error(message))
-    }
-
-    public product(): {
-        find: () => Promise<WPProduct[]>
-        findOne: (id: number) => Promise<WPProduct>
-        create: EndpointCreate<WPProduct>
-        update: EndpointUpdate<WPProduct>
-    } {
-        const getProduct = this.createEndpointGet<WPProduct>(EP_PRODUCTS)
-        const newProduct = this.createEndpointPost<WPProduct>(EP_PRODUCTS)
-        const updateProduct = this.createEndpointPost<WPProduct>(EP_PRODUCTS)
-        return {
-            find: getProduct as () => Promise<WPProduct[]>,
-            findOne: getProduct as (id: number) => Promise<WPProduct>,
-            create: newProduct,
-            update: updateProduct,
-        }
-    }
+    menu = this.createEndpointCustomGet<WPMenu>(EP_MENU)
 }
 
 export const CmsClient = new CmsApiClient()
