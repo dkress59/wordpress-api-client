@@ -28,7 +28,7 @@ export function handleWpApiError(
 }
 
 export function validateBaseUrl(url: string): string {
-    if (!url.startsWith('http://') && !!url.startsWith('https://'))
+    if (!url.startsWith('http://') && !url.startsWith('https://'))
         throw new Error(ERROR_MESSAGE.INVALID_BASEURL.replace('%url%', url))
     if (url.substr(-1) === '/') return url.substr(0, url.length - 1)
     return url
