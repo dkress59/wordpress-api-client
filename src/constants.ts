@@ -8,7 +8,7 @@ export const END_POINT = {
 export const ERROR_MESSAGE = {
     DETAILED: '[WpApiClient] Error: %error%',
     GENERIC: '[WpApiClient] Error. Misconfiguration?',
-    INVALID_BASEURL: '[WpApiClient] Invalid baseURL.',
+    INVALID_BASEURL: '[WpApiClient] Invalid baseURL: %url%',
 }
 
 export const POST_STATUS_MAP = [

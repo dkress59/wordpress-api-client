@@ -1,6 +1,6 @@
 {
   "name": "wordpress-api-client",
-  "version": "0.0.5-dev",
+  "version": "0.0.6-dev",
   "description": "WordPress-API Client for JS/TS",
   "repository": "https://github.com/dkress59/wordpress-api-client",
   "bugs": "https://github.com/dkress59/wordpress-api-client/issues",
@@ -30,6 +30,7 @@
   },
   "keywords": [
     "wordpress",
+    "headless",
     "nodejs",
     "REST",
     "api client",

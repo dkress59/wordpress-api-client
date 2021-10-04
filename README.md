@@ -134,7 +134,7 @@ export const CmsClient = new CmsApiClient()
 
 ### Custom End Points
 
-Let's say you have two [navigation menus](https://developer.wordpress.org/reference/functions/register_nav_menu/) registered in your WordPress-Theme's functions.php, and you have a [custom WP-API-route](https://developer.wordpress.org/reference/functions/register_rest_route/) registered like so:
+Let's say you have two [navigation menus](https://developer.wordpress.org/reference/functions/register_nav_menu/) registered in your WordPress-Theme's functions.php, and you have a [custom WP-API-route](https://developer.wordpress.org/reference/functions/register_rest_route/) registered, something like this:
 
 ```php
 <?php
