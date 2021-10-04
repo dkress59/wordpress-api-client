@@ -1,9 +1,9 @@
 {
-  "name": "wp-api-client",
-  "version": "0.0.1",
+  "name": "wordpress-api-client",
+  "version": "0.0.0-dev",
   "description": "WordPress-API Client for JS/TS",
-  "repository": "https://github.com/dkress59/wp-api-client",
-  "bugs": "https://github.com/dkress59/wp-api-client/issues",
+  "repository": "https://github.com/dkress59/wordpress-api-client",
+  "bugs": "https://github.com/dkress59/wordpress-api-client/issues",
   "author": "Damian Kress",
   "license": "MIT",
   "main": "src/index.js",
