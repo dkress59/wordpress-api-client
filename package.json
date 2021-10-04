@@ -1,12 +1,12 @@
 {
   "name": "wordpress-api-client",
-  "version": "0.0.4-dev",
+  "version": "0.0.5-dev",
   "description": "WordPress-API Client for JS/TS",
   "repository": "https://github.com/dkress59/wordpress-api-client",
   "bugs": "https://github.com/dkress59/wordpress-api-client/issues",
   "author": "Damian Kress",
   "license": "MIT",
-  "main": "src/index.js",
+  "main": ".dist/index.js",
   "types": "src/index",
   "contributors": [
     {
@@ -41,7 +41,7 @@
     "wp"
   ],
   "scripts": {
-    "build": "tsc src/*.ts",
+    "build": "tsc",
     "check:script": "eslint src --ext .ts --fix-dry-run",
     "lint:script": "eslint src --ext .ts --fix",
     "prepublishOnly": "rm .gitignore"

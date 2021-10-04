@@ -77,7 +77,7 @@ CmsClient.page().findOne(59).update(data)
 
 ### Helper Methods
 
-This package includes four helper functions and three utility types:
+This package includes three utility types and four helper functions:
 
 - WPCreate
 - EndpointCreate

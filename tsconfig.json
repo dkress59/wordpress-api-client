@@ -15,6 +15,7 @@
 		"lib": [
 			"esnext"
 		],
+		"outDir": ".dist",
 		"moduleResolution": "node",
 		"resolveJsonModule": true,
 		"skipLibCheck": true,
