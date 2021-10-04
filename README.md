@@ -1,5 +1,7 @@
 # WordPress-API Client
 
+[![npm version](https://badge.fury.io/js/wordpress-api-client.svg)](https://badge.fury.io/js/wordpress-api-client)
+
 The last JavaScript Client for your WP-API. Super simple yet highly extensible.
 
 ToDo:
@@ -16,29 +18,29 @@ ToDo:
 Depending on the package manager of your choice:
 
 ```bash
-yarn add wp-api-client
+yarn add wordpress-api-client
 ```
 
 ```bash
-npm install wp-api-client
+npm install wordpress-api-client
 ```
 
 ## Usage
 
-- [Defaults](https://github.com/dkress59/wp-api-client#default-methods)
-- [Helper Methods](https://github.com/dkress59/wp-api-client#helper-methods)
-- [Custom End Points](https://github.com/dkress59/wp-api-client#custom-end-points)
-- [Custom Post Types](https://github.com/dkress59/wp-api-client#custom-post-types)
-- [Advanced Custom Fields](https://github.com/dkress59/wp-api-client#extend-default-routes)
-- [JWT-Auth for WordPress](https://github.com/dkress59/wp-api-client#default-custom-interceptors)
+- [Defaults](https://github.com/dkress59/wordpress-api-client#default-methods)
+- [Helper Methods](https://github.com/dkress59/wordpress-api-client#helper-methods)
+- [Custom End Points](https://github.com/dkress59/wordpress-api-client#custom-end-points)
+- [Custom Post Types](https://github.com/dkress59/wordpress-api-client#custom-post-types)
+- [Advanced Custom Fields](https://github.com/dkress59/wordpress-api-client#extend-default-routes)
+- [JWT-Auth for WordPress](https://github.com/dkress59/wordpress-api-client#default-custom-interceptors)
 
 ### Default Methods
 
-To instantiate a WP-API Client you need to base the base URL of your WordPress website to the constructor. You can pass an `onError`-function as the second parameter and an exisitng axiosInstance as the third parameter (more on that here: [JWT-Auth for WordPress](https://github.com/dkress59/wp-api-client#jwt-auth-for-wordpress)).
+To instantiate a WP-API Client you need to base the base URL of your WordPress website to the constructor. You can pass an `onError`-function as the second parameter and an exisitng axiosInstance as the third parameter (more on that here: [JWT-Auth for WordPress](https://github.com/dkress59/wordpress-api-client#jwt-auth-for-wordpress)).
 With a bare instance of WpApiClient you will get methods to retreive, add and update any post, page, post-category or post-tag.
 
 ```typescript
-import { WpApiClient } from 'wp-api-client'
+import { WpApiClient } from 'wordpress-api-client'
 const CmsClient = new WpApiClient('https://my-wordpress-website.com')
 
 // Methods:
@@ -127,7 +129,7 @@ class RESTEndpoints {
 It is fairly easy to implement this in our WP-API Client:
 
 ```typescript
-import { WpApiClient } from 'wp-api-client'
+import { WpApiClient } from 'wordpress-api-client'
 const EP_MENU = 'my-plugin/v1/menu'
 
 interface WPMenu {
@@ -168,7 +170,7 @@ export const CmsClient = new CmsApiClient()
 It does not take much to add the methods for any of your registered Custom Post Types.
 
 ```typescript
-import { EndpointCreate, EndpointUpdate, WpApiClient } from 'wp-api-client'
+import { EndpointCreate, EndpointUpdate, WpApiClient } from 'wordpress-api-client'
 import { baseURL, EP_PRODUCTS } from './constants'
 import { WPProduct } from './types'
 
@@ -203,7 +205,7 @@ export const CmsClient = new CmsApiClient()
 WordPress plugins, such as [Advanced Custom Fields](https://www.advancedcustomfields.com/), can extend/modify the WP-API's response of default obects (WPPage, WPPost, …), which of course needs to be reflected in the API client's responses. If you are using TypeScript, the default methods can be extended with your custom typing.
 
 ```typescript
-import { WpApiClient, WPPage } from 'wp-api-client'
+import { WpApiClient, WPPage } from 'wordpress-api-client'
 const CmsClient = new WpApiClient('https://my-wordpress-website.com')
 
 interface CustomPage extends WPPage {
@@ -225,7 +227,7 @@ CmsClient.page<CustomPage>().update(id)
 Or, you might prefer to do it this way:
 
 ```typescript
-import { EndpointCreate, EndpointUpdate, WpApiClient } from 'wp-api-client'
+import { EndpointCreate, EndpointUpdate, WpApiClient } from 'wordpress-api-client'
 import { baseURL } from './constants'
 import { CustomPage } from './types'
 
