@@ -1,5 +1,5 @@
-import { WpApiClient } from './wordpress-api-client'
-export { WpApiClient } from './wordpress-api-client'
+import { WpApiClient } from './wp-api-client'
+export { WpApiClient } from './wp-api-client'
 
 export * from './constants'
 export * from './types'

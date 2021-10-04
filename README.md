@@ -77,14 +77,17 @@ CmsClient.page().findOne(59).update(data)
 
 ### Helper Methods
 
-[ ToDo ]
+This package includes four helper functions and three utility types:
 
+- WPCreate
 - EndpointCreate
 - EndpointUpdate
 - createEndpointGet
 - createEndpointPost
 - createEndpointCustomGet
 - createEndpointCustomPost
+
+[ ToDo ]
 
 ### Custom End Points
 

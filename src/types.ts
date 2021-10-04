@@ -140,11 +140,6 @@ export interface WPPage extends Omit<Omit<WPPost, 'categories'>, 'tags'> {
     parent: number
 }
 
-export type PickRename<T, K extends keyof T, R extends PropertyKey> = Omit<
-    T,
-    K
-> & { [P in R]: T[K] }
-
 export type WPCreate<W> = Record<string, unknown> &
     Partial<
         { content: string; title: string } & Omit<
