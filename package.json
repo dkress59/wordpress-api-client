@@ -1,6 +1,6 @@
 {
   "name": "wordpress-api-client",
-  "version": "0.0.1-dev",
+  "version": "0.0.2-dev",
   "description": "WordPress-API Client for JS/TS",
   "repository": "https://github.com/dkress59/wordpress-api-client",
   "bugs": "https://github.com/dkress59/wordpress-api-client/issues",
@@ -41,7 +41,7 @@
     "wp"
   ],
   "scripts": {
-    "build": "tsc",
+    "build": "tsc src/*.ts",
     "check:script": "eslint src --ext .ts --fix-dry-run",
     "lint:script": "eslint src --ext .ts --fix"
   }
