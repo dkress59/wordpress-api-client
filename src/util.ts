@@ -1,5 +1,5 @@
 import { AxiosResponse } from 'axios'
-import { ERROR_MESSAGE } from './constants'
+import { ERROR_MESSAGE } from './constants.js'
 import { URLSearchParams } from 'url'
 
 export function handleWpApiError(
@@ -39,8 +39,8 @@ export function getDefaultQueryList(params?: Record<string, string>): string {
         '?' +
         new URLSearchParams({
             _embed: 'true',
-            order: 'asc',
-            orderby: 'menu_order',
+            //order: 'asc',
+            //orderby: 'menu_order',
             per_page: '100',
             ...params,
         }).toString()

@@ -1,4 +1,4 @@
-import { WPPostStatus } from './types'
+import { WPPostStatus } from './types.js'
 
 export const END_POINT = {
     PAGES: 'wp/v2/pages',

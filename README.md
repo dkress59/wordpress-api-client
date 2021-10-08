@@ -10,7 +10,10 @@ ToDo:
 - [ ] Categories & Tags
 - [ ] Improve typings: WPPost, WPPage
 - [X] Constructor Validation
-- [ ] (Media Gallery)
+- [ ] Media Gallery
+- [ ] Catch 404s
+- [ ] PickRename
+- [ ] /wp-json
 - [ ] Jest
 
 ## Installation

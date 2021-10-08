@@ -1,17 +1,17 @@
-import { END_POINT } from './constants'
+import { END_POINT } from './constants.js'
 import {
     EndpointCreate,
     EndpointUpdate,
     WPCreate,
     WPPage,
     WPPost,
-} from './types'
+} from './types.js'
 import {
     getDefaultQueryList,
     getDefaultQuerySingle,
     handleWpApiError,
     validateBaseUrl,
-} from './util'
+} from './util.js'
 import axios, { AxiosInstance, AxiosResponse } from 'axios'
 
 export class WpApiClient {
@@ -27,6 +27,7 @@ export class WpApiClient {
         this.axios.interceptors.response.use(
             config => config,
             error => {
+                console.error(error)
                 handleWpApiError(error, onError)
             },
         )
