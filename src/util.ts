@@ -39,8 +39,8 @@ export function getDefaultQueryList(params?: Record<string, string>): string {
         '?' +
         new URLSearchParams({
             _embed: 'true',
-            //order: 'asc',
-            //orderby: 'menu_order',
+            order: 'asc',
+            orderby: 'menu_order',
             per_page: '100',
             ...params,
         }).toString()

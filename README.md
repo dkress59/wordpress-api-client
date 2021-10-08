@@ -8,12 +8,13 @@ ToDo:
 
 - [X] URLSearchParams
 - [ ] Categories & Tags
-- [ ] Improve typings: WPPost, WPPage
+- [ ] Create-Update-Return-Types
+- [X] Improve typings: WPPost, WPPage
 - [X] Constructor Validation
 - [ ] Media Gallery
 - [ ] Catch 404s
-- [ ] PickRename
-- [ ] /wp-json
+- [X] PickRename
+- [X] /wp-json
 - [ ] Jest
 
 ## Installation
@@ -145,7 +146,6 @@ Let's say you have two [navigation menus](https://developer.wordpress.org/refere
 use WP_REST_Response;
 
 class RESTEndpoints {
-    private string $restApiSlug = '/wp-json';
 
     public function __construct() {
         add_action('rest_api_init', [$this, 'add_endpoints']);
@@ -170,6 +170,7 @@ class RESTEndpoints {
         $response->header('Content-Type', 'application/json');
         return $response;
     }
+
 }
 
 ?>
@@ -263,7 +264,22 @@ class CmsApiClient extends WpApiClient {
 export const CmsClient = new CmsApiClient()
 ```
 
+#### ACF to REST API
+
+[ ToDo ]
+
+#### Yoast SEO (wordpress-seo)
+
+[ ToDo ]
+
 ### Default/Custom Intercepters
 
 [ ToDo ]
-JWT-Auth
+
+#### WP-Basic-Auth
+
+[ ToDo ]
+
+#### JWT-Auth for WordPress
+
+[ ToDo ]

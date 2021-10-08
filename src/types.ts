@@ -79,9 +79,13 @@ export interface WPMetaEmbed {
     ]
 }
 
+export enum WPCommentStaus {
+    'closed',
+    'open',
+}
+
 export interface WPPost {
     id: number
-    categories: number[]
     date: string
     date_gmt: string
     guid: {
@@ -94,21 +98,45 @@ export interface WPPost {
     type: string
     link: string
     title: {
+        // !! CPT: supports
+        raw?: string
         rendered: string
     }
     content: {
+        // !! CPT: supports
+        raw?: string
         rendered: string
         protected: boolean
     }
-    featured_media: number
-    menu_order: number
-    tags: number[]
+    excerpt: {
+        // !! CPT: supports
+        raw?: string
+        rendered: string
+        protected: boolean
+    }
+    author: number // !! CPT: supports
+    featured_media: number // !! CPT: supports
+    comment_status: WPCommentStaus
+    ping_status: WPCommentStaus
+    sticky: boolean
     template: string
-    yoastHead: string
+    format: string // !! CPT: supports
+    meta: unknown[] // ??
+    categories: number[]
+    tags: number[]
+    acf?: unknown
     _links: {
         'self': { href: string }[]
         'collection': { href: string }[]
         'about': { href: string }[]
+        'author': {
+            embeddable: boolean
+            href: string
+        }[]
+        'replies': {
+            embeddable: boolean
+            href: string
+        }[]
         'version-history': {
             count: number
             href: string
@@ -136,7 +164,8 @@ export interface WPPost {
     _embedded?: WPMetaEmbed
 }
 
-export interface WPPage extends Omit<Omit<WPPost, 'categories'>, 'tags'> {
+export interface WPPage
+    extends Omit<Omit<Omit<WPPost, 'categories'>, 'sticky'>, 'tags'> {
     parent: number
 }
 

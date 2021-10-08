@@ -23,7 +23,7 @@ export class WpApiClient {
         axiosInstance?: AxiosInstance,
     ) {
         this.axios = axiosInstance ?? axios.create()
-        this.axios.defaults.baseURL = validateBaseUrl(baseURL)
+        this.axios.defaults.baseURL = validateBaseUrl(baseURL) + '/wp-json'
         this.axios.interceptors.response.use(
             config => config,
             error => {
@@ -61,14 +61,20 @@ export class WpApiClient {
                 return (
                     await this.axios.post<WPCreate<P>, AxiosResponse<P>>(
                         `/${endpoint}/${id}`,
-                        body,
+                        {
+                            ...body,
+                            fields: body.acf,
+                        },
                     )
                 ).data
             else
                 return (
                     await this.axios.post<WPCreate<P>, AxiosResponse<P>>(
                         `/${endpoint}`,
-                        body,
+                        {
+                            ...body,
+                            fields: body.acf,
+                        },
                     )
                 ).data
         }
