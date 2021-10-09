@@ -154,8 +154,11 @@ export class WpApiClient {
                     {
                         headers: {
                             'Content-Type': mimeType,
-                            'Content-Disposition': 'application/x-www-form-urlencoded; filename="' + fileName + '"',
-                        }
+                            'Content-Disposition':
+                                'application/x-www-form-urlencoded; filename="' +
+                                fileName +
+                                '"',
+                        },
                     },
                 )
             ).data

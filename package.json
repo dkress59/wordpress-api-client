@@ -7,7 +7,6 @@
   "author": "Damian Kress",
   "license": "MIT",
   "main": ".dist/index.js",
-  "type": "module",
   "types": "src/index",
   "contributors": [
     {
