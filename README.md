@@ -12,7 +12,7 @@ ToDo:
 - [ ] Create-Update-Return-Types
 - [X] Improve typings: WPPost, WPPage
 - [X] Constructor Validation
-- [ ] Media Gallery
+- [X] Media Gallery
 - [ ] Catch 404s
 - [X] PickRename
 - [X] /wp-json
