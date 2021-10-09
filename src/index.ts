@@ -1,4 +1,6 @@
-export { WpApiClient } from './wp-api-client.js'
+import { WpApiClient } from './wp-api-client'
 
-export * from './constants.js'
-export * from './types.js'
+export * from './constants'
+export * from './types'
+
+export default WpApiClient
