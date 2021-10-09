@@ -3,6 +3,7 @@ import {
     EndpointCreate,
     EndpointUpdate,
     WPCreate,
+    WPMedia,
     WPPage,
     WPPost,
 } from './types.js'
@@ -97,7 +98,7 @@ export class WpApiClient {
     }
 
     public post<P = WPPost>(): {
-        find: () => Promise<P[]>
+        findAll: () => Promise<P[]>
         findOne: (id: number) => Promise<P>
         create: EndpointCreate<P>
         update: EndpointUpdate<P>
@@ -106,8 +107,7 @@ export class WpApiClient {
         const create = this.createEndpointPost<P>(END_POINT.POSTS)
         const update = this.createEndpointPost<P>(END_POINT.POSTS)
         return {
-            ...this,
-            find: find as () => Promise<P[]>,
+            findAll: find as () => Promise<P[]>,
             findOne: find as (id: number) => Promise<P>,
             create,
             update,
@@ -115,7 +115,7 @@ export class WpApiClient {
     }
 
     public page<P = WPPage>(): {
-        find: () => Promise<P[]>
+        findAll: () => Promise<P[]>
         findOne: (id: number) => Promise<P>
         create: EndpointCreate<P>
         update: EndpointUpdate<P>
@@ -124,8 +124,45 @@ export class WpApiClient {
         const create = this.createEndpointPost<P>(END_POINT.PAGES)
         const update = this.createEndpointPost<P>(END_POINT.PAGES)
         return {
-            ...this,
-            find: find as () => Promise<P[]>,
+            findAll: find as () => Promise<P[]>,
+            findOne: find as (id: number) => Promise<P>,
+            create,
+            update,
+        }
+    }
+
+    public media<P = WPMedia>(): {
+        findAll: () => Promise<P[]>
+        findOne: (id: number) => Promise<P>
+        create: (
+            fileName: string,
+            data: Buffer,
+            mimeType?: string,
+        ) => Promise<P>
+        update: EndpointUpdate<P>
+    } {
+        const find = this.createEndpointGet<P>(END_POINT.MEDIA)
+        const create = async (
+            fileName: string,
+            data: Buffer,
+            mimeType = 'image/jpeg',
+        ): Promise<P> => {
+            return (
+                await this.axios.post<Buffer, AxiosResponse<P>>(
+                    END_POINT.MEDIA,
+                    data,
+                    {
+                        headers: {
+                            'Content-Type': mimeType,
+                            'Content-Disposition': 'application/x-www-form-urlencoded; filename="' + fileName + '"',
+                        }
+                    },
+                )
+            ).data
+        }
+        const update = this.createEndpointPost<P>(END_POINT.MEDIA)
+        return {
+            findAll: find as () => Promise<P[]>,
             findOne: find as (id: number) => Promise<P>,
             create,
             update,

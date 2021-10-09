@@ -6,6 +6,7 @@ The last JavaScript Client for your WP-API. Super simple yet highly extensible.
 
 ToDo:
 
+- [ ] try: wp-types
 - [X] URLSearchParams
 - [ ] Categories & Tags
 - [ ] Create-Update-Return-Types
@@ -38,6 +39,8 @@ npm install wordpress-api-client
 - [Advanced Custom Fields](#extend-default-routes)
 - [JWT-Auth for WordPress](#default-custom-interceptors)
 
+---
+
 ### Default Methods
 
 To instantiate a WP-API Client you need to base the base URL of your WordPress website to the constructor. You can pass an `onError`-function as the second parameter and an exisitng axiosInstance as the third parameter (more on that here: [JWT-Auth for WordPress](#jwt-auth-for-wordpress)).
@@ -49,35 +52,28 @@ const CmsClient = new WpApiClient('https://my-wordpress-website.com')
 
 // Methods:
 
-CmsClient.post().find()
+CmsClient.post().findAll()
 CmsClient.post().findOne(id)
 CmsClient.post().create()
 CmsClient.post().update(id)
 
-CmsClient.page().find()
+CmsClient.page().findAll()
 CmsClient.page().findOne(id)
 CmsClient.page().create()
 CmsClient.page().update(id)
 
-CmsClient.postCategory().find()
+CmsClient.postCategory().findAll()
 CmsClient.postCategory().findOne(id)
 CmsClient.postCategory().create()
 CmsClient.postCategory().update(id)
 
-CmsClient.postTag().find()
+CmsClient.postTag().findAll()
 CmsClient.postTag().findOne(id)
 CmsClient.postTag().create()
 CmsClient.postTag().update(id)
 ```
 
-The methods are also chainable:
-
-```typescript
-const data: WPUpdate<WPPage> = {
-    content: 'Updated page content',
-}
-CmsClient.page().findOne(59).update(data)
-```
+---
 
 ### Helper Methods
 
@@ -100,6 +96,8 @@ For this recurring schema the WpApiClient class (and any sub-class) can use the 
 The utility type `EndpointCreate` will strip the `id` field from any type (e.g. POST to `/pages`), in accordance to the WP-API requirements. The `EndpointUpdate` utility type simply turns any type into a `Partial`, so that selective fields of any post type can be updated (e.g POST to. `/posts/{id}`)
 
 Of course, your are free to extend the WpApiClient class in any which way that suits you – but there are two more helpers that you can use, if you need to add methods for __custom__ wp-api end points. `createEndpointCustomGet` and `createEndpointCustomPost` also work very similarly; they both only take the respective path to the end point as a single, required argument, but they can be given up to two type arguments: The response type as the first, and a fallback type for errors as the second argument. You can find an [example here](#custom-end-points).
+
+---
 
 ### Custom Post Types
 
@@ -135,6 +133,8 @@ class CmsApiClient extends WpApiClient {
 
 export const CmsClient = new CmsApiClient()
 ```
+
+---
 
 ### Custom End Points
 
@@ -215,6 +215,8 @@ class CmsApiClient extends WpApiClient {
 export const CmsClient = new CmsApiClient()
 ```
 
+---
+
 ### Extend Default Routes
 
 WordPress plugins, such as [Advanced Custom Fields](https://www.advancedcustomfields.com/), can extend/modify the WP-API's response of default obects (WPPage, WPPost, …), which of course needs to be reflected in the API client's responses. If you are using TypeScript, the default methods can be extended with your custom typing.
@@ -233,7 +235,7 @@ interface CustomPage extends WPPage {
 
 // The response object can be casted like this:
 
-CmsClient.page<CustomPage>().find()
+CmsClient.page<CustomPage>().findAll()
 CmsClient.page<CustomPage>().findOne(id)
 CmsClient.page<CustomPage>().create()
 CmsClient.page<CustomPage>().update(id)
@@ -272,7 +274,9 @@ export const CmsClient = new CmsApiClient()
 
 [ ToDo ]
 
-### Default/Custom Intercepters
+---
+
+### Default and Custom Interceptors
 
 [ ToDo ]
 

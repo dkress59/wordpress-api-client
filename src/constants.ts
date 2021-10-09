@@ -1,6 +1,7 @@
 import { WPPostStatus } from './types.js'
 
 export const END_POINT = {
+    MEDIA: 'wp/v2/media',
     PAGES: 'wp/v2/pages',
     POSTS: 'wp/v2/posts',
 }
