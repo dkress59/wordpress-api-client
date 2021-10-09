@@ -6,17 +6,17 @@ The last JavaScript Client for your WP-API. Super simple yet highly extensible.
 
 ToDo:
 
-- [ ] try: wp-types
-- [X] URLSearchParams
+- [ ] Catch 404s & `WPError`s
 - [ ] Categories & Tags
-- [ ] Create-Update-Return-Types
-- [X] Improve typings: WPPost, WPPage
-- [X] Constructor Validation
-- [X] Media Gallery
-- [ ] Catch 404s
-- [X] PickRename
-- [X] /wp-json
 - [ ] Jest
+- [ ] (Create-Update-Return-Types)
+- [ ] (wp-types)
+- [X] /wp-json
+- [X] Constructor Validation
+- [X] Improve typings: WPPost, WPPage
+- [X] Media Gallery
+- [X] PickRename
+- [X] URLSearchParams
 
 ## Installation
 
