@@ -28,6 +28,7 @@
     "eslint-plugin-sort-imports-es6-autofix": "0.6.0",
     "eslint-plugin-unused-imports": "1.1.5",
     "jest": "^27.2.5",
+    "jest-mock-axios": "^4.4.1",
     "prettier": "2.4.1",
     "ts-jest": "^27.0.5",
     "ts-node": "^10.2.1",
@@ -47,7 +48,7 @@
     "wp"
   ],
   "scripts": {
-    "build": "tsc",
+    "build": "tsc -p tsconfig.build.json",
     "check:script": "eslint src --ext .ts --fix-dry-run --report-unused-disable-directives",
     "lint:script": "eslint src --ext .ts --fix",
     "prepublishOnly": "rm .gitignore",

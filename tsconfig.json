@@ -3,6 +3,7 @@
 		"./node_modules"
 	],
 	"include": [
+		"./__mocks__",
 		"./__tests__",
 		"./jest.config.ts",
 		"./src/*.json",

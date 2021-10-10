@@ -27,10 +27,7 @@ export class WpApiClient {
 		this.axios.defaults.baseURL = validateBaseUrl(baseURL) + '/wp-json'
 		this.axios.interceptors.response.use(
 			config => config,
-			error => {
-				console.error(error)
-				handleWpApiError(error, onError)
-			},
+			error => handleWpApiError(error, onError),
 		)
 	}
 
