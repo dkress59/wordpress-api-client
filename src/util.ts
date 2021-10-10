@@ -1,5 +1,5 @@
 import { AxiosResponse } from 'axios'
-import { ERROR_MESSAGE } from './constants.js'
+import { ERROR_MESSAGE } from './constants'
 import { URLSearchParams } from 'url'
 
 export function handleWpApiError(

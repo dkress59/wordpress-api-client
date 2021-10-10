@@ -1,5 +1,6 @@
 dist/
 src/**/*.js
 
-node_modules/
 .DS_Store
+coverage/
+node_modules/

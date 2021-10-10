@@ -1,4 +1,4 @@
-import { END_POINT } from './constants.js'
+import { END_POINT } from './constants'
 import {
 	EndpointCreate,
 	EndpointUpdate,
@@ -6,13 +6,13 @@ import {
 	WPMedia,
 	WPPage,
 	WPPost,
-} from './types.js'
+} from './types'
 import {
 	getDefaultQueryList,
 	getDefaultQuerySingle,
 	handleWpApiError,
 	validateBaseUrl,
-} from './util.js'
+} from './util'
 import axios, { AxiosInstance, AxiosResponse } from 'axios'
 
 export class WpApiClient {

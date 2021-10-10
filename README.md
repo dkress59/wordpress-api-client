@@ -2,13 +2,16 @@
 
 [![npm version](https://badge.fury.io/js/wordpress-api-client.svg)](https://badge.fury.io/js/wordpress-api-client)
 
-The last JavaScript Client for your WP-API. Super simple yet highly extensible.
+A full-fledged JavaScript client for your WP-API. Super simple yet highly extensible.
+
+Written in TypeScript, fully compatible to JavaScript.
 
 ToDo:
 
 - [ ] `ACFPost<P = Record<string, unknown>>`
 - [ ] Catch 404s & `WPError`s
 - [ ] Categories & Tags
+- [ ] Extendable URLSearchParams
 - [ ] Jest
 - [ ] (Create-Update-Return-Types)
 - [ ] (wp-types)

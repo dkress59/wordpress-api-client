@@ -1,4 +1,4 @@
-import { WPPostStatus } from './types.js'
+import { WPPostStatus } from './types'
 
 export const END_POINT = {
 	MEDIA: 'wp/v2/media',
