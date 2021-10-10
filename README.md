@@ -6,6 +6,7 @@ The last JavaScript Client for your WP-API. Super simple yet highly extensible.
 
 ToDo:
 
+- [ ] `ACFPost<P = Record<string, unknown>>`
 - [ ] Catch 404s & `WPError`s
 - [ ] Categories & Tags
 - [ ] Jest
@@ -62,6 +63,11 @@ CmsClient.page().findOne(id)
 CmsClient.page().create()
 CmsClient.page().update(id)
 
+CmsClient.media().findAll()
+CmsClient.media().findOne(id)
+CmsClient.media().create()
+CmsClient.media().update(id)
+
 CmsClient.postCategory().findAll()
 CmsClient.postCategory().findOne(id)
 CmsClient.postCategory().create()
@@ -73,12 +79,15 @@ CmsClient.postTag().create()
 CmsClient.postTag().update(id)
 ```
 
+__Note:__ To make use of any POST method (e.g. CmsClient.media().create()), you will have to set up some sort of Authentification.
+
 ---
 
 ### Helper Methods
 
 The WpApiClient class uses three utility types and four helper methods:
 
+- ACFPost (ToDo)
 - WPCreate
 - EndpointCreate
 - EndpointUpdate
@@ -268,7 +277,46 @@ export const CmsClient = new CmsApiClient()
 
 #### ACF to REST API
 
-[ ToDo ]
+When using this package for a WP installation which relies on [Advanced Custom Fields](https://www.advancedcustomfields.com), it is recommended to also install [ACF to REST API](https://wordpress.org/plugins/acf-to-rest-api/): You can then [extend the typings](#extend-default-routes) of your post types with an `acf` field to enable __full acf support__ (GET + POST) for the WpApiClient.
+
+_Note:_ If you have one of your ACF fields set to output a 'Post Object', the typing of the corresponding REST API response object ist not your usual `WPPost`, but rather an `ACFPost`, which you can import from this library (see: [Helper Methods](#helper-methods) for further info).
+
+```typescript
+import WpApiClient, {
+    EndpointCreate,
+    EndpointUpdate,
+    WPPost,
+} from 'wordpress-api-client'
+import { baseURL } from './constants'
+
+interface MyPostType extends WPPost {
+    acf: {
+        additional_info: string
+        sidebar_options: {
+            sidebar_id: number
+            layout: 'a' | 'b' | 'c'
+        }
+    }
+}
+
+export class CmsClient extends WpApiClient {
+    constructor() {
+        super(
+            baseURL,
+            (message: string) => console.error(message),
+        )
+    }
+
+    public post<P = MyPostType>(): {
+        findAll: () => Promise<P[]>
+        findOne: (id: number) => Promise<P>
+        create: EndpointCreate<P>
+        update: EndpointUpdate<P>
+    } {
+        return super.post<P>()
+    }
+}
+```
 
 #### Yoast SEO (wordpress-seo)
 
@@ -278,12 +326,54 @@ export const CmsClient = new CmsApiClient()
 
 ### Default and Custom Interceptors
 
+### Authentification
+
 [ ToDo ]
+
+#### WP-Nonce
+
+[ ToDo ]
+
+```typescript
+import WpApiClient from 'wordpress-api-client'
+import axios from 'axios'
+import { baseURL } from './constants'
+
+const nonce = global.window?.myLocalizedDataObject?.nonce
+
+const axiosInstance = axios.create()
+axiosInstance.defaults.headers.post['X-WP-Nonce'] = nonce
+
+export const CmsClient = new WpApiClient(
+    baseURL,
+    (message: string) => console.error(message),
+    axiosInstance,
+)
+```
 
 #### WP-Basic-Auth
 
 [ ToDo ]
 
+```typescript
+import WpApiClient from 'wordpress-api-client'
+import axios from 'axios'
+import { baseURL } from './constants'
+
+const axiosInstance = axios.create()
+axiosInstance.defaults.headers.post['Authorization'] = `Basic ${Buffer.from(
+    'my-username:my-password',
+).toString('base64')}`
+
+export const CmsClient = new WpApiClient(
+    baseURL,
+    (message: string) => console.error(message),
+    axiosInstance,
+)
+```
+
 #### JWT-Auth for WordPress
+
+[JWT-Auth for WordPress](https://wordpress.org/plugins/jwt-auth/) relies on the jsonwebtoken technology, which is a whole other deal in terms of security and therefore needs to be set up quite a bit more carefully. Always keep in mind that you can whitelist any end point of your WP REST API via PHP ("Whitelisting Endpoints" in the plugin's documentation).
 
 [ ToDo ]
