@@ -142,11 +142,18 @@ export class WpApiClient {
 		update: EndpointUpdate<P>
 	} {
 		const find = this.createEndpointGet<P>(END_POINT.MEDIA)
+		/**
+		 * @param {string} fileName Must include the file extension
+		 * @param {Buffer} data Takes a `Buffer` as input
+		 * @param {string} mimeType E.g.: `image/jpeg`
+		 * */
 		const create = async (
 			fileName: string,
 			data: Buffer,
 			mimeType = 'image/jpeg',
 		): Promise<P> => {
+			if (!fileName.includes('.'))
+				throw new Error('The fileName must include the file extension.')
 			return (
 				await this.axios.post<Buffer, AxiosResponse<P>>(
 					END_POINT.MEDIA,

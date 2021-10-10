@@ -45,7 +45,7 @@ npm install wordpress-api-client
 ### Default Methods
 
 To instantiate a WP-API Client you need to base the base URL of your WordPress website to the constructor. You can pass an `onError`-function as the second parameter and an exisitng axiosInstance as the third parameter (more on that here: [JWT-Auth for WordPress](#jwt-auth-for-wordpress)).
-With a bare instance of WpApiClient you will get methods to retreive, add and update any post, page, post-category or post-tag.
+With a bare instance of WpApiClient you will get methods to retreive, add and update any post, page, media item, post category or post tag.
 
 ```typescript
 import { WpApiClient } from 'wordpress-api-client'
@@ -79,7 +79,7 @@ CmsClient.postTag().create()
 CmsClient.postTag().update(id)
 ```
 
-__Note:__ To make use of any POST method (e.g. CmsClient.media().create()), you will have to set up some sort of Authentification.
+__Note:__ To make use of any POST method (e.g. `CmsClient.media().create()`), you will have to set up some sort of [Authentification](#authentification).
 
 ---
 
@@ -87,7 +87,7 @@ __Note:__ To make use of any POST method (e.g. CmsClient.media().create()), you 
 
 The WpApiClient class uses three utility types and four helper methods:
 
-- ACFPost (ToDo)
+- _ACFPost (ToDo)_
 - WPCreate
 - EndpointCreate
 - EndpointUpdate
@@ -277,7 +277,7 @@ export const CmsClient = new CmsApiClient()
 
 #### ACF to REST API
 
-When using this package for a WP installation which relies on [Advanced Custom Fields](https://www.advancedcustomfields.com), it is recommended to also install [ACF to REST API](https://wordpress.org/plugins/acf-to-rest-api/): You can then [extend the typings](#extend-default-routes) of your post types with an `acf` field to enable __full acf support__ (GET + POST) for the WpApiClient.
+When using this package for a WP installation which relies on [Advanced Custom Fields](https://www.advancedcustomfields.com), it is highly recommended to also install [ACF to REST API](https://wordpress.org/plugins/acf-to-rest-api/): You can then [extend the typings](#extend-default-routes) of your post types with an `acf` field to enable __full acf support__ (GET + POST) for the WpApiClient.
 
 _Note:_ If you have one of your ACF fields set to output a 'Post Object', the typing of the corresponding REST API response object ist not your usual `WPPost`, but rather an `ACFPost`, which you can import from this library (see: [Helper Methods](#helper-methods) for further info).
 
@@ -325,6 +325,10 @@ export class CmsClient extends WpApiClient {
 ---
 
 ### Default and Custom Interceptors
+
+[ ToDo ]
+
+---
 
 ### Authentification
 

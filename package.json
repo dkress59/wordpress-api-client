@@ -19,9 +19,9 @@
   },
   "devDependencies": {
     "@babel/core": "^7.15.8",
-    "@babel/eslint-parser": "7.15.7",
+    "@babel/eslint-parser": "7.15.8",
     "@sprylab/eslint-config": "1.5.7",
-    "@types/node": "^16.10.2",
+    "@types/node": "^16.10.3",
     "eslint": "7.32.0",
     "eslint-import-resolver-typescript": "2.5.0",
     "eslint-plugin-sort-imports-es6-autofix": "0.6.0",
@@ -44,7 +44,7 @@
   ],
   "scripts": {
     "build": "tsc",
-    "check:script": "eslint src --ext .ts --fix-dry-run",
+    "check:script": "eslint src --ext .ts --fix-dry-run --report-unused-disable-directives",
     "lint:script": "eslint src --ext .ts --fix",
     "prepublishOnly": "rm .gitignore"
   }
