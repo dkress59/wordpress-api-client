@@ -1,7 +1,7 @@
 {
   "name": "wordpress-api-client",
   "description": "WordPress-API Client for JS/TS",
-  "version": "0.0.12-dev",
+  "version": "0.0.13-dev",
   "author": "Damian Kress",
   "bugs": "https://github.com/dkress59/wordpress-api-client/issues",
   "license": "MIT",
@@ -58,7 +58,7 @@
     "build": "tsc -p tsconfig.build.json",
     "check:script": "eslint src --ext .ts --fix-dry-run --report-unused-disable-directives",
     "lint:script": "eslint src --ext .ts --fix",
-    "prepublishOnly": "rm -f .gitignore",
+    "prepublishOnly": "rm -rf .gitignore .jest coverage",
     "test": "jest --verbose",
     "test:watch": "jest --watchAll"
   }
