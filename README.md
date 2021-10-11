@@ -8,19 +8,19 @@ Written in TypeScript, fully compatible to JavaScript.
 
 ToDo:
 
-- [ ] `ACFPost<P = Record<string, unknown>>`
 - [ ] Catch 404s & `WPError`s
-- [ ] Categories & Tags
-- [ ] Extendable URLSearchParams
+- [ ] Document extendable URLSearchParams
 - [ ] Jest
 - [ ] (Create-Update-Return-Types)
-- [ ] (wp-types)
+- [X] `ACFPost<P = Record<string, unknown>>`
 - [X] /wp-json
+- [X] Categories & Tags
 - [X] Constructor Validation
 - [X] Improve typings: WPPost, WPPage
 - [X] Media Gallery
 - [X] PickRename
 - [X] URLSearchParams
+- [X] wp-types
 
 ## Installation
 

@@ -1,9 +1,9 @@
-import { WPPostStatus } from './types'
-
 export const END_POINT = {
+	CATEGORIES: 'wp/v2/categories',
 	MEDIA: 'wp/v2/media',
 	PAGES: 'wp/v2/pages',
 	POSTS: 'wp/v2/posts',
+	TAGS: 'wp/v2/tags',
 }
 
 export const ERROR_MESSAGE = {
@@ -11,11 +11,3 @@ export const ERROR_MESSAGE = {
 	GENERIC: '[WpApiClient] Error. Misconfiguration?',
 	INVALID_BASEURL: '[WpApiClient] Invalid baseURL: %url%',
 }
-
-export const POST_STATUS_MAP = [
-	WPPostStatus.DRAFT,
-	WPPostStatus.FUTURE,
-	WPPostStatus.PENDING,
-	WPPostStatus.PRIVATE,
-	WPPostStatus.PUBLISH,
-]

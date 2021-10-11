@@ -2,10 +2,12 @@ import { END_POINT } from './constants'
 import {
 	EndpointCreate,
 	EndpointUpdate,
+	WPCategory,
 	WPCreate,
 	WPMedia,
 	WPPage,
 	WPPost,
+	WPTag,
 } from './types'
 import {
 	getDefaultQueryList,
@@ -38,10 +40,12 @@ export class WpApiClient {
 		return async (id = 0) => {
 			if (!id)
 				return (
-					await this.axios.get<P[]>(
-						`/${endpoint}/${getDefaultQueryList(params)}`,
-					)
-				).data
+					(
+						await this.axios.get<P[] | undefined>(
+							`/${endpoint}/${getDefaultQueryList(params)}`,
+						)
+					).data ?? ([] as P[])
+				)
 			else
 				return (
 					await this.axios.get<P>(
@@ -168,6 +172,40 @@ export class WpApiClient {
 			).data
 		}
 		const update = this.createEndpointPost<P>(END_POINT.MEDIA)
+		return {
+			findAll: find as () => Promise<P[]>,
+			findOne: find as (id: number) => Promise<P>,
+			create,
+			update,
+		}
+	}
+
+	public postCategory<P = WPCategory>(): {
+		findAll: () => Promise<P[]>
+		findOne: (id: number) => Promise<P>
+		create: EndpointCreate<P>
+		update: EndpointUpdate<P>
+	} {
+		const find = this.createEndpointGet<P>(END_POINT.CATEGORIES)
+		const create = this.createEndpointPost<P>(END_POINT.CATEGORIES)
+		const update = this.createEndpointPost<P>(END_POINT.CATEGORIES)
+		return {
+			findAll: find as () => Promise<P[]>,
+			findOne: find as (id: number) => Promise<P>,
+			create,
+			update,
+		}
+	}
+
+	public postTag<P = WPTag>(): {
+		findAll: () => Promise<P[]>
+		findOne: (id: number) => Promise<P>
+		create: EndpointCreate<P>
+		update: EndpointUpdate<P>
+	} {
+		const find = this.createEndpointGet<P>(END_POINT.TAGS)
+		const create = this.createEndpointPost<P>(END_POINT.TAGS)
+		const update = this.createEndpointPost<P>(END_POINT.TAGS)
 		return {
 			findAll: find as () => Promise<P[]>,
 			findOne: find as (id: number) => Promise<P>,
