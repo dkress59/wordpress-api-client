@@ -1,12 +1,12 @@
 {
   "name": "wordpress-api-client",
-  "version": "0.0.11-dev",
   "description": "WordPress-API Client for JS/TS",
-  "repository": "https://github.com/dkress59/wordpress-api-client",
-  "bugs": "https://github.com/dkress59/wordpress-api-client/issues",
+  "version": "0.0.11-dev",
   "author": "Damian Kress",
+  "bugs": "https://github.com/dkress59/wordpress-api-client/issues",
   "license": "MIT",
   "main": "dist/index.js",
+  "repository": "https://github.com/dkress59/wordpress-api-client",
   "types": "src/index",
   "contributors": [
     {
@@ -37,6 +37,9 @@
     "ts-node": "^10.2.1",
     "typescript": "4.4.3",
     "wp-types": "^2.12.0"
+  },
+  "engines": {
+    "node": ">=0.12"
   },
   "keywords": [
     "wordpress",
