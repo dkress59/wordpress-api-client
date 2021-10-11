@@ -13,10 +13,10 @@ jobs:
         with:
           node-version: '16.x'
           registry-url: 'https://registry.npmjs.org'
-      - run: npm install
-      - run: npm run build
-      - run: npm run check:script
-      - run: npm run test
+      - run: yarn
+      - run: yarn build
+      - run: yarn check:script
+      - run: yarn test
       - name: 'Publish to NPM'
         run: npm publish
         env:
