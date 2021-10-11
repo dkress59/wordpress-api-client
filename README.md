@@ -126,19 +126,19 @@ class CmsApiClient extends WpApiClient {
     }
 
     public product(): {
-        find: () => Promise<WPProduct[]>
+        findAll: () => Promise<WPProduct[]>
         findOne: (id: number) => Promise<WPProduct>
         create: EndpointCreate<WPProduct>
         update: EndpointUpdate<WPProduct>
     } {
-        const getProduct = this.createEndpointGet<WPProduct>(EP_PRODUCTS)
-        const newProduct = this.createEndpointPost<WPProduct>(EP_PRODUCTS)
-        const updateProduct = this.createEndpointPost<WPProduct>(EP_PRODUCTS)
+        const find = this.createEndpointGet<WPProduct>(EP_PRODUCTS)
+        const create = this.createEndpointPost<WPProduct>(EP_PRODUCTS)
+        const update = this.createEndpointPost<WPProduct>(EP_PRODUCTS)
         return {
-            find: getProduct as () => Promise<WPProduct[]>,
-            findOne: getProduct as (id: number) => Promise<WPProduct>,
-            create: newProduct,
-            update: updateProduct,
+            findAll: find as () => Promise<WPProduct[]>,
+            findOne: find as (id: number) => Promise<WPProduct>,
+            create,
+            update,
         }
     }
 }
@@ -238,11 +238,7 @@ import { WpApiClient, WPPage } from 'wordpress-api-client'
 const CmsClient = new WpApiClient('https://my-wordpress-website.com')
 
 interface CustomPage extends WPPage {
-    acf: {
-        hideTitle: boolean,
-        gallery: string[],
-        // …
-    }
+    menu_order: number
 }
 
 // The response object can be casted like this:
@@ -265,13 +261,13 @@ class CmsApiClient extends WpApiClient {
         super(baseURL, (message: string) => console.error(message))
     }
 
-    public page<P = CustomPage>(): {
-        find: () => Promise<P[]>
-        findOne: (id: number) => Promise<P>
-        create: EndpointCreate<P>
-        update: EndpointUpdate<P>
+    public page(): {
+        find: () => Promise<CustomPage[]>
+        findOne: (id: number) => Promise<CustomPage>
+        create: EndpointCreate<CustomPage>
+        update: EndpointUpdate<CustomPage>
     } {
-        return super.page<P>()
+        return super.page<CustomPage>()
     }
 }
 
@@ -292,7 +288,7 @@ import WpApiClient, {
 } from 'wordpress-api-client'
 import { baseURL } from './constants'
 
-interface MyPostType extends WPPost {
+interface CustomPost extends WPPost {
     acf: {
         additional_info: string
         sidebar_options: {
@@ -310,13 +306,13 @@ export class CmsClient extends WpApiClient {
         )
     }
 
-    public post<P = MyPostType>(): {
-        findAll: () => Promise<P[]>
-        findOne: (id: number) => Promise<P>
-        create: EndpointCreate<P>
-        update: EndpointUpdate<P>
+    public post<CustomPost>(): {
+        findAll: () => Promise<CustomPost[]>
+        findOne: (id: number) => Promise<CustomPost>
+        create: EndpointCreate<CustomPost>
+        update: EndpointUpdate<CustomPost>
     } {
-        return super.post<P>()
+        return super.post<CustomPost>()
     }
 }
 ```
