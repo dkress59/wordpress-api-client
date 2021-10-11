@@ -1,9 +1,11 @@
-import { ACFMedia, WPPage, WPPost } from './types'
+import { ACFMedia, WPCategory, WPPage, WPPost, WPTag } from './types'
 import { FixtureFactory } from 'interface-forge'
 import {
 	WP_Post_Comment_Status_Name,
 	WP_Post_Status_Name,
 	WP_Post_Type_Name,
+	WP_REST_API_Object_Links,
+	WP_Taxonomy_Name,
 } from 'wp-types'
 import faker from 'faker'
 import path from 'path'
@@ -20,6 +22,68 @@ export const POST_STATUS_MAP = [
 	WP_Post_Status_Name.publish,
 	WP_Post_Status_Name.trash,
 ]
+
+export const WPObjectLinksFactory =
+	new FixtureFactory<WP_REST_API_Object_Links>(
+		() => ({
+			'predecessor-version': [
+				{
+					href: faker.internet.url(),
+					id: faker.datatype.number(),
+				},
+			],
+			'version-history': [
+				{
+					href: faker.internet.url(),
+					id: faker.datatype.number(),
+				},
+			],
+			'wp:attachment': [
+				{
+					href: faker.internet.url(),
+					id: faker.datatype.number(),
+				},
+			],
+			'wp:featuredmedia': [
+				{
+					href: faker.internet.url(),
+					id: faker.datatype.number(),
+				},
+			],
+			'wp:term': [
+				{
+					href: faker.internet.url(),
+					id: faker.datatype.number(),
+				},
+			],
+			'about': [
+				{
+					href: faker.internet.url(),
+					id: faker.datatype.number(),
+				},
+			],
+			'collection': [
+				{
+					href: faker.internet.url(),
+					id: faker.datatype.number(),
+				},
+			],
+			'counter': [
+				{
+					href: faker.internet.url(),
+					id: faker.datatype.number(),
+				},
+			],
+			'curies': [
+				{
+					href: faker.internet.url(),
+					id: faker.datatype.number(),
+				},
+			],
+		}),
+		undefined,
+		fixtureDir,
+	)
 
 export const AcfMediaFactory = new FixtureFactory<ACFMedia>(
 	() => ({
@@ -117,62 +181,7 @@ export const WPPostFactory = new FixtureFactory<WPPost>(
 		title: { rendered: faker.random.words() },
 		type: WP_Post_Type_Name.post,
 		yoastHead: '<meta title="' + faker.random.words() + '" />',
-		_links: {
-			'predecessor-version': [
-				{
-					href: faker.internet.url(),
-					id: faker.datatype.number(),
-				},
-			],
-			'version-history': [
-				{
-					href: faker.internet.url(),
-					id: faker.datatype.number(),
-				},
-			],
-			'wp:attachment': [
-				{
-					href: faker.internet.url(),
-					id: faker.datatype.number(),
-				},
-			],
-			'wp:featuredmedia': [
-				{
-					href: faker.internet.url(),
-					id: faker.datatype.number(),
-				},
-			],
-			'wp:term': [
-				{
-					href: faker.internet.url(),
-					id: faker.datatype.number(),
-				},
-			],
-			'about': [
-				{
-					href: faker.internet.url(),
-					id: faker.datatype.number(),
-				},
-			],
-			'collection': [
-				{
-					href: faker.internet.url(),
-					id: faker.datatype.number(),
-				},
-			],
-			'counter': [
-				{
-					href: faker.internet.url(),
-					id: faker.datatype.number(),
-				},
-			],
-			'curies': [
-				{
-					href: faker.internet.url(),
-					id: faker.datatype.number(),
-				},
-			],
-		},
+		_links: WPObjectLinksFactory,
 	}),
 	undefined,
 	fixtureDir,
@@ -184,6 +193,41 @@ export const WPPageFactory = new FixtureFactory<WPPage>(
 		type: WP_Post_Type_Name.page,
 		menu_order: 0,
 		parent: FixtureFactory.sample([0, 0, faker.datatype.number()]),
+	}),
+	undefined,
+	fixtureDir,
+)
+
+export const WPCategoryFactory = new FixtureFactory<WPCategory>(
+	() => ({
+		_links: WPObjectLinksFactory,
+		acf: undefined,
+		count: faker.datatype.number(12),
+		description: faker.lorem.sentence(),
+		id: faker.datatype.number(),
+		link: faker.internet.url(),
+		meta: [],
+		name: faker.random.words(),
+		slug: faker.random.words().replace(' ', '-').toLowerCase(),
+		taxonomy: WP_Taxonomy_Name.category,
+		parent: 0,
+	}),
+	undefined,
+	fixtureDir,
+)
+
+export const WPTagFactory = new FixtureFactory<WPTag>(
+	() => ({
+		_links: WPObjectLinksFactory,
+		acf: undefined,
+		count: faker.datatype.number(12),
+		description: faker.lorem.sentence(),
+		id: faker.datatype.number(),
+		link: faker.internet.url(),
+		meta: [],
+		name: faker.random.words(),
+		slug: faker.random.words().replace(' ', '-').toLowerCase(),
+		taxonomy: WP_Taxonomy_Name.post_tag,
 	}),
 	undefined,
 	fixtureDir,

@@ -10,4 +10,6 @@ export const ERROR_MESSAGE = {
 	DETAILED: '[WpApiClient] Error: %error%',
 	GENERIC: '[WpApiClient] Error. Misconfiguration?',
 	INVALID_BASEURL: '[WpApiClient] Invalid baseURL: %url%',
+	INVALID_FILENAME:
+		'[WpApiClient] The fileName must include the file extension (e.g.: %fileName%.jpg).',
 }

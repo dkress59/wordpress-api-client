@@ -1,4 +1,4 @@
-import { END_POINT } from './constants'
+import { END_POINT, ERROR_MESSAGE } from './constants'
 import {
 	EndpointCreate,
 	EndpointUpdate,
@@ -42,14 +42,14 @@ export class WpApiClient {
 				return (
 					(
 						await this.axios.get<P[] | undefined>(
-							`/${endpoint}/${getDefaultQueryList(params)}`,
+							`${endpoint}/${getDefaultQueryList(params)}`,
 						)
 					).data ?? ([] as P[])
 				)
 			else
 				return (
 					await this.axios.get<P>(
-						`/${endpoint}/${id}/${getDefaultQuerySingle(params)}`,
+						`${endpoint}/${id}/${getDefaultQuerySingle(params)}`,
 					)
 				).data
 		}
@@ -62,7 +62,7 @@ export class WpApiClient {
 			if (id)
 				return (
 					await this.axios.post<WPCreate<P>, AxiosResponse<P>>(
-						`/${endpoint}/${id}`,
+						`${endpoint}/${id}`,
 						{
 							...body,
 							fields: body.acf,
@@ -72,7 +72,7 @@ export class WpApiClient {
 			else
 				return (
 					await this.axios.post<WPCreate<P>, AxiosResponse<P>>(
-						`/${endpoint}`,
+						`${endpoint}`,
 						{
 							...body,
 							fields: body.acf,
@@ -86,7 +86,7 @@ export class WpApiClient {
 		endPoint: string,
 	): () => Promise<T | R> {
 		return async (): Promise<T | R> => {
-			return (await this.axios.get(`/${endPoint}`)).data
+			return (await this.axios.get(endPoint)).data
 		}
 	}
 
@@ -94,7 +94,7 @@ export class WpApiClient {
 		endPoint: string,
 	): (body: T) => Promise<T | R> {
 		return async (body: T): Promise<T | R> => {
-			return (await this.axios.post(`/${endPoint}`, body)).data
+			return (await this.axios.post(endPoint, body)).data
 		}
 	}
 
@@ -154,10 +154,15 @@ export class WpApiClient {
 			mimeType = 'image/jpeg',
 		): Promise<P> => {
 			if (!fileName.includes('.'))
-				throw new Error('The fileName must include the file extension.')
+				throw new Error(
+					ERROR_MESSAGE.INVALID_FILENAME.replace(
+						'%fileName%',
+						fileName,
+					),
+				)
 			return (
 				await this.axios.post<Buffer, AxiosResponse<P>>(
-					END_POINT.MEDIA,
+					`${END_POINT.MEDIA}`,
 					data,
 					{
 						headers: {

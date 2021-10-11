@@ -10,13 +10,13 @@ ToDo:
 
 - [ ] Catch 404s & `WPError`s
 - [ ] Document extendable URLSearchParams
-- [ ] Jest
 - [ ] (Create-Update-Return-Types)
 - [X] `ACFPost<P = Record<string, unknown>>`
 - [X] /wp-json
 - [X] Categories & Tags
 - [X] Constructor Validation
 - [X] Improve typings: WPPost, WPPage
+- [X] Jest
 - [X] Media Gallery
 - [X] PickRename
 - [X] URLSearchParams

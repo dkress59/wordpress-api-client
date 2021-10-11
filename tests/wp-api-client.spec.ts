@@ -1,10 +1,19 @@
-import { AxiosInstance } from 'axios'
-import { END_POINT } from '../src/constants'
-import { WPCreate, WPPage, WPPost } from '../src/types'
+import { END_POINT, ERROR_MESSAGE } from '../src/constants'
+import {
+	WPCategory,
+	WPCreate,
+	WPMedia,
+	WPPage,
+	WPPost,
+	WPTag,
+} from '../src/types'
 import { WPPageFactory, WPPostFactory } from '../src/factories'
 import { getDefaultQueryList, getDefaultQuerySingle } from '../src/util'
 import WpApiClient from '../src'
+import axios, { AxiosInstance } from 'axios'
 import mockAxios from 'jest-mock-axios'
+
+const mockData = 'mock_data'
 
 const mockPage = WPPageFactory.buildSync()
 const mockPageCreate: WPCreate<WPPage> = {
@@ -22,6 +31,13 @@ const mockPostCreate: WPCreate<WPPost> = {
 	title: mockPost.title.rendered,
 }
 
+const mockPostCategoryCreate: WPCreate<WPCategory> = {
+	description: 'mock_description',
+}
+const mockPostTagCreate: WPCreate<WPTag> = {
+	description: 'mock_description',
+}
+
 const EP_CUSTOM_GET = 'mock/custom/get'
 const EP_CUSTOM_POST = 'mock/custom/post'
 class MockClient extends WpApiClient {
@@ -33,42 +49,59 @@ class MockClient extends WpApiClient {
 		)
 	}
 
-	customGet = this.createEndpointCustomGet(EP_CUSTOM_GET)
+	customGetMethod = this.createEndpointCustomGet(EP_CUSTOM_GET)
 
-	customPost = this.createEndpointCustomPost(EP_CUSTOM_POST)
+	customPostMethod = this.createEndpointCustomPost(EP_CUSTOM_POST)
 }
 
 const instance = mockAxios.create()
 const client = new MockClient()
 
 describe('WpApiClient', () => {
+	describe('consctructor', () => {
+		it('uses custom AxiosInstance, if provided', () => {
+			const mockInstance = axios.create() as unknown as AxiosInstance
+			class TestClient extends WpApiClient {
+				constructor() {
+					super('http://mock-base.url', undefined, mockInstance)
+					expect(this.axios).toBe(mockInstance)
+				}
+			}
+			new TestClient()
+		})
+		it('falls back to new AxiosInstance', () => {
+			class TestClient extends WpApiClient {
+				constructor() {
+					super('http://mock-base.url')
+					expect(this.axios).not.toBeNull()
+				}
+			}
+			new TestClient()
+		})
+	})
 	describe('helper methods', () => {
 		describe('createEndpointGet', () => {
 			it('.findAll returns empty array if response is undefined', async () => {
 				mockAxios.get.mockResolvedValueOnce({ data: null })
 				expect(await client.page().findAll()).toEqual([])
 			})
-			it('.findAll returns data field of succesful AxiosResponse', async () => {
-				const mockData = 'mock_data'
+			it('.findAll returns data field of successful AxiosResponse', async () => {
 				mockAxios.get.mockResolvedValueOnce({ data: mockData })
 				expect(await client.page().findAll()).toEqual(mockData)
 			})
-			it('.findOne returns data field of succesful AxiosResponse', async () => {
-				const mockData = 'mock_data'
+			it('.findOne returns data field of successful AxiosResponse', async () => {
 				mockAxios.get.mockResolvedValueOnce({ data: mockData })
 				expect(await client.page().findOne(123)).toEqual(mockData)
 			})
 		})
 		describe('createEndpointPost', () => {
-			it('.create returns data field of succesful AxiosResponse', async () => {
-				const mockData = 'mock_data'
+			it('.create returns data field of successful AxiosResponse', async () => {
 				mockAxios.post.mockResolvedValueOnce({ data: mockData })
 				expect(await client.page().create(mockPageCreate)).toEqual(
 					mockData,
 				)
 			})
-			it('.update returns data field of succesful AxiosResponse', async () => {
-				const mockData = 'mock_data'
+			it('.update returns data field of successful AxiosResponse', async () => {
 				mockAxios.post.mockResolvedValueOnce({ data: mockData })
 				expect(await client.page().update(mockPageCreate, 123)).toEqual(
 					mockData,
@@ -77,27 +110,25 @@ describe('WpApiClient', () => {
 		})
 		describe('createEndpointCustomGet', () => {
 			it('calls the correct endpoint', () => {
-				client.customGet()
-				expect(mockAxios.get).toHaveBeenCalledWith(`/${EP_CUSTOM_GET}`)
+				client.customGetMethod()
+				expect(mockAxios.get).toHaveBeenCalledWith(`${EP_CUSTOM_GET}`)
 			})
-			it('returns data field of succesful AxiosResponse', async () => {
-				const mockData = 'mock_data'
+			it('returns data field of successful AxiosResponse', async () => {
 				mockAxios.get.mockResolvedValueOnce({ data: mockData })
-				expect(await client.customGet()).toEqual(mockData)
+				expect(await client.customGetMethod()).toEqual(mockData)
 			})
 		})
 		describe('createEndpointCustomPost', () => {
 			it('calls the correct endpoint with correct body', () => {
-				client.customPost('any')
+				client.customPostMethod('any')
 				expect(mockAxios.post).toHaveBeenCalledWith(
-					`/${EP_CUSTOM_POST}`,
+					`${EP_CUSTOM_POST}`,
 					'any',
 				)
 			})
-			it('returns data field of succesful AxiosResponse', async () => {
-				const mockData = 'mock_data'
+			it('returns data field of successful AxiosResponse', async () => {
 				mockAxios.post.mockResolvedValueOnce({ data: mockData })
-				expect(await client.customPost('any')).toEqual(mockData)
+				expect(await client.customPostMethod('any')).toEqual(mockData)
 			})
 		})
 	})
@@ -107,20 +138,20 @@ describe('WpApiClient', () => {
 				it('calls the correct endpoint', () => {
 					client.page().findAll()
 					expect(mockAxios.get).toHaveBeenCalledWith(
-						`/${END_POINT.PAGES}/${getDefaultQueryList()}`,
+						`${END_POINT.PAGES}/${getDefaultQueryList()}`,
 					)
 				})
 			})
 			it('findOne calls the correct endpoint', () => {
 				client.page().findOne(123)
 				expect(mockAxios.get).toHaveBeenCalledWith(
-					`/${END_POINT.PAGES}/123/${getDefaultQuerySingle()}`,
+					`${END_POINT.PAGES}/123/${getDefaultQuerySingle()}`,
 				)
 			})
 			it('create calls the correct endpoint', () => {
 				client.page().create(mockPageCreate)
 				expect(mockAxios.post).toHaveBeenCalledWith(
-					`/${END_POINT.PAGES}`,
+					`${END_POINT.PAGES}`,
 					mockPageCreate,
 				)
 			})
@@ -134,7 +165,7 @@ describe('WpApiClient', () => {
 				}
 				client.page().update(mockPageCreate, 123)
 				expect(mockAxios.post).toHaveBeenCalledWith(
-					`/${END_POINT.PAGES}/123`,
+					`${END_POINT.PAGES}/123`,
 					mockPageCreate,
 				)
 			})
@@ -144,35 +175,181 @@ describe('WpApiClient', () => {
 				it('calls the correct endpoint', () => {
 					client.post().findAll()
 					expect(mockAxios.get).toHaveBeenCalledWith(
-						`/${END_POINT.POSTS}/${getDefaultQueryList()}`,
+						`${END_POINT.POSTS}/${getDefaultQueryList()}`,
 					)
 				})
 			})
 			it('findOne calls the correct endpoint', () => {
 				client.post().findOne(123)
 				expect(mockAxios.get).toHaveBeenCalledWith(
-					`/${END_POINT.POSTS}/123/${getDefaultQuerySingle()}`,
+					`${END_POINT.POSTS}/123/${getDefaultQuerySingle()}`,
 				)
 			})
 			it('create calls the correct endpoint', () => {
 				client.post().create(mockPostCreate)
 				expect(mockAxios.post).toHaveBeenCalledWith(
-					`/${END_POINT.POSTS}`,
+					`${END_POINT.POSTS}`,
 					mockPostCreate,
 				)
 			})
 			it('update calls the correct endpoint', () => {
-				const mockPost = WPPostFactory.buildSync()
-				const mockPostCreate: WPCreate<WPPost> = {
-					...mockPost,
-					content: mockPost.content.rendered,
-					excerpt: mockPost.excerpt.rendered,
-					title: mockPost.title.rendered,
-				}
 				client.post().update(mockPostCreate, 123)
 				expect(mockAxios.post).toHaveBeenCalledWith(
-					`/${END_POINT.POSTS}/123`,
+					`${END_POINT.POSTS}/123`,
 					mockPostCreate,
+				)
+			})
+		})
+		describe('media', () => {
+			const mockFile = Buffer.from(mockData)
+			const mockFileName = 'mock_file.name'
+
+			describe('findAll', () => {
+				it('calls the correct endpoint', () => {
+					client.media().findAll()
+					expect(mockAxios.get).toHaveBeenCalledWith(
+						`${END_POINT.MEDIA}/${getDefaultQueryList()}`,
+					)
+				})
+				it('returns data field of successful AxiosResponse', async () => {
+					mockAxios.get.mockResolvedValueOnce({ data: mockData })
+					expect(await client.media().findAll()).toEqual(mockData)
+				})
+			})
+			describe('findOne', () => {
+				it('calls the correct endpoint', () => {
+					client.media().findOne(123)
+					expect(mockAxios.get).toHaveBeenCalledWith(
+						`${END_POINT.MEDIA}/123/${getDefaultQuerySingle()}`,
+					)
+				})
+				it('returns data field of successful AxiosResponse', async () => {
+					mockAxios.get.mockResolvedValueOnce({ data: mockData })
+					expect(await client.media().findOne(123)).toEqual(mockData)
+				})
+			})
+			describe('create', () => {
+				it('calls the correct endpoint', () => {
+					client.media().create(mockFileName, mockFile)
+					expect(mockAxios.post).toHaveBeenCalledWith(
+						`${END_POINT.MEDIA}`,
+						mockFile,
+						{
+							headers: {
+								'Content-Disposition': `application/x-www-form-urlencoded; filename="${mockFileName}"`,
+								'Content-Type': 'image/jpeg',
+							},
+						},
+					)
+				})
+				it('returns data field of successful AxiosResponse', async () => {
+					mockAxios.post.mockResolvedValueOnce({ data: mockData })
+					expect(
+						await client.media().create(mockFileName, mockFile),
+					).toEqual(mockData)
+				})
+				it('throws error if fileName is missing a file extension', async () => {
+					const invalidFileName = 'invalid'
+					await expect(
+						client.media().create(invalidFileName, mockFile),
+					).rejects.toThrow(
+						ERROR_MESSAGE.INVALID_FILENAME.replace(
+							'%fileName%',
+							invalidFileName,
+						),
+					)
+				})
+				it('can assign a mimeType', () => {
+					const mockMimeType = 'test/mock'
+					client.media().create(mockFileName, mockFile, mockMimeType)
+					expect(mockAxios.post).toHaveBeenCalledWith(
+						`${END_POINT.MEDIA}`,
+						mockFile,
+						{
+							headers: {
+								'Content-Disposition': `application/x-www-form-urlencoded; filename="${mockFileName}"`,
+								'Content-Type': mockMimeType,
+							},
+						},
+					)
+				})
+			})
+			describe('update', () => {
+				it('calls the correct endpoint', () => {
+					const mockMediaUpdate: WPCreate<WPMedia> = {
+						description: 'mock_description',
+					}
+					client.media().update(mockMediaUpdate, 123)
+					expect(mockAxios.post).toHaveBeenCalledWith(
+						`${END_POINT.MEDIA}/123`,
+						mockMediaUpdate,
+					)
+				})
+				it('returns data field of successful AxiosResponse', async () => {
+					mockAxios.post.mockResolvedValueOnce({ data: mockData })
+					expect(
+						await client.media().create(mockFileName, mockFile),
+					).toEqual(mockData)
+				})
+			})
+		})
+		describe('postCategory', () => {
+			describe('findAll', () => {
+				it('calls the correct endpoint', () => {
+					client.postCategory().findAll()
+					expect(mockAxios.get).toHaveBeenCalledWith(
+						`${END_POINT.CATEGORIES}/${getDefaultQueryList()}`,
+					)
+				})
+			})
+			it('findOne calls the correct endpoint', () => {
+				client.postCategory().findOne(123)
+				expect(mockAxios.get).toHaveBeenCalledWith(
+					`${END_POINT.CATEGORIES}/123/${getDefaultQuerySingle()}`,
+				)
+			})
+			it('create calls the correct endpoint', () => {
+				client.postCategory().create(mockPostCategoryCreate)
+				expect(mockAxios.post).toHaveBeenCalledWith(
+					`${END_POINT.CATEGORIES}`,
+					mockPostCategoryCreate,
+				)
+			})
+			it('update calls the correct endpoint', () => {
+				client.postCategory().update(mockPostCategoryCreate, 123)
+				expect(mockAxios.post).toHaveBeenCalledWith(
+					`${END_POINT.CATEGORIES}/123`,
+					mockPostCategoryCreate,
+				)
+			})
+		})
+		describe('postTag', () => {
+			describe('findAll', () => {
+				it('calls the correct endpoint', () => {
+					client.postTag().findAll()
+					expect(mockAxios.get).toHaveBeenCalledWith(
+						`${END_POINT.TAGS}/${getDefaultQueryList()}`,
+					)
+				})
+			})
+			it('findOne calls the correct endpoint', () => {
+				client.postTag().findOne(123)
+				expect(mockAxios.get).toHaveBeenCalledWith(
+					`${END_POINT.TAGS}/123/${getDefaultQuerySingle()}`,
+				)
+			})
+			it('create calls the correct endpoint', () => {
+				client.postTag().create(mockPostTagCreate)
+				expect(mockAxios.post).toHaveBeenCalledWith(
+					`${END_POINT.TAGS}`,
+					mockPostTagCreate,
+				)
+			})
+			it('update calls the correct endpoint', () => {
+				client.postTag().update(mockPostTagCreate, 123)
+				expect(mockAxios.post).toHaveBeenCalledWith(
+					`${END_POINT.TAGS}/123`,
+					mockPostTagCreate,
 				)
 			})
 		})
