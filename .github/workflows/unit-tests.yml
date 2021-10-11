@@ -34,4 +34,4 @@ jobs:
             - name: Install Dependencies
               run: yarn && yarn add codecov
             - name: Share Test Coverage
-              run: yarn coverage && yarn codecov
+              run: yarn test && yarn codecov
