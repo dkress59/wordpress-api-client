@@ -1,6 +1,6 @@
 {
   "name": "wordpress-api-client",
-  "version": "0.0.10-dev",
+  "version": "0.0.11-dev",
   "description": "WordPress-API Client for JS/TS",
   "repository": "https://github.com/dkress59/wordpress-api-client",
   "bugs": "https://github.com/dkress59/wordpress-api-client/issues",
@@ -56,7 +56,7 @@
     "check:script": "eslint src --ext .ts --fix-dry-run --report-unused-disable-directives",
     "lint:script": "eslint src --ext .ts --fix",
     "prepublishOnly": "rm .gitignore",
-    "test": "jest",
+    "test": "jest --verbose",
     "test:watch": "jest --watchAll"
   }
 }
