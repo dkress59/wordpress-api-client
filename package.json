@@ -26,6 +26,7 @@
     "@types/node": "^16.10.3",
     "eslint": "7.32.0",
     "eslint-import-resolver-typescript": "2.5.0",
+    "eslint-plugin-eslint-comments": "^3.2.0",
     "eslint-plugin-sort-imports-es6-autofix": "0.6.0",
     "eslint-plugin-unused-imports": "1.1.5",
     "faker": "^5.5.3",
@@ -39,7 +40,7 @@
     "wp-types": "^2.12.0"
   },
   "engines": {
-    "node": ">=0.12"
+    "node": ">=0.14"
   },
   "keywords": [
     "wordpress",
