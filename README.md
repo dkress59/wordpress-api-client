@@ -1,10 +1,10 @@
 # WordPress-API Client
 
-[![npm version](https://badge.fury.io/js/wordpress-api-client.svg)](https://badge.fury.io/js/wordpress-api-client)
-
 A full-fledged JavaScript client for your WP-API. Super simple yet highly extensible.
 
 Written in TypeScript, fully compatible to JavaScript.
+
+[![npm version](https://badge.fury.io/js/wordpress-api-client.svg)](https://badge.fury.io/js/wordpress-api-client) [![codecov](https://codecov.io/gh/dkress59/wordpress-api-client/branch/main/graph/badge.svg?token=1Z3R5J16FK)](https://codecov.io/gh/dkress59/wordpress-api-client)
 
 ToDo:
 
