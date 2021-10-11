@@ -11,7 +11,7 @@ export default {
 	// bail: 0,
 
 	// The directory where Jest should store its cached dependency information
-	// cacheDirectory: "/private/var/folders/ty/1_hskpc134xg1yr556gtfvbw0000gp/T/jest_dy",
+	cacheDirectory: '.jest/cache',
 
 	// Automatically clear mock calls and instances between every test
 	clearMocks: true,
@@ -20,15 +20,17 @@ export default {
 	collectCoverage: true,
 
 	// An array of glob patterns indicating a set of files for which coverage information should be collected
-	// collectCoverageFrom: undefined,
+	//collectCoverageFrom: ['**src/**/*.ts'],
 
 	// The directory where Jest should output its coverage files
 	coverageDirectory: 'coverage',
 
 	// An array of regexp pattern strings used to skip coverage collection
-	// coveragePathIgnorePatterns: [
-	//   "/node_modules/"
-	// ],
+	coveragePathIgnorePatterns: [
+		'node_modules',
+		'src/factories.ts',
+		'.factory.ts',
+	],
 
 	// Indicates which provider should be used to instrument code for coverage
 	coverageProvider: 'v8',
@@ -147,15 +149,10 @@ export default {
 	// testLocationInResults: false,
 
 	// The glob patterns Jest uses to detect test files
-	testMatch: [
-		'**/__tests__/**/*.[jt]s?(x)',
-		'**/?(*.)+(spec|test).[tj]s?(x)',
-	],
+	testMatch: ['**/tests/**/*.[jt]s?(x)', '**/?(*.)+(spec|test).[tj]s?(x)'],
 
 	// An array of regexp pattern strings that are matched against all test paths, matched tests are skipped
-	// testPathIgnorePatterns: [
-	//   "/node_modules/"
-	// ],
+	//testPathIgnorePatterns: ['node_modules', 'src/factories.ts', '.factory.ts'],
 
 	// The regexp pattern or array of patterns that Jest uses to detect test files
 	// testRegex: [],
@@ -185,7 +182,7 @@ export default {
 	// unmockedModulePathPatterns: undefined,
 
 	// Indicates whether each individual test should be reported during the run
-	// verbose: undefined,
+	// verbose: true,
 
 	// An array of regexp patterns that are matched against all source file paths before re-running tests in watch mode
 	// watchPathIgnorePatterns: [],

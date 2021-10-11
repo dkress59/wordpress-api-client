@@ -84,7 +84,7 @@ export class WpApiClient {
 
 	protected createEndpointCustomGet<T, R = null>(
 		endPoint: string,
-	): (body: T) => Promise<T | R> {
+	): () => Promise<T | R> {
 		return async (): Promise<T | R> => {
 			return (await this.axios.get(`/${endPoint}`)).data
 		}

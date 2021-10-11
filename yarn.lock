@@ -653,6 +653,11 @@
     eslint-plugin-sort-imports-es6-autofix "^0.6.0"
     eslint-plugin-testing-library "^4.12.2"
 
+"@tool-belt/type-predicates@^1.2.0":
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/@tool-belt/type-predicates/-/type-predicates-1.2.0.tgz#bc38cd34697c8664c59ce8a7188f7def3a22be23"
+  integrity sha512-08ow2MwCE8fx9VkWYHPmwFBPOkqGbeh3LRZCC0vzr1QECZpikMOOMTP/IQIE3nEBRQ9GNSs+A/ZRKym2mUvrAA==
+
 "@tootallnate/once@1":
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/@tootallnate/once/-/once-1.1.2.tgz#ccb91445360179a04e7fe6aff78c00ffc1eeaf82"
@@ -710,6 +715,11 @@
   integrity sha512-K2waXdXBi2302XUdcHcR1jCeU0LL4TD9HRs/gk0N2Xvrht+G/BfJa4QObBQZfhMdxiCpV3COl5Nfq4uKTeTnJA==
   dependencies:
     "@babel/types" "^7.3.0"
+
+"@types/faker@^5.5.8":
+  version "5.5.8"
+  resolved "https://registry.yarnpkg.com/@types/faker/-/faker-5.5.8.tgz#6649adfdfdbb0acf95361fc48f2d0ca6e88bd1cf"
+  integrity sha512-bsl0rYsaZVHlZkynL5O04q6YXDmVjcid6MbOHWqvtE2WWs/EKhp0qchDDhVWlWyQXUffX1G83X9LnMxRl8S/Mw==
 
 "@types/graceful-fs@^4.1.2":
   version "4.1.5"
@@ -1844,6 +1854,11 @@ expect@^27.2.5:
     jest-message-util "^27.2.5"
     jest-regex-util "^27.0.6"
 
+faker@^5.5.3:
+  version "5.5.3"
+  resolved "https://registry.yarnpkg.com/faker/-/faker-5.5.3.tgz#c57974ee484431b25205c2c8dc09fda861e51e0e"
+  integrity sha512-wLTv2a28wjUyWkbnX7u/ABZBkUkIF2fCd73V6P2oFqEGEktDfzWx4UxrSqtPRw0xPRAcjeAOIiJWqZm3pP4u3g==
+
 fast-deep-equal@^3.1.1, fast-deep-equal@^3.1.3:
   version "3.1.3"
   resolved "https://registry.yarnpkg.com/fast-deep-equal/-/fast-deep-equal-3.1.3.tgz#3a7d56b559d6cbc3eb512325244e619a65c6c525"
@@ -2173,6 +2188,13 @@ inherits@2:
   version "2.0.4"
   resolved "https://registry.yarnpkg.com/inherits/-/inherits-2.0.4.tgz#0fa2c64f932917c3433a0ded55363aae37416b7c"
   integrity sha512-k/vGaX4/Yla3WzyMCvTQOXYeIHvqOKtnqBduzTHpzpQZzAskKMhZ2K+EnBiSM9zGSoIFeMpXKxa4dYeZIQqewQ==
+
+interface-forge@^1.4.4:
+  version "1.4.4"
+  resolved "https://registry.yarnpkg.com/interface-forge/-/interface-forge-1.4.4.tgz#0d8efdade21df26fb1be9a0904f18ff92b37c79f"
+  integrity sha512-H6bk31/wkVNJb0NNkCd8y/5gywH6sfrPOPfg99L6Mh972srrAmd0UCG1g96iZwWcWV1vANT7/0Er4cSGAmgzZw==
+  dependencies:
+    "@tool-belt/type-predicates" "^1.2.0"
 
 internal-slot@^1.0.3:
   version "1.0.3"

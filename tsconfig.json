@@ -4,11 +4,11 @@
 	],
 	"include": [
 		"./__mocks__",
-		"./__tests__",
 		"./jest.config.ts",
 		"./src/*.json",
 		"./src/*.ts",
-		"./src/*.tsx"
+		"./src/*.tsx",
+		"./tests"
 	],
 	"compilerOptions": {
 		"baseUrl": "./",

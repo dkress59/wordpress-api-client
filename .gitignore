@@ -2,5 +2,6 @@ dist/
 src/**/*.js
 
 .DS_Store
+.jest/cache/
 coverage/
 node_modules/

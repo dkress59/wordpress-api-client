@@ -1,4 +1,4 @@
-import { ERROR_MESSAGE } from '../src'
+import { ERROR_MESSAGE } from '../src/constants'
 import {
 	getDefaultQueryList,
 	getDefaultQuerySingle,
