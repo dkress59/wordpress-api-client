@@ -10,6 +10,11 @@ ToDo:
 
 - [ ] Catch 404s & `WPError`s
 - [ ] Document extendable URLSearchParams
+- [ ] Refactor
+  - [ ] .find(arg?: number | number[])
+  - [ ] (axios <—> fetch)
+- [ ] Static .collector(s)
+- [ ] (Option: camelCasify)
 - [ ] (Create-Update-Return-Types)
 - [X] `ACFPost<P = Record<string, unknown>>`
 - [X] /wp-json
