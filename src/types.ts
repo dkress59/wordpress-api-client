@@ -14,7 +14,11 @@ export type WPCreate<W> = Record<string, unknown> &
 		>
 	>
 
+export type EndpointGetOne<P> = (id: number) => Promise<P>
+export type EndpointGetMany<P> = (ids?: number[]) => Promise<P[]>
+
 export type EndpointCreate<P> = (body: WPCreate<P>) => Promise<P | null>
+
 export type EndpointUpdate<P> = (
 	body: WPCreate<P>,
 	id: number,

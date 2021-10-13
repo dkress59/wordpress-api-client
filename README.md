@@ -11,8 +11,8 @@ ToDo:
 - [ ] Catch 404s & `WPError`s
 - [ ] Document extendable URLSearchParams
 - [ ] Refactor
-  - [ ] .find(arg?: number | number[])
   - [ ] (axios <—> fetch)
+  - [X] .find(arg?: number | number[])
 - [ ] Static .collector(s)
 - [ ] (Option: camelCasify)
 - [ ] (Create-Update-Return-Types)
@@ -136,15 +136,7 @@ class CmsApiClient extends WpApiClient {
         create: EndpointCreate<WPProduct>
         update: EndpointUpdate<WPProduct>
     } {
-        const find = this.createEndpointGet<WPProduct>(EP_PRODUCTS)
-        const create = this.createEndpointPost<WPProduct>(EP_PRODUCTS)
-        const update = this.createEndpointPost<WPProduct>(EP_PRODUCTS)
-        return {
-            findAll: find as () => Promise<WPProduct[]>,
-            findOne: find as (id: number) => Promise<WPProduct>,
-            create,
-            update,
-        }
+        return this.post<WPProduct>()
     }
 }
 

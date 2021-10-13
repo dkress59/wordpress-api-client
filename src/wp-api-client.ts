@@ -9,6 +9,7 @@ import {
 	WPPost,
 	WPTag,
 } from './types'
+import { EndpointGetMany, EndpointGetOne } from 'src'
 import {
 	getDefaultQueryList,
 	getDefaultQuerySingle,
@@ -36,7 +37,7 @@ export class WpApiClient {
 	protected createEndpointGet<P>(
 		endpoint: string,
 		params?: Record<string, string>,
-	): (id?: number) => Promise<P | P[]> {
+	): (id: undefined | number | number[]) => Promise<P | P[]> {
 		return async (id = 0) => {
 			if (!id)
 				return (
@@ -46,12 +47,23 @@ export class WpApiClient {
 						)
 					).data ?? ([] as P[])
 				)
-			else
+			if (Array.isArray(id))
 				return (
-					await this.axios.get<P>(
-						`${endpoint}/${id}/${getDefaultQuerySingle(params)}`,
+					await Promise.all(
+						id.map(postId =>
+							this.axios.get<P>(
+								`${endpoint}/${postId}/${getDefaultQuerySingle(
+									params,
+								)}`,
+							),
+						),
 					)
-				).data
+				).map(response => response.data)
+			return (
+				await this.axios.get<P>(
+					`${endpoint}/${id}/${getDefaultQuerySingle(params)}`,
+				)
+			).data
 		}
 	}
 
@@ -99,8 +111,8 @@ export class WpApiClient {
 	}
 
 	public post<P = WPPost>(): {
-		findAll: () => Promise<P[]>
-		findOne: (id: number) => Promise<P>
+		find: EndpointGetMany<P>
+		findOne: EndpointGetOne<P>
 		create: EndpointCreate<P>
 		update: EndpointUpdate<P>
 	} {
@@ -108,16 +120,16 @@ export class WpApiClient {
 		const create = this.createEndpointPost<P>(END_POINT.POSTS)
 		const update = this.createEndpointPost<P>(END_POINT.POSTS)
 		return {
-			findAll: find as () => Promise<P[]>,
-			findOne: find as (id: number) => Promise<P>,
+			find: find as EndpointGetMany<P>,
+			findOne: find as EndpointGetOne<P>,
 			create,
 			update,
 		}
 	}
 
 	public page<P = WPPage>(): {
-		findAll: () => Promise<P[]>
-		findOne: (id: number) => Promise<P>
+		find: EndpointGetMany<P>
+		findOne: EndpointGetOne<P>
 		create: EndpointCreate<P>
 		update: EndpointUpdate<P>
 	} {
@@ -125,16 +137,16 @@ export class WpApiClient {
 		const create = this.createEndpointPost<P>(END_POINT.PAGES)
 		const update = this.createEndpointPost<P>(END_POINT.PAGES)
 		return {
-			findAll: find as () => Promise<P[]>,
-			findOne: find as (id: number) => Promise<P>,
+			find: find as EndpointGetMany<P>,
+			findOne: find as EndpointGetOne<P>,
 			create,
 			update,
 		}
 	}
 
 	public media<P = WPMedia>(): {
-		findAll: () => Promise<P[]>
-		findOne: (id: number) => Promise<P>
+		find: EndpointGetMany<P>
+		findOne: EndpointGetOne<P>
 		create: (
 			fileName: string,
 			data: Buffer,
@@ -178,16 +190,16 @@ export class WpApiClient {
 		}
 		const update = this.createEndpointPost<P>(END_POINT.MEDIA)
 		return {
-			findAll: find as () => Promise<P[]>,
-			findOne: find as (id: number) => Promise<P>,
+			find: find as EndpointGetMany<P>,
+			findOne: find as EndpointGetOne<P>,
 			create,
 			update,
 		}
 	}
 
 	public postCategory<P = WPCategory>(): {
-		findAll: () => Promise<P[]>
-		findOne: (id: number) => Promise<P>
+		find: EndpointGetMany<P>
+		findOne: EndpointGetOne<P>
 		create: EndpointCreate<P>
 		update: EndpointUpdate<P>
 	} {
@@ -195,16 +207,16 @@ export class WpApiClient {
 		const create = this.createEndpointPost<P>(END_POINT.CATEGORIES)
 		const update = this.createEndpointPost<P>(END_POINT.CATEGORIES)
 		return {
-			findAll: find as () => Promise<P[]>,
-			findOne: find as (id: number) => Promise<P>,
+			find: find as EndpointGetMany<P>,
+			findOne: find as EndpointGetOne<P>,
 			create,
 			update,
 		}
 	}
 
 	public postTag<P = WPTag>(): {
-		findAll: () => Promise<P[]>
-		findOne: (id: number) => Promise<P>
+		find: EndpointGetMany<P>
+		findOne: EndpointGetOne<P>
 		create: EndpointCreate<P>
 		update: EndpointUpdate<P>
 	} {
@@ -212,8 +224,8 @@ export class WpApiClient {
 		const create = this.createEndpointPost<P>(END_POINT.TAGS)
 		const update = this.createEndpointPost<P>(END_POINT.TAGS)
 		return {
-			findAll: find as () => Promise<P[]>,
-			findOne: find as (id: number) => Promise<P>,
+			find: find as EndpointGetMany<P>,
+			findOne: find as EndpointGetOne<P>,
 			create,
 			update,
 		}
