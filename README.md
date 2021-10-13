@@ -9,8 +9,8 @@ Written in TypeScript, fully compatible to JavaScript.
 ToDo:
 
 - [ ] Catch 404s & `WPError`s
-- [ ] Document extendable URLSearchParams
-- [ ] Refactor
+- [X] Document extendable URLSearchParams
+- [-] Refactor
   - [ ] (axios <—> fetch)
   - [X] .find(arg?: number | number[])
 - [ ] Static .collector(s)
@@ -95,7 +95,6 @@ __Note:__ To make use of any POST method (e.g. `CmsClient.media().create()`), yo
 
 The WpApiClient class uses three utility types and four helper methods:
 
-- _ACFPost (ToDo)_
 - WPCreate
 - EndpointCreate
 - EndpointUpdate
@@ -104,15 +103,15 @@ The WpApiClient class uses three utility types and four helper methods:
 - createEndpointCustomGet
 - createEndpointCustomPost
 
-To understand `createEndpointGet` and `createEndpointPost`, one needs to know a few things about the WordPress API itself: To retreive a list of posts, one needs to GET-request the route `/posts`. For a specific post the route that needs to be requested `/posts/{id}`. The same goes for pages; `/pages`, `/pages/{id}`.
+To understand `.createEndpointGet()` and `.createEndpointPost()`, one needs to know a few things about the WordPress API itself: To retreive a list of posts, one needs to GET-request the route `/posts`. For a specific post the route that needs to be requested `/posts/{id}`. The same goes for pages; `/pages`, `/pages/{id}`.
 
 To update a specific post or page, a POST request must be sent to `/posts{id}` or `/pages/{id}`, for a new post/page the POST request goes directly to `/posts`/`/pages`. This schema is valid for all WordPress-built-ins (Posts, Pages, Post-Categories, Post-Tags, Media), and also for all registered [Custom Post Types](https://developer.wordpress.org/reference/functions/register_post_type/) and [Custom Taxonomies](https://developer.wordpress.org/reference/functions/register_taxonomy/).
 
-For this recurring schema the WpApiClient class (and any sub-class) can use the methods `createEndpointGet` and `createEndpointPost`. Both methods responses' type can be casted on the respective method, and both methods need the path to your end point (starting after `/wp-json`) as parameter. See the [next chapter](#custom-post-types) for an example. The two POST-Methods use a utility type, `WPCreate`, because the output format of the `post_content` and `post_title` fields is an object (`{ rendered: string }`), but the input format for these fields must be a plain string.
+For this recurring schema the WpApiClient class (and any sub-class) can use the methods `.createEndpointGet()` and `.createEndpointPost()`. Both methods responses' type can be casted on the respective method, and both methods need the path to your end point (starting after `/wp-json`) as parameter. See the [next chapter](#custom-post-types) for an example. The two POST-Methods use a utility type, `WPCreate`, because the output format of the `post_content` and `post_title` fields is an object (`{ rendered: string }`), but the input format for these fields must be a plain string. _Note:_ A default query-param string will be added to the end point when using `.createEndpointGet()`: Collections will have the query `?_embed=true&order=asc&orderby=menu_order&per_page=100` appended, single posts will be queried with [?_embed=true](https://developer.wordpress.org/rest-api/using-the-rest-api/global-parameters/#_embed). The query can be overriden with the second parameter, e.g: `.createEndpointGet('wp/v2/posts', { _embed: 'author' })`.
 
 The utility type `EndpointCreate` will strip the `id` field from any type (e.g. POST to `/pages`), in accordance to the WP-API requirements. The `EndpointUpdate` utility type simply turns any type into a `Partial`, so that selective fields of any post type can be updated (e.g POST to. `/posts/{id}`)
 
-Of course, your are free to extend the WpApiClient class in any which way that suits you – but there are two more helpers that you can use, if you need to add methods for __custom__ wp-api end points. `createEndpointCustomGet` and `createEndpointCustomPost` also work very similarly; they both only take the respective path to the end point as a single, required argument, but they can be given up to two type arguments: The response type as the first, and a fallback type for errors as the second argument. You can find an [example here](#custom-end-points).
+Of course, you are free to extend the WpApiClient class in any which way that suits you – but there are two more helpers that can be used to add methods for __custom end points__. `.createEndpointCustomGet()` and `.createEndpointCustomPost()` also work very similarly; they both only take the respective path to the end point as a single, required argument, but they can be given up to two type arguments: The response type as the first, and a fallback type for errors as the second argument. You can find an [example here](#custom-end-points).
 
 ---
 
@@ -121,7 +120,7 @@ Of course, your are free to extend the WpApiClient class in any which way that s
 It does not take much to add the methods for any of your registered Custom Post Types.
 
 ```typescript
-import { EndpointCreate, EndpointUpdate, WpApiClient } from 'wordpress-api-client'
+import { EndpointCreate, EndpointGetMany, EndpointGetOne, EndpointUpdate, WpApiClient } from 'wordpress-api-client'
 import { baseURL, EP_PRODUCTS } from './constants'
 import { WPProduct } from './types'
 
@@ -131,12 +130,12 @@ class CmsApiClient extends WpApiClient {
     }
 
     public product(): {
-        findAll: () => Promise<WPProduct[]>
-        findOne: (id: number) => Promise<WPProduct>
+        find: EndpointGetMany<WPProduct[]>
+        findOne: EndpointGetOne<WPProduct>
         create: EndpointCreate<WPProduct>
         update: EndpointUpdate<WPProduct>
     } {
-        return this.post<WPProduct>()
+        return super.post<WPProduct>()
     }
 }
 
@@ -249,9 +248,13 @@ CmsClient.page<CustomPage>().update(id)
 Or, you might prefer to do it this way:
 
 ```typescript
-import { EndpointCreate, EndpointUpdate, WpApiClient } from 'wordpress-api-client'
+import { EndpointCreate, EndpointGetMany, EndpointGetOne, EndpointUpdate, WpApiClient } from 'wordpress-api-client'
 import { baseURL } from './constants'
 import { CustomPage } from './types'
+
+type CustomPage = WPPage & Required<{
+    menu_order: number
+}>
 
 class CmsApiClient extends WpApiClient {
     constructor() {
@@ -259,8 +262,8 @@ class CmsApiClient extends WpApiClient {
     }
 
     public page(): {
-        find: () => Promise<CustomPage[]>
-        findOne: (id: number) => Promise<CustomPage>
+        find: EndpointGetMany<CustomPage>
+        findOne: EndpointGetOne<CustomPage>
         create: EndpointCreate<CustomPage>
         update: EndpointUpdate<CustomPage>
     } {
@@ -275,23 +278,23 @@ export const CmsClient = new CmsApiClient()
 
 When using this package for a WP installation which relies on [Advanced Custom Fields](https://www.advancedcustomfields.com), it is highly recommended to also install [ACF to REST API](https://wordpress.org/plugins/acf-to-rest-api/): You can then [extend the typings](#extend-default-routes) of your post types with an `acf` field to enable __full acf support__ (GET + POST) for the WpApiClient.
 
-_Note:_ If you have one of your ACF fields set to output a 'Post Object', the typing of the corresponding REST API response object ist not your usual `WPPost`, but rather an `ACFPost`, which you can import from this library (see: [Helper Methods](#helper-methods) for further info).
+_Note:_ If you have one of your ACF fields set to output a 'Post Object', the typing of the corresponding REST API response object ist not your usual `WPPost`, but rather an `ACFPost`, which you can imported from this library.
 
 ```typescript
 import WpApiClient, {
     EndpointCreate,
+    EndpointGetMany,
+    EndpointGetOne,
     EndpointUpdate,
     WPPost,
 } from 'wordpress-api-client'
 import { baseURL } from './constants'
 
-interface CustomPost extends WPPost {
-    acf: {
-        additional_info: string
-        sidebar_options: {
-            sidebar_id: number
-            layout: 'a' | 'b' | 'c'
-        }
+interface PostFields {
+    additional_info: string
+    sidebar_options: {
+        sidebar_id: number
+        layout: 'a' | 'b' | 'c'
     }
 }
 
@@ -303,14 +306,37 @@ export class CmsClient extends WpApiClient {
         )
     }
 
-    public post<CustomPost>(): {
-        findAll: () => Promise<CustomPost[]>
-        findOne: (id: number) => Promise<CustomPost>
-        create: EndpointCreate<CustomPost>
-        update: EndpointUpdate<CustomPost>
+    public post<WPPost<PostFields>>(): {
+        find: EndpointGetMany<WPPost<PostFields>>
+        findOne: EndpointGetOne<WPPost<PostFields>>
+        create: EndpointCreate<WPPost<PostFields>>
+        update: EndpointUpdate<WPPost<PostFields>>
     } {
-        return super.post<CustomPost>()
+        return super.post<WPPost<PostFields>>()
     }
+}
+```
+
+As you can see in the Example above, the WP typings from this package can be used as Generics:
+
+```typescript
+import { WPPost } from 'wordpress-api-client'
+
+// your acf fields of post_type 'post'
+interface PostFields {
+    additional_info: string
+    sidebar_options: {
+        sidebar_id: number
+        layout: 'a' | 'b' | 'c'
+    }
+}
+
+// can be implemented like this
+export type CustomPost = WPPost<Postfields>
+
+// which translates to
+export interface CustomPost extends WPPost {
+    acf: PostFields
 }
 ```
 
