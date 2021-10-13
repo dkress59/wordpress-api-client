@@ -14,7 +14,6 @@ ToDo:
 - [ ] Refactor
   - [ ] (axios <—> fetch)
   - [X] .find(arg?: number | number[])
-- [ ] Static .collector(s)
 - [ ] (Option: camelCasify)
 - [ ] (Create-Update-Return-Types)
 - [X] `ACFPost<P = Record<string, unknown>>`
@@ -26,6 +25,7 @@ ToDo:
 - [X] Jest
 - [X] Media Gallery
 - [X] PickRename
+- [X] Static .collector(s)
 - [X] URLSearchParams
 - [X] wp-types
 
