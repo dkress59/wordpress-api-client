@@ -10,6 +10,8 @@ import {
 	WPTag,
 } from './types'
 import { EndpointGetMany, EndpointGetOne } from 'src'
+import { POST_TYPE_MAP } from './factories'
+import { WP_Post_Type_Name } from 'wp-types'
 import {
 	getDefaultQueryList,
 	getDefaultQuerySingle,
@@ -17,6 +19,11 @@ import {
 	validateBaseUrl,
 } from './util'
 import axios, { AxiosInstance, AxiosResponse } from 'axios'
+
+interface PostCollection<P = any> {
+	postType: WP_Post_Type_Name | string
+	posts: P[]
+}
 
 export class WpApiClient {
 	protected readonly axios: AxiosInstance
@@ -32,6 +39,11 @@ export class WpApiClient {
 			config => config,
 			error => handleWpApiError(error, onError),
 		)
+		/* ;WpApiClient.collection =
+			POST_TYPE_MAP.map(postType => ({
+				postType,
+				posts: [],
+			})) */
 	}
 
 	protected createEndpointGet<P>(
@@ -39,16 +51,25 @@ export class WpApiClient {
 		params?: Record<string, string>,
 	): (id: undefined | number | number[]) => Promise<P | P[]> {
 		return async (id = 0) => {
-			if (!id)
-				return (
+			if (!id) {
+				const result =
 					(
 						await this.axios.get<P[] | undefined>(
 							`${endpoint}/${getDefaultQueryList(params)}`,
 						)
 					).data ?? ([] as P[])
-				)
-			if (Array.isArray(id))
-				return (
+				if (!result.length) return result
+				const postType = Reflect.get(
+					result[0] as unknown as WPPost,
+					'type',
+				) as string
+				WpApiClient.collection
+					.find(collection => collection.postType === postType)
+					?.posts.push(...result)
+				return result
+			}
+			if (Array.isArray(id)) {
+				const result = (
 					await Promise.all(
 						id.map(postId =>
 							this.axios.get<P>(
@@ -59,11 +80,28 @@ export class WpApiClient {
 						),
 					)
 				).map(response => response.data)
-			return (
+				const postType = Reflect.get(
+					result[0] as unknown as WPPost,
+					'type',
+				) as string
+				WpApiClient.collection
+					.find(collection => collection.postType === postType)
+					?.posts.push(...result)
+				return result
+			}
+			const result = (
 				await this.axios.get<P>(
 					`${endpoint}/${id}/${getDefaultQuerySingle(params)}`,
 				)
 			).data
+			const postType = Reflect.get(
+				result as unknown as WPPost,
+				'type',
+			) as string
+			WpApiClient.collection
+				.find(collection => collection.postType === postType)
+				?.posts.push(result)
+			return result
 		}
 	}
 
@@ -108,6 +146,40 @@ export class WpApiClient {
 		return async (body: T): Promise<T | R> => {
 			return (await this.axios.post(endPoint, body)).data
 		}
+	}
+
+	protected static collection: PostCollection[] = POST_TYPE_MAP.map(
+		postType => ({
+			postType,
+			posts: [],
+		}),
+	)
+
+	public static addCollection(...postTypes: string[]): void {
+		postTypes.forEach(postType =>
+			WpApiClient.collection.push({
+				postType,
+				posts: [],
+			}),
+		)
+	}
+
+	public static clearCollection(...postTypes: string[]): void {
+		WpApiClient.collection = WpApiClient.collection.map(collection => ({
+			...collection,
+			posts:
+				!postTypes.length || postTypes.includes(collection.postType)
+					? []
+					: collection.posts,
+		}))
+	}
+
+	public static collect<P = WPPost>(
+		postType: WP_Post_Type_Name | string,
+	): P[] | undefined {
+		return WpApiClient.collection.find(
+			collection => collection.postType === postType,
+		)?.posts as undefined | P[]
 	}
 
 	public post<P = WPPost>(): {

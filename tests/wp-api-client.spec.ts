@@ -1,4 +1,5 @@
 import { END_POINT, ERROR_MESSAGE } from '../src/constants'
+import { POST_TYPE_MAP, WPPageFactory, WPPostFactory } from '../src/factories'
 import {
 	WPCategory,
 	WPCreate,
@@ -7,7 +8,6 @@ import {
 	WPPost,
 	WPTag,
 } from '../src/types'
-import { WPPageFactory, WPPostFactory } from '../src/factories'
 import { WP_Post_Type_Name } from 'wp-types'
 import { getDefaultQueryList, getDefaultQuerySingle } from '../src/util'
 import WpApiClient from '../src'
@@ -19,6 +19,7 @@ const mockData = {
 	title: 'mock_data',
 	type: WP_Post_Type_Name.post,
 }
+const mockData2 = { ...mockData, title: mockData.title + '2' }
 
 const mockPage = WPPageFactory.buildSync()
 const mockPageCreate: WPCreate<WPPage> = {
@@ -93,11 +94,11 @@ describe('WpApiClient', () => {
 			it('.find returns data fields of multiple successful AxiosResponses', async () => {
 				mockAxios.get.mockResolvedValueOnce({ data: mockData })
 				mockAxios.get.mockResolvedValueOnce({
-					data: { ...mockData, title: mockData.title + '2' },
+					data: mockData2,
 				})
 				expect(await client.page().find([1, 2])).toEqual([
 					mockData,
-					{ ...mockData, title: mockData.title + '2' },
+					mockData2,
 				])
 			})
 			it('.find returns empty array if response is undefined', async () => {
@@ -366,7 +367,48 @@ describe('WpApiClient', () => {
 			MockClient.clearCollection()
 		})
 		it('sets up correctly', () => {
+			POST_TYPE_MAP.forEach(postType =>
+				expect(MockClient.collect(postType)).toEqual([]),
+			)
+		})
+		it('is extendable', () => {
+			MockClient.addCollection('order', 'product')
+			expect(MockClient.collect('order')).toEqual([])
+			expect(MockClient.collect('product')).toEqual([])
+			expect(MockClient.collect('undefined')).toBeUndefined()
+		})
+		it('is stored correctly', async () => {
+			mockAxios.get.mockResolvedValueOnce({ data: [mockData] })
+			await new MockClient().post().find()
+			mockAxios.get.mockResolvedValue({ data: mockData })
+			await new MockClient().post().findOne(1)
+			await new MockClient().post().find([2, 3])
+			expect(MockClient.collect(WP_Post_Type_Name.post)).toEqual([
+				mockData,
+				mockData,
+				mockData,
+				mockData,
+			])
+			expect(MockClient.collect(WP_Post_Type_Name.attachment)).toEqual([])
+		})
+		it('can be cleared', async () => {
+			mockAxios.get.mockResolvedValue({ data: mockData })
+			await new MockClient().post().find([2, 3])
+			MockClient.clearCollection()
 			expect(MockClient.collect(WP_Post_Type_Name.post)).toEqual([])
+		})
+		it('can be cleared partially', async () => {
+			mockAxios.get.mockResolvedValue({ data: mockData })
+			mockAxios.get.mockResolvedValueOnce({
+				data: { ...mockData, type: WP_Post_Type_Name.page },
+			})
+			await new MockClient().post().findOne(1)
+			await new MockClient().page().findOne(2)
+			MockClient.clearCollection(WP_Post_Type_Name.page)
+			expect(MockClient.collect(WP_Post_Type_Name.post)).toEqual([
+				mockData,
+			])
+			expect(MockClient.collect(WP_Post_Type_Name.page)).toEqual([])
 		})
 	})
 })
