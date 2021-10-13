@@ -8,12 +8,17 @@ import {
 	WPTag,
 } from '../src/types'
 import { WPPageFactory, WPPostFactory } from '../src/factories'
+import { WP_Post_Type_Name } from 'wp-types'
 import { getDefaultQueryList, getDefaultQuerySingle } from '../src/util'
 import WpApiClient from '../src'
 import axios, { AxiosInstance } from 'axios'
 import mockAxios from 'jest-mock-axios'
 
-const mockData = 'mock_data'
+const mockData = {
+	content: 'mock_data',
+	title: 'mock_data',
+	type: WP_Post_Type_Name.post,
+}
 
 const mockPage = WPPageFactory.buildSync()
 const mockPageCreate: WPCreate<WPPage> = {
@@ -87,10 +92,12 @@ describe('WpApiClient', () => {
 			})
 			it('.find returns data fields of multiple successful AxiosResponses', async () => {
 				mockAxios.get.mockResolvedValueOnce({ data: mockData })
-				mockAxios.get.mockResolvedValueOnce({ data: mockData + '2' })
+				mockAxios.get.mockResolvedValueOnce({
+					data: { ...mockData, title: mockData.title + '2' },
+				})
 				expect(await client.page().find([1, 2])).toEqual([
 					mockData,
-					mockData + '2',
+					{ ...mockData, title: mockData.title + '2' },
 				])
 			})
 			it('.find returns empty array if response is undefined', async () => {
@@ -205,7 +212,7 @@ describe('WpApiClient', () => {
 			})
 		})
 		describe('.media', () => {
-			const mockFile = Buffer.from(mockData)
+			const mockFile = Buffer.from(JSON.stringify(mockData))
 			const mockFileName = 'mock_file.name'
 
 			describe('.find', () => {
@@ -352,6 +359,14 @@ describe('WpApiClient', () => {
 					mockPostTagCreate,
 				)
 			})
+		})
+	})
+	describe('collection', () => {
+		beforeEach(() => {
+			MockClient.clearCollection()
+		})
+		it('sets up correctly', () => {
+			expect(MockClient.collect(WP_Post_Type_Name.post)).toEqual([])
 		})
 	})
 })

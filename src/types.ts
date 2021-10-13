@@ -99,7 +99,7 @@ export interface ACFMedia {
 	sizes: ACFMediaSizes
 }
 
-export interface ACFBase<A = unknown | undefined> {
+interface ACFBase<A = unknown | undefined> {
 	acf: A
 }
 

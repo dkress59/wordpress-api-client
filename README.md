@@ -9,8 +9,9 @@ Written in TypeScript, fully compatible to JavaScript.
 ToDo:
 
 - [ ] Catch 404s & `WPError`s
-- [X] Document extendable URLSearchParams
-- [-] Refactor
+- [ ] Example Project
+- [ ] Improved Docs
+- [ ] Refactor
   - [ ] (axios <—> fetch)
   - [X] .find(arg?: number | number[])
 - [ ] Static .collector(s)
@@ -20,6 +21,7 @@ ToDo:
 - [X] /wp-json
 - [X] Categories & Tags
 - [X] Constructor Validation
+- [X] Document extendable URLSearchParams
 - [X] Improve typings: WPPost, WPPage
 - [X] Jest
 - [X] Media Gallery
