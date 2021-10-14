@@ -1,9 +1,13 @@
 export const END_POINT = {
 	CATEGORIES: 'wp/v2/categories',
+	COMMENTS: 'wp/v2/comments',
 	MEDIA: 'wp/v2/media',
 	PAGES: 'wp/v2/pages',
 	POSTS: 'wp/v2/posts',
+	SEARCH: 'wp/v2/search',
+	SETTINGS: 'wp/v2/settings',
 	TAGS: 'wp/v2/tags',
+	TYPES: 'wp/v2/types',
 	USERS: 'wp/v2/users',
 }
 

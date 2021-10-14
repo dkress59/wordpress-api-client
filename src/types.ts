@@ -1,6 +1,7 @@
 import {
 	WP_REST_API_Attachment,
 	WP_REST_API_Category,
+	WP_REST_API_Comment,
 	WP_REST_API_Post,
 	WP_REST_API_Tag,
 	WP_REST_API_Taxonomy,
@@ -17,6 +18,8 @@ export type WPCreate<W> = Record<string, unknown> &
 
 export type EndpointFind<P> = (...ids: number[]) => Promise<P[]>
 
+export type EndpointFindOnly<P> = () => Promise<P>
+
 export type EndpointCreate<P> = (body: WPCreate<P>) => Promise<P | null>
 
 export type EndpointDelete<P> = (...ids: number[]) => Promise<(P | null)[]>
@@ -25,6 +28,8 @@ export type EndpointUpdate<P> = (
 	body: WPCreate<P>,
 	id: number,
 ) => Promise<P | null>
+
+export type EndpointUpdatePartial<P> = (body: Partial<P>) => Promise<P>
 
 export interface ACFPost {
 	ID: number
@@ -101,27 +106,28 @@ export interface ACFMedia {
 	sizes: ACFMediaSizes
 }
 
-interface ACFBase<A = unknown | undefined> {
+export interface ACFBase<A = unknown> {
 	acf: A
 }
 
 // ToDo: Omit<WP_REST_API_Post, 'menu_order'>
-export type WPPost<A = unknown | undefined> = WP_REST_API_Post & ACFBase<A>
+export type WPPost<A = unknown> = WP_REST_API_Post & ACFBase<A>
 
-export type WPMedia<A = unknown | undefined> = WP_REST_API_Attachment &
-	ACFBase<A>
+export type WPMedia<A = unknown> = WP_REST_API_Attachment & ACFBase<A>
 
 // ToDo: Fix Omit<> type hinting
-export type WPPage<A = unknown | undefined> /* Omit< */ = WPPost<A> /* ,
+export type WPPage<A = unknown> /* Omit< */ = WPPost<A> /* ,
 	'categories' | 'sticky' | 'tags'
 > */ & { menu_order: number; parent: number }
 
-export type WPTaxonomy<A = unknown | undefined> = WP_REST_API_Taxonomy &
-	ACFBase<A>
+export type WPTaxonomy<A = unknown> = WP_REST_API_Taxonomy & ACFBase<A>
 
-export type WPCategory<A = unknown | undefined> = WP_REST_API_Category &
-	ACFBase<A>
+export type WPCategory<A = unknown> = WP_REST_API_Category & ACFBase<A>
 
-export type WPTag<A = unknown | undefined> = WP_REST_API_Tag & ACFBase<A>
+export type WPComment<A = unknown> = WP_REST_API_Comment & ACFBase<A>
 
-export type WPUser<A = unknown | undefined> = WP_REST_API_User & ACFBase<A>
+//export type WPSettings<A = unknown> = WP_REST_API_Settings & ACFBase<A>
+
+export type WPTag<A = unknown> = WP_REST_API_Tag & ACFBase<A>
+
+export type WPUser<A = unknown> = WP_REST_API_User & ACFBase<A>

@@ -5,6 +5,7 @@ import {
 	EndpointFind,
 	EndpointUpdate,
 	WPCategory,
+	WPComment,
 	WPCreate,
 	WPMedia,
 	WPPage,
@@ -12,8 +13,15 @@ import {
 	WPTag,
 	WPUser,
 } from './types'
+import { EndpointFindOnly, EndpointUpdatePartial } from 'src'
 import { POST_TYPE_MAP } from './factories'
-import { WP_Post_Type_Name } from 'wp-types'
+import { URLSearchParams } from 'url'
+import {
+	WP_Post_Type_Name,
+	WP_REST_API_Search_Result,
+	WP_REST_API_Settings,
+	WP_REST_API_Type,
+} from 'wp-types'
 import {
 	getDefaultQueryList,
 	getDefaultQuerySingle,
@@ -172,7 +180,7 @@ export class WpApiClient {
 		)?.posts as undefined | P[]
 	}
 
-	protected addPostType<P = WPPost>(
+	protected defaultEndpoints<P = WPPost>(
 		endpoint: string,
 	): {
 		find: EndpointFind<P>
@@ -188,13 +196,68 @@ export class WpApiClient {
 		}
 	}
 
+	protected addPostType<P = WPPost>(
+		endpoint: string,
+		withRevisions: true,
+	): {
+		find: EndpointFind<P>
+		create: EndpointCreate<P>
+		delete: EndpointDelete<P>
+		update: EndpointUpdate<P>
+		revision: {
+			// WP_REST_API_Revision
+			find: EndpointFind<P>
+			create: EndpointCreate<P>
+			delete: EndpointDelete<P>
+			update: EndpointUpdate<P>
+		}
+	}
+	protected addPostType<P = WPPost>(
+		endpoint: string,
+		withRevisions?: false,
+	): {
+		find: EndpointFind<P>
+		create: EndpointCreate<P>
+		delete: EndpointDelete<P>
+		update: EndpointUpdate<P>
+	}
+	protected addPostType<P = WPPost>(
+		endpoint: string,
+		withRevisions?: boolean,
+	): {
+		find: EndpointFind<P>
+		create: EndpointCreate<P>
+		delete: EndpointDelete<P>
+		update: EndpointUpdate<P>
+		revision?: {
+			find: EndpointFind<P>
+			create: EndpointCreate<P>
+			delete: EndpointDelete<P>
+			update: EndpointUpdate<P>
+		}
+	} {
+		return {
+			...this.defaultEndpoints(endpoint),
+			revision: !withRevisions
+				? undefined
+				: { ...this.defaultEndpoints(`${endpoint}/revisions`) },
+		}
+	}
+
 	public post<P = WPPost>(): {
 		find: EndpointFind<P>
 		create: EndpointCreate<P>
 		delete: EndpointDelete<P>
 		update: EndpointUpdate<P>
+		revision: {
+			// WP_REST_API_Revision
+			find: EndpointFind<P>
+			create: EndpointCreate<P>
+			delete: EndpointDelete<P>
+			update: EndpointUpdate<P>
+		}
 	} {
-		return this.addPostType<P>(END_POINT.POSTS)
+		return this.addPostType<P>(END_POINT.POSTS, true)
 	}
 
 	public page<P = WPPage>(): {
@@ -202,8 +265,42 @@ export class WpApiClient {
 		create: EndpointCreate<P>
 		delete: EndpointDelete<P>
 		update: EndpointUpdate<P>
+		revision: {
+			// WP_REST_API_Revision
+			find: EndpointFind<P>
+			create: EndpointCreate<P>
+			delete: EndpointDelete<P>
+			update: EndpointUpdate<P>
+		}
 	} {
-		return this.addPostType<P>(END_POINT.PAGES)
+		return this.addPostType<P>(END_POINT.PAGES, true)
+	}
+
+	public comment<P = WPComment>(): {
+		find: EndpointFind<P>
+		create: EndpointCreate<P>
+		delete: EndpointDelete<P>
+		update: EndpointUpdate<P>
+	} {
+		return this.addPostType<P>(END_POINT.COMMENTS)
+	}
+
+	public postCategory<P = WPCategory>(): {
+		find: EndpointFind<P>
+		create: EndpointCreate<P>
+		delete: EndpointDelete<P>
+		update: EndpointUpdate<P>
+	} {
+		return this.addPostType<P>(END_POINT.CATEGORIES)
+	}
+
+	public postTag<P = WPTag>(): {
+		find: EndpointFind<P>
+		create: EndpointCreate<P>
+		delete: EndpointDelete<P>
+		update: EndpointUpdate<P>
+	} {
+		return this.addPostType<P>(END_POINT.TAGS)
 	}
 
 	public media<P = WPMedia>(): {
@@ -260,31 +357,13 @@ export class WpApiClient {
 		}
 	}
 
-	public postCategory<P = WPCategory>(): {
-		find: EndpointFind<P>
-		create: EndpointCreate<P>
-		delete: EndpointDelete<P>
-		update: EndpointUpdate<P>
-	} {
-		return this.addPostType<P>(END_POINT.CATEGORIES)
-	}
-
-	public postTag<P = WPTag>(): {
-		find: EndpointFind<P>
-		create: EndpointCreate<P>
-		delete: EndpointDelete<P>
-		update: EndpointUpdate<P>
-	} {
-		return this.addPostType<P>(END_POINT.TAGS)
-	}
-
 	public user<P = WPUser>(): {
 		find: EndpointFind<P>
-		findMe: () => Promise<P>
+		findMe: EndpointFindOnly<P>
 		create: EndpointCreate<P>
 		update: EndpointUpdate<P>
 		delete: EndpointDelete<P>
-		deleteMe: () => Promise<P>
+		deleteMe: EndpointFindOnly<P>
 	} {
 		const findMe = async () =>
 			(await this.axios.get<P>(END_POINT.USERS + '/me')).data
@@ -292,8 +371,51 @@ export class WpApiClient {
 			(await this.axios.delete<P>(END_POINT.USERS + '/me')).data
 		return {
 			...this.addPostType<P>(END_POINT.USERS),
-			findMe: findMe as () => Promise<P>,
+			findMe: findMe as EndpointFindOnly<P>,
 			deleteMe,
 		}
+	}
+
+	public siteSettings<P = WP_REST_API_Settings>(): {
+		find: EndpointFindOnly<P>
+		update: EndpointUpdatePartial<P>
+	} {
+		return {
+			find: this.createEndpointCustomGet<P, P>(
+				END_POINT.SETTINGS,
+			) as EndpointFindOnly<P>,
+			update: this.createEndpointCustomPost<Partial<P>, P>(
+				END_POINT.SETTINGS,
+			) as EndpointUpdatePartial<P>,
+		}
+	}
+
+	public async search<S = WP_REST_API_Search_Result>(
+		search?: string,
+		params?: Record<string, string> &
+			Partial<{
+				context: string
+				page: string
+				per_page: string
+				type: string
+				subtype: string
+			}>,
+	): Promise<S[]> {
+		if (search) params = { ...params, search }
+		const query = new URLSearchParams(params).toString()
+		return (await this.axios.get<S[]>(`${END_POINT.SEARCH}/?${query}`)).data
+	}
+
+	public async postType<P = WP_REST_API_Type>(): Promise<P[]>
+	public async postType<P = WP_REST_API_Type>(
+		postType: WP_Post_Type_Name | string,
+	): Promise<P>
+	public async postType<P = WP_REST_API_Type>(
+		postType?: WP_Post_Type_Name | string,
+	): Promise<P | P[]> {
+		return postType
+			? (await this.axios.get<P>(`${END_POINT.TYPES}/type/${postType}`))
+					.data
+			: (await this.axios.get<P[]>(END_POINT.TYPES)).data
 	}
 }

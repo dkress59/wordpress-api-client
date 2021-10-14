@@ -10,29 +10,27 @@ ToDo:
 
 - [ ] Example Project
 - [ ] Improved Docs
-- [ ] Refactor
-  - [ ] (axios <—> fetch)
-  - [X] `.find(...ids?: number[]): Promise<P[]>`
+- [ ] Improved WPCreate + WPUpdate
 - [ ] (Option: camelCasify)
 - [ ] (Option: restBase)
-- [ ] (Create-Update-Return-Types)
+- [X] `.find(...ids?: number[]): Promise<P[]>`
 - [X] Catch 404s & `WP_Error`s
 - [X] DELETE
 - [X] WP_User
 
 Missing defaults:
 
-- [ ] Comments
-- [ ] Plugins
-- [ ] Revisions
-- [ ] Search
-- [ ] Settings
 - [ ] (Block Directory)
 - [ ] (Block Renderer)
 - [ ] (Block Types)
 - [ ] (Editor Blocks)
+- [ ] (Plugins)
 - [ ] (Statuses)
-- [ ] (Types)
+- [X] Comments
+- [X] Revisions
+- [X] Search
+- [X] Settings
+- [X] Types
 
 ## Installation
 
@@ -55,6 +53,7 @@ npm install wordpress-api-client
 - [Advanced Custom Fields](#extend-default-routes)
 - [JWT-Auth for WordPress](#default-custom-interceptors)
 - …
+- [Changelog](#changelog)
 
 ---
 
@@ -73,16 +72,24 @@ client.post().create()
 client.post().find()
 client.post().delete()
 client.post().update()
+client.post().revision.create()
+client.post().revision.find()
+client.post().revision.delete()
+client.post().revision.update()
 
 client.page().create()
 client.page().find()
 client.page().delete()
 client.page().update()
+client.page().revision.create()
+client.page().revision.find()
+client.page().revision.delete()
+client.page().revision.update()
 
-client.media().create()
-client.media().find()
-client.media().delete()
-client.media().update()
+client.comment().create()
+client.comment().find()
+client.comment().delete()
+client.comment().update()
 
 client.postCategory().create()
 client.postCategory().find()
@@ -94,12 +101,21 @@ client.postTag().find()
 client.postTag().delete()
 client.postTag().update()
 
+client.media().create()
+client.media().find()
+client.media().delete()
+client.media().update()
+
 client.user().create()
 client.user().find()
 client.user().findMe()
 client.user().delete()
 client.user().deleteMe()
 client.user().update()
+
+client.postType()
+client.search()
+client.siteSettings()
 
 // Static Methods:
 
@@ -142,9 +158,16 @@ Of course, you are free to extend the WpApiClient class in any which way that su
 It does not take much to add the methods for any of your registered Custom Post Types.
 
 ```typescript
-import { EndpointCreate, EndpointFind, EndpointGetOne, EndpointUpdate, WpApiClient } from 'wordpress-api-client'
-import { baseURL, EP_PRODUCTS } from './constants'
+import WpApiClient, {
+    EndpointCreate,
+    EndpointDelete,
+    EndpointFind,
+    EndpointUpdate,
+} from 'wordpress-api-client'
+import { baseURL } from './constants'
 import { WPProduct } from './types'
+
+const EP_PRODUCTS = 'wp/v2/products'
 
 class CmsApiClient extends WpApiClient {
     constructor() {
@@ -152,12 +175,12 @@ class CmsApiClient extends WpApiClient {
     }
 
     public product(): {
-        find: EndpointFind<WPProduct[]>
-        findOne: EndpointGetOne<WPProduct>
         create: EndpointCreate<WPProduct>
+        delete: EndpointDelete<WPProduct>
+        find: EndpointFind<WPProduct[]>
         update: EndpointUpdate<WPProduct>
     } {
-        return super.post<WPProduct>()
+        return this.addPostType<WPProduct>(EP_PRODUCTS)
     }
 }
 
@@ -261,16 +284,21 @@ interface CustomPage extends WPPage {
 
 // The response object can be casted like this:
 
-CmsClient.page<CustomPage>().findAll()
-CmsClient.page<CustomPage>().findOne(id)
 CmsClient.page<CustomPage>().create()
-CmsClient.page<CustomPage>().update(id)
+CmsClient.page<CustomPage>().delete()
+CmsClient.page<CustomPage>().find()
+CmsClient.page<CustomPage>().update()
 ```
 
 Or, you might prefer to do it this way:
 
 ```typescript
-import { EndpointCreate, EndpointFind, EndpointGetOne, EndpointUpdate, WpApiClient } from 'wordpress-api-client'
+import WpApiClient, {
+    EndpointCreate,
+    EndpointDelete,
+    EndpointFind,
+    EndpointUpdate
+} from 'wordpress-api-client'
 import { baseURL } from './constants'
 import { CustomPage } from './types'
 
@@ -284,9 +312,9 @@ class CmsApiClient extends WpApiClient {
     }
 
     public page<P = CustomPage>(): {
-        find: EndpointFind<P>
-        findOne: EndpointGetOne<P>
         create: EndpointCreate<P>
+        delete: EndpointDelete<P>
+        find: EndpointFind<P>
         update: EndpointUpdate<P>
     } {
         return super.page<P>()
@@ -305,8 +333,8 @@ _Note:_ If you have one of your ACF fields set to output a 'Post Object', the ty
 ```typescript
 import WpApiClient, {
     EndpointCreate,
+    EndpointDelete,
     EndpointFind,
-    EndpointGetOne,
     EndpointUpdate,
     WPPost,
 } from 'wordpress-api-client'
@@ -329,9 +357,9 @@ export class CmsClient extends WpApiClient {
     }
 
     public post<P = WPPost<PostFields>>(): {
-        find: EndpointFind<P>
-        findOne: EndpointGetOne<P>
         create: EndpointCreate<P>
+        delete: EndpointDelete<P>
+        find: EndpointFind<P>
         update: EndpointUpdate<P>
     } {
         return super.post<P>()
@@ -425,3 +453,7 @@ export const CmsClient = new WpApiClient(
 [JWT-Auth for WordPress](https://wordpress.org/plugins/jwt-auth/) relies on the jsonwebtoken technology, which is a whole other deal in terms of security and therefore needs to be set up quite a bit more carefully. Always keep in mind that you can whitelist any end point of your WP REST API via PHP ("Whitelisting Endpoints" in the plugin's documentation).
 
 [ ToDo ]
+
+## Changelog
+
+- v0.1.0 public beta release

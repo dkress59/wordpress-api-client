@@ -161,6 +161,35 @@ describe('WpApiClient', () => {
 				expect(await request).toEqual([null])
 				mockAxios.reset()
 			})
+			describe('.revision', () => {
+				it('.find returns data field of successful AxiosResponse', async () => {
+					mockAxios.get.mockResolvedValueOnce({ data: [mockData] })
+					expect(await client.page().revision.find()).toEqual([
+						mockData,
+					])
+				})
+				it('.find returns data fields of multiple successful AxiosResponses', async () => {
+					mockAxios.get.mockResolvedValueOnce({ data: mockData })
+					mockAxios.get.mockResolvedValueOnce({
+						data: mockData2,
+					})
+					expect(await client.page().revision.find(1, 2)).toEqual([
+						mockData,
+						mockData2,
+					])
+				})
+				it('.find returns empty array, if response without ID is undefined', async () => {
+					mockAxios.get.mockResolvedValueOnce({ data: null })
+					expect(await client.page().revision.find()).toEqual([])
+				})
+				// eslint-disable-next-line jest/no-disabled-tests
+				it.skip('.find returns array containing null, if request with ID throws', async () => {
+					const request = client.page().revision.find(123)
+					mockAxios.mockError({ data: 'mock_html' })
+					expect(await request).toEqual([null])
+					mockAxios.reset()
+				})
+			})
 		})
 		describe('.createEndpointPost', () => {
 			it('.create returns data field of successful AxiosResponse', async () => {
@@ -366,6 +395,28 @@ describe('WpApiClient', () => {
 				)
 			})
 		})
+		describe('.comment', () => {
+			it('.find calls the correct endpoint', () => {
+				client.comment().find()
+				expect(mockAxios.get).toHaveBeenCalledWith(
+					`${END_POINT.COMMENTS}/${getDefaultQueryList()}`,
+				)
+			})
+			it('.create calls the correct endpoint', () => {
+				client.comment().create(mockPostTagCreate)
+				expect(mockAxios.post).toHaveBeenCalledWith(
+					`${END_POINT.COMMENTS}`,
+					mockPostTagCreate,
+				)
+			})
+			it('.update calls the correct endpoint', () => {
+				client.comment().update(mockPostTagCreate, 123)
+				expect(mockAxios.post).toHaveBeenCalledWith(
+					`${END_POINT.COMMENTS}/123`,
+					mockPostTagCreate,
+				)
+			})
+		})
 		describe('.postTag', () => {
 			it('.find calls the correct endpoint', () => {
 				client.postTag().find()
@@ -423,6 +474,61 @@ describe('WpApiClient', () => {
 				expect(mockAxios.post).toHaveBeenCalledWith(
 					`${END_POINT.USERS}/123`,
 					mockPostTagCreate,
+				)
+			})
+		})
+		describe('.siteSettings', () => {
+			it('.find calls the correct endpoint', () => {
+				client.siteSettings().find()
+				expect(mockAxios.get).toHaveBeenCalledWith(
+					`${END_POINT.SETTINGS}`,
+				)
+			})
+			it('.update calls the correct endpoint', () => {
+				client.siteSettings().update(mockPostTagCreate)
+				expect(mockAxios.post).toHaveBeenCalledWith(
+					`${END_POINT.SETTINGS}`,
+					mockPostTagCreate,
+				)
+			})
+		})
+		describe('.postType', () => {
+			it('calls the correct endpoint by default', () => {
+				client.postType()
+				expect(mockAxios.get).toHaveBeenCalledWith(`${END_POINT.TYPES}`)
+			})
+			it('calls the correct endpoint for specific postType', () => {
+				const postType = 'mock_post_type'
+				client.postType(postType)
+				expect(mockAxios.get).toHaveBeenCalledWith(
+					`${END_POINT.TYPES}/type/${postType}`,
+				)
+			})
+		})
+		describe('.search', () => {
+			it('calls the correct endpoint', () => {
+				client.search()
+				expect(mockAxios.get).toHaveBeenCalledWith(
+					`${END_POINT.SEARCH}/?`,
+				)
+			})
+			it('uses custom params', () => {
+				client.search(undefined, {
+					per_page: '100',
+					mock_custom_param: 'value',
+				})
+				expect(mockAxios.get).toHaveBeenCalledWith(
+					`${END_POINT.SEARCH}/?per_page=100&mock_custom_param=value`,
+				)
+			})
+			it('searches for correct string', () => {
+				const searchString = 'url-unsafe search string'
+				client.search(searchString)
+				expect(mockAxios.get).toHaveBeenCalledWith(
+					`${END_POINT.SEARCH}/?search=${searchString.replace(
+						/\s/g,
+						'+',
+					)}`,
 				)
 			})
 		})
