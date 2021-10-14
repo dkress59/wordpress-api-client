@@ -113,6 +113,7 @@ export class WpApiClient {
 
 	protected createEndpointDelete<P>(endpoint: string): EndpointDelete<P> {
 		return async (...ids: number[]) => {
+			if (!ids.length) throw new Error(ERROR_MESSAGE.ID_REQUIRED)
 			return (
 				await Promise.all(
 					ids.map(id => this.axios.delete<P>(`${endpoint}/${id}`)),
@@ -283,12 +284,12 @@ export class WpApiClient {
 		create: EndpointCreate<P>
 		update: EndpointUpdate<P>
 		delete: EndpointDelete<P>
-		deleteMe: () => Promise<boolean>
+		deleteMe: () => Promise<P>
 	} {
 		const findMe = async () =>
 			(await this.axios.get<P>(END_POINT.USERS + '/me')).data
 		const deleteMe = async () =>
-			(await this.axios.delete<boolean>(END_POINT.USERS + '/me')).data
+			(await this.axios.delete<P>(END_POINT.USERS + '/me')).data
 		return {
 			...this.addPostType<P>(END_POINT.USERS),
 			findMe: findMe as () => Promise<P>,

@@ -5,6 +5,7 @@ import {
 	handleWpApiError,
 	validateBaseUrl,
 } from '../src/util'
+import chalk from 'chalk'
 
 const mockError = 'mock_error'
 const onError = (error: string) => {
@@ -13,7 +14,20 @@ const onError = (error: string) => {
 
 describe('util', () => {
 	describe('handleWpApiError', () => {
-		it('uses onError, if provided, instead of throwing', () => {
+		it('logs error to console, by default', () => {
+			// eslint-disable-next-line no-console
+			const originalError = console.error
+			const mockConsoleError = jest.fn()
+			// eslint-disable-next-line no-console
+			console.error = mockConsoleError
+			handleWpApiError(null)
+			expect(mockConsoleError).toHaveBeenCalledWith(
+				chalk.blue(ERROR_MESSAGE.GENERIC),
+			)
+			// eslint-disable-next-line no-console
+			console.error = originalError
+		})
+		it('uses onError, if provided, instead of console.error', () => {
 			let error = ''
 			function onError(message: string) {
 				error = message
@@ -23,12 +37,30 @@ describe('util', () => {
 			).not.toThrow()
 			expect(error).toBe(ERROR_MESSAGE.GENERIC)
 		})
-		it('throws generic error if no error info provided', () => {
+		it('uses AxiosError, if detected', () => {
+			const mockUrl = 'mock_url'
+			expect(() =>
+				handleWpApiError(
+					{
+						config: { url: mockUrl },
+						isAxiosError: true,
+						response: { data: { message: mockError } },
+					},
+					onError,
+				),
+			).toThrow(
+				ERROR_MESSAGE.ERROR_RESPONSE.replace(
+					'%error%',
+					'"' + mockError + '"',
+				).replace('%url%', mockUrl),
+			)
+		})
+		it('uses generic error if no error info provided', () => {
 			expect(() => handleWpApiError(null, onError)).toThrow(
 				ERROR_MESSAGE.GENERIC,
 			)
 		})
-		it('throws generic error if provided error cannot be handled', () => {
+		it('uses generic error if provided error cannot be handled', () => {
 			expect(() =>
 				handleWpApiError(() => 'mock_string', onError),
 			).toThrow(ERROR_MESSAGE.GENERIC)
