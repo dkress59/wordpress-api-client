@@ -1,13 +1,13 @@
 {
   "name": "wordpress-api-client",
   "description": "WordPress-API Client for JS/TS",
-  "version": "0.0.13-dev",
+  "version": "0.1.0-dev",
   "author": "Damian Kress",
   "bugs": "https://github.com/dkress59/wordpress-api-client/issues",
   "license": "MIT",
   "main": "dist/index.js",
   "repository": "https://github.com/dkress59/wordpress-api-client",
-  "types": "src/index",
+  "types": "src/index.ts",
   "contributors": [
     {
       "name": "Damian Kress",

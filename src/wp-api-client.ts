@@ -1,6 +1,8 @@
 import { END_POINT, ERROR_MESSAGE } from './constants'
 import {
 	EndpointCreate,
+	EndpointGetMany,
+	EndpointGetOne,
 	EndpointUpdate,
 	WPCategory,
 	WPCreate,
@@ -8,8 +10,8 @@ import {
 	WPPage,
 	WPPost,
 	WPTag,
+	WPUser,
 } from './types'
-import { EndpointGetMany, EndpointGetOne } from 'src'
 import { POST_TYPE_MAP } from './factories'
 import { WP_Post_Type_Name } from 'wp-types'
 import {
@@ -300,6 +302,34 @@ export class WpApiClient {
 			findOne: find as EndpointGetOne<P>,
 			create,
 			update,
+		}
+	}
+
+	public user<P = WPUser>(): {
+		find: EndpointGetMany<P>
+		findMe: EndpointGetOne<P>
+		findOne: EndpointGetOne<P>
+		create: EndpointCreate<P>
+		update: EndpointUpdate<P>
+		delete: (id: number) => Promise<boolean>
+		deleteMe: () => Promise<boolean>
+	} {
+		const find = this.createEndpointGet<P>(END_POINT.USERS)
+		const findMe = this.createEndpointGet<P>(END_POINT.USERS + '/me')
+		const create = this.createEndpointPost<P>(END_POINT.USERS)
+		const update = this.createEndpointPost<P>(END_POINT.USERS)
+		const deleteOne = async (id: number) =>
+			(await this.axios.delete<boolean>(END_POINT.USERS + `/${id}`)).data
+		const deleteMe = async () =>
+			(await this.axios.delete<boolean>(END_POINT.USERS + '/me')).data
+		return {
+			find: find as EndpointGetMany<P>,
+			findMe: findMe as () => Promise<P>,
+			findOne: find as EndpointGetOne<P>,
+			create,
+			update,
+			delete: deleteOne,
+			deleteMe,
 		}
 	}
 }

@@ -4,6 +4,7 @@ export const END_POINT = {
 	PAGES: 'wp/v2/pages',
 	POSTS: 'wp/v2/posts',
 	TAGS: 'wp/v2/tags',
+	USERS: 'wp/v2/users',
 }
 
 export const ERROR_MESSAGE = {

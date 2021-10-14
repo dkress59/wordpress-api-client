@@ -4,6 +4,7 @@ import {
 	WP_REST_API_Post,
 	WP_REST_API_Tag,
 	WP_REST_API_Taxonomy,
+	WP_REST_API_User,
 } from 'wp-types'
 
 export type WPCreate<W> = Record<string, unknown> &
@@ -121,3 +122,5 @@ export type WPCategory<A = unknown | undefined> = WP_REST_API_Category &
 	ACFBase<A>
 
 export type WPTag<A = unknown | undefined> = WP_REST_API_Tag & ACFBase<A>
+
+export type WPUser<A = unknown | undefined> = WP_REST_API_User & ACFBase<A>

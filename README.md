@@ -8,26 +8,31 @@ Written in TypeScript, fully compatible to JavaScript.
 
 ToDo:
 
-- [ ] Catch 404s & `WPError`s
+- [ ] Catch 404s & `WP_Error`s
+- [ ] DELETE
 - [ ] Example Project
 - [ ] Improved Docs
 - [ ] Refactor
+  - [ ] `.find(...ids?: number[]): Promise<P[]>`
   - [ ] (axios <—> fetch)
-  - [X] .find(arg?: number | number[])
 - [ ] (Option: camelCasify)
+- [ ] (Option: restBase)
 - [ ] (Create-Update-Return-Types)
-- [X] `ACFPost<P = Record<string, unknown>>`
-- [X] /wp-json
-- [X] Categories & Tags
-- [X] Constructor Validation
-- [X] Document extendable URLSearchParams
-- [X] Improve typings: WPPost, WPPage
-- [X] Jest
-- [X] Media Gallery
-- [X] PickRename
-- [X] Static .collector(s)
-- [X] URLSearchParams
-- [X] wp-types
+- [X] WP_User
+
+Missing defaults:
+
+- [ ] Comments
+- [ ] Plugins
+- [ ] Revisions
+- [ ] Search
+- [ ] Settings
+- [ ] (Block Directory)
+- [ ] (Block Renderer)
+- [ ] (Block Types)
+- [ ] (Editor Blocks)
+- [ ] (Statuses)
+- [ ] (Types)
 
 ## Installation
 
@@ -49,47 +54,62 @@ npm install wordpress-api-client
 - [Custom End Points](#custom-end-points)
 - [Advanced Custom Fields](#extend-default-routes)
 - [JWT-Auth for WordPress](#default-custom-interceptors)
+- …
 
 ---
 
 ### Default Methods
 
-To instantiate a WP-API Client you need to base the base URL of your WordPress website to the constructor. You can pass an `onError`-function as the second parameter and an exisitng axiosInstance as the third parameter (more on that here: [JWT-Auth for WordPress](#jwt-auth-for-wordpress)).
+To instantiate a WP-API Client you need to pass the base URL of your WordPress website to the constructor. You can pass an `onError`-function as the second parameter and an exisitng axiosInstance as the third parameter (more on that here: [JWT-Auth for WordPress](#jwt-auth-for-wordpress)).
 With a bare instance of WpApiClient you will get methods to retreive, add and update any post, page, media item, post category or post tag.
 
 ```typescript
 import { WpApiClient } from 'wordpress-api-client'
-const CmsClient = new WpApiClient('https://my-wordpress-website.com')
+const client = new WpApiClient('https://my-wordpress-website.com')
 
 // Methods:
 
-CmsClient.post().findAll()
-CmsClient.post().findOne(id)
-CmsClient.post().create()
-CmsClient.post().update(id)
+client.post().create()
+client.post().find()
+client.post().delete()
+client.post().update()
 
-CmsClient.page().findAll()
-CmsClient.page().findOne(id)
-CmsClient.page().create()
-CmsClient.page().update(id)
+client.page().create()
+client.page().find()
+client.page().delete()
+client.page().update()
 
-CmsClient.media().findAll()
-CmsClient.media().findOne(id)
-CmsClient.media().create()
-CmsClient.media().update(id)
+client.media().create()
+client.media().find()
+client.media().delete()
+client.media().update()
 
-CmsClient.postCategory().findAll()
-CmsClient.postCategory().findOne(id)
-CmsClient.postCategory().create()
-CmsClient.postCategory().update(id)
+client.postCategory().create()
+client.postCategory().find()
+client.postCategory().delete()
+client.postCategory().update()
 
-CmsClient.postTag().findAll()
-CmsClient.postTag().findOne(id)
-CmsClient.postTag().create()
-CmsClient.postTag().update(id)
+client.postTag().create()
+client.postTag().find()
+client.postTag().delete()
+client.postTag().update()
+
+client.user().create()
+client.user().find()
+client.user().findMe()
+client.user().delete()
+client.user().deleteMe()
+client.user().update()
+
+// Static Methods:
+
+WpApiClient.addCollection()
+WpApiClient.collect()
+WpApiClient.clearCollection()
+
 ```
 
-__Note:__ To make use of any POST method (e.g. `CmsClient.media().create()`), you will have to set up some sort of [Authentification](#authentification).
+__Note:__ To make use of any POST or DELEE method (e.g. `CmsClient.media().create()`), you will have to set up some sort of [Authentification](#authentification).
 
 ---
 
@@ -263,13 +283,13 @@ class CmsApiClient extends WpApiClient {
         super(baseURL, (message: string) => console.error(message))
     }
 
-    public page(): {
-        find: EndpointGetMany<CustomPage>
-        findOne: EndpointGetOne<CustomPage>
-        create: EndpointCreate<CustomPage>
-        update: EndpointUpdate<CustomPage>
+    public page<P = CustomPage>(): {
+        find: EndpointGetMany<P>
+        findOne: EndpointGetOne<P>
+        create: EndpointCreate<P>
+        update: EndpointUpdate<P>
     } {
-        return super.page<CustomPage>()
+        return super.page<P>()
     }
 }
 
@@ -308,13 +328,13 @@ export class CmsClient extends WpApiClient {
         )
     }
 
-    public post<WPPost<PostFields>>(): {
-        find: EndpointGetMany<WPPost<PostFields>>
-        findOne: EndpointGetOne<WPPost<PostFields>>
-        create: EndpointCreate<WPPost<PostFields>>
-        update: EndpointUpdate<WPPost<PostFields>>
+    public post<P = WPPost<PostFields>>(): {
+        find: EndpointGetMany<P>
+        findOne: EndpointGetOne<P>
+        create: EndpointCreate<P>
+        update: EndpointUpdate<P>
     } {
-        return super.post<WPPost<PostFields>>()
+        return super.post<P>()
     }
 }
 ```
