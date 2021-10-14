@@ -3,7 +3,9 @@ import {
 	EndpointCreate,
 	EndpointDelete,
 	EndpointFind,
+	EndpointFindOnly,
 	EndpointUpdate,
+	EndpointUpdatePartial,
 	WPCategory,
 	WPComment,
 	WPCreate,
@@ -13,7 +15,6 @@ import {
 	WPTag,
 	WPUser,
 } from './types'
-import { EndpointFindOnly, EndpointUpdatePartial } from 'src'
 import { POST_TYPE_MAP } from './factories'
 import { URLSearchParams } from 'url'
 import {
