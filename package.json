@@ -59,7 +59,7 @@
     "check:script": "eslint src --ext .ts --fix-dry-run --report-unused-disable-directives",
     "lint:script": "eslint src --ext .ts --fix",
     "prepublishOnly": "rm -rf .gitignore .jest coverage",
-    "test": "jest --verbose",
+    "test": "jest --verbose --runInBand",
     "test:watch": "jest --watchAll"
   }
 }

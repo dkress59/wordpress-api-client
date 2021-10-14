@@ -8,16 +8,16 @@ Written in TypeScript, fully compatible to JavaScript.
 
 ToDo:
 
-- [ ] Catch 404s & `WP_Error`s
-- [ ] DELETE
 - [ ] Example Project
 - [ ] Improved Docs
 - [ ] Refactor
-  - [ ] `.find(...ids?: number[]): Promise<P[]>`
   - [ ] (axios <—> fetch)
+  - [X] `.find(...ids?: number[]): Promise<P[]>`
 - [ ] (Option: camelCasify)
 - [ ] (Option: restBase)
 - [ ] (Create-Update-Return-Types)
+- [X] Catch 404s & `WP_Error`s
+- [X] DELETE
 - [X] WP_User
 
 Missing defaults:
@@ -142,7 +142,7 @@ Of course, you are free to extend the WpApiClient class in any which way that su
 It does not take much to add the methods for any of your registered Custom Post Types.
 
 ```typescript
-import { EndpointCreate, EndpointGetMany, EndpointGetOne, EndpointUpdate, WpApiClient } from 'wordpress-api-client'
+import { EndpointCreate, EndpointFind, EndpointGetOne, EndpointUpdate, WpApiClient } from 'wordpress-api-client'
 import { baseURL, EP_PRODUCTS } from './constants'
 import { WPProduct } from './types'
 
@@ -152,7 +152,7 @@ class CmsApiClient extends WpApiClient {
     }
 
     public product(): {
-        find: EndpointGetMany<WPProduct[]>
+        find: EndpointFind<WPProduct[]>
         findOne: EndpointGetOne<WPProduct>
         create: EndpointCreate<WPProduct>
         update: EndpointUpdate<WPProduct>
@@ -270,7 +270,7 @@ CmsClient.page<CustomPage>().update(id)
 Or, you might prefer to do it this way:
 
 ```typescript
-import { EndpointCreate, EndpointGetMany, EndpointGetOne, EndpointUpdate, WpApiClient } from 'wordpress-api-client'
+import { EndpointCreate, EndpointFind, EndpointGetOne, EndpointUpdate, WpApiClient } from 'wordpress-api-client'
 import { baseURL } from './constants'
 import { CustomPage } from './types'
 
@@ -284,7 +284,7 @@ class CmsApiClient extends WpApiClient {
     }
 
     public page<P = CustomPage>(): {
-        find: EndpointGetMany<P>
+        find: EndpointFind<P>
         findOne: EndpointGetOne<P>
         create: EndpointCreate<P>
         update: EndpointUpdate<P>
@@ -305,7 +305,7 @@ _Note:_ If you have one of your ACF fields set to output a 'Post Object', the ty
 ```typescript
 import WpApiClient, {
     EndpointCreate,
-    EndpointGetMany,
+    EndpointFind,
     EndpointGetOne,
     EndpointUpdate,
     WPPost,
@@ -329,7 +329,7 @@ export class CmsClient extends WpApiClient {
     }
 
     public post<P = WPPost<PostFields>>(): {
-        find: EndpointGetMany<P>
+        find: EndpointFind<P>
         findOne: EndpointGetOne<P>
         create: EndpointCreate<P>
         update: EndpointUpdate<P>

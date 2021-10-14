@@ -1,14 +1,36 @@
-import { AxiosResponse } from 'axios'
+import { AxiosError, AxiosResponse } from 'axios'
 import { ERROR_MESSAGE } from './constants'
 import { URLSearchParams } from 'url'
+import chalk from 'chalk'
 
+// eslint-disable-next-line sonarjs/cognitive-complexity
 export function handleWpApiError(
-	error: unknown,
+	error: Error | AxiosError<unknown> | unknown,
 	onError?: (message: string) => void,
-): void {
+): unknown {
+	const isObject = !!error && typeof error === 'object'
+	const axiosError =
+		isObject &&
+		'isAxiosError' in error! &&
+		(Reflect.get(error, 'isAxiosError') as boolean)
+			? (error as AxiosError<unknown>)
+			: null
+	const url = axiosError?.config.url
 	const obj =
-		error && typeof error === 'object' && 'response' in error
-			? (Reflect.get(error, 'response') as AxiosResponse)
+		axiosError?.response?.data ?? (isObject && 'response' in error!)
+			? 'data' in
+			  Reflect.get(error as Record<string, unknown>, 'response')
+				? (Reflect.get(
+						Reflect.get(
+							error as Record<string, unknown>,
+							'response',
+						),
+						'data',
+				  ) as string | Record<string, string>)
+				: (Reflect.get(
+						error as Record<string, unknown>,
+						'response',
+				  ) as AxiosResponse)
 			: (error as null | string | Record<string, string>)
 
 	const message = obj
@@ -19,12 +41,20 @@ export function handleWpApiError(
 			? obj
 			: ''
 		: ''
-	const errorMessage = message
-		? ERROR_MESSAGE.DETAILED.replace('%error%', JSON.stringify(message))
-		: ERROR_MESSAGE.GENERIC
+
+	const errorMessage =
+		message !== ''
+			? ERROR_MESSAGE.ERROR_RESPONSE.replace(
+					'%error%',
+					JSON.stringify(message),
+			  ).replace('%url%', url ?? 'UNKNOWN')
+			: ERROR_MESSAGE.GENERIC
 
 	if (onError) onError(errorMessage)
-	else throw new Error(errorMessage)
+	// eslint-disable-next-line no-console
+	else console.error(chalk.blue(errorMessage))
+
+	return { data: null }
 }
 
 export function validateBaseUrl(url: string): string {
@@ -40,7 +70,7 @@ export function getDefaultQueryList(params?: Record<string, string>): string {
 		new URLSearchParams({
 			_embed: 'true',
 			order: 'asc',
-			orderby: 'menu_order',
+			//orderby: 'menu_order',
 			per_page: '100',
 			...params,
 		}).toString()

@@ -5,7 +5,11 @@ import {
 	handleWpApiError,
 	validateBaseUrl,
 } from '../src/util'
+
 const mockError = 'mock_error'
+const onError = (error: string) => {
+	throw new Error(error)
+}
 
 describe('util', () => {
 	describe('handleWpApiError', () => {
@@ -19,16 +23,20 @@ describe('util', () => {
 			).not.toThrow()
 			expect(error).toBe(ERROR_MESSAGE.GENERIC)
 		})
-		it('throws generic error if no error provided', () => {
-			expect(() => handleWpApiError(null)).toThrow(ERROR_MESSAGE.GENERIC)
-		})
-		it('throws generic error if provided error cannot be handled', () => {
-			expect(() => handleWpApiError(() => 'return_value')).toThrow(
+		it('throws generic error if no error info provided', () => {
+			expect(() => handleWpApiError(null, onError)).toThrow(
 				ERROR_MESSAGE.GENERIC,
 			)
 		})
+		it('throws generic error if provided error cannot be handled', () => {
+			expect(() =>
+				handleWpApiError(() => 'mock_string', onError),
+			).toThrow(ERROR_MESSAGE.GENERIC)
+		})
 		it('handles error typeof string', () => {
-			expect(() => handleWpApiError(mockError)).toThrow(mockError)
+			expect(() => handleWpApiError(mockError, onError)).toThrow(
+				mockError,
+			)
 		})
 		it('pulls error details from AxiosResponse, if provided', () => {
 			const errorObject = {
@@ -36,19 +44,25 @@ describe('util', () => {
 					error: mockError,
 				},
 			}
-			expect(() => handleWpApiError(errorObject)).toThrow(mockError)
+			expect(() => handleWpApiError(errorObject, onError)).toThrow(
+				mockError,
+			)
 		})
 		it('pulls error details from error object, if no AxiosResponse provided', () => {
 			const errorObject = {
 				error: mockError,
 			}
-			expect(() => handleWpApiError(errorObject)).toThrow(mockError)
+			expect(() => handleWpApiError(errorObject, onError)).toThrow(
+				mockError,
+			)
 		})
 		it('looks for message field, if no error field provided', () => {
 			const errorObject = {
 				message: mockError,
 			}
-			expect(() => handleWpApiError(errorObject)).toThrow(mockError)
+			expect(() => handleWpApiError(errorObject, onError)).toThrow(
+				mockError,
+			)
 		})
 		it('looks into AxiosResponse for message field, if no error field provided', () => {
 			const errorObject = {
@@ -56,7 +70,9 @@ describe('util', () => {
 					message: mockError,
 				},
 			}
-			expect(() => handleWpApiError(errorObject)).toThrow(mockError)
+			expect(() => handleWpApiError(errorObject, onError)).toThrow(
+				mockError,
+			)
 		})
 	})
 
@@ -90,12 +106,12 @@ describe('util', () => {
 	describe('getDefaultQueryList', () => {
 		it('returns default', () => {
 			expect(getDefaultQueryList()).toBe(
-				'?_embed=true&order=asc&orderby=menu_order&per_page=100',
+				'?_embed=true&order=asc&per_page=100',
 			)
 		})
 		it('has overridable defaults', () => {
 			expect(getDefaultQueryList({ per_page: '12' })).toBe(
-				'?_embed=true&order=asc&orderby=menu_order&per_page=12',
+				'?_embed=true&order=asc&per_page=12',
 			)
 		})
 	})

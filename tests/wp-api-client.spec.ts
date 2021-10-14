@@ -9,7 +9,7 @@ import {
 	WPTag,
 } from '../src/types'
 import { WP_Post_Type_Name } from 'wp-types'
-import { getDefaultQueryList, getDefaultQuerySingle } from '../src/util'
+import { getDefaultQueryList } from '../src/util'
 import WpApiClient from '../src'
 import axios, { AxiosInstance } from 'axios'
 import mockAxios from 'jest-mock-axios'
@@ -88,26 +88,29 @@ describe('WpApiClient', () => {
 	describe('helper methods', () => {
 		describe('.createEndpointGet', () => {
 			it('.find returns data field of successful AxiosResponse', async () => {
-				mockAxios.get.mockResolvedValueOnce({ data: mockData })
-				expect(await client.page().find()).toEqual(mockData)
+				mockAxios.get.mockResolvedValueOnce({ data: [mockData] })
+				expect(await client.page().find()).toEqual([mockData])
 			})
 			it('.find returns data fields of multiple successful AxiosResponses', async () => {
 				mockAxios.get.mockResolvedValueOnce({ data: mockData })
 				mockAxios.get.mockResolvedValueOnce({
 					data: mockData2,
 				})
-				expect(await client.page().find([1, 2])).toEqual([
+				expect(await client.page().find(1, 2)).toEqual([
 					mockData,
 					mockData2,
 				])
 			})
-			it('.find returns empty array if response is undefined', async () => {
+			it('.find returns empty array, if response without ID is undefined', async () => {
 				mockAxios.get.mockResolvedValueOnce({ data: null })
 				expect(await client.page().find()).toEqual([])
 			})
-			it('.findOne returns data field of successful AxiosResponse', async () => {
-				mockAxios.get.mockResolvedValueOnce({ data: mockData })
-				expect(await client.page().findOne(123)).toEqual(mockData)
+			// eslint-disable-next-line jest/no-disabled-tests
+			it.skip('.find returns array containing null, if request with ID throws', async () => {
+				const request = client.page().find(123)
+				mockAxios.mockError({ data: 'mock_html' })
+				expect(await request).toEqual([null])
+				mockAxios.reset()
 			})
 		})
 		describe('.createEndpointPost', () => {
@@ -156,12 +159,6 @@ describe('WpApiClient', () => {
 					`${END_POINT.PAGES}/${getDefaultQueryList()}`,
 				)
 			})
-			it('.findOne calls the correct endpoint', () => {
-				client.page().findOne(123)
-				expect(mockAxios.get).toHaveBeenCalledWith(
-					`${END_POINT.PAGES}/123/${getDefaultQuerySingle()}`,
-				)
-			})
 			it('.create calls the correct endpoint', () => {
 				client.page().create(mockPageCreate)
 				expect(mockAxios.post).toHaveBeenCalledWith(
@@ -189,12 +186,6 @@ describe('WpApiClient', () => {
 				client.post().find()
 				expect(mockAxios.get).toHaveBeenCalledWith(
 					`${END_POINT.POSTS}/${getDefaultQueryList()}`,
-				)
-			})
-			it('.findOne calls the correct endpoint', () => {
-				client.post().findOne(123)
-				expect(mockAxios.get).toHaveBeenCalledWith(
-					`${END_POINT.POSTS}/123/${getDefaultQuerySingle()}`,
 				)
 			})
 			it('.create calls the correct endpoint', () => {
@@ -226,18 +217,6 @@ describe('WpApiClient', () => {
 				it('returns data field of successful AxiosResponse', async () => {
 					mockAxios.get.mockResolvedValueOnce({ data: mockData })
 					expect(await client.media().find()).toEqual(mockData)
-				})
-			})
-			describe('.findOne', () => {
-				it('calls the correct endpoint', () => {
-					client.media().findOne(123)
-					expect(mockAxios.get).toHaveBeenCalledWith(
-						`${END_POINT.MEDIA}/123/${getDefaultQuerySingle()}`,
-					)
-				})
-				it('returns data field of successful AxiosResponse', async () => {
-					mockAxios.get.mockResolvedValueOnce({ data: mockData })
-					expect(await client.media().findOne(123)).toEqual(mockData)
 				})
 			})
 			describe('.create', () => {
@@ -312,12 +291,6 @@ describe('WpApiClient', () => {
 					`${END_POINT.CATEGORIES}/${getDefaultQueryList()}`,
 				)
 			})
-			it('.findOne calls the correct endpoint', () => {
-				client.postCategory().findOne(123)
-				expect(mockAxios.get).toHaveBeenCalledWith(
-					`${END_POINT.CATEGORIES}/123/${getDefaultQuerySingle()}`,
-				)
-			})
 			it('.create calls the correct endpoint', () => {
 				client.postCategory().create(mockPostCategoryCreate)
 				expect(mockAxios.post).toHaveBeenCalledWith(
@@ -338,12 +311,6 @@ describe('WpApiClient', () => {
 				client.postTag().find()
 				expect(mockAxios.get).toHaveBeenCalledWith(
 					`${END_POINT.TAGS}/${getDefaultQueryList()}`,
-				)
-			})
-			it('.findOne calls the correct endpoint', () => {
-				client.postTag().findOne(123)
-				expect(mockAxios.get).toHaveBeenCalledWith(
-					`${END_POINT.TAGS}/123/${getDefaultQuerySingle()}`,
 				)
 			})
 			it('.create calls the correct endpoint', () => {
@@ -381,8 +348,8 @@ describe('WpApiClient', () => {
 			mockAxios.get.mockResolvedValueOnce({ data: [mockData] })
 			await new MockClient().post().find()
 			mockAxios.get.mockResolvedValue({ data: mockData })
-			await new MockClient().post().findOne(1)
-			await new MockClient().post().find([2, 3])
+			await new MockClient().post().find(1)
+			await new MockClient().post().find(2, 3)
 			expect(MockClient.collect(WP_Post_Type_Name.post)).toEqual([
 				mockData,
 				mockData,
@@ -393,7 +360,7 @@ describe('WpApiClient', () => {
 		})
 		it('can be cleared', async () => {
 			mockAxios.get.mockResolvedValue({ data: mockData })
-			await new MockClient().post().find([2, 3])
+			await new MockClient().post().find(2, 3)
 			MockClient.clearCollection()
 			expect(MockClient.collect(WP_Post_Type_Name.post)).toEqual([])
 		})
@@ -402,8 +369,8 @@ describe('WpApiClient', () => {
 			mockAxios.get.mockResolvedValueOnce({
 				data: { ...mockData, type: WP_Post_Type_Name.page },
 			})
-			await new MockClient().post().findOne(1)
-			await new MockClient().page().findOne(2)
+			await new MockClient().post().find(1)
+			await new MockClient().page().find(2)
 			MockClient.clearCollection(WP_Post_Type_Name.page)
 			expect(MockClient.collect(WP_Post_Type_Name.post)).toEqual([
 				mockData,

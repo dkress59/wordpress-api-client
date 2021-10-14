@@ -1,8 +1,8 @@
 import { END_POINT, ERROR_MESSAGE } from './constants'
 import {
 	EndpointCreate,
-	EndpointGetMany,
-	EndpointGetOne,
+	EndpointDelete,
+	EndpointFind,
 	EndpointUpdate,
 	WPCategory,
 	WPCreate,
@@ -41,39 +41,25 @@ export class WpApiClient {
 			config => config,
 			error => handleWpApiError(error, onError),
 		)
-		/* ;WpApiClient.collection =
-			POST_TYPE_MAP.map(postType => ({
-				postType,
-				posts: [],
-			})) */
 	}
 
 	protected createEndpointGet<P>(
 		endpoint: string,
 		params?: Record<string, string>,
-	): (id: undefined | number | number[]) => Promise<P | P[]> {
-		return async (id = 0) => {
-			if (!id) {
-				const result =
+	): EndpointFind<P> {
+		return async (...ids: number[]) => {
+			let result: P[] = []
+			if (!ids.length) {
+				result =
 					(
 						await this.axios.get<P[] | undefined>(
 							`${endpoint}/${getDefaultQueryList(params)}`,
 						)
 					).data ?? ([] as P[])
-				if (!result.length) return result
-				const postType = Reflect.get(
-					result[0] as unknown as WPPost,
-					'type',
-				) as string
-				WpApiClient.collection
-					.find(collection => collection.postType === postType)
-					?.posts.push(...result)
-				return result
-			}
-			if (Array.isArray(id)) {
-				const result = (
+			} else {
+				result = (
 					await Promise.all(
-						id.map(postId =>
+						ids.map(postId =>
 							this.axios.get<P>(
 								`${endpoint}/${postId}/${getDefaultQuerySingle(
 									params,
@@ -82,27 +68,18 @@ export class WpApiClient {
 						),
 					)
 				).map(response => response.data)
-				const postType = Reflect.get(
-					result[0] as unknown as WPPost,
-					'type',
-				) as string
+			}
+			const postType =
+				result.length && !!result[0]
+					? (Reflect.get(
+							result[0] as Record<string, unknown>,
+							'type',
+					  ) as string)
+					: null
+			if (postType)
 				WpApiClient.collection
 					.find(collection => collection.postType === postType)
 					?.posts.push(...result)
-				return result
-			}
-			const result = (
-				await this.axios.get<P>(
-					`${endpoint}/${id}/${getDefaultQuerySingle(params)}`,
-				)
-			).data
-			const postType = Reflect.get(
-				result as unknown as WPPost,
-				'type',
-			) as string
-			WpApiClient.collection
-				.find(collection => collection.postType === postType)
-				?.posts.push(result)
 			return result
 		}
 	}
@@ -131,6 +108,16 @@ export class WpApiClient {
 						},
 					)
 				).data
+		}
+	}
+
+	protected createEndpointDelete<P>(endpoint: string): EndpointDelete<P> {
+		return async (...ids: number[]) => {
+			return (
+				await Promise.all(
+					ids.map(id => this.axios.delete<P>(`${endpoint}/${id}`)),
+				)
+			).map(response => response.data)
 		}
 	}
 
@@ -184,48 +171,48 @@ export class WpApiClient {
 		)?.posts as undefined | P[]
 	}
 
-	public post<P = WPPost>(): {
-		find: EndpointGetMany<P>
-		findOne: EndpointGetOne<P>
+	protected addPostType<P = WPPost>(
+		endpoint: string,
+	): {
+		find: EndpointFind<P>
 		create: EndpointCreate<P>
+		delete: EndpointDelete<P>
 		update: EndpointUpdate<P>
 	} {
-		const find = this.createEndpointGet<P>(END_POINT.POSTS)
-		const create = this.createEndpointPost<P>(END_POINT.POSTS)
-		const update = this.createEndpointPost<P>(END_POINT.POSTS)
 		return {
-			find: find as EndpointGetMany<P>,
-			findOne: find as EndpointGetOne<P>,
-			create,
-			update,
+			find: this.createEndpointGet<P>(endpoint),
+			create: this.createEndpointPost<P>(endpoint),
+			update: this.createEndpointPost<P>(endpoint),
+			delete: this.createEndpointDelete<P>(endpoint),
 		}
+	}
+
+	public post<P = WPPost>(): {
+		find: EndpointFind<P>
+		create: EndpointCreate<P>
+		delete: EndpointDelete<P>
+		update: EndpointUpdate<P>
+	} {
+		return this.addPostType<P>(END_POINT.POSTS)
 	}
 
 	public page<P = WPPage>(): {
-		find: EndpointGetMany<P>
-		findOne: EndpointGetOne<P>
+		find: EndpointFind<P>
 		create: EndpointCreate<P>
+		delete: EndpointDelete<P>
 		update: EndpointUpdate<P>
 	} {
-		const find = this.createEndpointGet<P>(END_POINT.PAGES)
-		const create = this.createEndpointPost<P>(END_POINT.PAGES)
-		const update = this.createEndpointPost<P>(END_POINT.PAGES)
-		return {
-			find: find as EndpointGetMany<P>,
-			findOne: find as EndpointGetOne<P>,
-			create,
-			update,
-		}
+		return this.addPostType<P>(END_POINT.PAGES)
 	}
 
 	public media<P = WPMedia>(): {
-		find: EndpointGetMany<P>
-		findOne: EndpointGetOne<P>
+		find: EndpointFind<P>
 		create: (
 			fileName: string,
 			data: Buffer,
 			mimeType?: string,
 		) => Promise<P>
+		delete: EndpointDelete<P>
 		update: EndpointUpdate<P>
 	} {
 		const find = this.createEndpointGet<P>(END_POINT.MEDIA)
@@ -262,73 +249,49 @@ export class WpApiClient {
 				)
 			).data
 		}
+		const deleteOne = this.createEndpointDelete<P>(END_POINT.MEDIA)
 		const update = this.createEndpointPost<P>(END_POINT.MEDIA)
 		return {
-			find: find as EndpointGetMany<P>,
-			findOne: find as EndpointGetOne<P>,
+			find,
 			create,
+			delete: deleteOne,
 			update,
 		}
 	}
 
 	public postCategory<P = WPCategory>(): {
-		find: EndpointGetMany<P>
-		findOne: EndpointGetOne<P>
+		find: EndpointFind<P>
 		create: EndpointCreate<P>
+		delete: EndpointDelete<P>
 		update: EndpointUpdate<P>
 	} {
-		const find = this.createEndpointGet<P>(END_POINT.CATEGORIES)
-		const create = this.createEndpointPost<P>(END_POINT.CATEGORIES)
-		const update = this.createEndpointPost<P>(END_POINT.CATEGORIES)
-		return {
-			find: find as EndpointGetMany<P>,
-			findOne: find as EndpointGetOne<P>,
-			create,
-			update,
-		}
+		return this.addPostType<P>(END_POINT.CATEGORIES)
 	}
 
 	public postTag<P = WPTag>(): {
-		find: EndpointGetMany<P>
-		findOne: EndpointGetOne<P>
+		find: EndpointFind<P>
 		create: EndpointCreate<P>
+		delete: EndpointDelete<P>
 		update: EndpointUpdate<P>
 	} {
-		const find = this.createEndpointGet<P>(END_POINT.TAGS)
-		const create = this.createEndpointPost<P>(END_POINT.TAGS)
-		const update = this.createEndpointPost<P>(END_POINT.TAGS)
-		return {
-			find: find as EndpointGetMany<P>,
-			findOne: find as EndpointGetOne<P>,
-			create,
-			update,
-		}
+		return this.addPostType<P>(END_POINT.TAGS)
 	}
 
 	public user<P = WPUser>(): {
-		find: EndpointGetMany<P>
-		findMe: EndpointGetOne<P>
-		findOne: EndpointGetOne<P>
+		find: EndpointFind<P>
+		findMe: () => Promise<P>
 		create: EndpointCreate<P>
 		update: EndpointUpdate<P>
-		delete: (id: number) => Promise<boolean>
+		delete: EndpointDelete<P>
 		deleteMe: () => Promise<boolean>
 	} {
-		const find = this.createEndpointGet<P>(END_POINT.USERS)
-		const findMe = this.createEndpointGet<P>(END_POINT.USERS + '/me')
-		const create = this.createEndpointPost<P>(END_POINT.USERS)
-		const update = this.createEndpointPost<P>(END_POINT.USERS)
-		const deleteOne = async (id: number) =>
-			(await this.axios.delete<boolean>(END_POINT.USERS + `/${id}`)).data
+		const findMe = async () =>
+			(await this.axios.get<P>(END_POINT.USERS + '/me')).data
 		const deleteMe = async () =>
 			(await this.axios.delete<boolean>(END_POINT.USERS + '/me')).data
 		return {
-			find: find as EndpointGetMany<P>,
+			...this.addPostType<P>(END_POINT.USERS),
 			findMe: findMe as () => Promise<P>,
-			findOne: find as EndpointGetOne<P>,
-			create,
-			update,
-			delete: deleteOne,
 			deleteMe,
 		}
 	}

@@ -8,9 +8,11 @@ export const END_POINT = {
 }
 
 export const ERROR_MESSAGE = {
-	DETAILED: '[WpApiClient] Error: %error%',
-	GENERIC: '[WpApiClient] Error. Misconfiguration?',
-	INVALID_BASEURL: '[WpApiClient] Invalid baseURL: %url%',
+	DETAILED: '[WpApiClient Error] %error%',
+	ERROR_RESPONSE:
+		'[WpApiClient Error] There was an error when calling the end point %url%: %error%',
+	GENERIC: '[WpApiClient Error] Misconfiguration?',
+	INVALID_BASEURL: '[WpApiClient Error] Invalid baseURL: %url%',
 	INVALID_FILENAME:
-		'[WpApiClient] The fileName must include the file extension (e.g.: %fileName%.jpg).',
+		'[WpApiClient Error] The fileName must include the file extension (e.g.: %fileName%.jpg).',
 }
