@@ -1,66 +1,21 @@
 {
-  "name": "wordpress-api-client",
+  "name": "wordpress-api-client-docs",
+  "private": true,
   "description": "WordPress-API Client for JS/TS",
   "version": "0.1.2",
   "author": "Damian Kress",
   "bugs": "https://github.com/dkress59/wordpress-api-client/issues",
   "license": "MIT",
-  "main": "dist/index.js",
   "repository": "https://github.com/dkress59/wordpress-api-client",
-  "types": "src/index.ts",
   "contributors": [
     {
       "name": "Damian Kress",
       "email": "mail@damiankress.de"
     }
   ],
-  "dependencies": {
-    "axios": "0.22.0"
-  },
-  "devDependencies": {
-    "@babel/core": "^7.15.8",
-    "@babel/eslint-parser": "7.15.8",
-    "@sprylab/eslint-config": "1.5.7",
-    "@types/faker": "^5.5.8",
-    "@types/jest": "^27.0.2",
-    "@types/node": "^16.10.3",
-    "eslint": "7.32.0",
-    "eslint-import-resolver-typescript": "2.5.0",
-    "eslint-plugin-sort-imports-es6-autofix": "0.6.0",
-    "eslint-plugin-unused-imports": "1.1.5",
-    "faker": "^5.5.3",
-    "interface-forge": "^1.4.4",
-    "jest": "^27.2.5",
-    "jest-mock-axios": "^4.4.1",
-    "prettier": "2.4.1",
-    "ts-jest": "^27.0.5",
-    "ts-node": "^10.2.1",
-    "typescript": "4.4.3",
-    "wp-types": "^2.12.0"
-  },
-  "engines": {
-    "node": ">=0.14"
-  },
-  "keywords": [
-    "wordpress",
-    "headless",
-    "nodejs",
-    "REST",
-    "api client",
-    "wpapi",
-    "wp-api",
-    "typescript",
-    "js",
-    "ts",
-    "wp"
-  ],
+  "dependencies": {},
+  "devDependencies": {},
   "scripts": {
-    "build": "tsc -p tsconfig.build.json",
-    "check:script": "eslint src --ext .ts --fix-dry-run --report-unused-disable-directives",
-    "lint:script": "eslint src --ext .ts --fix",
-    "prepublishOnly": "rm -rf .gitignore .jest coverage",
-    "test": "jest --verbose --runInBand",
-    "test:watch": "jest --watchAll",
-    "docs": "docsify serve ./docs"
+    "docs": "docsify serve ."
   }
 }

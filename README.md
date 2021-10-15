@@ -6,7 +6,11 @@ Written in TypeScript, fully compatible to JavaScript.
 
 [![npm version](https://badge.fury.io/js/wordpress-api-client.svg)](https://badge.fury.io/js/wordpress-api-client) [![codecov](https://codecov.io/gh/dkress59/wordpress-api-client/branch/main/graph/badge.svg?token=1Z3R5J16FK)](https://codecov.io/gh/dkress59/wordpress-api-client)
 
-## Installation
+---
+
+## Usage
+
+### Installation
 
 Depending on the package manager of your choice:
 
@@ -17,17 +21,6 @@ yarn add wordpress-api-client
 ```bash
 npm install wordpress-api-client
 ```
-
-## Usage
-
-- [Defaults](#default-methods)
-- [Helper Methods](#helper-methods)
-- [Custom Post Types](#custom-post-types)
-- [Custom End Points](#custom-end-points)
-- [Advanced Custom Fields](#extend-default-routes)
-- [JWT-Auth for WordPress](#default-custom-interceptors)
-- …
-- [Changelog](#changelog)
 
 ---
 
@@ -99,7 +92,35 @@ WpApiClient.clearCollection()
 
 ```
 
-__Note:__ To make use of any POST or DELEE method (e.g. `CmsClient.media().create()`), you will have to set up some sort of [Authentification](#authentification).
+#### .find(...ids: number[])
+
+##### find all
+
+##### find one or many
+
+##### find with params
+
+#### .create(body: WPCreate<WPPost>)
+
+You need to be authenticated, to use this method.
+
+WPCreate: id, date format, taxonomies, attachments, users
+
+#### .update(body: WPCreate<WPPost>, id: number)
+
+You need to be authenticated, to use this method.
+
+WPUpdate: id, date format, taxonomies, attachments, users
+
+#### .delete(id: number)
+
+You need to be authenticated, to use this method.
+
+---
+
+### Static Collectors
+
+__Note:__ inheritance problem
 
 ---
 
@@ -121,7 +142,7 @@ To update a specific post or page, a POST request must be sent to `/posts{id}` o
 
 For this recurring schema the WpApiClient class (and any sub-class) can use the methods `.createEndpointGet()` and `.createEndpointPost()`. Both methods responses' type can be casted on the respective method, and both methods need the path to your end point (starting after `/wp-json`) as parameter. See the [next chapter](#custom-post-types) for an example. The two POST-Methods use a utility type, `WPCreate`, because the output format of the `post_content` and `post_title` fields is an object (`{ rendered: string }`), but the input format for these fields must be a plain string. _Note:_ A default query-param string will be added to the end point when using `.createEndpointGet()`: Collections will have the query `?_embed=true&order=asc&orderby=menu_order&per_page=100` appended, single posts will be queried with [?_embed=true](https://developer.wordpress.org/rest-api/using-the-rest-api/global-parameters/#_embed). The query can be overriden with the second parameter, e.g: `.createEndpointGet('wp/v2/posts', { _embed: 'author' })`.
 
-The utility type `EndpointCreate` will strip the `id` field from any type (e.g. POST to `/pages`), in accordance to the WP-API requirements. The `EndpointUpdate` utility type simply turns any type into a `Partial`, so that selective fields of any post type can be updated (e.g POST to. `/posts/{id}`)
+The utility type `WPCreate<T>` will strip the `id` field from any type (e.g. POST to `/pages`), in accordance to the WP-API requirements. The `WPUpdate<T>` utility type simply turns any type into a `Partial`, so that selective fields of any post type can be updated (e.g POST to. `/posts/{id}`)
 
 Of course, you are free to extend the WpApiClient class in any which way that suits you – but there are two more helpers that can be used to add methods for __custom end points__. `.createEndpointCustomGet()` and `.createEndpointCustomPost()` also work very similarly; they both only take the respective path to the end point as a single, required argument, but they can be given up to two type arguments: The response type as the first, and a fallback type for errors as the second argument. You can find an [example here](#custom-end-points).
 
@@ -427,6 +448,32 @@ export const CmsClient = new WpApiClient(
 [JWT-Auth for WordPress](https://wordpress.org/plugins/jwt-auth/) relies on the jsonwebtoken technology, which is a whole other deal in terms of security and therefore needs to be set up quite a bit more carefully. Always keep in mind that you can whitelist any end point of your WP REST API via PHP ("Whitelisting Endpoints" in the plugin's documentation).
 
 [ ToDo ]
+
+#### OAuth
+
+[ ToDo ]
+
+---
+
+### .media()
+
+---
+
+### .user()
+
+---
+
+### .postType)
+
+---
+
+### .search()
+
+---
+
+### .siteSettings()
+
+---
 
 ## Changelog
 
