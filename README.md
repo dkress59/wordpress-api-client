@@ -1,36 +1,10 @@
 # WordPress-API Client
 
-A full-fledged JavaScript client for your WP-API. Super simple yet highly extensible.
+A typed JavaScript client for your WordPress REST API. Super simple yet highly extensible.
 
 Written in TypeScript, fully compatible to JavaScript.
 
 [![npm version](https://badge.fury.io/js/wordpress-api-client.svg)](https://badge.fury.io/js/wordpress-api-client) [![codecov](https://codecov.io/gh/dkress59/wordpress-api-client/branch/main/graph/badge.svg?token=1Z3R5J16FK)](https://codecov.io/gh/dkress59/wordpress-api-client)
-
-ToDo:
-
-- [ ] Example Project
-- [ ] Improved Docs
-- [ ] Improved WPCreate + WPUpdate
-- [ ] (Option: camelCasify)
-- [ ] (Option: restBase)
-- [X] `.find(...ids?: number[]): Promise<P[]>`
-- [X] Catch 404s & `WP_Error`s
-- [X] DELETE
-- [X] WP_User
-
-Missing defaults:
-
-- [ ] (Block Directory)
-- [ ] (Block Renderer)
-- [ ] (Block Types)
-- [ ] (Editor Blocks)
-- [ ] (Plugins)
-- [ ] (Statuses)
-- [X] Comments
-- [X] Revisions
-- [X] Search
-- [X] Settings
-- [X] Types
 
 ## Installation
 
@@ -455,6 +429,8 @@ export const CmsClient = new WpApiClient(
 [ ToDo ]
 
 ## Changelog
+
+The current progress can be tracked [here](https://github.com/dkress59/wordpress-api-client/projects/1)
 
 - v0.1.2 repaired type casting in handleWpApiError()
 
