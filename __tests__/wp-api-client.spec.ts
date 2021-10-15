@@ -101,9 +101,9 @@ describe('WpApiClient', () => {
 			expect(MockClient.collect('undefined')).toBeUndefined()
 		})
 		it('is stored correctly', async () => {
+			mockAxios.get.mockResolvedValue({ data: mockData })
 			mockAxios.get.mockResolvedValueOnce({ data: [mockData] })
 			await new MockClient().post().find()
-			mockAxios.get.mockResolvedValue({ data: mockData })
 			await new MockClient().post().find(1)
 			await new MockClient().post().find(2, 3)
 			expect(MockClient.collect(WP_Post_Type_Name.post)).toEqual([
@@ -622,6 +622,54 @@ describe('WpApiClient', () => {
 				expect(await client.plugin().delete(mockPlugin)).toEqual(
 					mockData,
 				)
+			})
+		})
+		describe('.reusableBlock', () => {
+			it('.find calls the correct endpoint', () => {
+				client.reusableBlock().find()
+				expect(mockAxios.get).toHaveBeenCalledWith(
+					`${END_POINT.EDITOR_BLOCKS}/${getDefaultQueryList()}`,
+				)
+			})
+		})
+		describe('.taxonomy', () => {
+			it('.find calls the correct endpoint', () => {
+				client.taxonomy().find()
+				expect(mockAxios.get).toHaveBeenCalledWith(
+					`${END_POINT.TAXONOMIES}/${getDefaultQueryList()}`,
+				)
+			})
+		})
+		describe('.renderedBlock', () => {
+			const mockBlockName = 'mock_block_name'
+			const mockPostId = 123
+			it('calls the correct endpoint', () => {
+				client.renderedBlock(mockBlockName, mockPostId)
+				expect(mockAxios.post).toHaveBeenCalledWith(
+					`${END_POINT.BLOCK_RENDERER}/${mockBlockName}`,
+					{
+						attributes: [],
+						context: 'view',
+						name: mockBlockName,
+						post_id: mockPostId,
+					},
+				)
+			})
+			it('returns data field of successful AxiosResponse', async () => {
+				mockAxios.post.mockResolvedValueOnce({ data: mockData })
+				expect(
+					await client.renderedBlock(mockBlockName, mockPostId),
+				).toEqual(mockData)
+			})
+		})
+		describe('.theme', () => {
+			it('calls the correct endpoint', () => {
+				client.theme()
+				expect(mockAxios.get).toHaveBeenCalledWith(END_POINT.THEMES)
+			})
+			it('returns data field of successful AxiosResponse', async () => {
+				mockAxios.get.mockResolvedValueOnce({ data: [mockData] })
+				expect(await client.theme()).toEqual([mockData])
 			})
 		})
 	})

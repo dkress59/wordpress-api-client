@@ -14,14 +14,18 @@ import {
 	WPPlugin,
 	WPPost,
 	WPTag,
+	WPTaxonomy,
+	WPTheme,
 	WPUser,
 } from './types'
 import { POST_TYPE_MAP } from './factories'
 import { URLSearchParams } from 'url'
 import {
 	WP_Post_Type_Name,
+	WP_REST_API_Block,
 	WP_REST_API_Block_Directory_Item,
 	WP_REST_API_Block_Type,
+	WP_REST_API_Rendered_Block,
 	WP_REST_API_Search_Result,
 	WP_REST_API_Settings,
 	WP_REST_API_Status,
@@ -501,5 +505,43 @@ export class WpApiClient {
 				(await this.axios.delete<P>(`${END_POINT.PLUGINS}/${plugin}`))
 					.data,
 		}
+	}
+
+	public reusableBlock<P = WP_REST_API_Block>(): {
+		find: EndpointFind<P>
+		create: EndpointCreate<P>
+		delete: EndpointDelete<P>
+		update: EndpointUpdate<P>
+	} {
+		return this.addPostType<P>(END_POINT.EDITOR_BLOCKS)
+	}
+
+	public taxonomy<P = WPTaxonomy>(): {
+		find: EndpointFind<P>
+		create: EndpointCreate<P>
+		delete: EndpointDelete<P>
+		update: EndpointUpdate<P>
+	} {
+		return this.addPostType<P>(END_POINT.TAXONOMIES)
+	}
+
+	public async renderedBlock<P = WP_REST_API_Rendered_Block>(
+		name: string,
+		postId: number,
+		context: 'edit' | 'view' = 'view',
+		attributes = [] as string[],
+	): Promise<P> {
+		return (
+			await this.axios.post<P>(`${END_POINT.BLOCK_RENDERER}/${name}`, {
+				name,
+				context,
+				post_id: postId,
+				attributes,
+			})
+		).data
+	}
+
+	public async theme<P = WPTheme>(): Promise<P[]> {
+		return (await this.axios.get<P[]>(END_POINT.THEMES)).data
 	}
 }

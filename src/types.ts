@@ -156,3 +156,102 @@ export interface WPPlugin {
 			| null
 	}
 }
+
+export interface WPThemeEditorColor {
+	name: string
+	slug: string
+	color: string
+}
+export interface WPThemeEditorFontSize {
+	name: string
+	size: number
+	slug: string
+}
+export interface WPThemeEditorGradientPreset {
+	name: string
+	gradient: string
+	slug: string
+}
+
+export interface WPThemeSupports {
+	'align-wide': boolean
+	'automatic-feed-links': boolean
+	'custom-background': {
+		'default-image': string
+		'default-preset': string
+		'default-position-x': string
+		'default-position-y': string
+		'default-size': string
+		'default-repeat': string
+		'default-attachment': string
+		'default-color': string
+	}
+	'custom-header': boolean
+	'custom-logo': {
+		'width': number
+		'height': number
+		'flex-width': boolean
+		'flex-height': boolean
+		'header-text'?: (string | null)[]
+		'unlink-homepage-logo': boolean
+	}
+	'customize-selective-refresh-widgets': boolean
+	'dark-editor-style': boolean
+	'disable-custom-colors': boolean
+	'disable-custom-font-sizes': boolean
+	'disable-custom-gradients': boolean
+	'editor-color-palette'?: WPThemeEditorColor[]
+	'editor-font-sizes'?: WPThemeEditorFontSize[]
+	'editor-gradient-presets'?: WPThemeEditorGradientPreset[]
+	'editor-styles': boolean
+	'html5'?: string[]
+	'formats'?: string[]
+	'post-thumbnails': boolean
+	'responsive-embeds': boolean
+	'title-tag': boolean
+	'wp-block-styles': boolean
+}
+
+export interface WPTheme {
+	stylesheet: string
+	template: string
+	requires_php: string
+	requires_wp: string
+	textdomain: string
+	version: string
+	screenshot: string
+	author: {
+		raw: string
+		rendered: string
+	}
+	author_uri: {
+		raw: string
+		rendered: string
+	}
+	description: {
+		raw: string
+		rendered: string
+	}
+	name: {
+		raw: string
+		rendered: string
+	}
+	tags: {
+		raw?: (string | null)[]
+		rendered: string
+	}
+	theme_uri: {
+		raw: string
+		rendered: string
+	}
+	status: string
+	theme_supports?: WPThemeSupports
+	_links: {
+		self?: {
+			href: string
+		}[]
+		collection?: {
+			href: string
+		}[]
+	}
+}
