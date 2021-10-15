@@ -60,6 +60,7 @@
     "lint:script": "eslint src --ext .ts --fix",
     "prepublishOnly": "rm -rf .gitignore .jest coverage",
     "test": "jest --verbose --runInBand",
-    "test:watch": "jest --watchAll"
+    "test:watch": "jest --watchAll",
+    "docs": "docsify serve ./docs"
   }
 }
