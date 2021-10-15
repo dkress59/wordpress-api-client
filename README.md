@@ -80,9 +80,17 @@ client.user().delete()
 client.user().deleteMe()
 client.user().update()
 
+client.plugin().create()
+client.plugin().find()
+client.plugin().delete()
+client.plugin().update()
+
+client.blockDirectory()
+client.blockType()
 client.postType()
 client.search()
 client.siteSettings()
+client.status()
 
 // Static Methods:
 
