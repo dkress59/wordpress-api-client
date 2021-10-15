@@ -1,7 +1,7 @@
 {
   "name": "wordpress-api-client",
   "description": "WordPress-API Client for JS/TS",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "author": "Damian Kress",
   "bugs": "https://github.com/dkress59/wordpress-api-client/issues",
   "license": "MIT",

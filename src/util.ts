@@ -11,13 +11,17 @@ export function handleWpApiError(
 	const isObject = !!error && typeof error === 'object'
 	const axiosError =
 		isObject &&
-		'isAxiosError' in error! &&
-		(Reflect.get(error, 'isAxiosError') as boolean)
+		'isAxiosError' in (error as Record<string, unknown>) &&
+		(Reflect.get(
+			error as Record<string, unknown>,
+			'isAxiosError',
+		) as boolean)
 			? (error as AxiosError<unknown>)
 			: null
 	const url = axiosError?.config.url
 	const obj =
-		axiosError?.response?.data ?? (isObject && 'response' in error!)
+		axiosError?.response?.data ??
+		(isObject && 'response' in (error as Record<string, unknown>))
 			? 'data' in
 			  Reflect.get(error as Record<string, unknown>, 'response')
 				? (Reflect.get(

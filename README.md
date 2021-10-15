@@ -456,6 +456,8 @@ export const CmsClient = new WpApiClient(
 
 ## Changelog
 
-- v0.1.1 import path fixed
+- v0.1.2 repaired type casting in handleWpApiError()
+
+- v0.1.1 import path repaired
 
 - v0.1.0 public beta release
