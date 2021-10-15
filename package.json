@@ -15,29 +15,29 @@
     }
   ],
   "dependencies": {
-    "axios": "0.22.0"
+    "axios": "0.23.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.15.8",
+    "@babel/core": "7.15.8",
     "@babel/eslint-parser": "7.15.8",
     "@sprylab/eslint-config": "1.5.7",
-    "@types/faker": "^5.5.8",
-    "@types/jest": "^27.0.2",
-    "@types/node": "^16.10.3",
+    "@types/faker": "5.5.8",
+    "@types/jest": "27.0.2",
+    "@types/node": "16.11.0",
     "eslint": "7.32.0",
     "eslint-import-resolver-typescript": "2.5.0",
     "eslint-plugin-sort-imports-es6-autofix": "0.6.0",
     "eslint-plugin-unused-imports": "1.1.5",
-    "faker": "^5.5.3",
-    "husky": "^7.0.2",
-    "interface-forge": "^1.4.4",
-    "jest": "^27.2.5",
-    "jest-mock-axios": "^4.4.1",
+    "faker": "5.5.3",
+    "husky": "7.0.2",
+    "interface-forge": "1.4.4",
+    "jest": "27.2.5",
+    "jest-mock-axios": "4.4.1",
     "prettier": "2.4.1",
-    "ts-jest": "^27.0.5",
-    "ts-node": "^10.2.1",
-    "typescript": "4.4.3",
-    "wp-types": "^2.12.0"
+    "ts-jest": "27.0.6",
+    "ts-node": "10.3.0",
+    "typescript": "4.4.4",
+    "wp-types": "2.12.0"
   },
   "engines": {
     "node": ">=0.14"

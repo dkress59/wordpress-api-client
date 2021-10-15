@@ -135,7 +135,7 @@ export class WpApiClient {
 		endPoint: string,
 	): () => Promise<T | R> {
 		return async (): Promise<T | R> => {
-			return (await this.axios.get(endPoint)).data
+			return (await this.axios.get<T>(endPoint)).data
 		}
 	}
 
@@ -143,7 +143,7 @@ export class WpApiClient {
 		endPoint: string,
 	): (body: T) => Promise<T | R> {
 		return async (body: T): Promise<T | R> => {
-			return (await this.axios.post(endPoint, body)).data
+			return (await this.axios.post<T>(endPoint, body)).data
 		}
 	}
 

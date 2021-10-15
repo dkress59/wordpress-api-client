@@ -5,7 +5,7 @@ import chalk from 'chalk'
 
 // eslint-disable-next-line sonarjs/cognitive-complexity
 export function handleWpApiError(
-	error: Error | AxiosError<unknown> | unknown,
+	error: Error | AxiosError | unknown,
 	onError?: (message: string) => void,
 ): unknown {
 	const isObject = !!error && typeof error === 'object'
@@ -16,7 +16,7 @@ export function handleWpApiError(
 			error as Record<string, unknown>,
 			'isAxiosError',
 		) as boolean)
-			? (error as AxiosError<unknown>)
+			? (error as AxiosError)
 			: null
 	const url = axiosError?.config.url
 	const obj =
