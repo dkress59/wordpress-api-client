@@ -5,6 +5,7 @@ export const END_POINT = {
 	COMMENTS: 'wp/v2/comments',
 	MEDIA: 'wp/v2/media',
 	PAGES: 'wp/v2/pages',
+	PLUGINS: 'wp/v2/plugins',
 	POSTS: 'wp/v2/posts',
 	SEARCH: 'wp/v2/search',
 	SETTINGS: 'wp/v2/settings',

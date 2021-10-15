@@ -131,3 +131,28 @@ export type WPComment<A = unknown> = WP_REST_API_Comment & ACFBase<A>
 export type WPTag<A = unknown> = WP_REST_API_Tag & ACFBase<A>
 
 export type WPUser<A = unknown> = WP_REST_API_User & ACFBase<A>
+
+export interface WPPlugin {
+	plugin: string
+	status: string
+	name: string
+	plugin_uri: string
+	author: string
+	author_uri: string
+	description: {
+		raw: string
+		rendered: string
+	}
+	version: string
+	network_only: boolean
+	requires_wp: string
+	requires_php: string
+	textdomain: string
+	_links: {
+		self?:
+			| {
+					href: string
+			  }[]
+			| null
+	}
+}

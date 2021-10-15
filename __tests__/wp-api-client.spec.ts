@@ -249,6 +249,7 @@ describe('WpApiClient', () => {
 				)
 			})
 			it('.update calls the correct endpoint', () => {
+				const mockPageId = 123
 				const mockPage = WPPageFactory.buildSync()
 				const mockPageCreate: WPCreate<WPPage> = {
 					...mockPage,
@@ -256,9 +257,9 @@ describe('WpApiClient', () => {
 					excerpt: mockPage.excerpt.rendered,
 					title: mockPage.title.rendered,
 				}
-				client.page().update(mockPageCreate, 123)
+				client.page().update(mockPageCreate, mockPageId)
 				expect(mockAxios.post).toHaveBeenCalledWith(
-					`${END_POINT.PAGES}/123`,
+					`${END_POINT.PAGES}/${mockPageId}`,
 					mockPageCreate,
 				)
 			})
@@ -501,7 +502,9 @@ describe('WpApiClient', () => {
 		describe('.blockType', () => {
 			it('calls the correct endpoint by default', () => {
 				client.blockType()
-				expect(mockAxios.get).toHaveBeenCalledWith(`${END_POINT.BLOCK_TYPES}`)
+				expect(mockAxios.get).toHaveBeenCalledWith(
+					`${END_POINT.BLOCK_TYPES}`,
+				)
 			})
 			it('calls the correct endpoint for specific blockType', () => {
 				const blockType = 'mock_block_type'
@@ -514,13 +517,17 @@ describe('WpApiClient', () => {
 		describe('.blockDirectory', () => {
 			it('calls the correct endpoint', () => {
 				client.blockDirectory()
-				expect(mockAxios.get).toHaveBeenCalledWith(`${END_POINT.BLOCK_DIRECTORY}`)
+				expect(mockAxios.get).toHaveBeenCalledWith(
+					`${END_POINT.BLOCK_DIRECTORY}`,
+				)
 			})
 		})
 		describe('.status', () => {
 			it('calls the correct endpoint by default', () => {
 				client.status()
-				expect(mockAxios.get).toHaveBeenCalledWith(`${END_POINT.STATUSES}`)
+				expect(mockAxios.get).toHaveBeenCalledWith(
+					`${END_POINT.STATUSES}`,
+				)
 			})
 			it('calls the correct endpoint for specific status', () => {
 				const status = 'mock_status'
@@ -554,6 +561,66 @@ describe('WpApiClient', () => {
 						/\s/g,
 						'+',
 					)}`,
+				)
+			})
+		})
+		describe('.plugin', () => {
+			const mockPlugin = 'mock_plugin'
+			it('.find calls the correct endpoint by default', () => {
+				client.plugin().find()
+				expect(mockAxios.get).toHaveBeenCalledWith(
+					`${END_POINT.PLUGINS}`,
+				)
+			})
+			it('.find calls the correct endpoint for specific plugin', () => {
+				client.plugin().find(mockPlugin)
+				expect(mockAxios.get).toHaveBeenCalledWith(
+					`${END_POINT.PLUGINS}/${mockPlugin}`,
+				)
+			})
+			it('.create calls the correct endpoint', () => {
+				client.plugin().create(mockPlugin)
+				expect(mockAxios.post).toHaveBeenCalledWith(
+					`${END_POINT.PLUGINS}`,
+					{ plugin: mockPlugin, status: 'inactive' },
+				)
+			})
+			it('.create can activate plugins', () => {
+				client.plugin().create(mockPlugin, 'active')
+				expect(mockAxios.post).toHaveBeenCalledWith(
+					`${END_POINT.PLUGINS}`,
+					{ plugin: mockPlugin, status: 'active' },
+				)
+			})
+			it('.create returns data field of successful AxiosResponse', async () => {
+				mockAxios.post.mockResolvedValueOnce({ data: mockData })
+				expect(await client.plugin().create(mockPlugin)).toEqual(
+					mockData,
+				)
+			})
+			it('.update calls the correct endpoint', () => {
+				client.plugin().update(mockPlugin)
+				expect(mockAxios.post).toHaveBeenCalledWith(
+					`${END_POINT.PLUGINS}/${mockPlugin}`,
+					{ context: 'view', status: 'inactive' },
+				)
+			})
+			it('.update returns data field of successful AxiosResponse', async () => {
+				mockAxios.post.mockResolvedValueOnce({ data: mockData })
+				expect(await client.plugin().update(mockPlugin)).toEqual(
+					mockData,
+				)
+			})
+			it('.delete calls the correct endpoint', () => {
+				client.plugin().delete(mockPlugin)
+				expect(mockAxios.delete).toHaveBeenCalledWith(
+					`${END_POINT.PLUGINS}/${mockPlugin}`,
+				)
+			})
+			it('.delete returns data field of successful AxiosResponse', async () => {
+				mockAxios.delete.mockResolvedValueOnce({ data: mockData })
+				expect(await client.plugin().delete(mockPlugin)).toEqual(
+					mockData,
 				)
 			})
 		})

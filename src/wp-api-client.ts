@@ -11,6 +11,7 @@ import {
 	WPCreate,
 	WPMedia,
 	WPPage,
+	WPPlugin,
 	WPPost,
 	WPTag,
 	WPUser,
@@ -431,8 +432,7 @@ export class WpApiClient {
 		status?: WP_Post_Type_Name | string,
 	): Promise<P | P[]> {
 		return status
-			? (await this.axios.get<P>(`${END_POINT.STATUSES}/${status}`))
-					.data
+			? (await this.axios.get<P>(`${END_POINT.STATUSES}/${status}`)).data
 			: (await this.axios.get<P[]>(END_POINT.STATUSES)).data
 	}
 
@@ -449,7 +449,57 @@ export class WpApiClient {
 			: (await this.axios.get<P[]>(END_POINT.BLOCK_TYPES)).data
 	}
 
-	public async blockDirectory<P = WP_REST_API_Block_Directory_Item>(): Promise<P | P[]> {
+	public async blockDirectory<
+		P = WP_REST_API_Block_Directory_Item,
+	>(): Promise<P | P[]> {
 		return (await this.axios.get<P[]>(END_POINT.BLOCK_DIRECTORY)).data
+	}
+
+	public plugin<P = WPPlugin>(): {
+		create: (plugin: string, status?: 'active' | 'inactive') => Promise<P>
+		find: (plugin?: string) => Promise<P[]>
+		update: (
+			plugin: string,
+			status?: 'active' | 'inactive',
+			context?: 'view' | 'embed' | 'edit',
+		) => Promise<P>
+		delete: (plugin: string) => Promise<P>
+	} {
+		return {
+			create: async (
+				plugin: string,
+				status: 'active' | 'inactive' = 'inactive',
+			) =>
+				(
+					await this.axios.post<P>(END_POINT.PLUGINS, {
+						plugin,
+						status,
+					})
+				).data,
+			find: async (plugin = '') =>
+				plugin
+					? [
+							(
+								await this.axios.get<P>(
+									`${END_POINT.PLUGINS}/${plugin}`,
+								)
+							).data,
+					  ]
+					: (await this.axios.get<P[]>(`${END_POINT.PLUGINS}`)).data,
+			update: async (
+				plugin: string,
+				status: 'active' | 'inactive' = 'inactive',
+				context: 'view' | 'embed' | 'edit' = 'view',
+			) =>
+				(
+					await this.axios.post<P>(`${END_POINT.PLUGINS}/${plugin}`, {
+						context,
+						status,
+					})
+				).data,
+			delete: async (plugin: string) =>
+				(await this.axios.delete<P>(`${END_POINT.PLUGINS}/${plugin}`))
+					.data,
+		}
 	}
 }
