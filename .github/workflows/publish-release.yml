@@ -14,18 +14,11 @@ jobs:
           node-version: '16.x'
           registry-url: 'https://registry.npmjs.org'
       - run: yarn
-      - run: yarn build
+      - run: yarn audit
       - run: yarn check:script
       - run: yarn test
+      - run: yarn build
       - name: 'Publish to NPM'
         run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-#      - uses: actions/setup-node@v2
-#        with:
-#          node-version: '16.x'
-#          registry-url: 'https://npm.pkg.github.com'
-#      - name: 'Publish to GitHub Packages'
-#        run: npm publish
-#        env:
-#          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
