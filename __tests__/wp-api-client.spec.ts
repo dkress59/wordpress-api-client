@@ -182,13 +182,6 @@ describe('WpApiClient', () => {
 					mockAxios.get.mockResolvedValueOnce({ data: null })
 					expect(await client.page().revision.find()).toEqual([])
 				})
-				// eslint-disable-next-line jest/no-disabled-tests
-				it.skip('.find returns array containing null, if request with ID throws', async () => {
-					const request = client.page().revision.find(123)
-					mockAxios.mockError({ data: 'mock_html' })
-					expect(await request).toEqual([null])
-					mockAxios.reset()
-				})
 			})
 		})
 		describe('.createEndpointPost', () => {
@@ -502,6 +495,38 @@ describe('WpApiClient', () => {
 				client.postType(postType)
 				expect(mockAxios.get).toHaveBeenCalledWith(
 					`${END_POINT.TYPES}/type/${postType}`,
+				)
+			})
+		})
+		describe('.blockType', () => {
+			it('calls the correct endpoint by default', () => {
+				client.blockType()
+				expect(mockAxios.get).toHaveBeenCalledWith(`${END_POINT.BLOCK_TYPES}`)
+			})
+			it('calls the correct endpoint for specific blockType', () => {
+				const blockType = 'mock_block_type'
+				client.blockType(blockType)
+				expect(mockAxios.get).toHaveBeenCalledWith(
+					`${END_POINT.BLOCK_TYPES}/${blockType}`,
+				)
+			})
+		})
+		describe('.blockDirectory', () => {
+			it('calls the correct endpoint', () => {
+				client.blockDirectory()
+				expect(mockAxios.get).toHaveBeenCalledWith(`${END_POINT.BLOCK_DIRECTORY}`)
+			})
+		})
+		describe('.status', () => {
+			it('calls the correct endpoint by default', () => {
+				client.status()
+				expect(mockAxios.get).toHaveBeenCalledWith(`${END_POINT.STATUSES}`)
+			})
+			it('calls the correct endpoint for specific status', () => {
+				const status = 'mock_status'
+				client.status(status)
+				expect(mockAxios.get).toHaveBeenCalledWith(
+					`${END_POINT.STATUSES}/${status}`,
 				)
 			})
 		})

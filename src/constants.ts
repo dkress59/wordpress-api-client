@@ -1,4 +1,6 @@
 export const END_POINT = {
+	BLOCK_DIRECTORY: 'wp/v2/block-directory/search',
+	BLOCK_TYPES: 'wp/v2/block-types',
 	CATEGORIES: 'wp/v2/categories',
 	COMMENTS: 'wp/v2/comments',
 	MEDIA: 'wp/v2/media',
@@ -6,6 +8,7 @@ export const END_POINT = {
 	POSTS: 'wp/v2/posts',
 	SEARCH: 'wp/v2/search',
 	SETTINGS: 'wp/v2/settings',
+	STATUSES: 'wp/v2/statuses',
 	TAGS: 'wp/v2/tags',
 	TYPES: 'wp/v2/types',
 	USERS: 'wp/v2/users',

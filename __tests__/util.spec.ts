@@ -125,13 +125,13 @@ describe('util', () => {
 		})
 		it('removes trailing slash, if provided', () => {
 			const withTrailingSlash = 'http://localhost:8080/'
-			expect(validateBaseUrl(withTrailingSlash)).toBe(
+			expect(validateBaseUrl(withTrailingSlash)).toEqual(
 				withTrailingSlash.substr(0, withTrailingSlash.length - 1),
 			)
 		})
 		it('does not remove trailing slash, if none provided', () => {
 			const noTrailingSlash = 'http://localhost:8080'
-			expect(validateBaseUrl(noTrailingSlash)).toBe(noTrailingSlash)
+			expect(validateBaseUrl(noTrailingSlash)).toEqual(noTrailingSlash)
 		})
 	})
 

@@ -19,8 +19,11 @@ import { POST_TYPE_MAP } from './factories'
 import { URLSearchParams } from 'url'
 import {
 	WP_Post_Type_Name,
+	WP_REST_API_Block_Directory_Item,
+	WP_REST_API_Block_Type,
 	WP_REST_API_Search_Result,
 	WP_REST_API_Settings,
+	WP_REST_API_Status,
 	WP_REST_API_Type,
 } from 'wp-types'
 import {
@@ -418,5 +421,35 @@ export class WpApiClient {
 			? (await this.axios.get<P>(`${END_POINT.TYPES}/type/${postType}`))
 					.data
 			: (await this.axios.get<P[]>(END_POINT.TYPES)).data
+	}
+
+	public async status<P = WP_REST_API_Status>(): Promise<P[]>
+	public async status<P = WP_REST_API_Status>(
+		status: WP_Post_Type_Name | string,
+	): Promise<P>
+	public async status<P = WP_REST_API_Status>(
+		status?: WP_Post_Type_Name | string,
+	): Promise<P | P[]> {
+		return status
+			? (await this.axios.get<P>(`${END_POINT.STATUSES}/${status}`))
+					.data
+			: (await this.axios.get<P[]>(END_POINT.STATUSES)).data
+	}
+
+	public async blockType<P = WP_REST_API_Block_Type>(): Promise<P[]>
+	public async blockType<P = WP_REST_API_Block_Type>(
+		blockType: WP_Post_Type_Name | string,
+	): Promise<P>
+	public async blockType<P = WP_REST_API_Block_Type>(
+		blockType?: WP_Post_Type_Name | string,
+	): Promise<P | P[]> {
+		return blockType
+			? (await this.axios.get<P>(`${END_POINT.BLOCK_TYPES}/${blockType}`))
+					.data
+			: (await this.axios.get<P[]>(END_POINT.BLOCK_TYPES)).data
+	}
+
+	public async blockDirectory<P = WP_REST_API_Block_Directory_Item>(): Promise<P | P[]> {
+		return (await this.axios.get<P[]>(END_POINT.BLOCK_DIRECTORY)).data
 	}
 }
