@@ -22,7 +22,6 @@ module.exports = {
 	rules: {
 		'curly': 'off',
 		'eslint-comments/disable-enable-pair': 'off',
-		'no-console': 'error',
 		'unused-imports/no-unused-imports': 'error',
 	},
 }

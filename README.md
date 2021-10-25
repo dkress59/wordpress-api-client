@@ -1,48 +1,30 @@
-# WordPress-API Client
+# Demonstration of the [WordPress API Client](https://github.com/dkress59/wordpress-api-client)
 
-A typed JavaScript client for your WordPress REST API. Super simple yet highly extensible.
+## Prerequisites
 
-[![npm version](https://badge.fury.io/js/wordpress-api-client.svg)](https://badge.fury.io/js/wordpress-api-client) ![WordPress](https://img.shields.io/badge/WordPress-%23117AC9.svg?style=flat&logo=WordPress&logoColor=white) ![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=flat&logo=typescript&logoColor=white) ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=flat&logo=javascript&logoColor=%23F7DF1E) ![Jest](https://img.shields.io/badge/-jest-%23C21325?style=flat&logo=jest&color=f07) [![codecov](https://codecov.io/gh/dkress59/wordpress-api-client/branch/main/graph/badge.svg?token=1Z3R5J16FK)](https://codecov.io/gh/dkress59/wordpress-api-client)
+- For a seamless development setup you need to have [Docker](https://www.docker.com/) and [NodeJS](https://nodejs.org/) installed
+- You should have some basic knowledge of PHP and WP development
+- You should be looking for a JS/TS WordPress-REST-API client
 
-## Installation
+## Setup
 
-Depending on the package manager of your choice:
-
-```bash
-yarn add wordpress-api-client
-```
-
-```bash
-npm install wordpress-api-client
-```
+- Start Docker and run `docker-compose up --build` from the project root
+- Run either `yarn` or `npm install` from the project root
+- Run `yarn dev` or `npm run dev`, respectively
 
 ## Usage
 
-The [Documentation](https://dkress59.github.io/wordpress-api-client/) still is WIP, but the most important things are already in there.
+This repository consists of three components:
 
----
+- A WordPress Plugin ([`/wp-plugin`](wp-plugin))
+- A WordPress Theme ([`/wp-theme`](wp-theme))
+- A NodeJS http server ([`/src`](src))
 
-## Changelog
+You can [login to WordPress](http://localhost:8080/wp-login.php) with these credentials:
 
-The current progress can be tracked [here](https://github.com/dkress59/wordpress-api-client/projects/1).
+```yml
+username: admin
+password: password
+```
 
-### v0.1.3
-
-- added methods for most missing default wp-api routes, such as
-  - .plugin() for `/wp/v2/plugins`
-  - .postType() for `/wp/v2/types`
-  - .taxonomy() for `/wp/v2/taxonomies`
-  - .theme() for `/wp/v2/themes`
-  - …and quite some more
-
-### v0.1.2
-
-- repaired type casting in handleWpApiError()
-
-### v0.1.1
-
-- import path repaired
-
-### v0.1.0
-
-- public beta release
+While Docker and the http server are running, you can edit anything inside `/wp-plugin`, `/wp-theme` and `/src` and test your modifications — the changes will take effect instantly.

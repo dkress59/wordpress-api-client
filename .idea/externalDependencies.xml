@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ExternalDependencies">
+    <plugin id="com.dubreuia" />
+    <plugin id="com.jetbrains.php" />
+    <plugin id="lv.midiana.misc.phpstorm-plugins.deep-keys" />
+  </component>
+</project>

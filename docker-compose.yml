@@ -1,0 +1,82 @@
+version: '3.9'
+
+services:
+
+  db:
+    image: mysql:8
+    cap_add:
+      - SYS_NICE  # CAP_SYS_NICE
+    platform: linux/amd64 # Apple M1 fix
+    volumes:
+      - ./conf/db.sql:/docker-entrypoint-initdb.d/db.sql
+    environment:
+      MYSQL_DATABASE: wordpress
+      MYSQL_PASSWORD: wordpress_db_password
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_USER: wordpress_db_user
+    networks:
+      - wpsite
+
+  #  phpmyadmin:
+  #    image: phpmyadmin/phpmyadmin
+  #    depends_on:
+  #      - db
+  #    ports:
+  #      - '8000:80'
+  #    environment:
+  #      PMA_HOST: db
+  #      MYSQL_ROOT_PASSWORD: password
+  #    networks:
+  #      - wpsite
+
+  nginx:
+    image: nginx:1.21.3-alpine
+    depends_on:
+      - wordpress
+    links:
+      - wordpress
+    volumes:
+      - wordpress:/var/www/html
+      - ./conf/nginx.conf:/etc/nginx/nginx.conf
+      - ./conf/nginx-site.conf:/etc/nginx/conf.d/site.conf
+      - ./conf/nginx-site.conf:/etc/nginx/conf.d/default.conf
+    ports:
+      - "8080:80"
+    networks:
+      - wpsite
+
+  wordpress:
+    depends_on:
+      - db
+    build:
+      context: .
+      target: docker-compose
+    #command: 'sh -c "/var/www/script/post-deploy.sh && php-fpm"'
+    volumes:
+      - wordpress:/var/www/html
+      - ./wp-content/uploads:/var/www/html/wp-content/uploads
+      - ./wp-plugin:/var/www/html/wp-content/plugins/demo-plugin
+      - ./wp-theme:/var/www/html/wp-content/themes/demo-theme
+    environment:
+      DISALLOW_FILE_MODS: 0
+      JWT_AUTH_CORS_ENABLE: 1
+      JWT_AUTH_SECRET_KEY: 'some_secret_hash'
+      SSL_ENABLED: 0
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_NAME: wordpress
+      WORDPRESS_DB_PASSWORD: wordpress_db_password
+      WORDPRESS_DB_USER: wordpress_db_user
+      WORDPRESS_DEBUG: 1
+      WORDPRESS_FS_METHOD: direct
+      WORDPRESS_SITEURL: http://localhost:8080
+      WORDPRESS_TABLE_PREFIX: wp_
+    networks:
+      - wpsite
+
+
+networks:
+  wpsite:
+
+volumes:
+  db:
+  wordpress:

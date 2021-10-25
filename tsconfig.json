@@ -3,12 +3,8 @@
 		"./node_modules",
 	],
 	"include": [
-		"./__mocks__",
-		"__tests__",
-		"./jest.config.ts",
 		"./src/*.json",
 		"./src/*.ts",
-		"./src/*.tsx",
 	],
 	"compilerOptions": {
 		"baseUrl": "./",
@@ -18,7 +14,7 @@
 		"lib": [
 			"esnext"
 		],
-		"outDir": "dist",
+		"outDir": "build",
 		"module": "commonjs",
 		"moduleResolution": "node",
 		"resolveJsonModule": true,

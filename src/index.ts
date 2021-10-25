@@ -1,4 +1,8 @@
-import { WpApiClient } from './wp-api-client'
+import { App } from './App'
+import http from 'http'
 
-export * from './types'
-export default WpApiClient
+const PORT = process.env.PORT ?? 5959
+const server = http.createServer()
+// eslint-disable-next-line @typescript-eslint/no-misused-promises
+server.on('request', App)
+server.listen(5959, () => console.log(`server listening on port ${PORT}`))

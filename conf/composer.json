@@ -1,0 +1,45 @@
+{
+  "name": "dkress/wordpress-api-client-demo",
+  "description": "A Demonstration of the wordpress-api-client npm package",
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://wpackagist.org",
+      "only": [
+        "wpackagist-plugin/*",
+        "wpackagist-theme/*"
+      ]
+    }
+  ],
+  "require": {
+    "php": "^8.0.11",
+    "ext-curl": "*",
+    "ext-exif": "*",
+    "ext-gd": "*",
+    "ext-imagick": "*",
+    "ext-json": "*",
+    "wp-api/basic-auth": "*",
+    "wpackagist-plugin/acf-to-rest-api": "3.3.2",
+    "wpackagist-plugin/advanced-custom-fields": "5.10.2",
+    "wpackagist-plugin/animate-wp-blocks": "2.0.2",
+    "wpackagist-plugin/jwt-auth": "2.0.0",
+    "wpackagist-theme/twentytwentyone": "1.4"
+  },
+  "extra": {
+    "installer-paths": {
+      "wpackagist-plugin/{$name}": [
+        "wp-content/plugins"
+      ],
+      "wpackagist-theme/{$name}": [
+        "wp-content/themes"
+      ]
+    }
+  },
+  "scripts": {
+    "post-update-cmd": [
+      "@php -r \"copy('wp-content/plugins/redis-cache-pro/stubs/object-cache.php', 'wp-content/object-cache.php');\""
+    ]
+  }
+}

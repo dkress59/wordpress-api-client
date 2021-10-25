@@ -1,0 +1,9 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="Eslint" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="PhpShortOpenTagInspection" enabled="true" level="WEAK WARNING" enabled_by_default="true">
+      <option name="PHP8_SEVERITY" value="WEAK WARNING" />
+    </inspection_tool>
+  </profile>
+</component>
