@@ -19,6 +19,7 @@
     "eslint-plugin-sort-imports-es6-autofix": "0.6.0",
     "eslint-plugin-unused-imports": "1.1.5",
     "faker": "^5.5.3",
+    "husky": "^7.0.4",
     "interface-forge": "^1.4.4",
     "nodemon": "2.0.14",
     "prettier": "2.4.1",
@@ -29,8 +30,10 @@
   },
   "scripts": {
     "build": "tsc",
-    "check:script": "eslint src --fix-dry-run",
     "dev": "nodemon",
-    "start": "node build/index.js"
+    "start": "node build/index.js",
+    "check:script": "eslint src --fix-dry-run",
+    "lint:script": "eslint src --fix",
+    "prepare": "husky install"
   }
 }
