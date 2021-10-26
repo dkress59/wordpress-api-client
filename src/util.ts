@@ -28,7 +28,7 @@ export function handleWpApiError(
 						Reflect.get(
 							error as Record<string, unknown>,
 							'response',
-						),
+						) as AxiosResponse,
 						'data',
 				  ) as string | Record<string, string>)
 				: (Reflect.get(
