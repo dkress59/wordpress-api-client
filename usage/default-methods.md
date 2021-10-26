@@ -70,8 +70,6 @@ client.search()
 client.siteSettings()
 client.status()
 
-// Static Methods:
-
 WpApiClient.addCollection()
 WpApiClient.collect()
 WpApiClient.clearCollection()
@@ -82,7 +80,69 @@ WpApiClient.clearCollection()
 
 ### find all
 
+To retrieve a list of all of your site's posts, call `await client.post().find()`.
+The response will be empty if no posts were found, otherwise it is paginated at
+100 objects per page.
+
+If you would like to change up the default query parameters, you can extend the
+`.post()` method:
+
+!> **ToDo:** [https://github.com/dkress59/wordpress-api-client/projects/1#card-71638560]
+
+```typescript
+import WpApiClient, {
+	END_POINT,
+    EndpointCreate,
+    EndpointDelete,
+    EndpointFind,
+    EndpointUpdate,
+	WpPost,
+} from 'wordpress-api-client'
+import { baseURL } from './constants'
+import { CustomPage } from './types'
+
+export class CmsClient extends WpApiClient {
+    constructor() {
+        super(baseURL)
+    }
+
+    public post<P = WpPost>(): {
+        create: EndpointCreate<P>
+        delete: EndpointDelete<P>
+        find: EndpointFind<P>
+        update: EndpointUpdate<P>
+		revision: {
+			create: EndpointCreate<P>
+			delete: EndpointDelete<P>
+			find: EndpointFind<P>
+			update: EndpointUpdate<P>
+		}
+    } {
+		const queryParams = new URLSearchParams({
+			_embed: 'true',
+			order: 'asc',
+			per_page: '8',
+		})
+        return {
+			...this.defaultEndpoints(END_POINT.POSTS, queryParams),
+			revision: {
+				...this.defaultEndpoints(END_POINT.POSTS + '/revisions', queryParams)
+			},
+		}
+    }
+}
+```
+
 ### find one or many
+
+Specific posts can be retrieved via post id, e.g.:
+
+```typescript
+const [frontPage, contactPage, productPage] = await client.page().find(12, 34, 123)
+```
+
+!> **Note:** If there is an error (e.g. [authentification](usage/authentification.md)),
+the respective promise will resolve to `null`.
 
 ### find with params
 
@@ -112,7 +172,7 @@ You need to be authenticated, to use this method.
 
 ---
 
-## .postType)
+## .postType()
 
 ---
 
