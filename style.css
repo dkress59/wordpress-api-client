@@ -1,9 +1,10 @@
 :root {
 	--color-primary: #3178C6;
-
-	/* --sidebar-nav-link-color: var(--color-primary); */
 	--sidebar-nav-link-color--active: var(--color-primary);
-	/* --sidebar-nav-link-color--hover: var(--color-primary); */
+}
+
+.markdown-section pre > code {
+	color: hsl(220, 14%, 71%);
 }
 
 small,
