@@ -16,6 +16,7 @@
   "dependencies": {},
   "devDependencies": {},
   "scripts": {
-    "docs": "docsify serve ."
+    "install": "yarn global add docsify",
+    "start": "docsify serve ."
   }
 }
