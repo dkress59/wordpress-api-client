@@ -3,7 +3,7 @@
 To instantiate a WP-API Client you need to pass the base URL of your WordPress
 website to the constructor. You can pass an `onError`-function as the second
 parameter and an exisitng axiosInstance as the third parameter (more on that here:
-[JWT-Auth for WordPress](#jwt-auth-for-wordpress)).
+[JWT-Auth for WordPress](usage/authentification.md#jwt-auth-for-wordpress)).
 With a bare instance of WpApiClient you will get methods to retreive, add and
 update any post, page, media item, post category or post tag.
 
@@ -87,7 +87,7 @@ The response will be empty if no posts were found, otherwise it is paginated at
 If you would like to change up the default query parameters, you can extend the
 `.post()` method:
 
-!> **ToDo:** [https://github.com/dkress59/wordpress-api-client/projects/1#card-71638560]
+!> **ToDo:** [wordpress-api-client/projects/1#card-71638560](https://github.com/dkress59/wordpress-api-client/projects/1#card-71638560 ':crossorgin')
 
 ```typescript
 import WpApiClient, {

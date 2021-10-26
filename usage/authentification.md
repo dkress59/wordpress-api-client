@@ -68,6 +68,7 @@ class OrdersDashboard {
 		);
 	}
 }
+
 new OrdersDashboard();
 ```
 
@@ -94,7 +95,7 @@ export const CmsClient = new WpApiClient(
 ## WP Basic-Auth
 
 Basic Authentification can be enabled for your WordPress installation with the plugin
-[WP-API/Basic-Auth](https://github.com/WP-API/Basic-Auth). This is arguably the most
+[WP-API/Basic-Auth](https://github.com/WP-API/Basic-Auth ':crossorgin'). This is arguably the most
 insecure authentification method you could choose, so it should exclusively be used
 for development purposes.
 
@@ -119,7 +120,7 @@ export const CmsClient = new WpApiClient(
 
 ## JWT-Auth for WordPress
 
-[JWT-Auth for WordPress](https://wordpress.org/plugins/jwt-auth/) relies on the
+[JWT-Auth for WordPress](https://wordpress.org/plugins/jwt-auth/ ':crossorgin') relies on the
 jsonwebtoken technology, which is a whole other deal in terms of security and
 therefore needs to be set up quite a bit more carefully. Always keep in mind that
 you can whitelist any end point of your WP REST API via PHP ("Whitelisting Endpoints"

@@ -1,6 +1,6 @@
 # Custom End Points
 
-Assuming you have two [navigation menus](https://developer.wordpress.org/reference/functions/register_nav_menu/)
+Assuming you have two [navigation menus](https://developer.wordpress.org/reference/functions/register_nav_menu/ ':crossorgin')
 registered in your WordPress-Theme.
 
 <details>

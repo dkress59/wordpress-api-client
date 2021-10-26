@@ -57,10 +57,10 @@ export const CmsClient = new CmsApiClient()
 
 ## ACF to REST API
 
-When using this package for a WP installation which relies on [Advanced Custom Fields](https://www.advancedcustomfields.com),
-it is highly recommended to also install [ACF to REST API](https://wordpress.org/plugins/acf-to-rest-api/):
-You can then [extend the typings](#extend-default-routes) of your post types with
-an `acf` field to enable __full acf support__ (GET + POST) for the WpApiClient.
+When using this package for a WP installation which relies on [Advanced Custom Fields](https://www.advancedcustomfields.com ':crossorgin'),
+it is highly recommended to also install [ACF to REST API](https://wordpress.org/plugins/acf-to-rest-api/ ':crossorgin'):
+You can then [extend the typings](usage/extending-default-routes.md) of your post
+types with an `acf` field to enable __full acf support__ (GET + POST) for the WpApiClient.
 
 _Note:_ If you have one of your ACF fields set to output a 'Post Object', the
 typing of the corresponding REST API response object ist not your usual `WPPost`,
