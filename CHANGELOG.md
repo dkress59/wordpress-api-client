@@ -9,9 +9,9 @@ The current progress can be tracked [here](https://github.com/dkress59/wordpress
   - .theme() for wp/v2/themes
   - …and quite some more
 
-methods for two default wp-api routes are still missing:
-`wp/v2/users/<user_id>/application-passwords`
-and `wp/v2/blocks/<block-id>/revisions`
+  - methods for two default wp-api routes are still missing:
+    <br />`wp/v2/users/<user_id>/application-passwords`
+    <br />and `wp/v2/blocks/<block-id>/revisions`
 
 - v0.1.2 repaired type casting in handleWpApiError()
 

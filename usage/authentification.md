@@ -93,8 +93,12 @@ export const CmsClient = new WpApiClient(
 
 ## WP Basic-Auth
 
-[WP-API/Basic-Auth](https://github.com/WP-API/Basic-Auth)
-[ ToDo ]
+Basic Authentification can be enabled for your WordPress installation with the plugin
+[WP-API/Basic-Auth](https://github.com/WP-API/Basic-Auth). This is arguably the most
+insecure authentification method you could choose, so it should exclusively be used
+for development purposes.
+
+!> **Be careful**, my friend!
 
 ```typescript
 import WpApiClient from 'wordpress-api-client'

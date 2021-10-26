@@ -1,0 +1,4 @@
+small,
+.markdown-section > small {
+	font-size: .75em;
+}
