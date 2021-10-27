@@ -37,7 +37,7 @@ type CustomPage = WPPage & Required<{
     menu_order: number
 }>
 
-class CmsApiClient extends WpApiClient {
+export class CmsClient extends WpApiClient {
     constructor() {
         super(baseURL, (message: string) => console.error(message))
     }
@@ -51,8 +51,6 @@ class CmsApiClient extends WpApiClient {
         return super.page<P>()
     }
 }
-
-export const CmsClient = new CmsApiClient()
 ```
 
 ## ACF to REST API

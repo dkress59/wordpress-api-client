@@ -141,7 +141,7 @@ Specific posts can be retrieved via post id, e.g.:
 const [frontPage, contactPage, productPage] = await client.page().find(12, 34, 123)
 ```
 
-!> **Note:** If there is an error (e.g. [authentification](usage/authentification.md)),
+?> **Note:** If there is an error (e.g. [authentification](usage/authentification.md)),
 the respective promise will resolve to `null`.
 
 ### find with params

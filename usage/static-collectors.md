@@ -35,7 +35,9 @@ MyFirstClient.collect('posts')
 MySecondClient.collect('posts')
 // equals
 WpApiClient.collect('posts')
-// which holds the results of clients' results
+// which holds the results of all clients' responses
 ```
+
+?> This is a **bug**, not a feature
 
 !> **Inheritance:** Using collectors is not recommended for multi-site installations
