@@ -2,7 +2,11 @@
 
 If you would like to use any method to create or update content, or if you would
 like to retrieve content which is restricted to certain user roles, you will need
-to authentificate you client with WordPress.
+to authentificate your client with WordPress.
+
+## User Role Restriction
+
+[ ToDo ]
 
 ## WP-Nonce
 
@@ -45,7 +49,7 @@ class OrdersDashboard {
 		$screen = get_current_screen();
 		if (!$screen || $screen->id !== 'toplevel_page_orders-dashboard') return;
 
-		// enqueue your compiled JS/TS PWA
+		// enqueue your compiled JS/TS SPA
 		wp_enqueue_script(
 			'orders-dashboard-vendors',
 			plugin_dir_url(__DIR__) . 'assets/dashboard/vendors.js'
@@ -95,11 +99,11 @@ export const CmsClient = new WpApiClient(
 ## WP Basic-Auth
 
 Basic Authentification can be enabled for your WordPress installation with the plugin
-[WP-API/Basic-Auth](https://github.com/WP-API/Basic-Auth ':crossorgin'). This is arguably the most
-insecure authentification method you could choose, so it should exclusively be used
-for development purposes.
+[WP-API/Basic-Auth](https://github.com/WP-API/Basic-Auth ':crossorgin'). This is
+arguably the most insecure authentification method you could choose, so it should
+exclusively be used **for development purposes**.
 
-!> **Be careful**, my friend!
+!> **Be considerate**, my friend!
 
 ```typescript
 import WpApiClient from 'wordpress-api-client'
@@ -120,11 +124,11 @@ export const CmsClient = new WpApiClient(
 
 ## JWT-Auth for WordPress
 
-[JWT-Auth for WordPress](https://wordpress.org/plugins/jwt-auth/ ':crossorgin') relies on the
-jsonwebtoken technology, which is a whole other deal in terms of security and
-therefore needs to be set up quite a bit more carefully. Always keep in mind that
-you can whitelist any end point of your WP REST API via PHP ("Whitelisting Endpoints"
-in the plugin's documentation).
+[JWT-Auth for WordPress](https://wordpress.org/plugins/jwt-auth/ ':crossorgin')
+relies on the jsonwebtoken technology, which is a whole other deal in terms of
+security and therefore needs to be set up quite a bit more carefully. Always keep
+in mind that you can whitelist any end point of your WP REST API via PHP
+("Whitelisting Endpoints" in the plugin's documentation).
 
 [ ToDo ]
 

@@ -47,7 +47,7 @@ class RESTEndpoints {
 
 }
 
-?>
+new RESTEndpoints();
 ```
 
 </details>

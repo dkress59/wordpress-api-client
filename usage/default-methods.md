@@ -96,7 +96,7 @@ import WpApiClient, {
     EndpointDelete,
     EndpointFind,
     EndpointUpdate,
-	WpPost,
+	WPPost,
 } from 'wordpress-api-client'
 import { baseURL } from './constants'
 import { CustomPage } from './types'
@@ -106,7 +106,7 @@ export class CmsClient extends WpApiClient {
         super(baseURL)
     }
 
-    public post<P = WpPost>(): {
+    public post<P = WPPost>(): {
         create: EndpointCreate<P>
         delete: EndpointDelete<P>
         find: EndpointFind<P>
@@ -146,25 +146,56 @@ the respective promise will resolve to `null`.
 
 ### find with params
 
+!> **ToDo** [wordpress-api-client/projects/1#card-71687889](https://github.com/dkress59/wordpress-api-client/projects/1#card-71687889 ':crossorgin')
+
 ## .create(body: WPCreate<WPPost>)
 
-You need to be authenticated, to use this method.
+When creating new content you need to be aware of a couple of things:
 
-WPCreate: id, date format, taxonomies, attachments, users
+- You need to be [authenticated](usage/authentification.md)
+- The `id` field is invalid (needs to be designated by WP)
+- Unlike the response typings, the fields `title`, `content` and `excerpt` of the
+  request body only accept plain HTML strings
+- Taxonomies can be assigned by referencing the respective term IDs, e.g.
+  `categories: [ 2, 34 ], tags: [5, 67]`
+
+?> See [Helper Methods](usage/helper-methods.md) for more info on the
+`WPCreate` type
 
 ## .update(body: WPCreate<WPPost>, id: number)
 
-You need to be authenticated, to use this method.
+The pointers above, for the `.create` method, are also valid for `.update`.
 
-WPUpdate: id, date format, taxonomies, attachments, users
+?> See [Helper Methods](usage/helper-methods.md) for more info on the
+`WPCreate` type
 
 ## .delete(id: number)
 
-You need to be authenticated, to use this method.
+You need to be [authenticated](usage/authentification.md) to use this method.
 
 ---
 
 ## .media()
+
+This library only supports one way of uploading media to your WP Media Library:
+
+```typescript
+client.media().create(
+	fileName: string,
+	data: Buffer,
+	mimeType?: string,
+)
+```
+
+The `data` parameter only accepts a Buffer which will be base64-encoded for transmission.
+This makes import-jobs uncomplicated, where you can buffer a file from disk and
+do not have to care about encoding. But there is always
+
+```typescript
+Buffer.from('my-encoded-data')
+```
+
+if your to-be-uploaded media is a string (e.g. a file retrieved via HTTP request).
 
 ---
 
