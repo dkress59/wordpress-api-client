@@ -40,7 +40,7 @@
     "wp-types": "2.12.0"
   },
   "engines": {
-    "node": ">=0.14"
+    "node": "^14.17.0 || >=16.0.0"
   },
   "keywords": [
     "wordpress",
