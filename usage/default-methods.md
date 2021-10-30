@@ -84,10 +84,9 @@ To retrieve a list of all of your site's posts, call `await client.post().find()
 The response will be empty if no posts were found, otherwise it is paginated at
 100 objects per page.
 
-If you would like to change up the default query parameters, you can extend the
-`.post` method:
-
-!> **ToDo:** [wordpress-api-client/projects/1#card-71638560](https://github.com/dkress59/wordpress-api-client/projects/1#card-71638560 ':crossorgin')
+Below is an example how to change up the default query parameters, e.g. if you would
+like to change the defaults for the `.post` methods. But you can also
+[modify the query parameters](#find-with-params) directly on any `.find` method.
 
 ```typescript
 import WpApiClient, {
@@ -149,7 +148,12 @@ the respective promise will resolve to `null`.
 
 ### find with params
 
-!> **ToDo** [wordpress-api-client/projects/1#card-71687889](https://github.com/dkress59/wordpress-api-client/projects/1#card-71687889 ':crossorgin')
+Query paramenters can be added/modified for any `.find` method by simply providing
+an instance of URLSearchParams to it, as the first parameter:
+
+```typescript
+const posts = await client.post().find(new URLSearchParams({ per_page: '12' }))
+```
 
 ## .create(body: WPCreate<WPPost>)
 
