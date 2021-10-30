@@ -144,6 +144,9 @@ const [frontPage, contactPage, productPage] = await client.page().find(12, 34, 1
 ?> **Note:** If there is an error (e.g. [authentification](usage/authentification.md)),
 the respective promise will resolve to `null`.
 
+?> You do not need to be authenticated to retrieve password-protected posts/pages
+– the password musst be appended as URLSearchParams:
+
 ### find with params
 
 !> **ToDo** [wordpress-api-client/projects/1#card-71687889](https://github.com/dkress59/wordpress-api-client/projects/1#card-71687889 ':crossorgin')
