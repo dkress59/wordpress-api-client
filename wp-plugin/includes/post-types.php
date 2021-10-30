@@ -11,17 +11,23 @@ class PostTypes {
 
 	public function register_custom_post_types() {
 		register_post_type('product', [
+			// By default, custom post types inherit the capabilities from posts,
+			// so user who can edit posts, can also edit products.
+			// If you want the CPT to have its own set of capabilities
+			// uncomment this line:
 			//'capability_type' => ['product', 'products'],
 			'has_archive'  => true,
 			'labels'       => [
 				'name'          => __('Products', 'client-demo'),
 				'singular_name' => __('Product', 'client-demo'),
 			],
+			// To enable additional primitives for capability_type, also uncomment
 			//'map_meta_cap'    => true,
 			'menu_icon'    => 'dashicons-tag',
+			// 'public' only concerns the wp-admin interface
 			'public'       => true,
 			'rewrite'      => ['slug' => 'collection'],
-			'show_in_rest' => true,
+			'show_in_rest' => true, // obviously important
 			'supports'     => [
 				'title',
 				'editor',

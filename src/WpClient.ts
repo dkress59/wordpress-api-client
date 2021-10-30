@@ -8,9 +8,9 @@ import WpApiClient, {
 import axios from 'axios'
 
 const axiosInstance = axios.create()
-axiosInstance.defaults.headers.post['Authorization'] = `Basic ${Buffer.from(
-	'admin:password',
-).toString('base64')}`
+const authHeader = `Basic ${Buffer.from('admin:password').toString('base64')}`
+axiosInstance.defaults.headers.delete['Authorization'] = authHeader
+axiosInstance.defaults.headers.post['Authorization'] = authHeader
 
 const EP_PRODUCTS = 'wp/v2/products'
 const EP_MENU = 'demo-plugin/v1/menu'

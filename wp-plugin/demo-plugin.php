@@ -16,3 +16,6 @@ new RESTEndpoints();
 
 require_once 'includes/post-types.php';
 new PostTypes();
+
+require_once 'includes/user-capabilities.php';
+new UserCapabilities();
