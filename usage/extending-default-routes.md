@@ -62,7 +62,7 @@ types with an `acf` field to enable __full acf support__ (GET + POST) for the Wp
 
 ?> **Note:** If you have one of your ACF fields set to output a 'Post Object', the
 typing of the corresponding REST API response object ist not your usual `WPPost`,
-but rather an `ACFPost`, which you can imported from this library
+but rather an `ACFPost` which you can import from this library
 
 ```typescript
 import WpApiClient, {
