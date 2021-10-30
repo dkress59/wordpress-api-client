@@ -1,4 +1,10 @@
-import { DefaultEndpoint, DefaultEndpointWithRevision } from '.'
+import {
+	DefaultEndpoint,
+	DefaultEndpointWithRevision,
+	PluginCreateDto,
+	PluginUpdateDto,
+	RenderedBlockDto,
+} from '.'
 import { END_POINT, ERROR_MESSAGE } from './constants'
 import {
 	EndpointCreate,
@@ -427,15 +433,15 @@ export class WpApiClient {
 		delete: (plugin: string) => Promise<P>
 	} {
 		return {
-			create: async (
-				plugin: string,
-				status: 'active' | 'inactive' = 'inactive',
-			) =>
+			create: async (plugin: string, status = 'inactive') =>
 				(
-					await this.axios.post<P>(END_POINT.PLUGINS, {
-						plugin,
-						status,
-					})
+					await this.axios.post<PluginCreateDto, AxiosResponse<P>>(
+						END_POINT.PLUGINS,
+						{
+							plugin,
+							status,
+						},
+					)
 				).data,
 			find: async (plugin = '') =>
 				plugin
@@ -453,10 +459,13 @@ export class WpApiClient {
 				context: 'view' | 'embed' | 'edit' = 'view',
 			) =>
 				(
-					await this.axios.post<P>(`${END_POINT.PLUGINS}/${plugin}`, {
-						context,
-						status,
-					})
+					await this.axios.post<PluginUpdateDto, AxiosResponse<P>>(
+						`${END_POINT.PLUGINS}/${plugin}`,
+						{
+							context,
+							status,
+						},
+					)
 				).data,
 			delete: async (plugin: string) =>
 				(await this.axios.delete<P>(`${END_POINT.PLUGINS}/${plugin}`))
@@ -473,17 +482,17 @@ export class WpApiClient {
 	}
 
 	public async renderedBlock<P = WP_REST_API_Rendered_Block>(
-		name: string,
-		postId: number,
-		context: 'edit' | 'view' = 'view',
-		attributes = [] as string[],
+		params: RenderedBlockDto,
 	): Promise<P> {
 		return (
-			await this.axios.post<P>(`${END_POINT.BLOCK_RENDERER}/${name}`, {
-				name,
-				context,
-				post_id: postId,
-				attributes,
+			await this.axios.post<
+				Omit<RenderedBlockDto, 'postId'> & { post_id: number },
+				AxiosResponse<P>
+			>(`${END_POINT.BLOCK_RENDERER}/${params.name}`, {
+				name: params.name,
+				post_id: params.postId,
+				attributes: params.attributes ?? [],
+				context: params.context ?? 'view',
 			})
 		).data
 	}

@@ -1,7 +1,7 @@
 import { END_POINT, ERROR_MESSAGE } from '../src/constants'
 import { POST_TYPE_MAP, WPPageFactory, WPPostFactory } from '../src/factories'
-import { URLSearchParams } from 'url'
 import {
+	RenderedBlockDto,
 	WPCategory,
 	WPCreate,
 	WPMedia,
@@ -9,6 +9,7 @@ import {
 	WPPost,
 	WPTag,
 } from '../src/types'
+import { URLSearchParams } from 'url'
 import { WP_Post_Type_Name } from 'wp-types'
 import { getDefaultQueryList } from '../src/util'
 import WpApiClient from '../src'
@@ -692,7 +693,10 @@ describe('WpApiClient', () => {
 			const mockBlockName = 'mock_block_name'
 			const mockPostId = 123
 			it('calls the correct endpoint', () => {
-				client.renderedBlock(mockBlockName, mockPostId)
+				client.renderedBlock({
+					name: mockBlockName,
+					postId: mockPostId,
+				})
 				expect(mockAxios.post).toHaveBeenCalledWith(
 					`${END_POINT.BLOCK_RENDERER}/${mockBlockName}`,
 					{
@@ -706,8 +710,28 @@ describe('WpApiClient', () => {
 			it('returns data field of successful AxiosResponse', async () => {
 				mockAxios.post.mockResolvedValueOnce({ data: mockData })
 				expect(
-					await client.renderedBlock(mockBlockName, mockPostId),
+					await client.renderedBlock({
+						name: mockBlockName,
+						postId: mockPostId,
+					}),
 				).toEqual(mockData)
+			})
+			it('takes arguments', async () => {
+				mockAxios.post.mockResolvedValueOnce({ data: mockData })
+				const body: RenderedBlockDto = {
+					name: mockBlockName,
+					postId: mockPostId,
+					attributes: ['some_attribute'],
+					context: 'edit',
+				}
+				await client.renderedBlock(body)
+				// @ts-ignore
+				body.post_id = body.postId
+				delete (body as { postId?: number }).postId
+				expect(mockAxios.post).toHaveBeenCalledWith(
+					END_POINT.BLOCK_RENDERER + '/mock_block_name',
+					body,
+				)
 			})
 		})
 		describe('.theme', () => {

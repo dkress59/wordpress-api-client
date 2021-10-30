@@ -280,3 +280,20 @@ export interface WPTheme {
 		}[]
 	}
 }
+
+export interface PluginCreateDto {
+	plugin: string
+	status?: 'active' | 'inactive'
+}
+
+export interface PluginUpdateDto {
+	status?: 'active' | 'inactive'
+	context?: 'view' | 'embed' | 'edit'
+}
+
+export interface RenderedBlockDto {
+	name: string
+	postId: number
+	context?: 'edit' | 'view'
+	attributes?: string[]
+}
