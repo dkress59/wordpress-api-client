@@ -1,12 +1,8 @@
 # Authentification
 
-If you would like to use any method to create or update content, or if you would
-like to retrieve content which is restricted to certain user roles, you will need
-to authentificate your client with WordPress.
-
-## User Role Restriction
-
-[ ToDo ]
+If you would like to use any method to create, update or delete content, or if
+you would like to retrieve content which is [restricted](#user-role-restriction)
+to certain user roles, you will need to authenticate your client with WordPress.
 
 ## WP-Nonce
 
@@ -81,12 +77,13 @@ new OrdersDashboard();
 
 ```typescript
 import WpApiClient from 'wordpress-api-client'
-import axios from 'axios'
+import axios from 'axios'ß´ü
 import { baseURL } from './constants'
 
 const nonce = global.window?.userData?.nonce
 
 const axiosInstance = axios.create()
+axiosInstance.defaults.headers.delete['X-WP-Nonce'] = nonce
 axiosInstance.defaults.headers.post['X-WP-Nonce'] = nonce
 
 export const CmsClient = new WpApiClient(
@@ -111,9 +108,11 @@ import axios from 'axios'
 import { baseURL } from './constants'
 
 const axiosInstance = axios.create()
-axiosInstance.defaults.headers.post['Authorization'] = `Basic ${Buffer.from(
-    'my-username:my-password',
+const authHeader = `Basic ${Buffer.from(
+	'my-username:my-password',
 ).toString('base64')}`
+axiosInstance.defaults.headers.delete['Authorization'] = authHeader
+axiosInstance.defaults.headers.post['Authorization'] = authHeader
 
 export const CmsClient = new WpApiClient(
     baseURL,
@@ -130,8 +129,31 @@ security and therefore needs to be set up quite a bit more carefully. Always kee
 in mind that you can whitelist any end point of your WP REST API via PHP
 ("Whitelisting Endpoints" in the plugin's documentation).
 
-[ ToDo ]
+[ ToDo: Docs ]
 
 ## OAuth
 
-[ ToDo ]
+[ ToDo: Docs ]
+
+## User Role Restriction
+
+Methods/end points which require authentification usually are also restricted by
+user role. For example, the `.page().create()` method is available to (authenticated)
+administrators, but it will throw an error for users with the role of 'subscriber'.
+
+In the examples above authentification is set globally on the AxiosInstance,
+for all POST and DELETE methods. It might be the case, though, that you have a
+REST route registered in WordPress which accepts POST requests and does not
+require authentification. In this case you need to configure a
+custom [Axios Interceptor](https://axios-http.com/docs/interceptors).
+
+It is also possible to restrict GET requests (e.g. to list posts of a custom
+post type) by user role. Here is an example of a custom post type which can only
+be requested by authenticated users ('minimum' default WP user role is 'subscriber'),
+and can only be edited by administrators:
+
+[ ToDo: Example CPT "Change Log" ]
+
+Even if authenticated, as demonstrated above, some methods/end points still might
+not be available. In your theme/plugin, make sure that the paramenter 'show_in_rest'
+is set to true in your `register_post_type()` function's arguments.

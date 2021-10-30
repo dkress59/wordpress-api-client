@@ -85,7 +85,7 @@ The response will be empty if no posts were found, otherwise it is paginated at
 100 objects per page.
 
 If you would like to change up the default query parameters, you can extend the
-`.post()` method:
+`.post` method:
 
 !> **ToDo:** [wordpress-api-client/projects/1#card-71638560](https://github.com/dkress59/wordpress-api-client/projects/1#card-71638560 ':crossorgin')
 
@@ -166,9 +166,6 @@ When creating new content you need to be aware of a couple of things:
 
 The pointers above, for the `.create` method, are also valid for `.update`.
 
-?> See [Helper Methods](usage/helper-methods.md) for more info on the
-`WPCreate` type
-
 ## .delete(id: number)
 
 You need to be [authenticated](usage/authentification.md) to use this method.
@@ -201,14 +198,25 @@ if your to-be-uploaded media is a string (e.g. a file retrieved via HTTP request
 
 ## .user()
 
----
-
-## .postType()
+Besides the usual `.create`, `.delete`, `.find`, and `.update` there are
+two additional `.user` methods, for the currently **logged-in user**: `.findMe`
+and `.deleteMe`. In order to delete or to retrieve their information,
+you do not have to provide a parameter – but you need to be [authenticated](usage/authentification.md).
 
 ---
 
 ## .search()
 
+[ ToDo: Docs ]
+
 ---
 
-## .siteSettings()
+## .plugin()
+
+[ ToDo: Docs ]
+
+---
+
+## .theme()
+
+The pointers above, for the `.plugin` method, are also valid for `.theme`.
