@@ -1,4 +1,5 @@
 import { ERROR_MESSAGE } from '../src/constants'
+import { URLSearchParams } from 'url'
 import {
 	getDefaultQueryList,
 	getDefaultQuerySingle,
@@ -116,11 +117,11 @@ describe('util', () => {
 			)
 		})
 		it('does not throw Error for http protocol', () => {
-			const validUrl = 'http://'
+			const validUrl = 'http://some.url'
 			expect(() => validateBaseUrl(validUrl)).not.toThrow()
 		})
 		it('does not throw Error for https protocol', () => {
-			const validUrl = 'https://'
+			const validUrl = 'https://some.url'
 			expect(() => validateBaseUrl(validUrl)).not.toThrow()
 		})
 		it('removes trailing slash, if provided', () => {
@@ -142,9 +143,9 @@ describe('util', () => {
 			)
 		})
 		it('has overridable defaults', () => {
-			expect(getDefaultQueryList({ per_page: '12' })).toBe(
-				'?_embed=true&order=asc&per_page=12',
-			)
+			expect(
+				getDefaultQueryList(new URLSearchParams({ per_page: '12' })),
+			).toBe('?_embed=true&order=asc&per_page=12')
 		})
 	})
 
@@ -153,9 +154,9 @@ describe('util', () => {
 			expect(getDefaultQuerySingle()).toBe('?_embed=true')
 		})
 		it('has overridable defaults', () => {
-			expect(getDefaultQuerySingle({ _embed: 'false' })).toBe(
-				'?_embed=false',
-			)
+			expect(
+				getDefaultQuerySingle(new URLSearchParams({ _embed: 'false' })),
+			).toBe('?_embed=false')
 		})
 	})
 })

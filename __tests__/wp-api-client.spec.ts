@@ -1,5 +1,6 @@
 import { END_POINT, ERROR_MESSAGE } from '../src/constants'
 import { POST_TYPE_MAP, WPPageFactory, WPPostFactory } from '../src/factories'
+import { URLSearchParams } from 'url'
 import {
 	WPCategory,
 	WPCreate,
@@ -135,6 +136,37 @@ describe('WpApiClient', () => {
 		})
 	})
 	describe('helper methods', () => {
+		describe('.addPostType', () => {
+			it('can set default URLSearchParams', async () => {
+				class SearchParamsClient extends WpApiClient {
+					constructor() {
+						super(
+							'http://mock.url',
+							undefined,
+							instance as unknown as AxiosInstance,
+						)
+					}
+
+					public post<P = WPPost>() {
+						return {
+							...this.addPostType<P>(
+								END_POINT.POSTS,
+								true,
+								new URLSearchParams({
+									mock_param: 'mock_value',
+									per_page: '10',
+								}),
+							),
+						}
+					}
+				}
+				const mockClient = new SearchParamsClient()
+				await mockClient.post().find()
+				expect(mockAxios.get).toHaveBeenCalledWith(
+					'wp/v2/posts/?_embed=true&order=asc&per_page=10&mock_param=mock_value',
+				)
+			})
+		})
 		describe('.createEndpointGet', () => {
 			it('.find returns data field of successful AxiosResponse', async () => {
 				mockAxios.get.mockResolvedValueOnce({ data: [mockData] })

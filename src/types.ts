@@ -31,6 +31,27 @@ export type EndpointUpdate<P> = (
 
 export type EndpointUpdatePartial<P> = (body: Partial<P>) => Promise<P>
 
+export interface DefaultEndpoint<P = WPPost> {
+	find: EndpointFind<P>
+	create: EndpointCreate<P>
+	delete: EndpointDelete<P>
+	update: EndpointUpdate<P>
+}
+
+export interface DefaultEndpointWithRevision<P = WPPost> {
+	find: EndpointFind<P>
+	create: EndpointCreate<P>
+	delete: EndpointDelete<P>
+	update: EndpointUpdate<P>
+	revision: {
+		// WP_REST_API_Revision
+		find: EndpointFind<P>
+		create: EndpointCreate<P>
+		delete: EndpointDelete<P>
+		update: EndpointUpdate<P>
+	}
+}
+
 export interface ACFPost {
 	ID: number
 	post_author: string

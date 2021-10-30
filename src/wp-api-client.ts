@@ -1,3 +1,4 @@
+import { DefaultEndpoint, DefaultEndpointWithRevision } from '.'
 import { END_POINT, ERROR_MESSAGE } from './constants'
 import {
 	EndpointCreate,
@@ -62,7 +63,7 @@ export class WpApiClient {
 
 	protected createEndpointGet<P>(
 		endpoint: string,
-		params?: Record<string, string>,
+		params?: URLSearchParams,
 	): EndpointFind<P> {
 		return async (...ids: number[]) => {
 			let result: P[] = []
@@ -191,14 +192,10 @@ export class WpApiClient {
 
 	protected defaultEndpoints<P = WPPost>(
 		endpoint: string,
-	): {
-		find: EndpointFind<P>
-		create: EndpointCreate<P>
-		delete: EndpointDelete<P>
-		update: EndpointUpdate<P>
-	} {
+		defaultParams?: URLSearchParams,
+	): DefaultEndpoint<P> {
 		return {
-			find: this.createEndpointGet<P>(endpoint),
+			find: this.createEndpointGet<P>(endpoint, defaultParams),
 			create: this.createEndpointPost<P>(endpoint),
 			update: this.createEndpointPost<P>(endpoint),
 			delete: this.createEndpointDelete<P>(endpoint),
@@ -208,31 +205,17 @@ export class WpApiClient {
 	protected addPostType<P = WPPost>(
 		endpoint: string,
 		withRevisions: true,
-	): {
-		find: EndpointFind<P>
-		create: EndpointCreate<P>
-		delete: EndpointDelete<P>
-		update: EndpointUpdate<P>
-		revision: {
-			// WP_REST_API_Revision
-			find: EndpointFind<P>
-			create: EndpointCreate<P>
-			delete: EndpointDelete<P>
-			update: EndpointUpdate<P>
-		}
-	}
+		defaultParams?: URLSearchParams,
+	): DefaultEndpointWithRevision<P>
 	protected addPostType<P = WPPost>(
 		endpoint: string,
 		withRevisions?: false,
-	): {
-		find: EndpointFind<P>
-		create: EndpointCreate<P>
-		delete: EndpointDelete<P>
-		update: EndpointUpdate<P>
-	}
+		defaultParams?: URLSearchParams,
+	): DefaultEndpoint<P>
 	protected addPostType<P = WPPost>(
 		endpoint: string,
 		withRevisions?: boolean,
+		defaultParams?: URLSearchParams,
 	): {
 		find: EndpointFind<P>
 		create: EndpointCreate<P>
@@ -246,69 +229,35 @@ export class WpApiClient {
 		}
 	} {
 		return {
-			...this.defaultEndpoints(endpoint),
+			...this.defaultEndpoints(endpoint, defaultParams),
 			revision: !withRevisions
 				? undefined
-				: { ...this.defaultEndpoints(`${endpoint}/revisions`) },
+				: {
+						...this.defaultEndpoints(
+							`${endpoint}/revisions`,
+							defaultParams,
+						),
+				  },
 		}
 	}
 
-	public post<P = WPPost>(): {
-		find: EndpointFind<P>
-		create: EndpointCreate<P>
-		delete: EndpointDelete<P>
-		update: EndpointUpdate<P>
-		revision: {
-			// WP_REST_API_Revision
-			find: EndpointFind<P>
-			create: EndpointCreate<P>
-			delete: EndpointDelete<P>
-			update: EndpointUpdate<P>
-		}
-	} {
+	public post<P = WPPost>(): DefaultEndpointWithRevision<P> {
 		return this.addPostType<P>(END_POINT.POSTS, true)
 	}
 
-	public page<P = WPPage>(): {
-		find: EndpointFind<P>
-		create: EndpointCreate<P>
-		delete: EndpointDelete<P>
-		update: EndpointUpdate<P>
-		revision: {
-			// WP_REST_API_Revision
-			find: EndpointFind<P>
-			create: EndpointCreate<P>
-			delete: EndpointDelete<P>
-			update: EndpointUpdate<P>
-		}
-	} {
+	public page<P = WPPage>(): DefaultEndpointWithRevision<P> {
 		return this.addPostType<P>(END_POINT.PAGES, true)
 	}
 
-	public comment<P = WPComment>(): {
-		find: EndpointFind<P>
-		create: EndpointCreate<P>
-		delete: EndpointDelete<P>
-		update: EndpointUpdate<P>
-	} {
+	public comment<P = WPComment>(): DefaultEndpoint<P> {
 		return this.addPostType<P>(END_POINT.COMMENTS)
 	}
 
-	public postCategory<P = WPCategory>(): {
-		find: EndpointFind<P>
-		create: EndpointCreate<P>
-		delete: EndpointDelete<P>
-		update: EndpointUpdate<P>
-	} {
+	public postCategory<P = WPCategory>(): DefaultEndpoint<P> {
 		return this.addPostType<P>(END_POINT.CATEGORIES)
 	}
 
-	public postTag<P = WPTag>(): {
-		find: EndpointFind<P>
-		create: EndpointCreate<P>
-		delete: EndpointDelete<P>
-		update: EndpointUpdate<P>
-	} {
+	public postTag<P = WPTag>(): DefaultEndpoint<P> {
 		return this.addPostType<P>(END_POINT.TAGS)
 	}
 
@@ -507,21 +456,11 @@ export class WpApiClient {
 		}
 	}
 
-	public reusableBlock<P = WP_REST_API_Block>(): {
-		find: EndpointFind<P>
-		create: EndpointCreate<P>
-		delete: EndpointDelete<P>
-		update: EndpointUpdate<P>
-	} {
+	public reusableBlock<P = WP_REST_API_Block>(): DefaultEndpoint<P> {
 		return this.addPostType<P>(END_POINT.EDITOR_BLOCKS)
 	}
 
-	public taxonomy<P = WPTaxonomy>(): {
-		find: EndpointFind<P>
-		create: EndpointCreate<P>
-		delete: EndpointDelete<P>
-		update: EndpointUpdate<P>
-	} {
+	public taxonomy<P = WPTaxonomy>(): DefaultEndpoint<P> {
 		return this.addPostType<P>(END_POINT.TAXONOMIES)
 	}
 

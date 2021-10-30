@@ -68,25 +68,24 @@ export function validateBaseUrl(url: string): string {
 	return url
 }
 
-export function getDefaultQueryList(params?: Record<string, string>): string {
+export function getDefaultQueryList(params = new URLSearchParams()): string {
 	return (
 		'?' +
 		new URLSearchParams({
 			_embed: 'true',
 			order: 'asc',
-			//orderby: 'menu_order',
 			per_page: '100',
-			...params,
+			...Object.fromEntries(params),
 		}).toString()
 	)
 }
 
-export function getDefaultQuerySingle(params?: Record<string, string>): string {
+export function getDefaultQuerySingle(params = new URLSearchParams()): string {
 	return (
 		'?' +
 		new URLSearchParams({
 			_embed: 'true',
-			...params,
+			...Object.fromEntries(params),
 		}).toString()
 	)
 }
