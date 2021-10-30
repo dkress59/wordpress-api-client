@@ -193,6 +193,22 @@ describe('WpApiClient', () => {
 				expect(await request).toEqual([null])
 				mockAxios.reset()
 			})
+			it('.find default URLSearchParams can be modified', async () => {
+				await client
+					.page()
+					.find(new URLSearchParams({ mock_param: 'mock_value' }))
+				expect(mockAxios.get).toHaveBeenCalledWith(
+					'wp/v2/pages/?_embed=true&order=asc&per_page=100&mock_param=mock_value',
+				)
+			})
+			it('.find (one or many) default URLSearchParams can be modified', async () => {
+				await client
+					.page()
+					.find(new URLSearchParams({ mock_param: 'mock_value' }), 59)
+				expect(mockAxios.get).toHaveBeenCalledWith(
+					'wp/v2/pages/59/?_embed=true&mock_param=mock_value',
+				)
+			})
 			describe('.revision', () => {
 				it('.find returns data field of successful AxiosResponse', async () => {
 					mockAxios.get.mockResolvedValueOnce({ data: [mockData] })

@@ -63,15 +63,23 @@ export class WpApiClient {
 
 	protected createEndpointGet<P>(
 		endpoint: string,
-		params?: URLSearchParams,
+		defaultQuery = new URLSearchParams(),
 	): EndpointFind<P> {
-		return async (...ids: number[]) => {
+		return async (query?: URLSearchParams | number, ...ids: number[]) => {
+			ids = typeof query === 'number' ? [query, ...ids] : ids
+			query =
+				typeof query === 'number'
+					? defaultQuery
+					: new URLSearchParams({
+							...Object.fromEntries(defaultQuery),
+							...Object.fromEntries(query ?? defaultQuery),
+					  })
 			let result: P[] = []
 			if (!ids.length) {
 				result =
 					(
 						await this.axios.get<P[] | undefined>(
-							`${endpoint}/${getDefaultQueryList(params)}`,
+							`${endpoint}/${getDefaultQueryList(query)}`,
 						)
 					).data ?? ([] as P[])
 			} else {
@@ -80,7 +88,7 @@ export class WpApiClient {
 						ids.map(postId =>
 							this.axios.get<P>(
 								`${endpoint}/${postId}/${getDefaultQuerySingle(
-									params,
+									query as undefined | URLSearchParams,
 								)}`,
 							),
 						),
@@ -250,15 +258,15 @@ export class WpApiClient {
 	}
 
 	public comment<P = WPComment>(): DefaultEndpoint<P> {
-		return this.addPostType<P>(END_POINT.COMMENTS)
+		return this.addPostType<P>(END_POINT.COMMENTS, false)
 	}
 
 	public postCategory<P = WPCategory>(): DefaultEndpoint<P> {
-		return this.addPostType<P>(END_POINT.CATEGORIES)
+		return this.addPostType<P>(END_POINT.CATEGORIES, false)
 	}
 
 	public postTag<P = WPTag>(): DefaultEndpoint<P> {
-		return this.addPostType<P>(END_POINT.TAGS)
+		return this.addPostType<P>(END_POINT.TAGS, false)
 	}
 
 	public media<P = WPMedia>(): {
@@ -457,11 +465,11 @@ export class WpApiClient {
 	}
 
 	public reusableBlock<P = WP_REST_API_Block>(): DefaultEndpoint<P> {
-		return this.addPostType<P>(END_POINT.EDITOR_BLOCKS)
+		return this.addPostType<P>(END_POINT.EDITOR_BLOCKS, false)
 	}
 
 	public taxonomy<P = WPTaxonomy>(): DefaultEndpoint<P> {
-		return this.addPostType<P>(END_POINT.TAXONOMIES)
+		return this.addPostType<P>(END_POINT.TAXONOMIES, false)
 	}
 
 	public async renderedBlock<P = WP_REST_API_Rendered_Block>(

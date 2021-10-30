@@ -147,6 +147,13 @@ describe('util', () => {
 				getDefaultQueryList(new URLSearchParams({ per_page: '12' })),
 			).toBe('?_embed=true&order=asc&per_page=12')
 		})
+		it('can be extended', () => {
+			expect(
+				getDefaultQueryList(
+					new URLSearchParams({ mock_param: 'mock_value' }),
+				),
+			).toBe('?_embed=true&order=asc&per_page=100&mock_param=mock_value')
+		})
 	})
 
 	describe('getDefaultQuerySingle', () => {
@@ -157,6 +164,13 @@ describe('util', () => {
 			expect(
 				getDefaultQuerySingle(new URLSearchParams({ _embed: 'false' })),
 			).toBe('?_embed=false')
+		})
+		it('can be extended', () => {
+			expect(
+				getDefaultQuerySingle(
+					new URLSearchParams({ mock_param: 'mock_value' }),
+				),
+			).toBe('?_embed=true&mock_param=mock_value')
 		})
 	})
 })

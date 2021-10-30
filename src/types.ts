@@ -1,3 +1,4 @@
+import { URLSearchParams } from 'url'
 import {
 	WP_REST_API_Attachment,
 	WP_REST_API_Category,
@@ -16,7 +17,10 @@ export type WPCreate<W> = Record<string, unknown> &
 		>
 	>
 
-export type EndpointFind<P> = (...ids: number[]) => Promise<P[]>
+export type EndpointFind<P> = (
+	query?: URLSearchParams | number,
+	...ids: number[]
+) => Promise<P[]>
 
 export type EndpointFindOnly<P> = () => Promise<P>
 

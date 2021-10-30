@@ -68,24 +68,24 @@ export function validateBaseUrl(url: string): string {
 	return url
 }
 
-export function getDefaultQueryList(params = new URLSearchParams()): string {
+export function getDefaultQueryList(query = new URLSearchParams()): string {
 	return (
 		'?' +
 		new URLSearchParams({
 			_embed: 'true',
 			order: 'asc',
 			per_page: '100',
-			...Object.fromEntries(params),
+			...Object.fromEntries(query),
 		}).toString()
 	)
 }
 
-export function getDefaultQuerySingle(params = new URLSearchParams()): string {
+export function getDefaultQuerySingle(query = new URLSearchParams()): string {
 	return (
 		'?' +
 		new URLSearchParams({
 			_embed: 'true',
-			...Object.fromEntries(params),
+			...Object.fromEntries(query),
 		}).toString()
 	)
 }
