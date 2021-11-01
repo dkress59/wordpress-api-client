@@ -1,10 +1,5 @@
 import { CustomPost, WPMenu, WPProduct } from './types'
-import WpApiClient, {
-	EndpointCreate,
-	EndpointDelete,
-	EndpointFind,
-	EndpointUpdate,
-} from 'wordpress-api-client'
+import WpApiClient, { DefaultEndpointWithRevision } from 'wordpress-api-client'
 import axios from 'axios'
 
 const axiosInstance = axios.create()
@@ -20,44 +15,11 @@ export class WpClient extends WpApiClient {
 		super('http://localhost:8080', undefined, axiosInstance)
 	}
 
-	post<P = CustomPost>(): {
-		create: EndpointCreate<P>
-		delete: EndpointDelete<P>
-		find: EndpointFind<P>
-		update: EndpointUpdate<P>
-		revision: {
-			create: EndpointCreate<P>
-			delete: EndpointDelete<P>
-			find: EndpointFind<P>
-			update: EndpointUpdate<P>
-		}
-	} {
-		return super.post<P>() as {
-			create: EndpointCreate<P>
-			delete: EndpointDelete<P>
-			find: EndpointFind<P>
-			update: EndpointUpdate<P>
-			revision: {
-				create: EndpointCreate<P>
-				delete: EndpointDelete<P>
-				find: EndpointFind<P>
-				update: EndpointUpdate<P>
-			}
-		}
+	post<P = CustomPost>(): DefaultEndpointWithRevision<P> {
+		return super.post<P>()
 	}
 
-	public product(): {
-		create: EndpointCreate<WPProduct>
-		delete: EndpointDelete<WPProduct>
-		find: EndpointFind<WPProduct>
-		update: EndpointUpdate<WPProduct>
-		revision: {
-			create: EndpointCreate<WPProduct>
-			delete: EndpointDelete<WPProduct>
-			find: EndpointFind<WPProduct>
-			update: EndpointUpdate<WPProduct>
-		}
-	} {
+	public product(): DefaultEndpointWithRevision<WPProduct> {
 		return this.addPostType<WPProduct>(EP_PRODUCTS, true)
 	}
 

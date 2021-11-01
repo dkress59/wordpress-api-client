@@ -1,6 +1,6 @@
 {
   "name": "wordpress-api-client-demo",
-  "version": "0.1.3.1",
+  "version": "0.1.5.1",
   "description": "A demonstration of the wordpress-api-client npm package",
   "main": "src/index.js",
   "types": "src/types.ts",
@@ -8,11 +8,12 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
-    "axios": "0.23.0",
-    "wordpress-api-client": "0.1.3"
+    "axios": "0.24.0",
+    "wordpress-api-client": "0.1.5"
   },
   "devDependencies": {
     "@sprylab/eslint-config": "1.6.0",
+    "@types/faker": "^5.5.9",
     "@types/node": "16.11.4",
     "eslint": "8.1.0",
     "eslint-import-resolver-typescript": "2.5.0",

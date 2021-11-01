@@ -1,5 +1,7 @@
 # NodeJS
+.jest/
 build/
+dist/
 node_modules/
 
 # Logs
