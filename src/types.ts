@@ -47,7 +47,7 @@ export interface DefaultEndpointWithRevision<P = WPPost> {
 	create: EndpointCreate<P>
 	delete: EndpointDelete<P>
 	update: EndpointUpdate<P>
-	revision: {
+	revision: (postId: number) => {
 		// WP_REST_API_Revision
 		find: EndpointFind<P>
 		create: EndpointCreate<P>

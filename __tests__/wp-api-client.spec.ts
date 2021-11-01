@@ -11,7 +11,7 @@ import {
 } from '../src/types'
 import { URLSearchParams } from 'url'
 import { WP_Post_Type_Name } from 'wp-types'
-import { getDefaultQueryList } from '../src/util'
+import { getDefaultQueryList, getDefaultQuerySingle } from '../src/util'
 import WpApiClient from '../src'
 import axios, { AxiosInstance } from 'axios'
 import mockAxios from 'jest-mock-axios'
@@ -211,9 +211,30 @@ describe('WpApiClient', () => {
 				)
 			})
 			describe('.revision', () => {
+				it('.find calls the correct endpoint', () => {
+					client.post().revision(1).find()
+					expect(mockAxios.get).toHaveBeenCalledWith(
+						`${
+							END_POINT.POSTS
+						}/1/revisions/${getDefaultQueryList()}`,
+					)
+				})
+				it('.find (one or many) calls the correct endpoint', () => {
+					client.post().revision(1).find(12, 23)
+					expect(mockAxios.get).toHaveBeenCalledWith(
+						`${
+							END_POINT.POSTS
+						}/1/revisions/12/${getDefaultQuerySingle()}`,
+					)
+					expect(mockAxios.get).toHaveBeenCalledWith(
+						`${
+							END_POINT.POSTS
+						}/1/revisions/23/${getDefaultQuerySingle()}`,
+					)
+				})
 				it('.find returns data field of successful AxiosResponse', async () => {
 					mockAxios.get.mockResolvedValueOnce({ data: [mockData] })
-					expect(await client.page().revision.find()).toEqual([
+					expect(await client.page().revision(1).find()).toEqual([
 						mockData,
 					])
 				})
@@ -222,14 +243,14 @@ describe('WpApiClient', () => {
 					mockAxios.get.mockResolvedValueOnce({
 						data: mockData2,
 					})
-					expect(await client.page().revision.find(1, 2)).toEqual([
+					expect(await client.page().revision(1).find(1, 2)).toEqual([
 						mockData,
 						mockData2,
 					])
 				})
 				it('.find returns empty array, if response without ID is undefined', async () => {
 					mockAxios.get.mockResolvedValueOnce({ data: null })
-					expect(await client.page().revision.find()).toEqual([])
+					expect(await client.page().revision(1).find()).toEqual([])
 				})
 			})
 		})

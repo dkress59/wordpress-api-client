@@ -235,7 +235,7 @@ export class WpApiClient {
 		create: EndpointCreate<P>
 		delete: EndpointDelete<P>
 		update: EndpointUpdate<P>
-		revision?: {
+		revision?: (postId: number) => {
 			find: EndpointFind<P>
 			create: EndpointCreate<P>
 			delete: EndpointDelete<P>
@@ -246,12 +246,12 @@ export class WpApiClient {
 			...this.defaultEndpoints(endpoint, defaultParams),
 			revision: !withRevisions
 				? undefined
-				: {
+				: (postId: number) => ({
 						...this.defaultEndpoints(
-							`${endpoint}/revisions`,
+							`${endpoint}/${postId}/revisions`,
 							defaultParams,
 						),
-				  },
+				  }),
 		}
 	}
 
