@@ -652,14 +652,14 @@ describe('WpApiClient', () => {
 				client.plugin().create(mockPlugin)
 				expect(mockAxios.post).toHaveBeenCalledWith(
 					`${END_POINT.PLUGINS}`,
-					{ plugin: mockPlugin, status: 'inactive' },
+					{ slug: mockPlugin, status: 'inactive' },
 				)
 			})
 			it('.create can activate plugins', () => {
 				client.plugin().create(mockPlugin, 'active')
 				expect(mockAxios.post).toHaveBeenCalledWith(
 					`${END_POINT.PLUGINS}`,
-					{ plugin: mockPlugin, status: 'active' },
+					{ slug: mockPlugin, status: 'active' },
 				)
 			})
 			it('.create returns data field of successful AxiosResponse', async () => {
