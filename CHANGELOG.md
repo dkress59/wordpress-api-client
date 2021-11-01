@@ -2,6 +2,8 @@
 
 The current progress can be tracked [here](https://github.com/dkress59/wordpress-api-client/projects/1)
 
+- v.0.1.5 repaired `.revision().find()` and `.plugin().create()`
+
 - v.0.1.4 implemented extendable query-params and default-query-params
   - **Note:** Authentification will confuse eslint/tslint with axios < v0.24.0
 
