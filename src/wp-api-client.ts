@@ -438,7 +438,7 @@ export class WpApiClient {
 					await this.axios.post<PluginCreateDto, AxiosResponse<P>>(
 						END_POINT.PLUGINS,
 						{
-							plugin,
+							slug: plugin,
 							status,
 						},
 					)
