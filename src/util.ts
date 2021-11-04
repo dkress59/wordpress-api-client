@@ -1,3 +1,4 @@
+import { BlackWhiteList } from '.'
 import { ERROR_MESSAGE } from './constants'
 import { URLSearchParams } from 'url'
 import { isObject } from '@tool-belt/type-predicates'
@@ -111,4 +112,18 @@ export function postCreate<
 	const fields = body.acf
 	delete body.acf
 	return { ...body, content, excerpt, fields, title }
+}
+
+export function isProtected(
+	url: string,
+	method: 'get' | 'post' | 'delete',
+	protectedRoutes: BlackWhiteList,
+): boolean {
+	const protectedEndPoints =
+		method === 'get'
+			? protectedRoutes.GET
+			: method === 'delete'
+			? protectedRoutes.DELETE
+			: protectedRoutes.POST
+	return !!protectedEndPoints.filter(uri => url.includes(uri)).length
 }

@@ -1,4 +1,4 @@
-import { ERROR_MESSAGE } from '../src/constants'
+import { END_POINT_PROTECTED, ERROR_MESSAGE } from '../src/constants'
 import { FetchClient } from '../src/fetch-client'
 import fetch from 'cross-fetch'
 jest.mock('cross-fetch', () => jest.fn())
@@ -7,6 +7,8 @@ const mockBaseURL = new URL('http://mock-website.com')
 const mockFetch = fetch as jest.MockedFunction<typeof fetch>
 const mockJson = jest.fn() as jest.MockedFunction<any>
 const mockText = jest.fn() as jest.MockedFunction<any>
+
+const defaultOptions = { body: undefined, headers: undefined, method: 'get' }
 
 describe('FetchClient', () => {
 	beforeEach(() => {
@@ -26,34 +28,47 @@ describe('FetchClient', () => {
 		it('throws invalid baseURL', () => {
 			expect(() => new FetchClient(new URL('invalid_url'))).toThrow()
 		})
-		it('can set default headers', async () => {
-			const http = new FetchClient(mockBaseURL, {
-				mock_key: 'mock_value',
+		describe('can set auth headers', () => {
+			const mockHeaders = {
+				Authorization: 'mock_value',
+			}
+			const http = new FetchClient(mockBaseURL, mockHeaders)
+			it('get', async () => {
+				const mockUri = END_POINT_PROTECTED.GET[0]
+				await http.get(mockUri)
+				expect(mockFetch).toHaveBeenCalledWith(
+					mockBaseURL.toString() + mockUri,
+					{
+						...defaultOptions,
+						headers: mockHeaders,
+						method: 'get',
+					},
+				)
 			})
-			await http.get('mock_uri')
-			expect(mockFetch).toHaveBeenCalledWith(
-				mockBaseURL.toString() + 'mock_uri',
-				{
-					headers: { mock_key: 'mock_value' },
-					method: 'get',
-				},
-			)
-			await http.post('mock_uri')
-			expect(mockFetch).toHaveBeenCalledWith(
-				mockBaseURL.toString() + 'mock_uri',
-				{
-					headers: { mock_key: 'mock_value' },
-					method: 'post',
-				},
-			)
-			await http.delete('mock_uri')
-			expect(mockFetch).toHaveBeenCalledWith(
-				mockBaseURL.toString() + 'mock_uri',
-				{
-					headers: { mock_key: 'mock_value' },
-					method: 'delete',
-				},
-			)
+			it('post', async () => {
+				const mockUri = END_POINT_PROTECTED.POST[0]
+				await http.post(mockUri)
+				expect(mockFetch).toHaveBeenCalledWith(
+					mockBaseURL.toString() + mockUri,
+					{
+						...defaultOptions,
+						headers: mockHeaders,
+						method: 'post',
+					},
+				)
+			})
+			it('delete', async () => {
+				const mockUri = END_POINT_PROTECTED.DELETE[0]
+				await http.delete(mockUri)
+				expect(mockFetch).toHaveBeenCalledWith(
+					mockBaseURL.toString() + mockUri,
+					{
+						...defaultOptions,
+						headers: mockHeaders,
+						method: 'delete',
+					},
+				)
+			})
 		})
 		it('can suppress errors with onError', async () => {
 			const mockOnError = jest.fn()
@@ -63,7 +78,7 @@ describe('FetchClient', () => {
 			expect(mockFetch).toHaveBeenCalledWith(
 				mockBaseURL.toString() + 'mock_uri',
 				{
-					headers: {},
+					...defaultOptions,
 					method: 'get',
 				},
 			)
@@ -77,7 +92,7 @@ describe('FetchClient', () => {
 			expect(mockFetch).toHaveBeenCalledWith(
 				mockBaseURL.toString() + 'mock_uri',
 				{
-					headers: {},
+					...defaultOptions,
 					method: 'get',
 				},
 			)
@@ -102,7 +117,7 @@ describe('FetchClient', () => {
 			expect(mockFetch).toHaveBeenCalledWith(
 				mockBaseURL.toString() + 'mock_uri',
 				{
-					headers: {},
+					...defaultOptions,
 					method: 'get',
 				},
 			)
@@ -116,7 +131,7 @@ describe('FetchClient', () => {
 			expect(mockFetch).toHaveBeenCalledWith(
 				mockBaseURL.toString() + 'mock_uri',
 				{
-					headers: {},
+					...defaultOptions,
 					method: 'get',
 				},
 			)
@@ -130,6 +145,7 @@ describe('FetchClient', () => {
 			expect(mockFetch).toHaveBeenCalledWith(
 				mockBaseURL.toString() + 'mock_uri',
 				{
+					...defaultOptions,
 					headers: { mock_key: 'overridden_value' },
 					method: 'get',
 				},
@@ -144,7 +160,7 @@ describe('FetchClient', () => {
 			expect(mockFetch).toHaveBeenCalledWith(
 				mockBaseURL.toString() + 'mock_uri',
 				{
-					headers: {},
+					...defaultOptions,
 					method: 'post',
 				},
 			)
@@ -158,6 +174,7 @@ describe('FetchClient', () => {
 			expect(mockFetch).toHaveBeenCalledWith(
 				mockBaseURL.toString() + 'mock_uri',
 				{
+					...defaultOptions,
 					headers: { mock_key: 'overridden_value' },
 					method: 'post',
 				},
@@ -171,8 +188,8 @@ describe('FetchClient', () => {
 			expect(mockFetch).toHaveBeenCalledWith(
 				mockBaseURL.toString() + 'mock_uri',
 				{
+					...defaultOptions,
 					body: JSON.stringify(body),
-					headers: {},
 					method: 'post',
 				},
 			)
@@ -186,7 +203,7 @@ describe('FetchClient', () => {
 			expect(mockFetch).toHaveBeenCalledWith(
 				mockBaseURL.toString() + 'mock_uri',
 				{
-					headers: {},
+					...defaultOptions,
 					method: 'delete',
 				},
 			)
@@ -200,6 +217,7 @@ describe('FetchClient', () => {
 			expect(mockFetch).toHaveBeenCalledWith(
 				mockBaseURL.toString() + 'mock_uri',
 				{
+					...defaultOptions,
 					headers: { mock_key: 'overridden_value' },
 					method: 'delete',
 				},

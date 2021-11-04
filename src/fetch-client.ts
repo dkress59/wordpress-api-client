@@ -1,21 +1,6 @@
-import { BlackWhiteList } from './types'
 import { END_POINT_PROTECTED } from './constants'
-import { handleWpError, validateBaseUrl } from './util'
+import { handleWpError, isProtected, validateBaseUrl } from './util'
 import fetch from 'cross-fetch'
-
-function isProtected(
-	url: string,
-	method: 'get' | 'post' | 'delete',
-	protectedRoutes: BlackWhiteList,
-): boolean {
-	const protectedEndPoints =
-		method === 'get'
-			? protectedRoutes.GET
-			: method === 'delete'
-			? protectedRoutes.DELETE
-			: protectedRoutes.POST
-	return !!protectedEndPoints.filter(uri => url.includes(uri)).length
-}
 
 export class FetchClient {
 	baseURL: string

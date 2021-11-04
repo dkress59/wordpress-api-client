@@ -119,7 +119,7 @@ describe('WpApiClient', () => {
 				expect(mockFetch).toHaveBeenCalledWith(
 					mockBaseURL +
 						`/wp-json/${END_POINT.POSTS}/1/revisions/?_embed=true&order=asc&per_page=10&mock_param=mock_value`,
-					{ body: undefined, headers: {}, method: 'get' },
+					{ ...defaultOptions, method: 'get' },
 				)
 			})
 		})
@@ -135,7 +135,7 @@ describe('WpApiClient', () => {
 				expect(mockFetch).toHaveBeenCalledWith(
 					mockBaseURL +
 						`/wp-json/${END_POINT.PAGES}/?_embed=true&order=asc&per_page=100&mock_param=mock_value`,
-					{ body: undefined, headers: {}, method: 'get' },
+					{ ...defaultOptions, method: 'get' },
 				)
 			})
 			it('.find (one or many) default URLSearchParams can be modified', async () => {
@@ -145,7 +145,7 @@ describe('WpApiClient', () => {
 				expect(mockFetch).toHaveBeenCalledWith(
 					mockBaseURL +
 						`/wp-json/${END_POINT.PAGES}/59/?_embed=true&mock_param=mock_value`,
-					{ body: undefined, headers: {}, method: 'get' },
+					{ ...defaultOptions, method: 'get' },
 				)
 			})
 			describe('.revision', () => {
@@ -155,7 +155,7 @@ describe('WpApiClient', () => {
 						`${mockBaseURL}/wp-json/${
 							END_POINT.POSTS
 						}/1/revisions/${getDefaultQueryList()}`,
-						defaultOptions,
+						{ ...defaultOptions, method: 'get' },
 					)
 				})
 				it('.find (one or many) calls the correct endpoint', () => {
@@ -164,13 +164,13 @@ describe('WpApiClient', () => {
 						`${mockBaseURL}/wp-json/${
 							END_POINT.POSTS
 						}/1/revisions/12/${getDefaultQuerySingle()}`,
-						defaultOptions,
+						{ ...defaultOptions, method: 'get' },
 					)
 					expect(mockFetch).toHaveBeenCalledWith(
 						`${mockBaseURL}/wp-json/${
 							END_POINT.POSTS
 						}/1/revisions/23/${getDefaultQuerySingle()}`,
-						defaultOptions,
+						{ ...defaultOptions, method: 'get' },
 					)
 				})
 				it('.find returns empty array, if response without ID is undefined', async () => {
@@ -204,7 +204,7 @@ describe('WpApiClient', () => {
 				client.customGetMethod()
 				expect(mockFetch).toHaveBeenCalledWith(
 					`${mockBaseURL}/wp-json/${EP_CUSTOM_GET}`,
-					defaultOptions,
+					{ ...defaultOptions, headers: undefined },
 				)
 			})
 			it('returns data field of successful AxiosResponse', async () => {
@@ -218,6 +218,7 @@ describe('WpApiClient', () => {
 					`${mockBaseURL}/wp-json/${EP_CUSTOM_POST}`,
 					{
 						...defaultOptions,
+						headers: undefined,
 						method: 'post',
 						body: JSON.stringify(mockData),
 					},
