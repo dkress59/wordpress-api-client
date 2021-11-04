@@ -54,13 +54,15 @@ export function handleWpApiError(
 			  ).replace('%url%', url ?? 'UNKNOWN')
 			: ERROR_MESSAGE.GENERIC
 
-	if (onError) onError(errorMessage)
 	// eslint-disable-next-line no-console
-	else console.error(chalk.blue(errorMessage))
+	console.error(chalk.blue(errorMessage))
+	if (onError) onError(errorMessage)
+	else throw new Error(errorMessage)
 
 	return { data: null }
 }
 
+/** returns validated baseURL without trainling slash */
 export function validateBaseUrl(url: string): string {
 	if (!url.startsWith('http://') && !url.startsWith('https://'))
 		throw new Error(ERROR_MESSAGE.INVALID_BASEURL.replace('%url%', url))
