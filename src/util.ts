@@ -1,4 +1,3 @@
-import { AxiosError, AxiosResponse } from 'axios'
 import { ERROR_MESSAGE } from './constants'
 import { URLSearchParams } from 'url'
 import { isObject } from '@tool-belt/type-predicates'
@@ -6,15 +5,15 @@ import chalk from 'chalk'
 
 // eslint-disable-next-line sonarjs/cognitive-complexity
 function getDataFromResponse(
-	json: null | Record<string, unknown>,
-	text = 'error',
+	json: null | string | Record<string, unknown>,
+	text = 'getDataFromResponse error',
 ): string {
-	const isJson = !!json
+	const isJson = !!json && typeof json === 'object'
 	const hasError = isJson && 'error' in json
 	const errorIsString = hasError && typeof json.error === 'string'
 	const hasMessage = isJson && 'message' in json
 	const messageIsArray = hasMessage && Array.isArray(json.message)
-	const messageIsString = hasMessage && typeof json.error === 'string'
+	const messageIsString = hasMessage && typeof json.message === 'string'
 	return !isJson
 		? text
 		: hasError && errorIsString
@@ -38,7 +37,10 @@ export async function handleWpError(
 
 	if (isFetchResponse) {
 		const err = error as Response
-		const json = (await err.json()) as null | Record<string, unknown>
+		const json = (await err.json()) as
+			| null
+			| string
+			| Record<string, unknown>
 		const text = await err.text()
 		const status = err.status
 		const url = err.url
@@ -56,65 +58,6 @@ export async function handleWpError(
 	if (onError) onError(message)
 	else throw new Error(message)
 	return Promise.reject(message)
-}
-
-// eslint-disable-next-line sonarjs/cognitive-complexity
-export function handleWpApiError(
-	error: Error | AxiosError | unknown,
-	onError?: (message: string) => void,
-): unknown {
-	const isObject = !!error && typeof error === 'object'
-	const axiosError =
-		isObject &&
-		'isAxiosError' in (error as Record<string, unknown>) &&
-		(Reflect.get(
-			error as Record<string, unknown>,
-			'isAxiosError',
-		) as boolean)
-			? (error as AxiosError)
-			: null
-	const url = axiosError?.config.url
-	const obj =
-		axiosError?.response?.data ??
-		(isObject && 'response' in (error as Record<string, unknown>))
-			? 'data' in
-			  Reflect.get(error as Record<string, unknown>, 'response')
-				? (Reflect.get(
-						Reflect.get(
-							error as Record<string, unknown>,
-							'response',
-						) as AxiosResponse,
-						'data',
-				  ) as string | Record<string, string>)
-				: (Reflect.get(
-						error as Record<string, unknown>,
-						'response',
-				  ) as AxiosResponse)
-			: (error as null | string | Record<string, string>)
-
-	const message = obj
-		? typeof obj === 'object'
-			? (Reflect.get(obj, 'error') as string) ||
-			  (Reflect.get(obj, 'message') as string)
-			: typeof obj === 'string'
-			? obj
-			: ''
-		: ''
-
-	const errorMessage =
-		message !== ''
-			? ERROR_MESSAGE.ERROR_RESPONSE.replace(
-					'%error%',
-					JSON.stringify(message),
-			  ).replace('%url%', url ?? 'UNKNOWN')
-			: ERROR_MESSAGE.GENERIC
-
-	// eslint-disable-next-line no-console
-	console.error(chalk.blue(errorMessage))
-	if (onError) onError(errorMessage)
-	else throw new Error(errorMessage)
-
-	return { data: null }
 }
 
 /** returns validated baseURL without trainling slash */

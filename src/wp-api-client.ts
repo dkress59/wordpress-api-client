@@ -1,8 +1,6 @@
 import {
 	DefaultEndpoint,
 	DefaultEndpointWithRevision,
-	PluginCreateDto,
-	PluginUpdateDto,
 	RenderedBlockDto,
 } from '.'
 import { END_POINT, ERROR_MESSAGE } from './constants'
@@ -25,6 +23,7 @@ import {
 	WPTheme,
 	WPUser,
 } from './types'
+import { FetchClient } from './fetch-client'
 import { POST_TYPE_MAP } from './factories'
 import { URLSearchParams } from 'url'
 import {
@@ -38,13 +37,7 @@ import {
 	WP_REST_API_Status,
 	WP_REST_API_Type,
 } from 'wp-types'
-import {
-	getDefaultQueryList,
-	getDefaultQuerySingle,
-	handleWpApiError,
-	validateBaseUrl,
-} from './util'
-import axios, { AxiosInstance, AxiosResponse } from 'axios'
+import { getDefaultQueryList, getDefaultQuerySingle } from './util'
 
 interface PostCollection<P = any> {
 	postType: WP_Post_Type_Name | string
@@ -52,18 +45,21 @@ interface PostCollection<P = any> {
 }
 
 export class WpApiClient {
-	protected readonly axios: AxiosInstance
+	protected readonly axios: FetchClient
 
 	constructor(
 		baseURL: string,
-		onError?: (message: string) => void,
-		axiosInstance?: AxiosInstance,
+		options?: {
+			auth?: 'basic' | 'jwt'
+			onError?: (message: string) => void
+			protected?: string[]
+			public?: string[]
+		},
 	) {
-		this.axios = axiosInstance ?? axios.create()
-		this.axios.defaults.baseURL = validateBaseUrl(baseURL) + '/wp-json'
-		this.axios.interceptors.response.use(
-			config => config,
-			error => handleWpApiError(error, onError),
+		this.axios = new FetchClient(
+			new URL('wp-json', baseURL),
+			undefined,
+			options?.onError,
 		)
 	}
 
@@ -83,23 +79,19 @@ export class WpApiClient {
 			let result: P[] = []
 			if (!ids.length) {
 				result =
-					(
-						await this.axios.get<P[] | undefined>(
-							`${endpoint}/${getDefaultQueryList(query)}`,
-						)
-					).data ?? ([] as P[])
+					(await this.axios.get<P[] | undefined>(
+						`${endpoint}/${getDefaultQueryList(query)}`,
+					)) ?? ([] as P[])
 			} else {
-				result = (
-					await Promise.all(
-						ids.map(postId =>
-							this.axios.get<P>(
-								`${endpoint}/${postId}/${getDefaultQuerySingle(
-									query as undefined | URLSearchParams,
-								)}`,
-							),
+				result = await Promise.all(
+					ids.map(postId =>
+						this.axios.get<P>(
+							`${endpoint}/${postId}/${getDefaultQuerySingle(
+								query as undefined | URLSearchParams,
+							)}`,
 						),
-					)
-				).map(response => response.data)
+					),
+				)
 			}
 			const postType =
 				result.length && !!result[0]
@@ -121,36 +113,32 @@ export class WpApiClient {
 	): (body: WPCreate<P>, id?: number) => Promise<P> {
 		return async (body: WPCreate<P>, id = 0) => {
 			if (id)
-				return (
-					await this.axios.post<WPCreate<P>, AxiosResponse<P>>(
-						`${endpoint}/${id}`,
-						{
-							...body,
-							fields: body.acf,
-						},
-					)
-				).data
+				return await this.axios.post<P>(
+					`${endpoint}/${id}`,
+					undefined,
+					JSON.stringify({
+						...body,
+						fields: body.acf,
+					}),
+				)
 			else
-				return (
-					await this.axios.post<WPCreate<P>, AxiosResponse<P>>(
-						`${endpoint}`,
-						{
-							...body,
-							fields: body.acf,
-						},
-					)
-				).data
+				return await this.axios.post<P>(
+					`${endpoint}`,
+					undefined,
+					JSON.stringify({
+						...body,
+						fields: body.acf,
+					}),
+				)
 		}
 	}
 
 	protected createEndpointDelete<P>(endpoint: string): EndpointDelete<P> {
 		return async (...ids: number[]) => {
 			if (!ids.length) throw new Error(ERROR_MESSAGE.ID_REQUIRED)
-			return (
-				await Promise.all(
-					ids.map(id => this.axios.delete<P>(`${endpoint}/${id}`)),
-				)
-			).map(response => response.data)
+			return await Promise.all(
+				ids.map(id => this.axios.delete<P>(`${endpoint}/${id}`)),
+			)
 		}
 	}
 
@@ -158,7 +146,7 @@ export class WpApiClient {
 		endPoint: string,
 	): () => Promise<T | R> {
 		return async (): Promise<T | R> => {
-			return (await this.axios.get<T>(endPoint)).data
+			return await this.axios.get<T>(endPoint)
 		}
 	}
 
@@ -166,7 +154,11 @@ export class WpApiClient {
 		endPoint: string,
 	): (body: T) => Promise<T | R> {
 		return async (body: T): Promise<T | R> => {
-			return (await this.axios.post<T>(endPoint, body)).data
+			return await this.axios.post<T>(
+				endPoint,
+				undefined,
+				JSON.stringify(body),
+			)
 		}
 	}
 
@@ -303,21 +295,17 @@ export class WpApiClient {
 						fileName,
 					),
 				)
-			return (
-				await this.axios.post<Buffer, AxiosResponse<P>>(
-					`${END_POINT.MEDIA}`,
-					data,
-					{
-						headers: {
-							'Content-Type': mimeType,
-							'Content-Disposition':
-								'application/x-www-form-urlencoded; filename="' +
-								fileName +
-								'"',
-						},
-					},
-				)
-			).data
+			return await this.axios.post<P>(
+				`${END_POINT.MEDIA}`,
+				{
+					'Content-Type': mimeType,
+					'Content-Disposition':
+						'application/x-www-form-urlencoded; filename="' +
+						fileName +
+						'"',
+				},
+				data,
+			)
 		}
 		const deleteOne = this.createEndpointDelete<P>(END_POINT.MEDIA)
 		const update = this.createEndpointPost<P>(END_POINT.MEDIA)
@@ -338,9 +326,9 @@ export class WpApiClient {
 		deleteMe: EndpointFindOnly<P>
 	} {
 		const findMe = async () =>
-			(await this.axios.get<P>(END_POINT.USERS + '/me')).data
+			await this.axios.get<P>(END_POINT.USERS + '/me')
 		const deleteMe = async () =>
-			(await this.axios.delete<P>(END_POINT.USERS + '/me')).data
+			await this.axios.delete<P>(END_POINT.USERS + '/me')
 		return {
 			...this.addPostType<P>(END_POINT.USERS),
 			findMe: findMe as EndpointFindOnly<P>,
@@ -375,7 +363,7 @@ export class WpApiClient {
 	): Promise<S[]> {
 		if (search) params = { ...params, search }
 		const query = new URLSearchParams(params).toString()
-		return (await this.axios.get<S[]>(`${END_POINT.SEARCH}/?${query}`)).data
+		return await this.axios.get<S[]>(`${END_POINT.SEARCH}/?${query}`)
 	}
 
 	public async postType<P = WP_REST_API_Type>(): Promise<P[]>
@@ -386,9 +374,8 @@ export class WpApiClient {
 		postType?: WP_Post_Type_Name | string,
 	): Promise<P | P[]> {
 		return postType
-			? (await this.axios.get<P>(`${END_POINT.TYPES}/type/${postType}`))
-					.data
-			: (await this.axios.get<P[]>(END_POINT.TYPES)).data
+			? await this.axios.get<P>(`${END_POINT.TYPES}/type/${postType}`)
+			: await this.axios.get<P[]>(END_POINT.TYPES)
 	}
 
 	public async status<P = WP_REST_API_Status>(): Promise<P[]>
@@ -399,8 +386,8 @@ export class WpApiClient {
 		status?: WP_Post_Type_Name | string,
 	): Promise<P | P[]> {
 		return status
-			? (await this.axios.get<P>(`${END_POINT.STATUSES}/${status}`)).data
-			: (await this.axios.get<P[]>(END_POINT.STATUSES)).data
+			? await this.axios.get<P>(`${END_POINT.STATUSES}/${status}`)
+			: await this.axios.get<P[]>(END_POINT.STATUSES)
 	}
 
 	public async blockType<P = WP_REST_API_Block_Type>(): Promise<P[]>
@@ -411,15 +398,14 @@ export class WpApiClient {
 		blockType?: WP_Post_Type_Name | string,
 	): Promise<P | P[]> {
 		return blockType
-			? (await this.axios.get<P>(`${END_POINT.BLOCK_TYPES}/${blockType}`))
-					.data
-			: (await this.axios.get<P[]>(END_POINT.BLOCK_TYPES)).data
+			? await this.axios.get<P>(`${END_POINT.BLOCK_TYPES}/${blockType}`)
+			: await this.axios.get<P[]>(END_POINT.BLOCK_TYPES)
 	}
 
 	public async blockDirectory<
 		P = WP_REST_API_Block_Directory_Item,
 	>(): Promise<P | P[]> {
-		return (await this.axios.get<P[]>(END_POINT.BLOCK_DIRECTORY)).data
+		return await this.axios.get<P[]>(END_POINT.BLOCK_DIRECTORY)
 	}
 
 	public plugin<P = WPPlugin>(): {
@@ -434,42 +420,37 @@ export class WpApiClient {
 	} {
 		return {
 			create: async (plugin: string, status = 'inactive') =>
-				(
-					await this.axios.post<PluginCreateDto, AxiosResponse<P>>(
-						END_POINT.PLUGINS,
-						{
-							slug: plugin,
-							status,
-						},
-					)
-				).data,
+				await this.axios.post<P>(
+					END_POINT.PLUGINS,
+					undefined,
+					JSON.stringify({
+						slug: plugin,
+						status,
+					}),
+				),
 			find: async (plugin = '') =>
 				plugin
 					? [
-							(
-								await this.axios.get<P>(
-									`${END_POINT.PLUGINS}/${plugin}`,
-								)
-							).data,
+							await this.axios.get<P>(
+								`${END_POINT.PLUGINS}/${plugin}`,
+							),
 					  ]
-					: (await this.axios.get<P[]>(`${END_POINT.PLUGINS}`)).data,
+					: await this.axios.get<P[]>(`${END_POINT.PLUGINS}`),
 			update: async (
 				plugin: string,
 				status: 'active' | 'inactive' = 'inactive',
 				context: 'view' | 'embed' | 'edit' = 'view',
 			) =>
-				(
-					await this.axios.post<PluginUpdateDto, AxiosResponse<P>>(
-						`${END_POINT.PLUGINS}/${plugin}`,
-						{
-							context,
-							status,
-						},
-					)
-				).data,
+				await this.axios.post<P>(
+					`${END_POINT.PLUGINS}/${plugin}`,
+					undefined,
+					JSON.stringify({
+						context,
+						status,
+					}),
+				),
 			delete: async (plugin: string) =>
-				(await this.axios.delete<P>(`${END_POINT.PLUGINS}/${plugin}`))
-					.data,
+				await this.axios.delete<P>(`${END_POINT.PLUGINS}/${plugin}`),
 		}
 	}
 
@@ -484,20 +465,19 @@ export class WpApiClient {
 	public async renderedBlock<P = WP_REST_API_Rendered_Block>(
 		params: RenderedBlockDto,
 	): Promise<P> {
-		return (
-			await this.axios.post<
-				Omit<RenderedBlockDto, 'postId'> & { post_id: number },
-				AxiosResponse<P>
-			>(`${END_POINT.BLOCK_RENDERER}/${params.name}`, {
+		return await this.axios.post<P>(
+			`${END_POINT.BLOCK_RENDERER}/${params.name}`,
+			undefined,
+			JSON.stringify({
 				name: params.name,
 				post_id: params.postId,
 				attributes: params.attributes ?? [],
 				context: params.context ?? 'view',
-			})
-		).data
+			}),
+		)
 	}
 
 	public async theme<P = WPTheme>(): Promise<P[]> {
-		return (await this.axios.get<P[]>(END_POINT.THEMES)).data
+		return await this.axios.get<P[]>(END_POINT.THEMES)
 	}
 }

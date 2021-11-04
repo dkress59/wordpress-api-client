@@ -1,15 +1,14 @@
 import { ERROR_MESSAGE } from '../src/constants'
 import { FetchClient } from '../src/fetch-client'
 import fetch from 'cross-fetch'
-
 jest.mock('cross-fetch', () => jest.fn())
 
 const mockBaseURL = new URL('http://mock-website.com')
+const mockFetch = fetch as jest.MockedFunction<typeof fetch>
+const mockJson = jest.fn() as jest.MockedFunction<any>
+const mockText = jest.fn() as jest.MockedFunction<any>
 
 describe('FetchClient', () => {
-	const mockFetch = fetch as jest.MockedFunction<typeof fetch>
-	const mockJson = jest.fn() as jest.MockedFunction<any>
-	const mockText = jest.fn() as jest.MockedFunction<any>
 	beforeEach(() => {
 		mockJson.mockResolvedValue({ status: 200 })
 		mockText.mockResolvedValue(JSON.stringify({ status: 200 }))

@@ -24,6 +24,7 @@ export class FetchClient {
 		headers?: Record<string, string>,
 		body?: BodyInit,
 	) {
+		body = body?.toString()
 		try {
 			headers = { ...this.headers, ...headers }
 			const response = await fetch(this.baseURL + url, {
