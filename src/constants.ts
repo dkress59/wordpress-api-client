@@ -22,7 +22,7 @@ export const END_POINT = {
 export const ERROR_MESSAGE = {
 	DETAILED: '[WpApiClient Error] %error%',
 	ERROR_RESPONSE:
-		'[WpApiClient Error] There was an error when calling the end point %url%: %error%',
+		'[WpApiClient Error] There was an error when calling the end point %url%: %error% (%status%)',
 	GENERIC: '[WpApiClient Error] Misconfiguration?',
 	ID_REQUIRED:
 		'[WpApiClient Error] At least one ID must be provided to .delete()',

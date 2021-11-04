@@ -1,5 +1,5 @@
-import { handleWpApiError, validateBaseUrl } from './util'
-import fetch, { BodyInit, HeadersInit } from 'node-fetch'
+import { handleWpError, validateBaseUrl } from './util'
+import fetch from 'cross-fetch'
 
 export class FetchClient {
 	baseURL: string
@@ -7,7 +7,7 @@ export class FetchClient {
 
 	constructor(
 		baseURL: URL,
-		public headers?: HeadersInit,
+		public headers: Record<string, string> = {},
 		onError?: (message: string) => void,
 	) {
 		this.baseURL = validateBaseUrl(baseURL.toString()) + '/'
@@ -18,53 +18,40 @@ export class FetchClient {
 			})
 	}
 
-	async get<T>(url: string, headers?: Record<string, string>): Promise<T> {
+	private async fetch<T>(
+		url: string,
+		method: 'get' | 'post' | 'delete',
+		headers?: Record<string, string>,
+		body?: BodyInit,
+	) {
 		try {
 			headers = { ...this.headers, ...headers }
-			const response = await fetch(url, {
+			const response = await fetch(this.baseURL + url, {
+				body,
 				headers,
-				method: 'get',
-				hostname: this.baseURL,
+				method,
 			})
+			if (response.status >= 400) throw response
 			return response.json() as unknown as T
 		} catch (error: unknown) {
-			handleWpApiError(error, this.onError)
+			await handleWpError(error, this.onError)
 			return Promise.reject()
 		}
+	}
+
+	async get<T>(url: string, headers?: Record<string, string>): Promise<T> {
+		return await this.fetch(url, 'get', headers)
 	}
 
 	async post<T>(
 		url: string,
-		headers?: HeadersInit,
+		headers?: Record<string, string>,
 		body?: BodyInit,
 	): Promise<T> {
-		try {
-			headers = { ...this.headers, ...headers }
-			const response = await fetch(url, {
-				headers,
-				body,
-				method: 'post',
-				hostname: this.baseURL,
-			})
-			return response.json() as unknown as T
-		} catch (error: unknown) {
-			handleWpApiError(error, this.onError)
-			return Promise.reject()
-		}
+		return await this.fetch(url, 'post', headers, body)
 	}
 
 	async delete<T>(url: string, headers?: Record<string, string>): Promise<T> {
-		try {
-			headers = { ...this.headers, ...headers }
-			const response = await fetch(url, {
-				headers,
-				method: 'delete',
-				hostname: this.baseURL,
-			})
-			return response.json() as unknown as T
-		} catch (error: unknown) {
-			handleWpApiError(error, this.onError)
-			return Promise.reject()
-		}
+		return await this.fetch(url, 'delete', headers)
 	}
 }

@@ -1,7 +1,62 @@
 import { AxiosError, AxiosResponse } from 'axios'
 import { ERROR_MESSAGE } from './constants'
 import { URLSearchParams } from 'url'
+import { isObject } from '@tool-belt/type-predicates'
 import chalk from 'chalk'
+
+// eslint-disable-next-line sonarjs/cognitive-complexity
+function getDataFromResponse(
+	json: null | Record<string, unknown>,
+	text = 'error',
+): string {
+	const isJson = !!json
+	const hasError = isJson && 'error' in json
+	const errorIsString = hasError && typeof json.error === 'string'
+	const hasMessage = isJson && 'message' in json
+	const messageIsArray = hasMessage && Array.isArray(json.message)
+	const messageIsString = hasMessage && typeof json.error === 'string'
+	return !isJson
+		? text
+		: hasError && errorIsString
+		? (json.error as string)
+		: hasMessage && messageIsArray
+		? (json.message as string[])[0]
+		: hasMessage && messageIsString
+		? (json.message as string)
+		: text
+}
+
+export async function handleWpError(
+	error?: Response | unknown,
+	onError?: (message: string) => void,
+) {
+	let message = ERROR_MESSAGE.GENERIC
+	const isFetchResponse =
+		isObject(error) &&
+		Object.keys(error).includes('json') &&
+		typeof (error as Response).json === 'function'
+
+	if (isFetchResponse) {
+		const err = error as Response
+		const json = (await err.json()) as null | Record<string, unknown>
+		const text = await err.text()
+		const status = err.status
+		const url = err.url
+		const data = getDataFromResponse(json, text)
+		message = ERROR_MESSAGE.ERROR_RESPONSE.replace(
+			'%url%',
+			url || 'UNKNOWN',
+		)
+			.replace('%error%', JSON.stringify(data))
+			.replace('%status%', status.toString())
+	}
+
+	// eslint-disable-next-line no-console
+	console.error(chalk.blue(message))
+	if (onError) onError(message)
+	else throw new Error(message)
+	return Promise.reject(message)
+}
 
 // eslint-disable-next-line sonarjs/cognitive-complexity
 export function handleWpApiError(

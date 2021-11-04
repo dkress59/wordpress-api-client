@@ -1,16 +1,24 @@
+import { ERROR_MESSAGE } from '../src/constants'
 import { FetchClient } from '../src/fetch-client'
-import fetch, { Response } from 'node-fetch'
+import fetch from 'cross-fetch'
 
-jest.mock('node-fetch', () => jest.fn())
+jest.mock('cross-fetch', () => jest.fn())
 
 const mockBaseURL = new URL('http://mock-website.com')
 
 describe('FetchClient', () => {
 	const mockFetch = fetch as jest.MockedFunction<typeof fetch>
-	const json = jest.fn() as jest.MockedFunction<any>
+	const mockJson = jest.fn() as jest.MockedFunction<any>
+	const mockText = jest.fn() as jest.MockedFunction<any>
 	beforeEach(() => {
-		json.mockResolvedValue({ status: 200 })
-		mockFetch.mockResolvedValue({ ok: true, json } as Response)
+		mockJson.mockResolvedValue({ status: 200 })
+		mockText.mockResolvedValue(JSON.stringify({ status: 200 }))
+		mockFetch.mockReset()
+		mockFetch.mockResolvedValue({
+			ok: true,
+			json: mockJson,
+			text: mockText,
+		} as Response)
 	})
 	describe('constructor', () => {
 		it('validates baseURL', () => {
@@ -24,120 +32,179 @@ describe('FetchClient', () => {
 				mock_key: 'mock_value',
 			})
 			await http.get('mock_uri')
-			expect(fetch).toHaveBeenCalledWith('mock_uri', {
-				headers: { mock_key: 'mock_value' },
-				method: 'get',
-				hostname: mockBaseURL.toString(),
-			})
+			expect(mockFetch).toHaveBeenCalledWith(
+				mockBaseURL.toString() + 'mock_uri',
+				{
+					headers: { mock_key: 'mock_value' },
+					method: 'get',
+				},
+			)
+			await http.post('mock_uri')
+			expect(mockFetch).toHaveBeenCalledWith(
+				mockBaseURL.toString() + 'mock_uri',
+				{
+					headers: { mock_key: 'mock_value' },
+					method: 'post',
+				},
+			)
+			await http.delete('mock_uri')
+			expect(mockFetch).toHaveBeenCalledWith(
+				mockBaseURL.toString() + 'mock_uri',
+				{
+					headers: { mock_key: 'mock_value' },
+					method: 'delete',
+				},
+			)
 		})
 		it('can suppress errors with onError', async () => {
 			const mockOnError = jest.fn()
 			const http = new FetchClient(mockBaseURL, undefined, mockOnError)
 			mockFetch.mockRejectedValueOnce('mock_error')
 			await expect(http.get('mock_uri')).rejects.not.toThrow()
-			expect(fetch).toHaveBeenCalledWith('mock_uri', {
-				headers: {},
-				method: 'get',
-				hostname: mockBaseURL.toString(),
-			})
+			expect(mockFetch).toHaveBeenCalledWith(
+				mockBaseURL.toString() + 'mock_uri',
+				{
+					headers: {},
+					method: 'get',
+				},
+			)
 		})
 		it('throws if no onError', async () => {
 			const http = new FetchClient(mockBaseURL)
 			mockFetch.mockRejectedValueOnce('mock_error')
 			await expect(http.get('mock_uri')).rejects.toThrow(
+				new Error(ERROR_MESSAGE.GENERIC),
+			)
+			expect(mockFetch).toHaveBeenCalledWith(
+				mockBaseURL.toString() + 'mock_uri',
+				{
+					headers: {},
+					method: 'get',
+				},
+			)
+		})
+		it('throws if status >= 400', async () => {
+			mockJson.mockResolvedValue({ error: 'mock_error' })
+			mockFetch.mockResolvedValue({
+				ok: false,
+				json: mockJson,
+				text: mockText,
+				status: 400,
+				url: 'mock_uri',
+			} as Response)
+			const http = new FetchClient(mockBaseURL)
+			await expect(http.get('mock_uri')).rejects.toThrow(
 				new Error(
-					'[WpApiClient Error] There was an error when calling the end point UNKNOWN: "mock_error"',
+					ERROR_MESSAGE.ERROR_RESPONSE.replace('%url%', 'mock_uri')
+						.replace('%error%', '"mock_error"')
+						.replace('%status%', '400'),
 				),
 			)
-			expect(fetch).toHaveBeenCalledWith('mock_uri', {
-				headers: {},
-				method: 'get',
-				hostname: mockBaseURL.toString(),
-			})
+			expect(mockFetch).toHaveBeenCalledWith(
+				mockBaseURL.toString() + 'mock_uri',
+				{
+					headers: {},
+					method: 'get',
+				},
+			)
 		})
 	})
 	describe('get', () => {
 		it('fetches the correct URL', async () => {
 			const http = new FetchClient(mockBaseURL)
 			await http.get('mock_uri')
-			expect(json).toHaveBeenCalled()
-			expect(fetch).toHaveBeenCalledWith('mock_uri', {
-				headers: {},
-				method: 'get',
-				hostname: mockBaseURL.toString(),
-			})
+			expect(mockJson).toHaveBeenCalled()
+			expect(mockFetch).toHaveBeenCalledWith(
+				mockBaseURL.toString() + 'mock_uri',
+				{
+					headers: {},
+					method: 'get',
+				},
+			)
 		})
 		it('can override headers', async () => {
 			const http = new FetchClient(mockBaseURL, {
 				mock_key: 'mock_value',
 			})
 			await http.get('mock_uri', { mock_key: 'overridden_value' })
-			expect(json).toHaveBeenCalled()
-			expect(fetch).toHaveBeenCalledWith('mock_uri', {
-				headers: { mock_key: 'overridden_value' },
-				method: 'get',
-				hostname: mockBaseURL.toString(),
-			})
+			expect(mockJson).toHaveBeenCalled()
+			expect(mockFetch).toHaveBeenCalledWith(
+				mockBaseURL.toString() + 'mock_uri',
+				{
+					headers: { mock_key: 'overridden_value' },
+					method: 'get',
+				},
+			)
 		})
 	})
 	describe('post', () => {
 		it('fetches the correct URL', async () => {
 			const http = new FetchClient(mockBaseURL)
 			await http.post('mock_uri')
-			expect(json).toHaveBeenCalled()
-			expect(fetch).toHaveBeenCalledWith('mock_uri', {
-				headers: {},
-				method: 'post',
-				hostname: mockBaseURL.toString(),
-			})
+			expect(mockJson).toHaveBeenCalled()
+			expect(mockFetch).toHaveBeenCalledWith(
+				mockBaseURL.toString() + 'mock_uri',
+				{
+					headers: {},
+					method: 'post',
+				},
+			)
 		})
 		it('can override headers', async () => {
 			const http = new FetchClient(mockBaseURL, {
 				mock_key: 'mock_value',
 			})
 			await http.post('mock_uri', { mock_key: 'overridden_value' })
-			expect(json).toHaveBeenCalled()
-			expect(fetch).toHaveBeenCalledWith('mock_uri', {
-				headers: { mock_key: 'overridden_value' },
-				method: 'post',
-				hostname: mockBaseURL.toString(),
-			})
+			expect(mockJson).toHaveBeenCalled()
+			expect(mockFetch).toHaveBeenCalledWith(
+				mockBaseURL.toString() + 'mock_uri',
+				{
+					headers: { mock_key: 'overridden_value' },
+					method: 'post',
+				},
+			)
 		})
 		it('transmits body', async () => {
 			const http = new FetchClient(mockBaseURL)
 			const body = { mock_key: 'mock_value' }
 			await http.post('mock_uri', undefined, JSON.stringify(body))
-			expect(json).toHaveBeenCalled()
-			expect(fetch).toHaveBeenCalledWith('mock_uri', {
-				body: JSON.stringify(body),
-				headers: {},
-				method: 'post',
-				hostname: mockBaseURL.toString(),
-			})
+			expect(mockJson).toHaveBeenCalled()
+			expect(mockFetch).toHaveBeenCalledWith(
+				mockBaseURL.toString() + 'mock_uri',
+				{
+					body: JSON.stringify(body),
+					headers: {},
+					method: 'post',
+				},
+			)
 		})
 	})
 	describe('delete', () => {
 		it('fetches the correct URL', async () => {
 			const http = new FetchClient(mockBaseURL)
 			await http.delete('mock_uri')
-			expect(json).toHaveBeenCalled()
-			expect(fetch).toHaveBeenCalledWith('mock_uri', {
-				headers: {},
-				method: 'delete',
-				hostname: mockBaseURL.toString(),
-			})
+			expect(mockJson).toHaveBeenCalled()
+			expect(mockFetch).toHaveBeenCalledWith(
+				mockBaseURL.toString() + 'mock_uri',
+				{
+					headers: {},
+					method: 'delete',
+				},
+			)
 		})
 		it('can override headers', async () => {
 			const http = new FetchClient(mockBaseURL, {
 				mock_key: 'mock_value',
 			})
 			await http.delete('mock_uri', { mock_key: 'overridden_value' })
-			expect(json).toHaveBeenCalled()
-			expect(fetch).toHaveBeenCalledWith('mock_uri', {
-				headers: { mock_key: 'overridden_value' },
-				method: 'delete',
-				hostname: mockBaseURL.toString(),
-			})
+			expect(mockJson).toHaveBeenCalled()
+			expect(mockFetch).toHaveBeenCalledWith(
+				mockBaseURL.toString() + 'mock_uri',
+				{
+					headers: { mock_key: 'overridden_value' },
+					method: 'delete',
+				},
+			)
 		})
 	})
 })
