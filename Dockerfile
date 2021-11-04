@@ -65,3 +65,5 @@ FROM wordpress AS docker-compose
 
 # Disable Opcache Preload
 RUN echo '<?php' > /var/www/opcache.php
+
+#VOLUME /var/www/html

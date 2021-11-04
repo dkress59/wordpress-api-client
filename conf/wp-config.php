@@ -59,7 +59,7 @@ define('WP_DEBUG_LOG', (bool) getenv('WORDPRESS_DEBUG'));
 define('WP_DEBUG_DISPLAY', (bool) getenv('WORDPRESS_DEBUG'));
 
 /** SSL */
-//define('FORCE_SSL_ADMIN', true);
+define('FORCE_SSL_ADMIN', (bool) getenv('WORDPRESS_ADMIN_SSL'));
 // in some setups HTTP_X_FORWARDED_PROTO might contain
 // a comma-separated list e.g. http,https
 // so check for https existence

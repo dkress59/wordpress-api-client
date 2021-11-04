@@ -1,9 +1,9 @@
 <?php
 /*
-Plugin Name: WP API Client Demo
+Plugin Name: Demo Plugin
 Plugin URI:
-Description:
-Version: 0.1.3.1
+Description: WP API Client Demo
+Version: 0.1.5.1
 Author: Damian Kress
 Author URI: http://damiankress.de
 Text Domain: client-demo
