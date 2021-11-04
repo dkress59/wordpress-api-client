@@ -1,3 +1,5 @@
+import { BlackWhiteList } from '.'
+
 export const END_POINT = {
 	BLOCK_DIRECTORY: 'wp/v2/block-directory/search',
 	BLOCK_RENDERER: 'wp/v2/block-renderer',
@@ -17,6 +19,7 @@ export const END_POINT = {
 	THEMES: 'wp/v2/themes',
 	TYPES: 'wp/v2/types',
 	USERS: 'wp/v2/users',
+	USERS_ME: 'wp/v2/users/me',
 }
 
 export const ERROR_MESSAGE = {
@@ -29,4 +32,16 @@ export const ERROR_MESSAGE = {
 	INVALID_BASEURL: '[WpApiClient Error] Invalid baseURL: %url%',
 	INVALID_FILENAME:
 		'[WpApiClient Error] The fileName must include the file extension (e.g.: %fileName%.jpg).',
+}
+
+export const END_POINT_PROTECTED: BlackWhiteList = {
+	GET: [END_POINT.USERS_ME],
+	POST: [...Object.values(END_POINT)],
+	DELETE: [...Object.values(END_POINT)],
+}
+
+export const END_POINT_PUBLIC: BlackWhiteList = {
+	GET: Object.values(END_POINT).filter(uri => uri !== END_POINT.USERS_ME),
+	POST: [],
+	DELETE: [],
 }

@@ -9,14 +9,6 @@ import {
 	WP_REST_API_User,
 } from 'wp-types'
 
-export type WPCreate<W> = Record<string, unknown> &
-	Partial<
-		{ content: string; excerpt: string; title: string } & Omit<
-			Omit<Omit<Omit<W, 'content'>, 'excerpt'>, 'id'>,
-			'title'
-		>
-	>
-
 export type EndpointFind<P> = (
 	query?: URLSearchParams | number,
 	...ids: number[]
@@ -24,12 +16,12 @@ export type EndpointFind<P> = (
 
 export type EndpointFindOnly<P> = () => Promise<P>
 
-export type EndpointCreate<P> = (body: WPCreate<P>) => Promise<P | null>
+export type EndpointCreate<P> = (body: Partial<P>) => Promise<P | null>
 
 export type EndpointDelete<P> = (...ids: number[]) => Promise<(P | null)[]>
 
 export type EndpointUpdate<P> = (
-	body: WPCreate<P>,
+	body: Partial<P>,
 	id: number,
 ) => Promise<P | null>
 
@@ -296,4 +288,10 @@ export interface RenderedBlockDto {
 	postId: number
 	context?: 'edit' | 'view'
 	attributes?: string[]
+}
+
+export interface BlackWhiteList {
+	GET: string[]
+	POST: string[]
+	DELETE: string[]
 }

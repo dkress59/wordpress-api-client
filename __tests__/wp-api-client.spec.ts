@@ -1,7 +1,7 @@
 import { END_POINT, ERROR_MESSAGE } from '../src/constants'
-import { POST_TYPE_MAP, WPPageFactory, WPPostFactory } from '../src/factories'
+import { POST_TYPE_MAP, WPPageFactory } from '../src/factories'
 import { URLSearchParams } from 'url'
-import { WPCategory, WPCreate, WPPage, WPPost, WPTag } from '../src/types'
+import { WPPost } from '../src/types'
 import { WP_Post_Type_Name } from 'wp-types'
 import { getDefaultQueryList, getDefaultQuerySingle } from '../src/util'
 import WpApiClient from '../src'
@@ -23,37 +23,15 @@ const mockData = {
 const mockData2 = { ...mockData, title: mockData.title + '2' }
 
 const mockPage = WPPageFactory.buildSync()
-const mockPageCreate: WPCreate<WPPage> = {
-	...mockPage,
-	content: mockPage.content.rendered,
-	excerpt: mockPage.excerpt.rendered,
-	title: mockPage.title.rendered,
-}
-
-const mockPost = WPPostFactory.buildSync()
-const mockPostCreate: WPCreate<WPPost> = {
-	...mockPost,
-	content: mockPost.content.rendered,
-	excerpt: mockPost.excerpt.rendered,
-	title: mockPost.title.rendered,
-}
-
-const mockPostCategoryCreate: WPCreate<WPCategory> = {
-	description: 'mock_description',
-}
-const mockPostTagCreate: WPCreate<WPTag> = {
-	description: 'mock_description',
-}
 
 const EP_CUSTOM_GET = 'mock/custom/get'
 const EP_CUSTOM_POST = 'mock/custom/post'
 class MockClient extends WpApiClient {
 	constructor() {
-		super('http://mock.url')
+		super(mockBaseURL)
 	}
 
 	customGetMethod = this.createEndpointCustomGet(EP_CUSTOM_GET)
-
 	customPostMethod = this.createEndpointCustomPost(EP_CUSTOM_POST)
 }
 
@@ -126,23 +104,21 @@ describe('WpApiClient', () => {
 					}
 
 					public post<P = WPPost>() {
-						return {
-							...this.addPostType<P>(
-								END_POINT.POSTS,
-								true,
-								new URLSearchParams({
-									mock_param: 'mock_value',
-									per_page: '10',
-								}),
-							),
-						}
+						return this.addPostType<P>(
+							END_POINT.POSTS,
+							true,
+							new URLSearchParams({
+								mock_param: 'mock_value',
+								per_page: '10',
+							}),
+						)
 					}
 				}
 				const mockClient = new SearchParamsClient()
-				await mockClient.post().find()
+				await mockClient.post().revision(1).find()
 				expect(mockFetch).toHaveBeenCalledWith(
 					mockBaseURL +
-						'/wp-json/wp/v2/posts/?_embed=true&order=asc&per_page=10&mock_param=mock_value',
+						`/wp-json/${END_POINT.POSTS}/1/revisions/?_embed=true&order=asc&per_page=10&mock_param=mock_value`,
 					{ body: undefined, headers: {}, method: 'get' },
 				)
 			})
@@ -158,7 +134,7 @@ describe('WpApiClient', () => {
 					.find(new URLSearchParams({ mock_param: 'mock_value' }))
 				expect(mockFetch).toHaveBeenCalledWith(
 					mockBaseURL +
-						'/wp-json/wp/v2/pages/?_embed=true&order=asc&per_page=100&mock_param=mock_value',
+						`/wp-json/${END_POINT.PAGES}/?_embed=true&order=asc&per_page=100&mock_param=mock_value`,
 					{ body: undefined, headers: {}, method: 'get' },
 				)
 			})
@@ -168,7 +144,7 @@ describe('WpApiClient', () => {
 					.find(new URLSearchParams({ mock_param: 'mock_value' }), 59)
 				expect(mockFetch).toHaveBeenCalledWith(
 					mockBaseURL +
-						'/wp-json/wp/v2/pages/59/?_embed=true&mock_param=mock_value',
+						`/wp-json/${END_POINT.PAGES}/59/?_embed=true&mock_param=mock_value`,
 					{ body: undefined, headers: {}, method: 'get' },
 				)
 			})
@@ -205,12 +181,10 @@ describe('WpApiClient', () => {
 		})
 		describe('.createEndpointPost', () => {
 			it('.create returns data field of successful AxiosResponse', async () => {
-				expect(await client.page().create(mockPageCreate)).toEqual(
-					mockData,
-				)
+				expect(await client.page().create(mockPage)).toEqual(mockData)
 			})
 			it('.update returns data field of successful AxiosResponse', async () => {
-				expect(await client.page().update(mockPageCreate, 123)).toEqual(
+				expect(await client.page().update(mockPage, 123)).toEqual(
 					mockData,
 				)
 			})
@@ -239,19 +213,36 @@ describe('WpApiClient', () => {
 		})
 		describe('.createEndpointCustomPost', () => {
 			it('calls the correct endpoint with correct body', () => {
-				client.customPostMethod('any')
+				client.customPostMethod(mockData)
 				expect(mockFetch).toHaveBeenCalledWith(
 					`${mockBaseURL}/wp-json/${EP_CUSTOM_POST}`,
 					{
 						...defaultOptions,
 						method: 'post',
-						body: JSON.stringify('any'),
+						body: JSON.stringify(mockData),
 					},
 				)
 			})
 			it('returns data field of successful AxiosResponse', async () => {
-				expect(await client.customPostMethod('any')).toEqual(mockData)
+				expect(await client.customPostMethod(mockData)).toEqual(
+					mockData,
+				)
 			})
+		})
+	})
+
+	describe('default methods', () => {
+		it('.comment returns default entpoints', () => {
+			expect(client.comment()).not.toBeNull()
+		})
+		it('.postCategory returns default entpoints', () => {
+			expect(client.postCategory()).not.toBeNull()
+		})
+		it('.postTag returns default entpoints', () => {
+			expect(client.postTag()).not.toBeNull()
+		})
+		it('.media returns default entpoints', () => {
+			expect(client.media()).not.toBeNull()
 		})
 	})
 })

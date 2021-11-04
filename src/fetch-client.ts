@@ -1,21 +1,34 @@
+import { BlackWhiteList } from './types'
+import { END_POINT_PROTECTED } from './constants'
 import { handleWpError, validateBaseUrl } from './util'
 import fetch from 'cross-fetch'
 
+function isProtected(
+	url: string,
+	method: 'get' | 'post' | 'delete',
+	protectedRoutes: BlackWhiteList,
+): boolean {
+	const protectedEndPoints =
+		method === 'get'
+			? protectedRoutes.GET
+			: method === 'delete'
+			? protectedRoutes.DELETE
+			: protectedRoutes.POST
+	return !!protectedEndPoints.filter(uri => url.includes(uri)).length
+}
+
 export class FetchClient {
 	baseURL: string
-	onError: (message: string) => void
 
 	constructor(
 		baseURL: URL,
-		public headers: Record<string, string> = {},
-		onError?: (message: string) => void,
+		public authHeader: Record<string, string> = {},
+		public onError: (message: string) => void = (message: string) => {
+			throw new Error(message)
+		},
+		public protectedRoutes = END_POINT_PROTECTED,
 	) {
 		this.baseURL = validateBaseUrl(baseURL.toString()) + '/'
-		this.onError =
-			onError ??
-			((message: string) => {
-				throw new Error(message)
-			})
 	}
 
 	private async fetch<T>(
@@ -26,7 +39,8 @@ export class FetchClient {
 	) {
 		body = body?.toString()
 		try {
-			headers = { ...this.headers, ...headers }
+			if (isProtected(url, method, this.protectedRoutes))
+				headers = { ...this.authHeader, ...headers }
 			const response = await fetch(this.baseURL + url, {
 				body,
 				headers,

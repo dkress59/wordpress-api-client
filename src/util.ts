@@ -60,7 +60,7 @@ export async function handleWpError(
 	return Promise.reject(message)
 }
 
-/** returns validated baseURL without trainling slash */
+/** returns validated baseURL without trailing slash */
 export function validateBaseUrl(url: string): string {
 	if (!url.startsWith('http://') && !url.startsWith('https://'))
 		throw new Error(ERROR_MESSAGE.INVALID_BASEURL.replace('%url%', url))
@@ -88,4 +88,27 @@ export function getDefaultQuerySingle(query = new URLSearchParams()): string {
 			...Object.fromEntries(query),
 		}).toString()
 	)
+}
+
+export function postCreate<
+	P extends {
+		acf?: Record<string, unknown>
+		content?: { rendered: string }
+		excerpt?: { rendered: string }
+		title?: { rendered: string }
+	},
+>(
+	body: P,
+): P & {
+	content?: string
+	excerpt?: string
+	fields?: Record<string, unknown>
+	title?: string
+} {
+	const content = body.content?.rendered
+	const excerpt = body.excerpt?.rendered
+	const title = body.title?.rendered
+	const fields = body.acf
+	delete body.acf
+	return { ...body, content, excerpt, fields, title }
 }

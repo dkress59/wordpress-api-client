@@ -4,6 +4,7 @@ import {
 	getDefaultQueryList,
 	getDefaultQuerySingle,
 	handleWpError,
+	postCreate,
 	validateBaseUrl,
 } from '../src/util'
 import chalk from 'chalk'
@@ -59,7 +60,7 @@ describe('util', () => {
 			await expect(
 				handleWpError(() => 'return_value', onError),
 			).rejects.not.toThrow()
-			expect(error).toBe(ERROR_MESSAGE.GENERIC)
+			expect(error).toEqual(ERROR_MESSAGE.GENERIC)
 		})
 
 		it('response: undefined', async () => {
@@ -225,6 +226,47 @@ describe('util', () => {
 					new URLSearchParams({ mock_param: 'mock_value' }),
 				),
 			).toBe('?_embed=true&mock_param=mock_value')
+		})
+	})
+
+	describe('postCreate', () => {
+		it('transforms `content.rendered` into `content`', () => {
+			expect(
+				postCreate({ content: { rendered: 'mock_content' } }),
+			).toEqual({
+				content: 'mock_content',
+				excerpt: undefined,
+				fields: undefined,
+				title: undefined,
+			})
+		})
+		it('transforms `excerpt.rendered` into `excerpt`', () => {
+			expect(
+				postCreate({ excerpt: { rendered: 'mock_content' } }),
+			).toEqual({
+				content: undefined,
+				excerpt: 'mock_content',
+				fields: undefined,
+				title: undefined,
+			})
+		})
+		it('transforms `title.rendered` into `title`', () => {
+			expect(postCreate({ title: { rendered: 'mock_content' } })).toEqual(
+				{
+					content: undefined,
+					excerpt: undefined,
+					fields: undefined,
+					title: 'mock_content',
+				},
+			)
+		})
+		it('transforms `acf` into `fields`', () => {
+			expect(postCreate({ acf: { rendered: 'mock_content' } })).toEqual({
+				content: undefined,
+				excerpt: undefined,
+				fields: { rendered: 'mock_content' },
+				title: undefined,
+			})
 		})
 	})
 })

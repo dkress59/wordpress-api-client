@@ -1,19 +1,16 @@
 import {
+	BlackWhiteList,
 	DefaultEndpoint,
 	DefaultEndpointWithRevision,
-	RenderedBlockDto,
-} from '.'
-import { END_POINT, ERROR_MESSAGE } from './constants'
-import {
 	EndpointCreate,
 	EndpointDelete,
 	EndpointFind,
 	EndpointFindOnly,
 	EndpointUpdate,
 	EndpointUpdatePartial,
+	RenderedBlockDto,
 	WPCategory,
 	WPComment,
-	WPCreate,
 	WPMedia,
 	WPPage,
 	WPPlugin,
@@ -23,6 +20,12 @@ import {
 	WPTheme,
 	WPUser,
 } from './types'
+import {
+	END_POINT,
+	END_POINT_PROTECTED,
+	END_POINT_PUBLIC,
+	ERROR_MESSAGE,
+} from './constants'
 import { FetchClient } from './fetch-client'
 import { POST_TYPE_MAP } from './factories'
 import { URLSearchParams } from 'url'
@@ -37,7 +40,7 @@ import {
 	WP_REST_API_Status,
 	WP_REST_API_Type,
 } from 'wp-types'
-import { getDefaultQueryList, getDefaultQuerySingle } from './util'
+import { getDefaultQueryList, getDefaultQuerySingle, postCreate } from './util'
 
 interface PostCollection<P = any> {
 	postType: WP_Post_Type_Name | string
@@ -45,21 +48,78 @@ interface PostCollection<P = any> {
 }
 
 export class WpApiClient {
-	protected readonly axios: FetchClient
+	protected readonly http: FetchClient
+	protected readonly authHeader?: { Authorization: string }
 
+	constructor(baseURL: string)
 	constructor(
 		baseURL: string,
-		options?: {
-			auth?: 'basic' | 'jwt'
+		options: {
+			auth: {
+				type: 'jwt'
+				token: string
+			}
 			onError?: (message: string) => void
-			protected?: string[]
-			public?: string[]
+			protected?: BlackWhiteList
+			public?: BlackWhiteList
+		},
+	)
+	constructor(
+		baseURL: string,
+		options: {
+			auth: {
+				type: 'basic'
+				username: string
+				password: string
+			}
+			onError?: (message: string) => void
+			protected?: BlackWhiteList
+		},
+	)
+	constructor(
+		baseURL: string,
+		options: {
+			auth: {
+				type: 'none'
+			}
+			onError?: (message: string) => void
+			protected?: BlackWhiteList
+			public?: BlackWhiteList
+		},
+	)
+	constructor(
+		baseURL: string,
+		options: {
+			auth: {
+				type: 'basic' | 'jwt' | 'none'
+				token?: string
+				username?: string
+				password?: string
+			}
+			onError?: (message: string) => void
+			protected?: BlackWhiteList
+			public?: BlackWhiteList
+		} = {
+			auth: { type: 'none' },
+			protected: END_POINT_PROTECTED,
+			public: END_POINT_PUBLIC,
 		},
 	) {
-		this.axios = new FetchClient(
+		if (options.auth.type === 'basic')
+			this.authHeader = {
+				Authorization: `Basic ${Buffer.from(
+					options.auth.username! + ':' + options.auth.password!,
+				).toString('base64')}`,
+			}
+		if (options.auth.type === 'jwt')
+			this.authHeader = {
+				Authorization: `Bearer ${options.auth.token}`,
+			}
+		this.http = new FetchClient(
 			new URL('wp-json', baseURL),
-			undefined,
-			options?.onError,
+			this.authHeader,
+			options.onError,
+			options.public,
 		)
 	}
 
@@ -79,13 +139,13 @@ export class WpApiClient {
 			let result: P[] = []
 			if (!ids.length) {
 				result =
-					(await this.axios.get<P[] | undefined>(
+					(await this.http.get<P[] | undefined>(
 						`${endpoint}/${getDefaultQueryList(query)}`,
 					)) ?? ([] as P[])
 			} else {
 				result = await Promise.all(
 					ids.map(postId =>
-						this.axios.get<P>(
+						this.http.get<P>(
 							`${endpoint}/${postId}/${getDefaultQuerySingle(
 								query as undefined | URLSearchParams,
 							)}`,
@@ -110,25 +170,27 @@ export class WpApiClient {
 
 	protected createEndpointPost<P>(
 		endpoint: string,
-	): (body: WPCreate<P>, id?: number) => Promise<P> {
-		return async (body: WPCreate<P>, id = 0) => {
+	): (body: Partial<P>, id?: number) => Promise<P> {
+		return async (body: Partial<P>, id = 0) => {
 			if (id)
-				return await this.axios.post<P>(
+				return await this.http.post<P>(
 					`${endpoint}/${id}`,
 					undefined,
-					JSON.stringify({
-						...body,
-						fields: body.acf,
-					}),
+					JSON.stringify(
+						postCreate<Partial<P>>({
+							...body,
+						}),
+					),
 				)
 			else
-				return await this.axios.post<P>(
+				return await this.http.post<P>(
 					`${endpoint}`,
 					undefined,
-					JSON.stringify({
-						...body,
-						fields: body.acf,
-					}),
+					JSON.stringify(
+						postCreate<Partial<P>>({
+							...body,
+						}),
+					),
 				)
 		}
 	}
@@ -137,7 +199,7 @@ export class WpApiClient {
 		return async (...ids: number[]) => {
 			if (!ids.length) throw new Error(ERROR_MESSAGE.ID_REQUIRED)
 			return await Promise.all(
-				ids.map(id => this.axios.delete<P>(`${endpoint}/${id}`)),
+				ids.map(id => this.http.delete<P>(`${endpoint}/${id}`)),
 			)
 		}
 	}
@@ -146,7 +208,7 @@ export class WpApiClient {
 		endPoint: string,
 	): () => Promise<T | R> {
 		return async (): Promise<T | R> => {
-			return await this.axios.get<T>(endPoint)
+			return await this.http.get<T>(endPoint)
 		}
 	}
 
@@ -154,7 +216,7 @@ export class WpApiClient {
 		endPoint: string,
 	): (body: T) => Promise<T | R> {
 		return async (body: T): Promise<T | R> => {
-			return await this.axios.post<T>(
+			return await this.http.post<T>(
 				endPoint,
 				undefined,
 				JSON.stringify(body),
@@ -295,7 +357,7 @@ export class WpApiClient {
 						fileName,
 					),
 				)
-			return await this.axios.post<P>(
+			return await this.http.post<P>(
 				`${END_POINT.MEDIA}`,
 				{
 					'Content-Type': mimeType,
@@ -325,10 +387,9 @@ export class WpApiClient {
 		delete: EndpointDelete<P>
 		deleteMe: EndpointFindOnly<P>
 	} {
-		const findMe = async () =>
-			await this.axios.get<P>(END_POINT.USERS + '/me')
+		const findMe = async () => await this.http.get<P>(END_POINT.USERS_ME)
 		const deleteMe = async () =>
-			await this.axios.delete<P>(END_POINT.USERS + '/me')
+			await this.http.delete<P>(END_POINT.USERS_ME)
 		return {
 			...this.addPostType<P>(END_POINT.USERS),
 			findMe: findMe as EndpointFindOnly<P>,
@@ -363,7 +424,7 @@ export class WpApiClient {
 	): Promise<S[]> {
 		if (search) params = { ...params, search }
 		const query = new URLSearchParams(params).toString()
-		return await this.axios.get<S[]>(`${END_POINT.SEARCH}/?${query}`)
+		return await this.http.get<S[]>(`${END_POINT.SEARCH}/?${query}`)
 	}
 
 	public async postType<P = WP_REST_API_Type>(): Promise<P[]>
@@ -374,8 +435,8 @@ export class WpApiClient {
 		postType?: WP_Post_Type_Name | string,
 	): Promise<P | P[]> {
 		return postType
-			? await this.axios.get<P>(`${END_POINT.TYPES}/type/${postType}`)
-			: await this.axios.get<P[]>(END_POINT.TYPES)
+			? await this.http.get<P>(`${END_POINT.TYPES}/type/${postType}`)
+			: await this.http.get<P[]>(END_POINT.TYPES)
 	}
 
 	public async status<P = WP_REST_API_Status>(): Promise<P[]>
@@ -386,8 +447,8 @@ export class WpApiClient {
 		status?: WP_Post_Type_Name | string,
 	): Promise<P | P[]> {
 		return status
-			? await this.axios.get<P>(`${END_POINT.STATUSES}/${status}`)
-			: await this.axios.get<P[]>(END_POINT.STATUSES)
+			? await this.http.get<P>(`${END_POINT.STATUSES}/${status}`)
+			: await this.http.get<P[]>(END_POINT.STATUSES)
 	}
 
 	public async blockType<P = WP_REST_API_Block_Type>(): Promise<P[]>
@@ -398,14 +459,14 @@ export class WpApiClient {
 		blockType?: WP_Post_Type_Name | string,
 	): Promise<P | P[]> {
 		return blockType
-			? await this.axios.get<P>(`${END_POINT.BLOCK_TYPES}/${blockType}`)
-			: await this.axios.get<P[]>(END_POINT.BLOCK_TYPES)
+			? await this.http.get<P>(`${END_POINT.BLOCK_TYPES}/${blockType}`)
+			: await this.http.get<P[]>(END_POINT.BLOCK_TYPES)
 	}
 
 	public async blockDirectory<
 		P = WP_REST_API_Block_Directory_Item,
 	>(): Promise<P | P[]> {
-		return await this.axios.get<P[]>(END_POINT.BLOCK_DIRECTORY)
+		return await this.http.get<P[]>(END_POINT.BLOCK_DIRECTORY)
 	}
 
 	public plugin<P = WPPlugin>(): {
@@ -420,7 +481,7 @@ export class WpApiClient {
 	} {
 		return {
 			create: async (plugin: string, status = 'inactive') =>
-				await this.axios.post<P>(
+				await this.http.post<P>(
 					END_POINT.PLUGINS,
 					undefined,
 					JSON.stringify({
@@ -430,18 +491,14 @@ export class WpApiClient {
 				),
 			find: async (plugin = '') =>
 				plugin
-					? [
-							await this.axios.get<P>(
-								`${END_POINT.PLUGINS}/${plugin}`,
-							),
-					  ]
-					: await this.axios.get<P[]>(`${END_POINT.PLUGINS}`),
+					? [await this.http.get<P>(`${END_POINT.PLUGINS}/${plugin}`)]
+					: await this.http.get<P[]>(`${END_POINT.PLUGINS}`),
 			update: async (
 				plugin: string,
 				status: 'active' | 'inactive' = 'inactive',
 				context: 'view' | 'embed' | 'edit' = 'view',
 			) =>
-				await this.axios.post<P>(
+				await this.http.post<P>(
 					`${END_POINT.PLUGINS}/${plugin}`,
 					undefined,
 					JSON.stringify({
@@ -450,7 +507,7 @@ export class WpApiClient {
 					}),
 				),
 			delete: async (plugin: string) =>
-				await this.axios.delete<P>(`${END_POINT.PLUGINS}/${plugin}`),
+				await this.http.delete<P>(`${END_POINT.PLUGINS}/${plugin}`),
 		}
 	}
 
@@ -465,7 +522,7 @@ export class WpApiClient {
 	public async renderedBlock<P = WP_REST_API_Rendered_Block>(
 		params: RenderedBlockDto,
 	): Promise<P> {
-		return await this.axios.post<P>(
+		return await this.http.post<P>(
 			`${END_POINT.BLOCK_RENDERER}/${params.name}`,
 			undefined,
 			JSON.stringify({
@@ -478,6 +535,6 @@ export class WpApiClient {
 	}
 
 	public async theme<P = WPTheme>(): Promise<P[]> {
-		return await this.axios.get<P[]>(END_POINT.THEMES)
+		return await this.http.get<P[]>(END_POINT.THEMES)
 	}
 }
