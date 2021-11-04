@@ -7,10 +7,11 @@ export class FetchClient {
 
 	constructor(
 		baseURL: URL,
-		public authHeader: Record<string, string> = {},
 		public onError: (message: string) => void = (message: string) => {
 			throw new Error(message)
 		},
+		public headers: Record<string, string> = {},
+		public authHeader: Record<string, string> = {},
 		public protectedRoutes = END_POINT_PROTECTED,
 	) {
 		this.baseURL = validateBaseUrl(baseURL.toString()) + '/'
@@ -24,6 +25,7 @@ export class FetchClient {
 	) {
 		body = body?.toString()
 		try {
+			headers = { ...this.headers, ...headers }
 			if (isProtected(url, method, this.protectedRoutes))
 				headers = { ...this.authHeader, ...headers }
 			const response = await fetch(this.baseURL + url, {

@@ -8,7 +8,7 @@ const mockFetch = fetch as jest.MockedFunction<typeof fetch>
 const mockJson = jest.fn() as jest.MockedFunction<any>
 const mockText = jest.fn() as jest.MockedFunction<any>
 
-const defaultOptions = { body: undefined, headers: undefined, method: 'get' }
+const defaultOptions = { body: undefined, headers: {}, method: 'get' }
 
 describe('FetchClient', () => {
 	beforeEach(() => {
@@ -32,7 +32,7 @@ describe('FetchClient', () => {
 			const mockHeaders = {
 				Authorization: 'mock_value',
 			}
-			const http = new FetchClient(mockBaseURL, mockHeaders)
+			const http = new FetchClient(mockBaseURL, undefined, mockHeaders)
 			it('get', async () => {
 				const mockUri = END_POINT_PROTECTED.GET[0]
 				await http.get(mockUri)
@@ -72,7 +72,7 @@ describe('FetchClient', () => {
 		})
 		it('can suppress errors with onError', async () => {
 			const mockOnError = jest.fn()
-			const http = new FetchClient(mockBaseURL, undefined, mockOnError)
+			const http = new FetchClient(mockBaseURL, mockOnError)
 			mockFetch.mockRejectedValueOnce('mock_error')
 			await expect(http.get('mock_uri')).rejects.not.toThrow()
 			expect(mockFetch).toHaveBeenCalledWith(
@@ -137,7 +137,7 @@ describe('FetchClient', () => {
 			)
 		})
 		it('can override headers', async () => {
-			const http = new FetchClient(mockBaseURL, {
+			const http = new FetchClient(mockBaseURL, undefined, {
 				mock_key: 'mock_value',
 			})
 			await http.get('mock_uri', { mock_key: 'overridden_value' })
@@ -166,7 +166,7 @@ describe('FetchClient', () => {
 			)
 		})
 		it('can override headers', async () => {
-			const http = new FetchClient(mockBaseURL, {
+			const http = new FetchClient(mockBaseURL, undefined, {
 				mock_key: 'mock_value',
 			})
 			await http.post('mock_uri', { mock_key: 'overridden_value' })
@@ -209,7 +209,7 @@ describe('FetchClient', () => {
 			)
 		})
 		it('can override headers', async () => {
-			const http = new FetchClient(mockBaseURL, {
+			const http = new FetchClient(mockBaseURL, undefined, {
 				mock_key: 'mock_value',
 			})
 			await http.delete('mock_uri', { mock_key: 'overridden_value' })

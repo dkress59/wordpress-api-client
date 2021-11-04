@@ -290,6 +290,27 @@ export interface RenderedBlockDto {
 	attributes?: string[]
 }
 
+export interface WpApiOptions {
+	auth:
+		| undefined
+		| {
+				type: 'basic'
+				username: string
+				password: string
+		  }
+		| {
+				type: 'jwt'
+				token: string
+		  }
+		| {
+				type: 'none'
+		  }
+	headers?: Record<string, string>
+	onError?: (message: string) => void
+	protected?: BlackWhiteList
+	public?: BlackWhiteList
+}
+
 export interface BlackWhiteList {
 	GET: string[]
 	POST: string[]

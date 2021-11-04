@@ -30,6 +30,9 @@ describe('util', () => {
 		const error9 = {
 			message: undefined,
 		}
+		const error10 = {
+			mock_key: mockError,
+		}
 		const mockResponse = (error: unknown) => {
 			return {
 				json: () => error,
@@ -155,6 +158,17 @@ describe('util', () => {
 		it('response: boolean', async () => {
 			await expect(
 				async () => await handleWpError(mockResponse(error9)),
+			).rejects.toThrow(
+				new Error(
+					ERROR_MESSAGE.ERROR_RESPONSE.replace('%url%', 'UNKNOWN')
+						.replace('%error%', '"[object Object]"')
+						.replace('%status%', '500'),
+				),
+			)
+		})
+		it('response: error.mock_key', async () => {
+			await expect(
+				async () => await handleWpError(mockResponse(error10)),
 			).rejects.toThrow(
 				new Error(
 					ERROR_MESSAGE.ERROR_RESPONSE.replace('%url%', 'UNKNOWN')

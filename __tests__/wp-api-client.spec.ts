@@ -93,6 +93,29 @@ describe('WpApiClient', () => {
 				},
 			)
 		})
+		it('can set/override default headers', async () => {
+			const client = new WpApiClient(mockBaseURL, {
+				auth: {
+					type: 'jwt',
+					token: 'mock_token',
+				},
+				headers: {
+					mock_key: 'mock_value',
+				},
+			})
+			await client.post().delete(1)
+			expect(mockFetch).toHaveBeenCalledWith(
+				mockRestBase + END_POINT.POSTS + '/1',
+				{
+					body: undefined,
+					headers: {
+						Authorization: 'Bearer mock_token',
+						mock_key: 'mock_value',
+					},
+					method: 'delete',
+				},
+			)
+		})
 	})
 	describe('collection', () => {
 		beforeEach(() => {
@@ -250,7 +273,7 @@ describe('WpApiClient', () => {
 				client.customGetMethod()
 				expect(mockFetch).toHaveBeenCalledWith(
 					`${mockBaseURL}/wp-json/${EP_CUSTOM_GET}`,
-					{ ...defaultOptions, headers: undefined },
+					defaultOptions,
 				)
 			})
 			it('returns data field of successful AxiosResponse', async () => {
@@ -264,7 +287,6 @@ describe('WpApiClient', () => {
 					`${mockBaseURL}/wp-json/${EP_CUSTOM_POST}`,
 					{
 						...defaultOptions,
-						headers: undefined,
 						method: 'post',
 						body: JSON.stringify(mockData),
 					},
@@ -342,8 +364,7 @@ describe('WpApiClient', () => {
 				expect(mockFetch).toHaveBeenCalledWith(
 					mockRestBase + END_POINT.USERS_ME,
 					{
-						headers: undefined,
-						body: undefined,
+						...defaultOptions,
 						method: 'delete',
 					},
 				)
@@ -362,7 +383,7 @@ describe('WpApiClient', () => {
 				expect(mockFetch).toHaveBeenCalledWith(
 					mockRestBase + END_POINT.SETTINGS,
 					{
-						headers: undefined,
+						...defaultOptions,
 						body: JSON.stringify({ use_smilies: false }),
 						method: 'post',
 					},
@@ -467,7 +488,7 @@ describe('WpApiClient', () => {
 						'/' +
 						mockBody.name,
 					{
-						headers: undefined,
+						...defaultOptions,
 						body: JSON.stringify({
 							name: mockBody.name,
 							post_id: mockBody.postId,
@@ -479,25 +500,23 @@ describe('WpApiClient', () => {
 				)
 			})
 			it('create (custom)', async () => {
+				const mockName = 'mock-block'
 				const mockAttribute = 'mock_attribute'
-				const mockBody = {
-					name: 'mock-block',
+				await client.renderedBlock({
+					name: mockName,
 					postId: 1,
 					attributes: [mockAttribute],
-				}
-				await client.renderedBlock(mockBody)
+					context: 'edit',
+				})
 				expect(mockFetch).toHaveBeenCalledWith(
-					mockRestBase +
-						END_POINT.BLOCK_RENDERER +
-						'/' +
-						mockBody.name,
+					mockRestBase + END_POINT.BLOCK_RENDERER + '/' + mockName,
 					{
-						headers: undefined,
+						...defaultOptions,
 						body: JSON.stringify({
-							name: mockBody.name,
-							post_id: mockBody.postId,
+							name: mockName,
+							post_id: 1,
 							attributes: [mockAttribute],
-							context: 'view',
+							context: 'edit',
 						}),
 						method: 'post',
 					},
@@ -520,11 +539,11 @@ describe('WpApiClient', () => {
 				expect(mockFetch).toHaveBeenCalledWith(
 					mockRestBase + END_POINT.PLUGINS,
 					{
+						...defaultOptions,
 						body: JSON.stringify({
 							slug: mockSlug,
 							status: 'inactive',
 						}),
-						headers: undefined,
 						method: 'post',
 					},
 				)
@@ -534,11 +553,11 @@ describe('WpApiClient', () => {
 				expect(mockFetch).toHaveBeenCalledWith(
 					mockRestBase + END_POINT.PLUGINS,
 					{
+						...defaultOptions,
 						body: JSON.stringify({
 							slug: mockSlug,
 							status: 'active',
 						}),
-						headers: undefined,
 						method: 'post',
 					},
 				)
@@ -568,8 +587,7 @@ describe('WpApiClient', () => {
 				expect(mockFetch).toHaveBeenCalledWith(
 					mockRestBase + END_POINT.PLUGINS + '/' + mockSlug,
 					{
-						body: undefined,
-						headers: undefined,
+						...defaultOptions,
 						method: 'delete',
 					},
 				)
@@ -579,11 +597,11 @@ describe('WpApiClient', () => {
 				expect(mockFetch).toHaveBeenCalledWith(
 					mockRestBase + END_POINT.PLUGINS + '/' + mockSlug,
 					{
+						...defaultOptions,
 						body: JSON.stringify({
 							context: 'view',
 							status: 'inactive',
 						}),
-						headers: undefined,
 						method: 'post',
 					},
 				)
@@ -593,11 +611,11 @@ describe('WpApiClient', () => {
 				expect(mockFetch).toHaveBeenCalledWith(
 					mockRestBase + END_POINT.PLUGINS + '/' + mockSlug,
 					{
+						...defaultOptions,
 						body: JSON.stringify({
 							context: 'edit',
 							status: 'active',
 						}),
-						headers: undefined,
 						method: 'post',
 					},
 				)

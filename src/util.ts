@@ -7,7 +7,7 @@ import chalk from 'chalk'
 // eslint-disable-next-line sonarjs/cognitive-complexity
 function getDataFromResponse(
 	json: null | string | Record<string, unknown>,
-	text = 'getDataFromResponse error',
+	text: string,
 ): string {
 	const isJson = !!json && typeof json === 'object'
 	const hasError = isJson && 'error' in json

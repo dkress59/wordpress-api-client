@@ -1,5 +1,4 @@
 import {
-	BlackWhiteList,
 	DefaultEndpoint,
 	DefaultEndpointWithRevision,
 	EndpointCreate,
@@ -20,12 +19,7 @@ import {
 	WPTheme,
 	WPUser,
 } from './types'
-import {
-	END_POINT,
-	END_POINT_PROTECTED,
-	END_POINT_PUBLIC,
-	ERROR_MESSAGE,
-} from './constants'
+import { END_POINT, END_POINT_PROTECTED, ERROR_MESSAGE } from './constants'
 import { FetchClient } from './fetch-client'
 import { POST_TYPE_MAP } from './factories'
 import { URLSearchParams } from 'url'
@@ -40,6 +34,7 @@ import {
 	WP_REST_API_Status,
 	WP_REST_API_Type,
 } from 'wp-types'
+import { WpApiOptions } from '.'
 import { getDefaultQueryList, getDefaultQuerySingle, postCreate } from './util'
 
 interface PostCollection<P = any> {
@@ -48,78 +43,34 @@ interface PostCollection<P = any> {
 }
 
 export class WpApiClient {
-	protected readonly http: FetchClient
 	protected readonly authHeader?: { Authorization: string }
+	protected readonly headers?: Record<string, string>
+	protected readonly http: FetchClient
 
-	constructor(baseURL: string)
 	constructor(
 		baseURL: string,
-		options: {
-			auth: {
-				type: 'jwt'
-				token: string
-			}
-			onError?: (message: string) => void
-			protected?: BlackWhiteList
-			public?: BlackWhiteList
-		},
-	)
-	constructor(
-		baseURL: string,
-		options: {
-			auth: {
-				type: 'basic'
-				username: string
-				password: string
-			}
-			onError?: (message: string) => void
-			protected?: BlackWhiteList
-		},
-	)
-	constructor(
-		baseURL: string,
-		options: {
-			auth: {
-				type: 'none'
-			}
-			onError?: (message: string) => void
-			protected?: BlackWhiteList
-			public?: BlackWhiteList
-		},
-	)
-	constructor(
-		baseURL: string,
-		options: {
-			auth: {
-				type: 'basic' | 'jwt' | 'none'
-				token?: string
-				username?: string
-				password?: string
-			}
-			onError?: (message: string) => void
-			protected?: BlackWhiteList
-			public?: BlackWhiteList
-		} = {
+		options: WpApiOptions = {
 			auth: { type: 'none' },
 			protected: END_POINT_PROTECTED,
-			public: END_POINT_PUBLIC,
 		},
 	) {
-		if (options.auth.type === 'basic')
+		if (options.auth?.type === 'basic')
 			this.authHeader = {
 				Authorization: `Basic ${Buffer.from(
-					options.auth.username! + ':' + options.auth.password!,
+					options.auth.username + ':' + options.auth.password,
 				).toString('base64')}`,
 			}
-		if (options.auth.type === 'jwt')
+		if (options.auth?.type === 'jwt')
 			this.authHeader = {
 				Authorization: `Bearer ${options.auth.token}`,
 			}
+		this.headers = options.headers
 		this.http = new FetchClient(
 			new URL('wp-json', baseURL),
-			this.authHeader,
 			options.onError,
-			options.public,
+			this.headers,
+			this.authHeader,
+			options.protected,
 		)
 	}
 
