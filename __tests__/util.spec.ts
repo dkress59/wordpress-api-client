@@ -4,6 +4,7 @@ import {
 	getDefaultQueryList,
 	getDefaultQuerySingle,
 	handleWpError,
+	isProtected,
 	postCreate,
 	validateBaseUrl,
 } from '../src/util'
@@ -266,6 +267,75 @@ describe('util', () => {
 				excerpt: undefined,
 				fields: { rendered: 'mock_content' },
 				title: undefined,
+			})
+		})
+	})
+
+	describe('isProtected', () => {
+		const mockEndPoint = 'some/protected/route'
+		const protectedList = {
+			GET: [mockEndPoint],
+			POST: [mockEndPoint],
+			DELETE: [mockEndPoint],
+		}
+		describe('GET', () => {
+			it('false for public routes', () => {
+				expect(
+					isProtected(
+						'http://mock.url/some/public/route',
+						'get',
+						protectedList,
+					),
+				).toBe(false)
+			})
+			it('true for protected routes', () => {
+				expect(
+					isProtected(
+						'http://mock.url/' + mockEndPoint,
+						'get',
+						protectedList,
+					),
+				).toBe(true)
+			})
+		})
+		describe('POST', () => {
+			it('false for public routes', () => {
+				expect(
+					isProtected(
+						'http://mock.url/some/public/route',
+						'post',
+						protectedList,
+					),
+				).toBe(false)
+			})
+			it('true for protected routes', () => {
+				expect(
+					isProtected(
+						'http://mock.url/' + mockEndPoint,
+						'get',
+						protectedList,
+					),
+				).toBe(true)
+			})
+		})
+		describe('DELETE', () => {
+			it('false for public routes', () => {
+				expect(
+					isProtected(
+						'http://mock.url/some/public/route',
+						'delete',
+						protectedList,
+					),
+				).toBe(false)
+			})
+			it('true for protected routes', () => {
+				expect(
+					isProtected(
+						'http://mock.url/' + mockEndPoint,
+						'get',
+						protectedList,
+					),
+				).toBe(true)
 			})
 		})
 	})

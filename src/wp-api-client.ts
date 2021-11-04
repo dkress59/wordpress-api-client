@@ -392,7 +392,7 @@ export class WpApiClient {
 			await this.http.delete<P>(END_POINT.USERS_ME)
 		return {
 			...this.addPostType<P>(END_POINT.USERS),
-			findMe: findMe as EndpointFindOnly<P>,
+			findMe,
 			deleteMe,
 		}
 	}
@@ -520,16 +520,16 @@ export class WpApiClient {
 	}
 
 	public async renderedBlock<P = WP_REST_API_Rendered_Block>(
-		params: RenderedBlockDto,
+		body: RenderedBlockDto,
 	): Promise<P> {
 		return await this.http.post<P>(
-			`${END_POINT.BLOCK_RENDERER}/${params.name}`,
+			`${END_POINT.BLOCK_RENDERER}/${body.name}`,
 			undefined,
 			JSON.stringify({
-				name: params.name,
-				post_id: params.postId,
-				attributes: params.attributes ?? [],
-				context: params.context ?? 'view',
+				name: body.name,
+				post_id: body.postId,
+				attributes: body.attributes ?? [],
+				context: body.context ?? 'view',
 			}),
 		)
 	}

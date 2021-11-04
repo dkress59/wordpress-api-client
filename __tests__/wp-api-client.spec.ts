@@ -14,6 +14,7 @@ const mockText = jest.fn() as jest.MockedFunction<any>
 
 const defaultOptions = { body: undefined, headers: {}, method: 'get' }
 const mockBaseURL = 'http://mock.url'
+const mockRestBase = mockBaseURL + '/wp-json/'
 
 const mockData = {
 	content: 'mock_data',
@@ -47,6 +48,51 @@ describe('WpApiClient', () => {
 			json: mockJson,
 			text: mockText,
 		} as Response)
+	})
+	describe('constructor', () => {
+		it('correctly sets headers for basic auth', async () => {
+			const password = 'mock_password'
+			const username = 'mock_username'
+			const client = new WpApiClient(mockBaseURL, {
+				auth: {
+					type: 'basic',
+					password,
+					username,
+				},
+			})
+			await client.post().delete(1)
+			expect(mockFetch).toHaveBeenCalledWith(
+				mockRestBase + END_POINT.POSTS + '/1',
+				{
+					body: undefined,
+					headers: {
+						Authorization: `Basic ${Buffer.from(
+							username + ':' + password,
+						).toString('base64')}`,
+					},
+					method: 'delete',
+				},
+			)
+		})
+		it('correctly sets headers for jwt auth', async () => {
+			const client = new WpApiClient(mockBaseURL, {
+				auth: {
+					type: 'jwt',
+					token: 'mock_token',
+				},
+			})
+			await client.post().delete(1)
+			expect(mockFetch).toHaveBeenCalledWith(
+				mockRestBase + END_POINT.POSTS + '/1',
+				{
+					body: undefined,
+					headers: {
+						Authorization: `Bearer mock_token`,
+					},
+					method: 'delete',
+				},
+			)
+		})
 	})
 	describe('collection', () => {
 		beforeEach(() => {
@@ -242,8 +288,320 @@ describe('WpApiClient', () => {
 		it('.postTag returns default entpoints', () => {
 			expect(client.postTag()).not.toBeNull()
 		})
-		it('.media returns default entpoints', () => {
-			expect(client.media()).not.toBeNull()
+		it('.reusableBlock returns default entpoints', () => {
+			expect(client.reusableBlock()).not.toBeNull()
+		})
+		it('.taxonomy returns default entpoints', () => {
+			expect(client.taxonomy()).not.toBeNull()
+		})
+		describe('.media', () => {
+			it('.create', async () => {
+				const mockFileName = 'mock.file'
+				const data = 'mock_data'
+				await client.media().create(mockFileName, Buffer.from(data))
+				expect(mockFetch).toHaveBeenCalledWith(
+					mockRestBase + END_POINT.MEDIA,
+					{
+						body: data,
+						headers: {
+							'Content-Type': 'image/jpeg',
+							'Content-Disposition':
+								'application/x-www-form-urlencoded; filename="' +
+								mockFileName +
+								'"',
+						},
+						method: 'post',
+					},
+				)
+			})
+			it('throws invalid filename', async () => {
+				const mockFileName = 'mock_file'
+				const data = 'mock_data'
+				await expect(
+					client.media().create(mockFileName, Buffer.from(data)),
+				).rejects.toThrow(
+					new Error(
+						ERROR_MESSAGE.INVALID_FILENAME.replace(
+							'%fileName%',
+							mockFileName,
+						),
+					),
+				)
+			})
+		})
+		describe('.user', () => {
+			it('.findMe', async () => {
+				await client.user().findMe()
+				expect(mockFetch).toHaveBeenCalledWith(
+					mockRestBase + END_POINT.USERS_ME,
+					defaultOptions,
+				)
+			})
+			it('.deleteMe', async () => {
+				await client.user().deleteMe()
+				expect(mockFetch).toHaveBeenCalledWith(
+					mockRestBase + END_POINT.USERS_ME,
+					{
+						headers: undefined,
+						body: undefined,
+						method: 'delete',
+					},
+				)
+			})
+		})
+		describe('.siteSettings', () => {
+			it('.find', async () => {
+				await client.siteSettings().find()
+				expect(mockFetch).toHaveBeenCalledWith(
+					mockRestBase + END_POINT.SETTINGS,
+					defaultOptions,
+				)
+			})
+			it('.update', async () => {
+				await client.siteSettings().update({ use_smilies: false })
+				expect(mockFetch).toHaveBeenCalledWith(
+					mockRestBase + END_POINT.SETTINGS,
+					{
+						headers: undefined,
+						body: JSON.stringify({ use_smilies: false }),
+						method: 'post',
+					},
+				)
+			})
+		})
+		describe('.search', () => {
+			it('defaults correctly', async () => {
+				await client.search()
+				expect(mockFetch).toHaveBeenCalledWith(
+					mockRestBase + END_POINT.SEARCH + '/?',
+					defaultOptions,
+				)
+			})
+			it('searches by string', async () => {
+				await client.search('some string')
+				expect(mockFetch).toHaveBeenCalledWith(
+					mockRestBase + END_POINT.SEARCH + '/?search=some+string',
+					defaultOptions,
+				)
+			})
+			it('can modify params', async () => {
+				await client.search('some string', { per_page: '10' })
+				expect(mockFetch).toHaveBeenCalledWith(
+					mockRestBase +
+						END_POINT.SEARCH +
+						'/?per_page=10&search=some+string',
+					defaultOptions,
+				)
+			})
+		})
+		describe('.postType', () => {
+			it('list', async () => {
+				await client.postType()
+				expect(mockFetch).toHaveBeenCalledWith(
+					mockRestBase + END_POINT.TYPES,
+					defaultOptions,
+				)
+			})
+			it('by slug', async () => {
+				const mockSlug = 'mock_slug'
+				await client.postType(mockSlug)
+				expect(mockFetch).toHaveBeenCalledWith(
+					mockRestBase + END_POINT.TYPES + '/type/' + mockSlug,
+					defaultOptions,
+				)
+			})
+		})
+		describe('.status', () => {
+			it('list', async () => {
+				await client.status()
+				expect(mockFetch).toHaveBeenCalledWith(
+					mockRestBase + END_POINT.STATUSES,
+					defaultOptions,
+				)
+			})
+			it('by slug', async () => {
+				const mockSlug = 'mock_slug'
+				await client.status(mockSlug)
+				expect(mockFetch).toHaveBeenCalledWith(
+					mockRestBase + END_POINT.STATUSES + '/' + mockSlug,
+					defaultOptions,
+				)
+			})
+		})
+		describe('.blockType', () => {
+			it('list', async () => {
+				await client.blockType()
+				expect(mockFetch).toHaveBeenCalledWith(
+					mockRestBase + END_POINT.BLOCK_TYPES,
+					defaultOptions,
+				)
+			})
+			it('by slug', async () => {
+				const mockSlug = 'mock_slug'
+				await client.blockType(mockSlug)
+				expect(mockFetch).toHaveBeenCalledWith(
+					mockRestBase + END_POINT.BLOCK_TYPES + '/' + mockSlug,
+					defaultOptions,
+				)
+			})
+		})
+		describe('.blockDirectory', () => {
+			it('list', async () => {
+				await client.blockDirectory()
+				expect(mockFetch).toHaveBeenCalledWith(
+					mockRestBase + END_POINT.BLOCK_DIRECTORY,
+					defaultOptions,
+				)
+			})
+		})
+		describe('.renderedBlock', () => {
+			it('create (default)', async () => {
+				const mockBody = {
+					name: 'mock-block',
+					postId: 1,
+				}
+				await client.renderedBlock(mockBody)
+				expect(mockFetch).toHaveBeenCalledWith(
+					mockRestBase +
+						END_POINT.BLOCK_RENDERER +
+						'/' +
+						mockBody.name,
+					{
+						headers: undefined,
+						body: JSON.stringify({
+							name: mockBody.name,
+							post_id: mockBody.postId,
+							attributes: [],
+							context: 'view',
+						}),
+						method: 'post',
+					},
+				)
+			})
+			it('create (custom)', async () => {
+				const mockAttribute = 'mock_attribute'
+				const mockBody = {
+					name: 'mock-block',
+					postId: 1,
+					attributes: [mockAttribute],
+				}
+				await client.renderedBlock(mockBody)
+				expect(mockFetch).toHaveBeenCalledWith(
+					mockRestBase +
+						END_POINT.BLOCK_RENDERER +
+						'/' +
+						mockBody.name,
+					{
+						headers: undefined,
+						body: JSON.stringify({
+							name: mockBody.name,
+							post_id: mockBody.postId,
+							attributes: [mockAttribute],
+							context: 'view',
+						}),
+						method: 'post',
+					},
+				)
+			})
+		})
+		describe('.theme', () => {
+			it('list', async () => {
+				await client.theme()
+				expect(mockFetch).toHaveBeenCalledWith(
+					mockRestBase + END_POINT.THEMES,
+					defaultOptions,
+				)
+			})
+		})
+		describe('.plugin', () => {
+			const mockSlug = 'mock-slug'
+			it('.create (inactive)', async () => {
+				await client.plugin().create(mockSlug)
+				expect(mockFetch).toHaveBeenCalledWith(
+					mockRestBase + END_POINT.PLUGINS,
+					{
+						body: JSON.stringify({
+							slug: mockSlug,
+							status: 'inactive',
+						}),
+						headers: undefined,
+						method: 'post',
+					},
+				)
+			})
+			it('.create (active)', async () => {
+				await client.plugin().create(mockSlug, 'active')
+				expect(mockFetch).toHaveBeenCalledWith(
+					mockRestBase + END_POINT.PLUGINS,
+					{
+						body: JSON.stringify({
+							slug: mockSlug,
+							status: 'active',
+						}),
+						headers: undefined,
+						method: 'post',
+					},
+				)
+			})
+			it('.find (list)', async () => {
+				await client.plugin().find()
+				expect(mockFetch).toHaveBeenCalledWith(
+					mockRestBase + END_POINT.PLUGINS,
+					{
+						...defaultOptions,
+						method: 'get',
+					},
+				)
+			})
+			it('.find (single)', async () => {
+				await client.plugin().find(mockSlug)
+				expect(mockFetch).toHaveBeenCalledWith(
+					mockRestBase + END_POINT.PLUGINS + '/' + mockSlug,
+					{
+						...defaultOptions,
+						method: 'get',
+					},
+				)
+			})
+			it('.delete', async () => {
+				await client.plugin().delete(mockSlug)
+				expect(mockFetch).toHaveBeenCalledWith(
+					mockRestBase + END_POINT.PLUGINS + '/' + mockSlug,
+					{
+						body: undefined,
+						headers: undefined,
+						method: 'delete',
+					},
+				)
+			})
+			it('.update (default)', async () => {
+				await client.plugin().update(mockSlug)
+				expect(mockFetch).toHaveBeenCalledWith(
+					mockRestBase + END_POINT.PLUGINS + '/' + mockSlug,
+					{
+						body: JSON.stringify({
+							context: 'view',
+							status: 'inactive',
+						}),
+						headers: undefined,
+						method: 'post',
+					},
+				)
+			})
+			it('.update (custom)', async () => {
+				await client.plugin().update(mockSlug, 'active', 'edit')
+				expect(mockFetch).toHaveBeenCalledWith(
+					mockRestBase + END_POINT.PLUGINS + '/' + mockSlug,
+					{
+						body: JSON.stringify({
+							context: 'edit',
+							status: 'active',
+						}),
+						headers: undefined,
+						method: 'post',
+					},
+				)
+			})
 		})
 	})
 })
