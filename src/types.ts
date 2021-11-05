@@ -303,6 +303,10 @@ export interface WpApiOptions {
 				token: string
 		  }
 		| {
+				type: 'nonce'
+				nonce: string
+		  }
+		| {
 				type: 'none'
 		  }
 	headers?: Record<string, string>

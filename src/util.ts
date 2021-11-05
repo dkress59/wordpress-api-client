@@ -92,20 +92,22 @@ export function getDefaultQuerySingle(query = new URLSearchParams()): string {
 }
 
 export function postCreate<
-	P extends {
-		acf?: Record<string, unknown>
-		content?: { rendered: string }
-		excerpt?: { rendered: string }
-		title?: { rendered: string }
-	},
+	P extends Partial<{
+		acf: Record<string, unknown> | unknown
+		content: { rendered: string }
+		id: number
+		excerpt: { rendered: string }
+		title: { rendered: string }
+	}>,
 >(
-	body: P,
-): P & {
-	content?: string
-	excerpt?: string
-	fields?: Record<string, unknown>
-	title?: string
-} {
+	body: Omit<P, 'id'>,
+): Omit<P, 'id'> &
+	Partial<{
+		content: string
+		excerpt: string
+		fields: Record<string, unknown> | unknown
+		title: string
+	}> {
 	const content = body.content?.rendered
 	const excerpt = body.excerpt?.rendered
 	const title = body.title?.rendered

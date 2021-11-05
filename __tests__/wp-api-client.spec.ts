@@ -97,7 +97,26 @@ describe('WpApiClient', () => {
 				{
 					body: undefined,
 					headers: {
-						Authorization: `Bearer mock_token`,
+						Authorization: 'Bearer mock_token',
+					},
+					method: 'delete',
+				},
+			)
+		})
+		it('correctly sets headers for nonce auth', async () => {
+			const client = new WpApiClient(mockBaseURL, {
+				auth: {
+					type: 'nonce',
+					nonce: 'mock_nonce',
+				},
+			})
+			await client.post().delete(1)
+			expect(mockFetch).toHaveBeenCalledWith(
+				mockRestBase + END_POINT.POSTS + '/1',
+				{
+					body: undefined,
+					headers: {
+						'X-WP-Nonce': 'mock_nonce',
 					},
 					method: 'delete',
 				},

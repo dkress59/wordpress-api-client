@@ -43,7 +43,9 @@ interface PostCollection<P = any> {
 }
 
 export class WpApiClient {
-	protected readonly authHeader?: { Authorization: string }
+	protected readonly authHeader?:
+		| { Authorization: string }
+		| { 'X-WP-Nonce': string }
 	protected readonly headers?: Record<string, string>
 	protected readonly http: FetchClient
 
@@ -63,6 +65,10 @@ export class WpApiClient {
 		if (options.auth?.type === 'jwt')
 			this.authHeader = {
 				Authorization: `Bearer ${options.auth.token}`,
+			}
+		if (options.auth?.type === 'nonce')
+			this.authHeader = {
+				'X-WP-Nonce': options.auth.nonce,
 			}
 		this.headers = options.headers
 		this.http = new FetchClient(
