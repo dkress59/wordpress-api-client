@@ -11,6 +11,16 @@ import {
 import chalk from 'chalk'
 
 describe('util', () => {
+	// eslint-disable-next-line no-console
+	const originalError = console.error
+	beforeAll(() => {
+		// eslint-disable-next-line no-console
+		console.error = jest.fn()
+	})
+	afterAll(() => {
+		// eslint-disable-next-line no-console
+		console.error = originalError
+	})
 	describe('handleWpError', () => {
 		const mockError = 'mock_error'
 		const error1 = undefined

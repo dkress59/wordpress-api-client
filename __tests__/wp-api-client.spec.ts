@@ -39,6 +39,16 @@ class MockClient extends WpApiClient {
 const client = new MockClient()
 
 describe('WpApiClient', () => {
+	// eslint-disable-next-line no-console
+	const originalError = console.error
+	beforeAll(() => {
+		// eslint-disable-next-line no-console
+		console.error = jest.fn()
+	})
+	afterAll(() => {
+		// eslint-disable-next-line no-console
+		console.error = originalError
+	})
 	beforeEach(() => {
 		mockJson.mockResolvedValue(mockData)
 		mockText.mockResolvedValue(JSON.stringify(mockData))

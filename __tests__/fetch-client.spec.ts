@@ -11,6 +11,16 @@ const mockText = jest.fn() as jest.MockedFunction<any>
 const defaultOptions = { body: undefined, headers: {}, method: 'get' }
 
 describe('FetchClient', () => {
+	// eslint-disable-next-line no-console
+	const originalError = console.error
+	beforeAll(() => {
+		// eslint-disable-next-line no-console
+		console.error = jest.fn()
+	})
+	afterAll(() => {
+		// eslint-disable-next-line no-console
+		console.error = originalError
+	})
 	beforeEach(() => {
 		mockJson.mockResolvedValue({ status: 200 })
 		mockText.mockResolvedValue(JSON.stringify({ status: 200 }))

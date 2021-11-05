@@ -74,6 +74,44 @@ export class WpApiClient {
 		)
 	}
 
+	// STATIC
+
+	protected static collection: PostCollection[] = POST_TYPE_MAP.map(
+		postType => ({
+			postType,
+			posts: [],
+		}),
+	)
+
+	public static addCollection(...postTypes: string[]): void {
+		postTypes.forEach(postType =>
+			WpApiClient.collection.push({
+				postType,
+				posts: [],
+			}),
+		)
+	}
+
+	public static clearCollection(...postTypes: string[]): void {
+		WpApiClient.collection = WpApiClient.collection.map(collection => ({
+			...collection,
+			posts:
+				!postTypes.length || postTypes.includes(collection.postType)
+					? []
+					: collection.posts,
+		}))
+	}
+
+	public static collect<P = WPPost>(
+		postType: WP_Post_Type_Name | string,
+	): P[] | undefined {
+		return WpApiClient.collection.find(
+			collection => collection.postType === postType,
+		)?.posts as undefined | P[]
+	}
+
+	// PROTECTED
+
 	protected createEndpointGet<P>(
 		endpoint: string,
 		defaultQuery = new URLSearchParams(),
@@ -175,40 +213,6 @@ export class WpApiClient {
 		}
 	}
 
-	protected static collection: PostCollection[] = POST_TYPE_MAP.map(
-		postType => ({
-			postType,
-			posts: [],
-		}),
-	)
-
-	public static addCollection(...postTypes: string[]): void {
-		postTypes.forEach(postType =>
-			WpApiClient.collection.push({
-				postType,
-				posts: [],
-			}),
-		)
-	}
-
-	public static clearCollection(...postTypes: string[]): void {
-		WpApiClient.collection = WpApiClient.collection.map(collection => ({
-			...collection,
-			posts:
-				!postTypes.length || postTypes.includes(collection.postType)
-					? []
-					: collection.posts,
-		}))
-	}
-
-	public static collect<P = WPPost>(
-		postType: WP_Post_Type_Name | string,
-	): P[] | undefined {
-		return WpApiClient.collection.find(
-			collection => collection.postType === postType,
-		)?.posts as undefined | P[]
-	}
-
 	protected defaultEndpoints<P = WPPost>(
 		endpoint: string,
 		defaultParams?: URLSearchParams,
@@ -260,24 +264,28 @@ export class WpApiClient {
 		}
 	}
 
-	public post<P = WPPost>(): DefaultEndpointWithRevision<P> {
-		return this.addPostType<P>(END_POINT.POSTS, true)
+	// PUBLIC
+
+	public async blockType<P = WP_REST_API_Block_Type>(): Promise<P[]>
+	public async blockType<P = WP_REST_API_Block_Type>(
+		blockType: WP_Post_Type_Name | string,
+	): Promise<P>
+	public async blockType<P = WP_REST_API_Block_Type>(
+		blockType?: WP_Post_Type_Name | string,
+	): Promise<P | P[]> {
+		return blockType
+			? await this.http.get<P>(`${END_POINT.BLOCK_TYPES}/${blockType}`)
+			: await this.http.get<P[]>(END_POINT.BLOCK_TYPES)
 	}
 
-	public page<P = WPPage>(): DefaultEndpointWithRevision<P> {
-		return this.addPostType<P>(END_POINT.PAGES, true)
+	public async blockDirectory<
+		P = WP_REST_API_Block_Directory_Item,
+	>(): Promise<P | P[]> {
+		return await this.http.get<P[]>(END_POINT.BLOCK_DIRECTORY)
 	}
 
 	public comment<P = WPComment>(): DefaultEndpoint<P> {
 		return this.addPostType<P>(END_POINT.COMMENTS, false)
-	}
-
-	public postCategory<P = WPCategory>(): DefaultEndpoint<P> {
-		return this.addPostType<P>(END_POINT.CATEGORIES, false)
-	}
-
-	public postTag<P = WPTag>(): DefaultEndpoint<P> {
-		return this.addPostType<P>(END_POINT.TAGS, false)
 	}
 
 	public media<P = WPMedia>(): {
@@ -330,94 +338,8 @@ export class WpApiClient {
 		}
 	}
 
-	public user<P = WPUser>(): {
-		find: EndpointFind<P>
-		findMe: EndpointFindOnly<P>
-		create: EndpointCreate<P>
-		update: EndpointUpdate<P>
-		delete: EndpointDelete<P>
-		deleteMe: EndpointFindOnly<P>
-	} {
-		const findMe = async () => await this.http.get<P>(END_POINT.USERS_ME)
-		const deleteMe = async () =>
-			await this.http.delete<P>(END_POINT.USERS_ME)
-		return {
-			...this.addPostType<P>(END_POINT.USERS),
-			findMe,
-			deleteMe,
-		}
-	}
-
-	public siteSettings<P = WP_REST_API_Settings>(): {
-		find: EndpointFindOnly<P>
-		update: EndpointUpdatePartial<P>
-	} {
-		return {
-			find: this.createEndpointCustomGet<P, P>(
-				END_POINT.SETTINGS,
-			) as EndpointFindOnly<P>,
-			update: this.createEndpointCustomPost<Partial<P>, P>(
-				END_POINT.SETTINGS,
-			) as EndpointUpdatePartial<P>,
-		}
-	}
-
-	public async search<S = WP_REST_API_Search_Result>(
-		search?: string,
-		params?: Record<string, string> &
-			Partial<{
-				context: string
-				page: string
-				per_page: string
-				type: string
-				subtype: string
-			}>,
-	): Promise<S[]> {
-		if (search) params = { ...params, search }
-		const query = new URLSearchParams(params).toString()
-		return await this.http.get<S[]>(`${END_POINT.SEARCH}/?${query}`)
-	}
-
-	public async postType<P = WP_REST_API_Type>(): Promise<P[]>
-	public async postType<P = WP_REST_API_Type>(
-		postType: WP_Post_Type_Name | string,
-	): Promise<P>
-	public async postType<P = WP_REST_API_Type>(
-		postType?: WP_Post_Type_Name | string,
-	): Promise<P | P[]> {
-		return postType
-			? await this.http.get<P>(`${END_POINT.TYPES}/type/${postType}`)
-			: await this.http.get<P[]>(END_POINT.TYPES)
-	}
-
-	public async status<P = WP_REST_API_Status>(): Promise<P[]>
-	public async status<P = WP_REST_API_Status>(
-		status: WP_Post_Type_Name | string,
-	): Promise<P>
-	public async status<P = WP_REST_API_Status>(
-		status?: WP_Post_Type_Name | string,
-	): Promise<P | P[]> {
-		return status
-			? await this.http.get<P>(`${END_POINT.STATUSES}/${status}`)
-			: await this.http.get<P[]>(END_POINT.STATUSES)
-	}
-
-	public async blockType<P = WP_REST_API_Block_Type>(): Promise<P[]>
-	public async blockType<P = WP_REST_API_Block_Type>(
-		blockType: WP_Post_Type_Name | string,
-	): Promise<P>
-	public async blockType<P = WP_REST_API_Block_Type>(
-		blockType?: WP_Post_Type_Name | string,
-	): Promise<P | P[]> {
-		return blockType
-			? await this.http.get<P>(`${END_POINT.BLOCK_TYPES}/${blockType}`)
-			: await this.http.get<P[]>(END_POINT.BLOCK_TYPES)
-	}
-
-	public async blockDirectory<
-		P = WP_REST_API_Block_Directory_Item,
-	>(): Promise<P | P[]> {
-		return await this.http.get<P[]>(END_POINT.BLOCK_DIRECTORY)
+	public page<P = WPPage>(): DefaultEndpointWithRevision<P> {
+		return this.addPostType<P>(END_POINT.PAGES, true)
 	}
 
 	public plugin<P = WPPlugin>(): {
@@ -462,12 +384,28 @@ export class WpApiClient {
 		}
 	}
 
-	public reusableBlock<P = WP_REST_API_Block>(): DefaultEndpoint<P> {
-		return this.addPostType<P>(END_POINT.EDITOR_BLOCKS, false)
+	public post<P = WPPost>(): DefaultEndpointWithRevision<P> {
+		return this.addPostType<P>(END_POINT.POSTS, true)
 	}
 
-	public taxonomy<P = WPTaxonomy>(): DefaultEndpoint<P> {
-		return this.addPostType<P>(END_POINT.TAXONOMIES, false)
+	public postCategory<P = WPCategory>(): DefaultEndpoint<P> {
+		return this.addPostType<P>(END_POINT.CATEGORIES, false)
+	}
+
+	public postTag<P = WPTag>(): DefaultEndpoint<P> {
+		return this.addPostType<P>(END_POINT.TAGS, false)
+	}
+
+	public async postType<P = WP_REST_API_Type>(): Promise<P[]>
+	public async postType<P = WP_REST_API_Type>(
+		postType: WP_Post_Type_Name | string,
+	): Promise<P>
+	public async postType<P = WP_REST_API_Type>(
+		postType?: WP_Post_Type_Name | string,
+	): Promise<P | P[]> {
+		return postType
+			? await this.http.get<P>(`${END_POINT.TYPES}/type/${postType}`)
+			: await this.http.get<P[]>(END_POINT.TYPES)
 	}
 
 	public async renderedBlock<P = WP_REST_API_Rendered_Block>(
@@ -483,6 +421,74 @@ export class WpApiClient {
 				context: body.context ?? 'view',
 			}),
 		)
+	}
+
+	public reusableBlock<P = WP_REST_API_Block>(): DefaultEndpoint<P> {
+		return this.addPostType<P>(END_POINT.EDITOR_BLOCKS, false)
+	}
+
+	public async search<S = WP_REST_API_Search_Result>(
+		search?: string,
+		params?: Record<string, string> &
+			Partial<{
+				context: string
+				page: string
+				per_page: string
+				type: string
+				subtype: string
+			}>,
+	): Promise<S[]> {
+		if (search) params = { ...params, search }
+		const query = new URLSearchParams(params).toString()
+		return await this.http.get<S[]>(`${END_POINT.SEARCH}/?${query}`)
+	}
+
+	public siteSettings<P = WP_REST_API_Settings>(): {
+		find: EndpointFindOnly<P>
+		update: EndpointUpdatePartial<P>
+	} {
+		return {
+			find: this.createEndpointCustomGet<P, P>(
+				END_POINT.SETTINGS,
+			) as EndpointFindOnly<P>,
+			update: this.createEndpointCustomPost<Partial<P>, P>(
+				END_POINT.SETTINGS,
+			) as EndpointUpdatePartial<P>,
+		}
+	}
+
+	public async status<P = WP_REST_API_Status>(): Promise<P[]>
+	public async status<P = WP_REST_API_Status>(
+		status: WP_Post_Type_Name | string,
+	): Promise<P>
+	public async status<P = WP_REST_API_Status>(
+		status?: WP_Post_Type_Name | string,
+	): Promise<P | P[]> {
+		return status
+			? await this.http.get<P>(`${END_POINT.STATUSES}/${status}`)
+			: await this.http.get<P[]>(END_POINT.STATUSES)
+	}
+
+	public user<P = WPUser>(): {
+		find: EndpointFind<P>
+		findMe: EndpointFindOnly<P>
+		create: EndpointCreate<P>
+		update: EndpointUpdate<P>
+		delete: EndpointDelete<P>
+		deleteMe: EndpointFindOnly<P>
+	} {
+		const findMe = async () => await this.http.get<P>(END_POINT.USERS_ME)
+		const deleteMe = async () =>
+			await this.http.delete<P>(END_POINT.USERS_ME)
+		return {
+			...this.addPostType<P>(END_POINT.USERS),
+			findMe,
+			deleteMe,
+		}
+	}
+
+	public taxonomy<P = WPTaxonomy>(): DefaultEndpoint<P> {
+		return this.addPostType<P>(END_POINT.TAXONOMIES, false)
 	}
 
 	public async theme<P = WPTheme>(): Promise<P[]> {
