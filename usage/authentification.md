@@ -77,19 +77,18 @@ new OrdersDashboard();
 
 ```typescript
 import WpApiClient from 'wordpress-api-client'
-import axios from 'axios'ß´ü
 import { baseURL } from './constants'
 
 const nonce = global.window?.userData?.nonce
 
-const axiosInstance = axios.create()
-axiosInstance.defaults.headers.delete['X-WP-Nonce'] = nonce
-axiosInstance.defaults.headers.post['X-WP-Nonce'] = nonce
-
 export const CmsClient = new WpApiClient(
     baseURL,
-    (message: string) => console.error(message),
-    axiosInstance,
+	{
+		auth: {
+			type: 'nonce',
+			nonce: nonce,
+		},
+	}
 )
 ```
 
@@ -104,20 +103,17 @@ exclusively be used **for development purposes**.
 
 ```typescript
 import WpApiClient from 'wordpress-api-client'
-import axios from 'axios'
 import { baseURL } from './constants'
-
-const axiosInstance = axios.create()
-const authHeader = `Basic ${Buffer.from(
-	'my-username:my-password',
-).toString('base64')}`
-axiosInstance.defaults.headers.delete['Authorization'] = authHeader
-axiosInstance.defaults.headers.post['Authorization'] = authHeader
 
 export const CmsClient = new WpApiClient(
     baseURL,
-    (message: string) => console.error(message),
-    axiosInstance,
+	{
+		auth: {
+			type: 'basic',
+			password: 'admin_password',
+			username: 'admin',
+		},
+	}
 )
 ```
 
@@ -127,13 +123,54 @@ export const CmsClient = new WpApiClient(
 relies on the jsonwebtoken technology, which is a whole other deal in terms of
 security and therefore needs to be set up quite a bit more carefully. Always keep
 in mind that you can whitelist any end point of your WP REST API via PHP
-("Whitelisting Endpoints" in the plugin's documentation).
+("Whitelisting Endpoints" in the plugin's documentation). The routes which need
+authentification can be configured with the [protected](#blacklisting-whitelisting)
+option.
 
-[ ToDo: Docs ]
+```typescript
+import WpApiClient from 'wordpress-api-client'
+import { baseURL } from './constants'
+
+export const CmsClient = new WpApiClient(
+    baseURL,
+	{
+		auth: {
+			type: 'jwt',
+			token: 'my_jsonwebtoken',
+		},
+	}
+)
+```
 
 ## OAuth
 
-[ ToDo: Docs ]
+There is now example, yet, for WP+OAuth. Please report an [issue](https://github.com/dkress59/wordpress-api-client/issues),
+if you really need one!
+
+## Blacklisting / Whitelisting
+
+Routes, which require authentification can be set with the `protected` option.
+You can extend and/or filter the defaults, like this:
+
+```typescript
+import WpApiClient from 'wordpress-api-client'
+import { END_POINT_PROTECTED } from 'wordpress-api-client/constants'
+
+export const CmsClient = new WpApiClient(
+    baseURL,
+	{
+		auth: {
+			type: 'jwt',
+			token: 'my_jsonwebtoken',
+		},
+		protected: {
+			GET: [ ...END_POINT_PROTECTED.GET, 'wp/v2/orders' ],
+			POST: [ ...END_POINT_PROTECTED.POST, 'wp/v2/orders' ],
+			DELETE: [ ...END_POINT_PROTECTED.DELETE, 'wp/v2/orders' ],
+		}
+	}
+)
+```
 
 ## User Role Restriction
 

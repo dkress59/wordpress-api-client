@@ -24,12 +24,7 @@ CmsClient.page<CustomPage>().update()
 Or, you might prefer to do it this way:
 
 ```typescript
-import WpApiClient, {
-    EndpointCreate,
-    EndpointDelete,
-    EndpointFind,
-    EndpointUpdate
-} from 'wordpress-api-client'
+import WpApiClient, { DefaultEndpointWithRevision } from 'wordpress-api-client'
 import { baseURL } from './constants'
 import { CustomPage } from './types'
 
@@ -39,15 +34,10 @@ type CustomPage = WPPage & Required<{
 
 export class CmsClient extends WpApiClient {
     constructor() {
-        super(baseURL, (message: string) => console.error(message))
+        super(baseURL)
     }
 
-    public page<P = CustomPage>(): {
-        create: EndpointCreate<P>
-        delete: EndpointDelete<P>
-        find: EndpointFind<P>
-        update: EndpointUpdate<P>
-    } {
+    public page<P = CustomPage>(): DefaultEndpointWithRevision<P> {
         return super.page<P>()
     }
 }
@@ -66,10 +56,7 @@ but rather an `ACFPost` which you can import from this library
 
 ```typescript
 import WpApiClient, {
-    EndpointCreate,
-    EndpointDelete,
-    EndpointFind,
-    EndpointUpdate,
+    DefaultEndpointWithRevision,
     WPPost,
 } from 'wordpress-api-client'
 import { baseURL } from './constants'
@@ -84,18 +71,10 @@ interface PostFields {
 
 export class CmsClient extends WpApiClient {
     constructor() {
-        super(
-            baseURL,
-            (message: string) => console.error(message),
-        )
+        super(baseURL)
     }
 
-    public post<P = WPPost<PostFields>>(): {
-        create: EndpointCreate<P>
-        delete: EndpointDelete<P>
-        find: EndpointFind<P>
-        update: EndpointUpdate<P>
-    } {
+    public post<P = WPPost<PostFields>>(): DefaultEndpointWithRevision<P> {
         return super.post<P>()
     }
 }

@@ -1,7 +1,7 @@
 <!-- ./_sidebar.md -->
 
 * [Start](/ "WordPress API Client Documentation")
-* [Usage](usage/ "Installation")
+* Usage
   * [Default Methods](usage/default-methods.md "Default Methods")
   * [Extending Default Routes](usage/extending-default-routes.md)
   * [Custom Post Types](usage/custom-post-types.md)

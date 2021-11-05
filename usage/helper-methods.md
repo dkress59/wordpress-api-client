@@ -9,6 +9,8 @@ The WpApiClient class uses three utility types and four helper methods:
 - createEndpointPost
 - createEndpointCustomGet
 - createEndpointCustomPost
+- defaultEndpoints (ToDo: Docs)
+- addPostType (ToDo: Docs)
 
 To understand `.createEndpointGet()` and `.createEndpointPost()`, one needs to
 know a few things about the WordPress API itself: To retreive a list of posts,

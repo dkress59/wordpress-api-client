@@ -58,11 +58,6 @@ It is fairly easy to implement this in our WP-API Client:
 import WpApiClient from 'wordpress-api-client'
 const EP_MENU = 'my-plugin/v1/menu'
 
-interface WPMenu {
-    primary: WPMenuItem[]
-    footer: WPMenuItem[]
-}
-
 interface WPMenuItem {
     attr_title: string
     classes: string[]
@@ -75,6 +70,11 @@ interface WPMenuItem {
     target: '' | '_blank'
     title: string
     // …
+}
+
+interface WPMenu {
+    primary: WPMenuItem[]
+    footer: WPMenuItem[]
 }
 
 export class CmsClient extends WpApiClient {

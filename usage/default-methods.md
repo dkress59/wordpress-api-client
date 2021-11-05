@@ -17,19 +17,19 @@ client.post().create()
 client.post().find()
 client.post().delete()
 client.post().update()
-client.post().revision.create()
-client.post().revision.find()
-client.post().revision.delete()
-client.post().revision.update()
+client.post().revision().create()
+client.post().revision().find()
+client.post().revision().delete()
+client.post().revision().update()
 
 client.page().create()
 client.page().find()
 client.page().delete()
 client.page().update()
-client.page().revision.create()
-client.page().revision.find()
-client.page().revision.delete()
-client.page().revision.update()
+client.page().revision().create()
+client.page().revision().find()
+client.page().revision().delete()
+client.page().revision().update()
 
 client.comment().create()
 client.comment().find()
@@ -91,10 +91,7 @@ like to change the defaults for the `.post` methods. But you can also
 ```typescript
 import WpApiClient, {
 	END_POINT,
-    EndpointCreate,
-    EndpointDelete,
-    EndpointFind,
-    EndpointUpdate,
+    DefaultEndpointWithRevision,
 	WPPost,
 } from 'wordpress-api-client'
 import { baseURL } from './constants'
@@ -105,18 +102,7 @@ export class CmsClient extends WpApiClient {
         super(baseURL)
     }
 
-    public post<P = WPPost>(): {
-        create: EndpointCreate<P>
-        delete: EndpointDelete<P>
-        find: EndpointFind<P>
-        update: EndpointUpdate<P>
-		revision: {
-			create: EndpointCreate<P>
-			delete: EndpointDelete<P>
-			find: EndpointFind<P>
-			update: EndpointUpdate<P>
-		}
-    } {
+    public post<P = WPPost>(): DefaultEndpointWithRevision<P> {
 		const queryParams = new URLSearchParams({
 			_embed: 'true',
 			order: 'asc',
@@ -155,14 +141,24 @@ an instance of URLSearchParams to it, as the first parameter:
 const posts = await client.post().find(new URLSearchParams({ per_page: '12' }))
 ```
 
+### find revisios
+
+You cannot retrieve a list of revisions of all posts, but you can retreive all
+revisions for a specific post:
+
+```typescript
+const revisions = await client.post(1).revision().find()
+```
+
 ## .create(body: WPCreate<WPPost>)
 
-When creating new content you need to be aware of a couple of things:
+When creating new content you should be aware of a couple of things, most of which
+an internal function of this package automatically takes care of:
 
 - You need to be [authenticated](usage/authentification.md)
-- The `id` field is invalid (needs to be designated by WP)
-- Unlike the response typings, the fields `title`, `content` and `excerpt` of the
-  request body only accept plain HTML strings
+- The `id` field must be omitted (needs to be designated by WP)
+- Unlike the API response objects, the fields `title`, `content` and `excerpt`
+  of the request body only accept plain HTML strings
 - Taxonomies can be assigned by referencing the respective term IDs, e.g.
   `categories: [ 2, 34 ], tags: [5, 67]`
 
@@ -214,16 +210,26 @@ you do not have to provide a parameter – but you need to be [authenticated](us
 
 ## .search()
 
-[ ToDo: Docs ]
+You can simply search by text and/or modify the search query:
+
+```typescript
+const searchResults = await client.search(
+	'Search by string.',
+	new URLSearchParams({ per_page: '25' }),
+)
+```
+
+The response is an array of `WP_REST_API_Search_Result`s.
 
 ---
 
 ## .plugin()
 
-[ ToDo: Docs ]
+You can list, install, activate and deactivate plugins with the client, although
+you need to be [authenticated](usage/authentification.md) to use this method.
 
 ---
 
 ## .theme()
 
-The pointers above, for the `.plugin` method, are also valid for `.theme`.
+The `.theme` method only returns a list of the installed themes.
