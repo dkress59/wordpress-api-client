@@ -46,22 +46,22 @@ of your needs:
 import WpApiClient from 'wordpress-api-client'
 
 function getContent(): {
-	aboutPage: WPPage | null
-	contactPage: WPPage | null
-	frontPage: WPPage | null
-	categories: WPCategory[]
-	recent25posts: WPPost[]
+    aboutPage: WPPage | null
+    contactPage: WPPage | null
+    frontPage: WPPage | null
+    categories: WPCategory[]
+    recent25posts: WPPost[]
 } {
-	const client = new WpApiClient('https://my-wordpress-website.com')
+    const client = new WpApiClient('https://my-wordpress-website.com')
 
-	const [aboutPage, contactPage, frontPage] = await client.page().find(12, 23, 34)
-	const categories = await client.postCategories().find()
-	const recent25posts = await client.posts().find(new URLSearchParams({
-		order: 'desc',
-		per_page: '25',
-	}))
+    const [aboutPage, contactPage, frontPage] = await client.page().find(12, 23, 34)
+    const categories = await client.postCategories().find()
+    const recent25posts = await client.posts().find(new URLSearchParams({
+        order: 'desc',
+        per_page: '25',
+    }))
 
-	return { frontPage, aboutPage, contactPage, categories, recent25Posts }
+    return { frontPage, aboutPage, contactPage, categories, recent25Posts }
 }
 ```
 
@@ -76,25 +76,25 @@ const EP_PRODUCTS = 'wp/v2/products'
 const EP_MENU = 'demo-plugin/v1/menu'
 
 export class WpClient extends WpApiClient {
-	constructor() {
-		super('http://localhost:8080', {
-			auth: {
-				type: 'basic',
-				password: 'password',
-				username: 'admin',
-			},
-		})
-	}
+    constructor() {
+        super('http://localhost:8080', {
+            auth: {
+                type: 'basic',
+                password: 'password',
+                username: 'admin',
+            },
+        })
+    }
 
-	post<P = CustomPost>(): DefaultEndpointWithRevision<P> {
-		return super.post<P>()
-	}
+    post<P = CustomPost>(): DefaultEndpointWithRevision<P> {
+        return super.post<P>()
+    }
 
-	public product(): DefaultEndpointWithRevision<WPProduct> {
-		return this.addPostType<WPProduct>(EP_PRODUCTS, true)
-	}
+    public product(): DefaultEndpointWithRevision<WPProduct> {
+        return this.addPostType<WPProduct>(EP_PRODUCTS, true)
+    }
 
-	menu = this.createEndpointCustomGet<WPMenu>(EP_MENU)
+    menu = this.createEndpointCustomGet<WPMenu>(EP_MENU)
 }
 ```
 
