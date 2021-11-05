@@ -1,3 +1,4 @@
+import { PostFields } from './types'
 import { URLSearchParams } from 'url'
 import { WpClient } from './WpClient'
 import fsPromise from 'fs/promises'
@@ -22,15 +23,18 @@ export async function App(req: http.IncomingMessage, res: http.ServerResponse) {
 			res.write(
 				JSON.stringify(
 					await client.post().create({
-						title: 'Created Post',
-						content: '<p><strong>Demo Content</strong></p>',
+						title: { rendered: 'Created Post' },
+						content: {
+							rendered: '<p><strong>Demo Content</strong></p>',
+							protected: false,
+						},
 						status: 'publish',
-						fields: {
+						acf: {
 							sidebarOptions: {
 								sidebar_id: 1,
 								layout: 'b',
 							},
-						},
+						} as PostFields,
 					}),
 				),
 			)
@@ -49,7 +53,7 @@ export async function App(req: http.IncomingMessage, res: http.ServerResponse) {
 				JSON.stringify(
 					await client.post().update(
 						{
-							title: 'Hello Update!',
+							title: { rendered: 'Hello Update!' },
 							slug: 'hello-update',
 							status: 'publish',
 						},
@@ -107,9 +111,49 @@ export async function App(req: http.IncomingMessage, res: http.ServerResponse) {
 			)
 			break
 
-		// ToDo https://github.com/dkress59/wordpress-api-client/projects/1#card-70917987
 		case '/get-user':
 			res.write(JSON.stringify(await client.user().findMe()))
+			break
+
+		case '/block-directory':
+			res.write(JSON.stringify(await client.blockDirectory()))
+			break
+
+		case '/block-type':
+			res.write(JSON.stringify(await client.blockType()))
+			break
+
+		case '/comments':
+			res.write(JSON.stringify(await client.comment().find()))
+			break
+
+		case '/plugins':
+			res.write(JSON.stringify(await client.plugin().find()))
+			break
+
+		case '/plugin-activate':
+			res.write(
+				JSON.stringify(
+					await client
+						.plugin()
+						.update(
+							'animate-wp-blocks/animate-wp-blocks',
+							'active',
+						),
+				),
+			)
+			break
+
+		case '/categories':
+			res.write(JSON.stringify(await client.postCategory().find()))
+			break
+
+		case '/tags':
+			res.write(JSON.stringify(await client.postTag().find()))
+			break
+
+		case '/post-types':
+			res.write(JSON.stringify(await client.postType()))
 			break
 	}
 	res.end()

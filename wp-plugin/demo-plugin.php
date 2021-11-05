@@ -3,7 +3,7 @@
 Plugin Name: Demo Plugin
 Plugin URI:
 Description: WP API Client Demo
-Version: 0.1.5.1
+Version: 0.2.0.1
 Author: Damian Kress
 Author URI: http://damiankress.de
 Text Domain: client-demo

@@ -25,7 +25,7 @@
     "wpackagist-plugin/advanced-custom-fields": "5.10.2",
     "wpackagist-plugin/animate-wp-blocks": "2.0.2",
     "wpackagist-plugin/jwt-auth": "2.0.0",
-    "wpackagist-plugin/wordpress-seo": "17.4",
+    "wpackagist-plugin/wordpress-seo": "17.5",
     "wpackagist-theme/twentytwentyone": "1.4"
   },
   "extra": {

@@ -1,6 +1,6 @@
 import { WPPost } from 'wordpress-api-client'
 
-interface PostFields {
+export interface PostFields {
 	coverImage: string
 	sidebarOptions: {
 		sidebar_id: number

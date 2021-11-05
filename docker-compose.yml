@@ -19,17 +19,17 @@ services:
     networks:
       - wpsite
 
-  #  phpmyadmin:
-  #    image: phpmyadmin/phpmyadmin
-  #    depends_on:
-  #      - db
-  #    ports:
-  #      - '8000:80'
-  #    environment:
-  #      PMA_HOST: db
-  #      MYSQL_ROOT_PASSWORD: password
-  #    networks:
-  #      - wpsite
+  #phpmyadmin:
+  #  image: phpmyadmin/phpmyadmin
+  #  depends_on:
+  #    - db
+  #  ports:
+  #    - '8000:80'
+  #  environment:
+  #    PMA_HOST: db
+  #    MYSQL_ROOT_PASSWORD: password
+  #  networks:
+  #    - wpsite
 
   nginx:
     image: nginx:1.21.3-alpine
@@ -84,8 +84,3 @@ networks:
 volumes:
   db:
   wordpress:
-    #driver_opts:
-    #  type: none
-    #  #NOTE needs full path (~ doesn't work)
-    #  device: /Users/sprylab/Private/wordpress-api-client-demo/wp
-    #  o: bind
