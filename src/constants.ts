@@ -35,7 +35,7 @@ export const ERROR_MESSAGE = {
 }
 
 export const END_POINT_PROTECTED: BlackWhiteList = {
-	GET: [END_POINT.USERS_ME],
+	GET: [END_POINT.USERS_ME, END_POINT.PLUGINS],
 	POST: [...Object.values(END_POINT)],
 	DELETE: [...Object.values(END_POINT)],
 }

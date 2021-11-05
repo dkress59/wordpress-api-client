@@ -378,12 +378,7 @@ export class WpApiClient {
 				context: 'view' | 'embed' | 'edit' = 'view',
 			) =>
 				await this.http.post<P>(
-					`${END_POINT.PLUGINS}/${plugin}`,
-					undefined,
-					JSON.stringify({
-						context,
-						status,
-					}),
+					`${END_POINT.PLUGINS}/${plugin}?status=${status}&context=${context}`,
 				),
 			delete: async (plugin: string) =>
 				await this.http.delete<P>(`${END_POINT.PLUGINS}/${plugin}`),
