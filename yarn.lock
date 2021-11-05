@@ -46,7 +46,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/core@npm:7.16.0":
+"@babel/core@npm:*, @babel/core@npm:7.16.0":
   version: 7.16.0
   resolution: "@babel/core@npm:7.16.0"
   dependencies:
@@ -2706,7 +2706,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint@npm:8.1.0":
+"eslint@npm:*, eslint@npm:8.1.0":
   version: 8.1.0
   resolution: "eslint@npm:8.1.0"
   dependencies:
@@ -5092,7 +5092,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prettier@npm:2.4.1":
+"prettier@npm:*, prettier@npm:2.4.1":
   version: 2.4.1
   resolution: "prettier@npm:2.4.1"
   bin:
