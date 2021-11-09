@@ -122,6 +122,20 @@ describe('WpApiClient', () => {
 				},
 			)
 		})
+		it('does not set headers for undefined auth', async () => {
+			const client = new WpApiClient(mockBaseURL, {
+				auth: undefined,
+			})
+			await client.post().delete(1)
+			expect(mockFetch).toHaveBeenCalledWith(
+				mockRestBase + END_POINT.POSTS + '/1',
+				{
+					body: undefined,
+					headers: {},
+					method: 'delete',
+				},
+			)
+		})
 		it('can set/override default headers', async () => {
 			const client = new WpApiClient(mockBaseURL, {
 				auth: {
@@ -624,13 +638,18 @@ describe('WpApiClient', () => {
 			it('.update (default)', async () => {
 				await client.plugin().update(mockSlug)
 				expect(mockFetch).toHaveBeenCalledWith(
-					mockRestBase + END_POINT.PLUGINS + '/' + mockSlug,
+					mockRestBase +
+						END_POINT.PLUGINS +
+						'/' +
+						mockSlug +
+						'?' +
+						new URLSearchParams({
+							status: 'inactive',
+							context: 'view',
+						}).toString(),
 					{
 						...defaultOptions,
-						body: JSON.stringify({
-							context: 'view',
-							status: 'inactive',
-						}),
+						body: undefined,
 						method: 'post',
 					},
 				)
@@ -638,13 +657,18 @@ describe('WpApiClient', () => {
 			it('.update (custom)', async () => {
 				await client.plugin().update(mockSlug, 'active', 'edit')
 				expect(mockFetch).toHaveBeenCalledWith(
-					mockRestBase + END_POINT.PLUGINS + '/' + mockSlug,
+					mockRestBase +
+						END_POINT.PLUGINS +
+						'/' +
+						mockSlug +
+						'?' +
+						new URLSearchParams({
+							status: 'active',
+							context: 'edit',
+						}).toString(),
 					{
 						...defaultOptions,
-						body: JSON.stringify({
-							context: 'edit',
-							status: 'active',
-						}),
+						body: undefined,
 						method: 'post',
 					},
 				)
