@@ -4,25 +4,27 @@ import { URLSearchParams } from 'url'
 import { isObject } from '@tool-belt/type-predicates'
 import chalk from 'chalk'
 
+// FIXME: weird type casting issue
 // eslint-disable-next-line sonarjs/cognitive-complexity
-function getDataFromResponse(
-	json: null | string | Record<string, unknown>,
-	text: string,
-): string {
-	const isJson = !!json && typeof json === 'object'
-	const hasError = isJson && 'error' in json
-	const errorIsString = hasError && typeof json.error === 'string'
-	const hasMessage = isJson && 'message' in json
-	const messageIsArray = hasMessage && Array.isArray(json.message)
-	const messageIsString = hasMessage && typeof json.message === 'string'
+function getDataFromResponse(json: unknown, text: string): string {
+	if (!json) return text
+	const isJson = typeof json === 'object'
+	const hasError = isJson && 'error' in (json as { error: string })
+	const errorIsString =
+		hasError && typeof (json as { error: string }).error === 'string'
+	const hasMessage = isJson && 'message' in (json as { message: string })
+	const messageIsArray =
+		hasMessage && Array.isArray((json as { message: string[] }).message)
+	const messageIsString =
+		hasMessage && typeof (json as { message: string }).message === 'string'
 	return !isJson
 		? text
 		: hasError && errorIsString
-		? (json.error as string)
+		? (json as { error: string }).error
 		: hasMessage && messageIsArray
-		? (json.message as string[])[0]
+		? (json as { message: string[] }).message[0]!
 		: hasMessage && messageIsString
-		? (json.message as string)
+		? (json as { message: string }).message
 		: text
 }
 

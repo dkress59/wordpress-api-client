@@ -2,6 +2,10 @@
 
 The current progress can be tracked [here](https://github.com/dkress59/wordpress-api-client/projects/1)
 
+- v.0.2.1 minor fixes
+  - type casting
+  - .plugin
+
 - v.0.2.0 cross-fetch and advanced options
   - less overhead by replacing axios with a fetch client
   - authorisation is now handled via constructor arguments and a blacklist
