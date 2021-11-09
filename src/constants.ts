@@ -1,5 +1,3 @@
-import { BlackWhiteList } from '.'
-
 export const END_POINT = {
 	BLOCK_DIRECTORY: 'wp/v2/block-directory/search',
 	BLOCK_RENDERER: 'wp/v2/block-renderer',
@@ -34,13 +32,13 @@ export const ERROR_MESSAGE = {
 		'[WpApiClient Error] The fileName must include the file extension (e.g.: %fileName%.jpg).',
 }
 
-export const END_POINT_PROTECTED: BlackWhiteList = {
+export const END_POINT_PROTECTED = {
 	GET: [END_POINT.USERS_ME, END_POINT.PLUGINS],
 	POST: [...Object.values(END_POINT)],
 	DELETE: [...Object.values(END_POINT)],
 }
 
-export const END_POINT_PUBLIC: BlackWhiteList = {
+export const END_POINT_PUBLIC = {
 	GET: Object.values(END_POINT).filter(uri => uri !== END_POINT.USERS_ME),
 	POST: [],
 	DELETE: [],

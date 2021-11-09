@@ -4,7 +4,8 @@ The current progress can be tracked [here](https://github.com/dkress59/wordpress
 
 - v.0.2.1 minor fixes
   - type casting
-  - .plugin
+  - .plugin fix
+  - minor fixes
 
 - v.0.2.0 cross-fetch and advanced options
   - less overhead by replacing axios with a fetch client
