@@ -32,10 +32,10 @@ describe('FetchClient', () => {
 		} as Response)
 	})
 	describe('constructor', () => {
-		it('validates baseURL', () => {
+		it('validates baseUrl', () => {
 			expect(() => new FetchClient(mockBaseURL)).not.toThrow()
 		})
-		it('throws invalid baseURL', () => {
+		it('throws invalid baseUrl', () => {
 			expect(() => new FetchClient(new URL('invalid_url'))).toThrow()
 		})
 		describe('can set auth headers', () => {

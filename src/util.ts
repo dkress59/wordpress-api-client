@@ -1,8 +1,7 @@
-import { BlackWhiteList } from '.'
+import { BlackWhiteList } from './types'
 import { ERROR_MESSAGE } from './constants'
 import { URLSearchParams } from 'url'
 import { isObject } from '@tool-belt/type-predicates'
-import chalk from 'chalk'
 
 // FIXME: weird type casting issue
 // eslint-disable-next-line sonarjs/cognitive-complexity
@@ -57,13 +56,13 @@ export async function handleWpError(
 	}
 
 	// eslint-disable-next-line no-console
-	console.error(chalk.blue(message))
+	console.error(message)
 	if (onError) onError(message)
 	else throw new Error(message)
 	return Promise.reject(message)
 }
 
-/** returns validated baseURL without trailing slash */
+/** returns validated baseUrl without trailing slash */
 export function validateBaseUrl(url: string): string {
 	if (!url.startsWith('http://') && !url.startsWith('https://'))
 		throw new Error(ERROR_MESSAGE.INVALID_BASEURL.replace('%url%', url))

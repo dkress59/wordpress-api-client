@@ -291,8 +291,7 @@ export interface RenderedBlockDto {
 }
 
 export interface WpApiOptions {
-	auth:
-		| undefined
+	auth?:
 		| {
 				type: 'basic'
 				username: string
@@ -313,6 +312,7 @@ export interface WpApiOptions {
 	onError?: (message: string) => void
 	protected?: BlackWhiteList
 	public?: BlackWhiteList
+	restBase?: string
 }
 
 export interface BlackWhiteList {

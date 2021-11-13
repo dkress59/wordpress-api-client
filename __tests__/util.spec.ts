@@ -8,7 +8,6 @@ import {
 	postCreate,
 	validateBaseUrl,
 } from '../src/util'
-import chalk from 'chalk'
 
 describe('util', () => {
 	// eslint-disable-next-line no-console
@@ -60,9 +59,7 @@ describe('util', () => {
 			await expect(handleWpError(null)).rejects.toThrow(
 				new Error(ERROR_MESSAGE.GENERIC),
 			)
-			expect(mockConsoleError).toHaveBeenCalledWith(
-				chalk.blue(ERROR_MESSAGE.GENERIC),
-			)
+			expect(mockConsoleError).toHaveBeenCalledWith(ERROR_MESSAGE.GENERIC)
 			// eslint-disable-next-line no-console
 			console.error = originalError
 		})

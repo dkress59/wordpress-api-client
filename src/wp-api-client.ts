@@ -18,6 +18,7 @@ import {
 	WPTaxonomy,
 	WPTheme,
 	WPUser,
+	WpApiOptions,
 } from './types'
 import { END_POINT, END_POINT_PROTECTED, ERROR_MESSAGE } from './constants'
 import { FetchClient } from './fetch-client'
@@ -34,7 +35,6 @@ import {
 	WP_REST_API_Status,
 	WP_REST_API_Type,
 } from 'wp-types'
-import { WpApiOptions } from '.'
 import { getDefaultQueryList, getDefaultQuerySingle, postCreate } from './util'
 
 interface PostCollection<P = any> {
@@ -48,9 +48,10 @@ export class WpApiClient {
 		| { 'X-WP-Nonce': string }
 	protected readonly headers?: Record<string, string>
 	protected readonly http: FetchClient
+	protected readonly baseUrl?: URL
 
 	constructor(
-		baseURL: string,
+		baseUrl: string,
 		options: WpApiOptions = {
 			auth: { type: 'none' },
 			protected: END_POINT_PROTECTED,
@@ -70,9 +71,10 @@ export class WpApiClient {
 			this.authHeader = {
 				'X-WP-Nonce': options.auth.nonce,
 			}
+		this.baseUrl = new URL(options.restBase ?? 'wp-json', baseUrl)
 		this.headers = options.headers
 		this.http = new FetchClient(
-			new URL('wp-json', baseURL),
+			this.baseUrl,
 			options.onError,
 			this.headers,
 			this.authHeader,

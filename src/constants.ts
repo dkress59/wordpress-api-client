@@ -27,7 +27,7 @@ export const ERROR_MESSAGE = {
 	GENERIC: '[WpApiClient Error] Misconfiguration?',
 	ID_REQUIRED:
 		'[WpApiClient Error] At least one ID must be provided to .delete()',
-	INVALID_BASEURL: '[WpApiClient Error] Invalid baseURL: %url%',
+	INVALID_BASEURL: '[WpApiClient Error] Invalid baseUrl: %url%',
 	INVALID_FILENAME:
 		'[WpApiClient Error] The fileName must include the file extension (e.g.: %fileName%.jpg).',
 }

@@ -3,10 +3,10 @@ import { handleWpError, isProtected, validateBaseUrl } from './util'
 import fetch from 'cross-fetch'
 
 export class FetchClient {
-	baseURL: string
+	baseUrl: string
 
 	constructor(
-		baseURL: URL,
+		baseUrl: URL,
 		public onError: (message: string) => void = (message: string) => {
 			throw new Error(message)
 		},
@@ -14,7 +14,7 @@ export class FetchClient {
 		public authHeader: Record<string, string> = {},
 		public protectedRoutes = END_POINT_PROTECTED,
 	) {
-		this.baseURL = validateBaseUrl(baseURL.toString()) + '/'
+		this.baseUrl = validateBaseUrl(baseUrl.toString()) + '/'
 	}
 
 	private async fetch<T>(
@@ -28,7 +28,7 @@ export class FetchClient {
 			headers = { ...this.headers, ...headers }
 			if (isProtected(url, method, this.protectedRoutes))
 				headers = { ...this.authHeader, ...headers }
-			const response = await fetch(this.baseURL + url, {
+			const response = await fetch(this.baseUrl + url, {
 				body,
 				headers,
 				method,
