@@ -3,24 +3,14 @@ import { URLSearchParams } from 'url'
 import {
 	getDefaultQueryList,
 	getDefaultQuerySingle,
-	handleWpError,
+	getErrorMessage,
 	isProtected,
 	postCreate,
 	validateBaseUrl,
 } from '../src/util'
 
 describe('util', () => {
-	// eslint-disable-next-line no-console
-	const originalError = console.error
-	beforeAll(() => {
-		// eslint-disable-next-line no-console
-		console.error = jest.fn()
-	})
-	afterAll(() => {
-		// eslint-disable-next-line no-console
-		console.error = originalError
-	})
-	describe('handleWpError', () => {
+	describe('getErrorMessage', () => {
 		const mockError = 'mock_error'
 		const error1 = undefined
 		const error2 = null
@@ -50,138 +40,74 @@ describe('util', () => {
 			}
 		}
 
-		it('logs error to console, by default', async () => {
-			// eslint-disable-next-line no-console
-			const originalError = console.error
-			const mockConsoleError = jest.fn()
-			// eslint-disable-next-line no-console
-			console.error = mockConsoleError
-			await expect(handleWpError(null)).rejects.toThrow(
-				new Error(ERROR_MESSAGE.GENERIC),
-			)
-			expect(mockConsoleError).toHaveBeenCalledWith(ERROR_MESSAGE.GENERIC)
-			// eslint-disable-next-line no-console
-			console.error = originalError
-		})
-		it('uses onError, if provided, instead of console.error', async () => {
-			let error = ''
-			function onError(message: string) {
-				error = message
-			}
-			await expect(
-				handleWpError(() => 'return_value', onError),
-			).rejects.not.toThrow()
-			expect(error).toEqual(ERROR_MESSAGE.GENERIC)
-		})
-
 		it('response: undefined', async () => {
-			await expect(
-				async () => await handleWpError(mockResponse(error1)),
-			).rejects.toThrow(
-				new Error(
-					ERROR_MESSAGE.ERROR_RESPONSE.replace('%url%', 'UNKNOWN')
-						.replace('%error%', '"undefined"')
-						.replace('%status%', '500'),
-				),
+			expect(await getErrorMessage(mockResponse(error1))).toEqual(
+				ERROR_MESSAGE.ERROR_RESPONSE.replace('%url%', 'UNKNOWN')
+					.replace('%error%', '"undefined"')
+					.replace('%status%', '500'),
 			)
 		})
 		it('response: null', async () => {
-			await expect(
-				async () => await handleWpError(mockResponse(error2)),
-			).rejects.toThrow(
-				new Error(
-					ERROR_MESSAGE.ERROR_RESPONSE.replace('%url%', 'UNKNOWN')
-						.replace('%error%', '"null"')
-						.replace('%status%', '500'),
-				),
+			expect(await getErrorMessage(mockResponse(error2))).toEqual(
+				ERROR_MESSAGE.ERROR_RESPONSE.replace('%url%', 'UNKNOWN')
+					.replace('%error%', '"null"')
+					.replace('%status%', '500'),
 			)
 		})
 		it('response: "null"', async () => {
-			await expect(
-				async () => await handleWpError(mockResponse(error3)),
-			).rejects.toThrow(
-				new Error(
-					ERROR_MESSAGE.ERROR_RESPONSE.replace('%url%', 'UNKNOWN')
-						.replace('%error%', '"null"')
-						.replace('%status%', '500'),
-				),
+			expect(await getErrorMessage(mockResponse(error3))).toEqual(
+				ERROR_MESSAGE.ERROR_RESPONSE.replace('%url%', 'UNKNOWN')
+					.replace('%error%', '"null"')
+					.replace('%status%', '500'),
 			)
 		})
 		it('response: ""', async () => {
-			await expect(
-				async () => await handleWpError(mockResponse(error4)),
-			).rejects.toThrow(
-				new Error(
-					ERROR_MESSAGE.ERROR_RESPONSE.replace('%url%', 'UNKNOWN')
-						.replace('%error%', '""')
-						.replace('%status%', '500'),
-				),
+			expect(await getErrorMessage(mockResponse(error4))).toEqual(
+				ERROR_MESSAGE.ERROR_RESPONSE.replace('%url%', 'UNKNOWN')
+					.replace('%error%', '""')
+					.replace('%status%', '500'),
 			)
 		})
 		it('response: new Error()', async () => {
-			await expect(
-				async () => await handleWpError(mockResponse(error5)),
-			).rejects.toThrow(
-				new Error(
-					ERROR_MESSAGE.ERROR_RESPONSE.replace('%url%', 'UNKNOWN')
-						.replace('%error%', '"mock_error"')
-						.replace('%status%', '500'),
-				),
+			expect(await getErrorMessage(mockResponse(error5))).toEqual(
+				ERROR_MESSAGE.ERROR_RESPONSE.replace('%url%', 'UNKNOWN')
+					.replace('%error%', '"mock_error"')
+					.replace('%status%', '500'),
 			)
 		})
 		it('response: error.error', async () => {
-			await expect(
-				async () => await handleWpError(mockResponse(error6)),
-			).rejects.toThrow(
-				new Error(
-					ERROR_MESSAGE.ERROR_RESPONSE.replace('%url%', 'UNKNOWN')
-						.replace('%error%', '"mock_error"')
-						.replace('%status%', '500'),
-				),
+			expect(await getErrorMessage(mockResponse(error6))).toEqual(
+				ERROR_MESSAGE.ERROR_RESPONSE.replace('%url%', 'UNKNOWN')
+					.replace('%error%', '"mock_error"')
+					.replace('%status%', '500'),
 			)
 		})
 		it('response: error.message', async () => {
-			await expect(
-				async () => await handleWpError(mockResponse(error7)),
-			).rejects.toThrow(
-				new Error(
-					ERROR_MESSAGE.ERROR_RESPONSE.replace('%url%', 'UNKNOWN')
-						.replace('%error%', '"mock_error"')
-						.replace('%status%', '500'),
-				),
+			expect(await getErrorMessage(mockResponse(error7))).toEqual(
+				ERROR_MESSAGE.ERROR_RESPONSE.replace('%url%', 'UNKNOWN')
+					.replace('%error%', '"mock_error"')
+					.replace('%status%', '500'),
 			)
 		})
 		it('response: error.message[0]', async () => {
-			await expect(
-				async () => await handleWpError(mockResponse(error8)),
-			).rejects.toThrow(
-				new Error(
-					ERROR_MESSAGE.ERROR_RESPONSE.replace('%url%', 'UNKNOWN')
-						.replace('%error%', '"mock_error"')
-						.replace('%status%', '500'),
-				),
+			expect(await getErrorMessage(mockResponse(error8))).toEqual(
+				ERROR_MESSAGE.ERROR_RESPONSE.replace('%url%', 'UNKNOWN')
+					.replace('%error%', '"mock_error"')
+					.replace('%status%', '500'),
 			)
 		})
 		it('response: boolean', async () => {
-			await expect(
-				async () => await handleWpError(mockResponse(error9)),
-			).rejects.toThrow(
-				new Error(
-					ERROR_MESSAGE.ERROR_RESPONSE.replace('%url%', 'UNKNOWN')
-						.replace('%error%', '"[object Object]"')
-						.replace('%status%', '500'),
-				),
+			expect(await getErrorMessage(mockResponse(error9))).toEqual(
+				ERROR_MESSAGE.ERROR_RESPONSE.replace('%url%', 'UNKNOWN')
+					.replace('%error%', '"[object Object]"')
+					.replace('%status%', '500'),
 			)
 		})
 		it('response: error.mock_key', async () => {
-			await expect(
-				async () => await handleWpError(mockResponse(error10)),
-			).rejects.toThrow(
-				new Error(
-					ERROR_MESSAGE.ERROR_RESPONSE.replace('%url%', 'UNKNOWN')
-						.replace('%error%', '"[object Object]"')
-						.replace('%status%', '500'),
-				),
+			expect(await getErrorMessage(mockResponse(error10))).toEqual(
+				ERROR_MESSAGE.ERROR_RESPONSE.replace('%url%', 'UNKNOWN')
+					.replace('%error%', '"[object Object]"')
+					.replace('%status%', '500'),
 			)
 		})
 	})

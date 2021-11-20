@@ -27,10 +27,9 @@ function getDataFromResponse(json: unknown, text: string): string {
 		: text
 }
 
-export async function handleWpError(
+export async function getErrorMessage(
 	error?: Response | unknown,
-	onError?: (message: string) => void,
-) {
+): Promise<string> {
 	let message = ERROR_MESSAGE.GENERIC
 	const isFetchResponse =
 		isObject(error) &&
@@ -55,11 +54,7 @@ export async function handleWpError(
 			.replace('%status%', status.toString())
 	}
 
-	// eslint-disable-next-line no-console
-	console.error(message)
-	if (onError) onError(message)
-	else throw new Error(message)
-	return Promise.reject(message)
+	return message
 }
 
 /** returns validated baseUrl without trailing slash */

@@ -84,7 +84,8 @@ describe('FetchClient', () => {
 			const mockOnError = jest.fn()
 			const http = new FetchClient(mockBaseURL, mockOnError)
 			mockFetch.mockRejectedValueOnce('mock_error')
-			await expect(http.get('mock_uri')).rejects.not.toThrow()
+			expect(await http.get('mock_uri')).toBeUndefined()
+			expect(mockOnError).toHaveBeenCalled()
 			expect(mockFetch).toHaveBeenCalledWith(
 				mockBaseURL.toString() + 'mock_uri',
 				{
