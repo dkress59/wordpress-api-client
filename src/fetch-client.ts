@@ -19,7 +19,7 @@ export class FetchClient {
 		this.baseUrl = validateBaseUrl(baseUrl.toString()) + '/'
 	}
 
-	/** returns undefined, if onError does not throw */
+	/** returns undefined if onError does not throw */
 	private async fetch<T>(
 		url: string,
 		method: 'get' | 'post' | 'delete',
@@ -39,7 +39,7 @@ export class FetchClient {
 			if (response.status >= 400) throw response
 			return response.json() as unknown as T
 		} catch (error: unknown) {
-			const message = await getErrorMessage(error)
+			const message = await getErrorMessage(error as Response)
 			this.onError(message)
 		}
 	}

@@ -1,12 +1,11 @@
 import { BlackWhiteList } from './types'
 import { ERROR_MESSAGE } from './constants'
 import { URLSearchParams } from 'url'
-import { isObject } from '@tool-belt/type-predicates'
 
 // FIXME: weird type casting issue
 // eslint-disable-next-line sonarjs/cognitive-complexity
-function getDataFromResponse(json: unknown, text: string): string {
-	if (!json) return text
+function getDataFromResponse(json: unknown, statusText: string): string {
+	if (!json) return statusText
 	const isJson = typeof json === 'object'
 	const hasError = isJson && 'error' in (json as { error: string })
 	const errorIsString =
@@ -17,44 +16,25 @@ function getDataFromResponse(json: unknown, text: string): string {
 	const messageIsString =
 		hasMessage && typeof (json as { message: string }).message === 'string'
 	return !isJson
-		? text
+		? statusText
 		: hasError && errorIsString
 		? (json as { error: string }).error
 		: hasMessage && messageIsArray
 		? (json as { message: string[] }).message[0]!
 		: hasMessage && messageIsString
 		? (json as { message: string }).message
-		: text
+		: statusText
 }
 
-export async function getErrorMessage(
-	error?: Response | unknown,
-): Promise<string> {
-	let message = ERROR_MESSAGE.GENERIC
-	const isFetchResponse =
-		isObject(error) &&
-		Object.keys(error).includes('json') &&
-		typeof (error as Response).json === 'function'
-
-	if (isFetchResponse) {
-		const err = error as Response
-		const json = (await err.json()) as
-			| null
-			| string
-			| Record<string, unknown>
-		const text = await err.text()
-		const status = err.status
-		const url = err.url
-		const data = getDataFromResponse(json, text)
-		message = ERROR_MESSAGE.ERROR_RESPONSE.replace(
-			'%url%',
-			url || 'UNKNOWN',
-		)
-			.replace('%error%', JSON.stringify(data))
-			.replace('%status%', status.toString())
-	}
-
-	return message
+export async function getErrorMessage(err: Response): Promise<string> {
+	const { statusText } = err
+	const json = (await err.json()) as null | string | Record<string, unknown>
+	const status = err.status
+	const url = err.url
+	const data = getDataFromResponse(json, statusText)
+	return ERROR_MESSAGE.ERROR_RESPONSE.replace('%url%', url || 'UNKNOWN')
+		.replace('%error%', JSON.stringify(data))
+		.replace('%status%', status.toString())
 }
 
 /** returns validated baseUrl without trailing slash */

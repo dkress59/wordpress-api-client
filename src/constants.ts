@@ -16,8 +16,9 @@ export const END_POINT = {
 	TAXONOMIES: 'wp/v2/taxonomies',
 	THEMES: 'wp/v2/themes',
 	TYPES: 'wp/v2/types',
-	USERS: 'wp/v2/users',
+	USER_APPLICATION_PASSWORDS: 'application-passwords',
 	USERS_ME: 'wp/v2/users/me',
+	USERS: 'wp/v2/users',
 }
 
 export const ERROR_MESSAGE = {
@@ -33,13 +34,24 @@ export const ERROR_MESSAGE = {
 }
 
 export const END_POINT_PROTECTED = {
-	GET: [END_POINT.USERS_ME, END_POINT.PLUGINS],
+	GET: [
+		END_POINT.PLUGINS,
+		END_POINT.USER_APPLICATION_PASSWORDS,
+		END_POINT.USERS_ME,
+	],
 	POST: [...Object.values(END_POINT)],
 	DELETE: [...Object.values(END_POINT)],
 }
 
 export const END_POINT_PUBLIC = {
-	GET: Object.values(END_POINT).filter(uri => uri !== END_POINT.USERS_ME),
+	GET: Object.values(END_POINT).filter(
+		uri =>
+			uri !== END_POINT.USERS_ME &&
+			!(
+				uri.includes(END_POINT.USER_APPLICATION_PASSWORDS) &&
+				uri.includes(END_POINT.USERS)
+			),
+	),
 	POST: [],
 	DELETE: [],
 }

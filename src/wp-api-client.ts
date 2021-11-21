@@ -26,6 +26,7 @@ import { POST_TYPE_MAP } from './factories'
 import { URLSearchParams } from 'url'
 import {
 	WP_Post_Type_Name,
+	WP_REST_API_Application_Password,
 	WP_REST_API_Block,
 	WP_REST_API_Block_Directory_Item,
 	WP_REST_API_Block_Type,
@@ -496,5 +497,89 @@ export class WpApiClient {
 
 	public async theme<P = WPTheme>(): Promise<P[]> {
 		return await this.http.get<P[]>(END_POINT.THEMES)
+	}
+
+	public applicationPassword() {
+		const find = async (
+			userId: number,
+			uuids: string[] = [],
+		): Promise<WP_REST_API_Application_Password[]> => {
+			const endpoint =
+				END_POINT.USERS +
+				'/' +
+				String(userId) +
+				'/' +
+				END_POINT.USER_APPLICATION_PASSWORDS
+			if (!uuids.length) {
+				return await this.http.get<WP_REST_API_Application_Password[]>(
+					endpoint,
+				)
+			}
+			return Promise.all(
+				uuids.map(
+					async uuid =>
+						await this.http.get<WP_REST_API_Application_Password>(
+							endpoint + '/' + uuid,
+						),
+				),
+			)
+		}
+		const create = async (
+			userId: number,
+			appId: string,
+			name: string,
+		): Promise<Required<WP_REST_API_Application_Password>> => {
+			const endpoint =
+				END_POINT.USERS +
+				'/' +
+				String(userId) +
+				'/' +
+				END_POINT.USER_APPLICATION_PASSWORDS
+			return await this.http.post<
+				Required<WP_REST_API_Application_Password>
+			>(
+				endpoint +
+					'?' +
+					new URLSearchParams({ app_id: appId, name }).toString(),
+			)
+		}
+		const update = async (
+			userId: number,
+			uuid: string,
+			appId?: string,
+			name?: string,
+		): Promise<WP_REST_API_Application_Password> => {
+			const endpoint =
+				END_POINT.USERS +
+				'/' +
+				String(userId) +
+				'/' +
+				END_POINT.USER_APPLICATION_PASSWORDS +
+				'/' +
+				uuid
+			const params = new Map()
+			if (name) params.set('name', name)
+			if (appId) params.set('app_id', appId)
+			return await this.http.post<WP_REST_API_Application_Password>(
+				endpoint + '?' + new URLSearchParams(params).toString(),
+			)
+		}
+		const deleteOne = async (userId: number, uuid: string) => {
+			const endpoint =
+				END_POINT.USERS +
+				'/' +
+				String(userId) +
+				'/' +
+				END_POINT.USER_APPLICATION_PASSWORDS +
+				'/' +
+				uuid
+			return await this.http.delete(endpoint)
+		}
+		return {
+			create,
+			delete: deleteOne,
+			find,
+			update,
+		}
 	}
 }
