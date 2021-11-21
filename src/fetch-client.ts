@@ -41,6 +41,7 @@ export class FetchClient {
 		} catch (error: unknown) {
 			const message = await getErrorMessage(error as Response)
 			this.onError(message)
+			return undefined
 		}
 	}
 

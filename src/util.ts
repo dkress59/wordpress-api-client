@@ -87,9 +87,8 @@ export function postCreate<
 	const content = body.content?.rendered ?? body.content?.raw
 	const excerpt = body.excerpt?.rendered ?? body.excerpt?.raw
 	const title = body.title?.rendered ?? body.title?.raw
-	const fields = body.acf
 	delete body.acf
-	return { ...body, content, excerpt, fields, title }
+	return { ...body, content, excerpt, title }
 }
 
 export function isProtected(

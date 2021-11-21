@@ -1,5 +1,5 @@
-import { ACFMedia, WPCategory, WPPage, WPPost, WPTag } from './types'
 import { FixtureFactory } from 'interface-forge'
+import { WPCategory, WPPage, WPPost, WPTag } from './types'
 import {
 	WP_Post_Comment_Status_Name,
 	WP_Post_Status_Name,
@@ -97,74 +97,6 @@ export const WPObjectLinksFactory =
 		undefined,
 		fixtureDir,
 	)
-
-export const AcfMediaFactory = new FixtureFactory<ACFMedia>(
-	() => ({
-		ID: faker.datatype.number(),
-		alt: faker.lorem.sentence(),
-		author: faker.datatype.number().toString(),
-		caption: faker.lorem.sentence(),
-		date: faker.date.recent(),
-		modified: faker.date.recent(),
-		description: faker.lorem.sentence(),
-		filename: faker.system.fileName() + '.' + faker.system.fileExt(),
-		filesize: faker.datatype.number(),
-		url: faker.internet.url(),
-		id: faker.datatype.number(),
-		mime_type: faker.system.mimeType(),
-		name: faker.random.words(),
-		title: faker.random.words(),
-		status: FixtureFactory.sample(POST_STATUS_MAP),
-		link: faker.internet.url(),
-		menu_order: faker.datatype.number(),
-		uploaded_to: faker.datatype.number(),
-		icon: faker.random.word(),
-		width: faker.datatype.number(4096),
-		height: faker.datatype.number(4096),
-		type: FixtureFactory.sample(['image', 'video']),
-		subtype: FixtureFactory.sample(['jpeg', 'png', 'mp4']),
-		sizes: {
-			'thumbnail':
-				faker.datatype.number(4096).toString() +
-				'x' +
-				faker.datatype.number(4096).toString(),
-			'thumbnail-width': faker.datatype.number(4096),
-			'thumbnail-height': faker.datatype.number(4096),
-			'medium':
-				faker.datatype.number(4096).toString() +
-				'x' +
-				faker.datatype.number(4096).toString(),
-			'medium-width': faker.datatype.number(4096),
-			'medium-height': faker.datatype.number(4096),
-			'medium_large':
-				faker.datatype.number(4096).toString() +
-				'x' +
-				faker.datatype.number(4096).toString(),
-			'medium_large-width': faker.datatype.number(4096),
-			'medium_large-height': faker.datatype.number(4096),
-			'large':
-				faker.datatype.number(4096).toString() +
-				'x' +
-				faker.datatype.number(4096).toString(),
-			'large-width': faker.datatype.number(4096),
-			'large-height': faker.datatype.number(4096),
-			'1536x1536':
-				faker.datatype.number(4096).toString() +
-				'x' +
-				faker.datatype.number(4096).toString(),
-			'1536x1536-width': faker.datatype.number(4096),
-			'1536x1536-height': faker.datatype.number(4096),
-			'2048x2048':
-				faker.datatype.number(4096).toString() +
-				'x' +
-				faker.datatype.number(4096).toString(),
-			'2048x2048-width': faker.datatype.number(4096),
-			'2048x2048-height': faker.datatype.number(4096),
-		},
-	}),
-	undefined,
-	fixtureDir,
-)
 
 export const WPPostFactory = new FixtureFactory<WPPost>(
 	() => ({

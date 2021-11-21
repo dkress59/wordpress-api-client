@@ -228,14 +228,6 @@ describe('util', () => {
 				},
 			)
 		})
-		it('transforms `acf` into `fields`', () => {
-			expect(postCreate({ acf: { rendered: 'mock_content' } })).toEqual({
-				content: undefined,
-				excerpt: undefined,
-				fields: { rendered: 'mock_content' },
-				title: undefined,
-			})
-		})
 	})
 
 	describe('isProtected', () => {
