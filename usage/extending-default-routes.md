@@ -45,14 +45,14 @@ export class CmsClient extends WpApiClient {
 
 ## ACF to REST API
 
-When using this package for a WP installation which relies on [Advanced Custom Fields](https://www.advancedcustomfields.com ':crossorgin'),
-it is highly recommended to also install [ACF to REST API](https://wordpress.org/plugins/acf-to-rest-api/ ':crossorgin'):
-You can then [extend the typings](usage/extending-default-routes.md) of your post
+When using this package for a WP installation which relies on
+ [Advanced Custom Fields](https://www.advancedcustomfields.com ':crossorgin'),
+ you can easily [extend the typings](usage/extending-default-routes.md) of your post
 types with an `acf` field to enable __full acf support__ (GET + POST) for the WpApiClient.
 
-?> **Note:** If you have one of your ACF fields set to output a 'Post Object', the
-typing of the corresponding REST API response object ist not your usual `WPPost`,
-but rather an `ACFPost` which you can import from this library
+?> Up to v0.2.3 this package used to rely on
+ [ACF to REST API](https://wordpress.org/plugins/acf-to-rest-api/ ':crossorgin'),
+ but since ACF v5.11.1 and WpApiClient v0.3.0 this is no longer required!
 
 ```typescript
 import WpApiClient, {
@@ -109,6 +109,9 @@ export interface CustomPost extends WPPost {
 If you are familiar with WordPress and SEO, you probably know Yoast! SEO. If you
 would like to use the Yoast! meta from your posts, pages, media and custom post types,
 you can add extend the WP REST API with thos fields.
+
+The example below will add a `yoastHead` field to the REST response for all posts,
+pages, products and media – containing all the yoast meta for the given post objects.
 
 <details>
 <summary>PHP Example (Click to expand)</summary>
@@ -170,5 +173,5 @@ new RESTEndpoints();
 </details>
 <br />
 
-This will add a `yoastHead` field to the REST response for all posts, pages,
-products and media – containing all the yoast meta for the given post objects.
+?> Since Yoast! SEO v17.x the REST-API output in the JSON format can be controlled
+via the WP-Admin-UI. The corresponding typings will soon be integrated.
