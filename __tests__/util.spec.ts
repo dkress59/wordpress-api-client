@@ -8,6 +8,7 @@ import {
 	postCreate,
 	validateBaseUrl,
 } from '../src/util'
+import { mockResponse, mockStatusText } from './util'
 
 describe('util', () => {
 	describe('getErrorMessage', () => {
@@ -32,82 +33,75 @@ describe('util', () => {
 		const error10 = {
 			mock_key: mockError,
 		}
-		const mockResponse = (error: unknown) => {
-			return {
-				json: () => error,
-				text: () => String(error),
-				status: 500,
-			}
-		}
 
 		it('response: undefined', async () => {
 			expect(await getErrorMessage(mockResponse(error1))).toEqual(
 				ERROR_MESSAGE.ERROR_RESPONSE.replace('%url%', 'UNKNOWN')
-					.replace('%error%', '"undefined"')
-					.replace('%status%', '500'),
+					.replace('%error%', '"' + mockStatusText + '"')
+					.replace('%status%', '666'),
 			)
 		})
 		it('response: null', async () => {
 			expect(await getErrorMessage(mockResponse(error2))).toEqual(
 				ERROR_MESSAGE.ERROR_RESPONSE.replace('%url%', 'UNKNOWN')
-					.replace('%error%', '"null"')
-					.replace('%status%', '500'),
+					.replace('%error%', '"' + mockStatusText + '"')
+					.replace('%status%', '666'),
 			)
 		})
 		it('response: "null"', async () => {
 			expect(await getErrorMessage(mockResponse(error3))).toEqual(
 				ERROR_MESSAGE.ERROR_RESPONSE.replace('%url%', 'UNKNOWN')
-					.replace('%error%', '"null"')
-					.replace('%status%', '500'),
+					.replace('%error%', '"' + mockStatusText + '"')
+					.replace('%status%', '666'),
 			)
 		})
 		it('response: ""', async () => {
 			expect(await getErrorMessage(mockResponse(error4))).toEqual(
 				ERROR_MESSAGE.ERROR_RESPONSE.replace('%url%', 'UNKNOWN')
-					.replace('%error%', '""')
-					.replace('%status%', '500'),
+					.replace('%error%', '"' + mockStatusText + '"')
+					.replace('%status%', '666'),
 			)
 		})
 		it('response: new Error()', async () => {
 			expect(await getErrorMessage(mockResponse(error5))).toEqual(
 				ERROR_MESSAGE.ERROR_RESPONSE.replace('%url%', 'UNKNOWN')
 					.replace('%error%', '"mock_error"')
-					.replace('%status%', '500'),
+					.replace('%status%', '666'),
 			)
 		})
 		it('response: error.error', async () => {
 			expect(await getErrorMessage(mockResponse(error6))).toEqual(
 				ERROR_MESSAGE.ERROR_RESPONSE.replace('%url%', 'UNKNOWN')
 					.replace('%error%', '"mock_error"')
-					.replace('%status%', '500'),
+					.replace('%status%', '666'),
 			)
 		})
 		it('response: error.message', async () => {
 			expect(await getErrorMessage(mockResponse(error7))).toEqual(
 				ERROR_MESSAGE.ERROR_RESPONSE.replace('%url%', 'UNKNOWN')
 					.replace('%error%', '"mock_error"')
-					.replace('%status%', '500'),
+					.replace('%status%', '666'),
 			)
 		})
 		it('response: error.message[0]', async () => {
 			expect(await getErrorMessage(mockResponse(error8))).toEqual(
 				ERROR_MESSAGE.ERROR_RESPONSE.replace('%url%', 'UNKNOWN')
 					.replace('%error%', '"mock_error"')
-					.replace('%status%', '500'),
+					.replace('%status%', '666'),
 			)
 		})
 		it('response: boolean', async () => {
 			expect(await getErrorMessage(mockResponse(error9))).toEqual(
 				ERROR_MESSAGE.ERROR_RESPONSE.replace('%url%', 'UNKNOWN')
-					.replace('%error%', '"[object Object]"')
-					.replace('%status%', '500'),
+					.replace('%error%', '"' + mockStatusText + '"')
+					.replace('%status%', '666'),
 			)
 		})
 		it('response: error.mock_key', async () => {
 			expect(await getErrorMessage(mockResponse(error10))).toEqual(
 				ERROR_MESSAGE.ERROR_RESPONSE.replace('%url%', 'UNKNOWN')
-					.replace('%error%', '"[object Object]"')
-					.replace('%status%', '500'),
+					.replace('%error%', '"' + mockStatusText + '"')
+					.replace('%status%', '666'),
 			)
 		})
 	})

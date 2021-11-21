@@ -4,6 +4,7 @@ import { URLSearchParams } from 'url'
 import { WPPost } from '../src/types'
 import { WP_Post_Type_Name } from 'wp-types'
 import { getDefaultQueryList, getDefaultQuerySingle } from '../src/util'
+import { randomUUID } from 'crypto'
 import WpApiClient from '../src'
 import fetch from 'cross-fetch'
 jest.mock('cross-fetch', () => jest.fn())
@@ -665,6 +666,99 @@ describe('WpApiClient', () => {
 						new URLSearchParams({
 							status: 'active',
 							context: 'edit',
+						}).toString(),
+					{
+						...defaultOptions,
+						body: undefined,
+						method: 'post',
+					},
+				)
+			})
+		})
+		describe('.applicationPasswords', () => {
+			const mockUserId = 59
+			const mockAppId = randomUUID()
+			const mockAppName = 'mock-app-name'
+			const endpoint =
+				mockRestBase +
+				END_POINT.USERS +
+				'/' +
+				String(mockUserId) +
+				'/' +
+				END_POINT.USER_APPLICATION_PASSWORDS
+			it('.create', async () => {
+				await client
+					.applicationPassword()
+					.create(mockUserId, mockAppId, mockAppName)
+				expect(mockFetch).toHaveBeenCalledWith(
+					endpoint +
+						'?' +
+						new URLSearchParams({
+							app_id: mockAppId,
+							name: mockAppName,
+						}).toString(),
+					{
+						...defaultOptions,
+						method: 'post',
+					},
+				)
+			})
+			it('.find (list)', async () => {
+				await client.applicationPassword().find(mockUserId)
+				expect(mockFetch).toHaveBeenCalledWith(endpoint, defaultOptions)
+			})
+			it('.find (single)', async () => {
+				await client.applicationPassword().find(mockUserId, [mockAppId])
+				expect(mockFetch).toHaveBeenCalledWith(
+					endpoint + '/' + mockAppId,
+					defaultOptions,
+				)
+			})
+			it('.delete', async () => {
+				await client.applicationPassword().delete(mockUserId, mockAppId)
+				expect(mockFetch).toHaveBeenCalledWith(
+					endpoint + '/' + mockAppId,
+					{
+						...defaultOptions,
+						method: 'delete',
+					},
+				)
+			})
+			it('.update (appId)', async () => {
+				await client
+					.applicationPassword()
+					.update(mockUserId, mockAppId, 'updated-app-id')
+				expect(mockFetch).toHaveBeenCalledWith(
+					endpoint +
+						'/' +
+						mockAppId +
+						'?' +
+						new URLSearchParams({
+							app_id: 'updated-app-id',
+						}).toString(),
+					{
+						...defaultOptions,
+						body: undefined,
+						method: 'post',
+					},
+				)
+			})
+			it('.update (custom)', async () => {
+				await client
+					.applicationPassword()
+					.update(
+						mockUserId,
+						mockAppId,
+						undefined,
+						'updated-app-name',
+					)
+				expect(mockFetch).toHaveBeenCalledWith(
+					endpoint +
+						'/' +
+						mockAppId +
+						'?' +
+						new URLSearchParams({
+							name: 'updated-app-name',
 						}).toString(),
 					{
 						...defaultOptions,

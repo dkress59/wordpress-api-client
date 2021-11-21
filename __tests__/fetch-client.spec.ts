@@ -1,5 +1,6 @@
 import { END_POINT_PROTECTED, ERROR_MESSAGE } from '../src/constants'
 import { FetchClient } from '../src/fetch-client'
+import { mockResponse, mockStatusText } from './util'
 import fetch from 'cross-fetch'
 jest.mock('cross-fetch', () => jest.fn())
 
@@ -83,7 +84,7 @@ describe('FetchClient', () => {
 		it('can suppress errors with onError', async () => {
 			const mockOnError = jest.fn()
 			const http = new FetchClient(mockBaseURL, mockOnError)
-			mockFetch.mockRejectedValueOnce('mock_error')
+			mockFetch.mockRejectedValueOnce(mockResponse('mock_error'))
 			expect(await http.get('mock_uri')).toBeUndefined()
 			expect(mockOnError).toHaveBeenCalled()
 			expect(mockFetch).toHaveBeenCalledWith(
@@ -96,9 +97,13 @@ describe('FetchClient', () => {
 		})
 		it('throws if no onError', async () => {
 			const http = new FetchClient(mockBaseURL)
-			mockFetch.mockRejectedValueOnce('mock_error')
+			mockFetch.mockRejectedValueOnce(mockResponse('mock_error'))
 			await expect(http.get('mock_uri')).rejects.toThrow(
-				new Error(ERROR_MESSAGE.GENERIC),
+				new Error(
+					ERROR_MESSAGE.ERROR_RESPONSE.replace('%url%', 'UNKNOWN')
+						.replace('%error%', '"' + mockStatusText + '"')
+						.replace('%status%', '666'),
+				),
 			)
 			expect(mockFetch).toHaveBeenCalledWith(
 				mockBaseURL.toString() + 'mock_uri',
