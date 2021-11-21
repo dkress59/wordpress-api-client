@@ -70,10 +70,10 @@ export function getDefaultQuerySingle(query = new URLSearchParams()): string {
 export function postCreate<
 	P extends Partial<{
 		acf: Record<string, unknown> | unknown
-		content: { rendered: string }
+		content: Partial<{ raw: string; rendered: string }>
 		id: number
-		excerpt: { rendered: string }
-		title: { rendered: string }
+		excerpt: Partial<{ raw: string; rendered: string }>
+		title: Partial<{ raw: string; rendered: string }>
 	}>,
 >(
 	body: Omit<P, 'id'>,
@@ -84,9 +84,9 @@ export function postCreate<
 		fields: Record<string, unknown> | unknown
 		title: string
 	}> {
-	const content = body.content?.rendered
-	const excerpt = body.excerpt?.rendered
-	const title = body.title?.rendered
+	const content = body.content?.rendered ?? body.content?.raw
+	const excerpt = body.excerpt?.rendered ?? body.excerpt?.raw
+	const title = body.title?.rendered ?? body.title?.raw
 	const fields = body.acf
 	delete body.acf
 	return { ...body, content, excerpt, fields, title }

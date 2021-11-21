@@ -427,8 +427,22 @@ export class WpApiClient {
 		)
 	}
 
-	public reusableBlock<P = WP_REST_API_Block>(): DefaultEndpoint<P> {
-		return this.addPostType<P>(END_POINT.EDITOR_BLOCKS, false)
+	public reusableBlock<P = WP_REST_API_Block>(): DefaultEndpoint<P> & {
+		autosave: (blocktId: number) => {
+			create: EndpointCreate<P & { parent: number }>
+			find: EndpointFind<P & { parent: number }>
+		}
+	} {
+		return {
+			...this.defaultEndpoints(END_POINT.EDITOR_BLOCKS),
+			autosave: (blockId: number) => {
+				const endpoint = `${END_POINT.EDITOR_BLOCKS}/${blockId}/autosaves`
+				return {
+					create: this.createEndpointPost(endpoint),
+					find: this.createEndpointGet(endpoint),
+				}
+			},
+		}
 	}
 
 	public async search<S = WP_REST_API_Search_Result>(

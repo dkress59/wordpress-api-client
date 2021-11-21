@@ -354,9 +354,6 @@ describe('WpApiClient', () => {
 		it('.postTag returns default entpoints', () => {
 			expect(client.postTag()).not.toBeNull()
 		})
-		it('.reusableBlock returns default entpoints', () => {
-			expect(client.reusableBlock()).not.toBeNull()
-		})
 		it('.taxonomy returns default entpoints', () => {
 			expect(client.taxonomy()).not.toBeNull()
 		})
@@ -765,6 +762,53 @@ describe('WpApiClient', () => {
 						body: undefined,
 						method: 'post',
 					},
+				)
+			})
+		})
+		describe('.reusableBlock', () => {
+			it('returns default entpoints', () => {
+				expect(client.reusableBlock()).not.toBeNull()
+			})
+			it('can create autosave', async () => {
+				const mockBlockId = 123
+				const mockTitle = 'Updated autosave'
+				await client
+					.reusableBlock()
+					.autosave(mockBlockId)
+					.create({ title: { raw: mockTitle } })
+				expect(mockFetch).toHaveBeenCalledWith(
+					mockRestBase +
+						`${END_POINT.EDITOR_BLOCKS}/${mockBlockId}/autosaves`,
+					{
+						...defaultOptions,
+						method: 'post',
+						body: JSON.stringify({ title: mockTitle }),
+					},
+				)
+			})
+			it('can retrieve autosave', async () => {
+				const mockBlockId = 123
+				await client
+					.reusableBlock()
+					.autosave(mockBlockId)
+					.find(mockBlockId)
+				expect(mockFetch).toHaveBeenCalledWith(
+					mockRestBase +
+						`${
+							END_POINT.EDITOR_BLOCKS
+						}/${mockBlockId}/autosaves/${mockBlockId}/${getDefaultQuerySingle()}`,
+					defaultOptions,
+				)
+			})
+			it('can list autosaves', async () => {
+				const mockBlockId = 123
+				await client.reusableBlock().autosave(mockBlockId).find()
+				expect(mockFetch).toHaveBeenCalledWith(
+					mockRestBase +
+						`${
+							END_POINT.EDITOR_BLOCKS
+						}/${mockBlockId}/autosaves/${getDefaultQueryList()}`,
+					defaultOptions,
 				)
 			})
 		})

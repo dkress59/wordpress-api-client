@@ -172,12 +172,28 @@ describe('util', () => {
 	})
 
 	describe('postCreate', () => {
+		it('transforms `content.raw` into `content`', () => {
+			expect(postCreate({ content: { raw: 'mock_content' } })).toEqual({
+				content: 'mock_content',
+				excerpt: undefined,
+				fields: undefined,
+				title: undefined,
+			})
+		})
 		it('transforms `content.rendered` into `content`', () => {
 			expect(
 				postCreate({ content: { rendered: 'mock_content' } }),
 			).toEqual({
 				content: 'mock_content',
 				excerpt: undefined,
+				fields: undefined,
+				title: undefined,
+			})
+		})
+		it('transforms `excerpt.raw` into `excerpt`', () => {
+			expect(postCreate({ excerpt: { raw: 'mock_content' } })).toEqual({
+				content: undefined,
+				excerpt: 'mock_content',
 				fields: undefined,
 				title: undefined,
 			})
@@ -191,6 +207,16 @@ describe('util', () => {
 				fields: undefined,
 				title: undefined,
 			})
+		})
+		it('transforms `title.raw` into `title`', () => {
+			expect(postCreate({ title: { rendered: 'mock_content' } })).toEqual(
+				{
+					content: undefined,
+					raw: undefined,
+					fields: undefined,
+					title: 'mock_content',
+				},
+			)
 		})
 		it('transforms `title.rendered` into `title`', () => {
 			expect(postCreate({ title: { rendered: 'mock_content' } })).toEqual(
