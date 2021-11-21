@@ -2,6 +2,14 @@
 
 The current progress can be tracked [here](https://github.com/dkress59/wordpress-api-client/projects/1)
 
+- v.0.2.3 default methods, error handling
+  - implemented last two missing default methods
+    - applications passwords
+    - block revisions
+  - improved error handling
+
+- v.0.2.2 minor fixes
+
 - v.0.2.1 minor fixes
   - type casting
   - .plugin fix
@@ -27,7 +35,7 @@ The current progress can be tracked [here](https://github.com/dkress59/wordpress
 
   - methods for two default wp-api routes are still missing:
     <br />`wp/v2/users/<user_id>/application-passwords`
-    <br />and `wp/v2/blocks/<block-id>/revisions`
+    <br />and `wp/v2/blocks/<block-id>/autosaves`
 
 - v0.1.2 repaired type casting in handleWpApiError()
 
