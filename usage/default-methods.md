@@ -1,17 +1,22 @@
 # Default Methods
 
-To instantiate a WP-API Client you need to pass the base URL of your WordPress
-website to the constructor. You can pass an `onError`-function as the second
-parameter and an exisitng axiosInstance as the third parameter (more on that here:
-[JWT-Auth for WordPress](usage/authentification.md#jwt-auth-for-wordpress)).
 With a bare instance of WpApiClient you will get methods to retreive, add and
 update any post, page, media item, post category or post tag.
+To instantiate a WP-API Client you need to pass the base URL of your WordPress
+website to the constructor.
+
+With the second argument, the constructor options,
+you can define authentication, default headers, and an onError function.
+
+?> if your options.onError function does not throw, the errored response will
+return `undefined`
 
 ## Methods List
 
 ```typescript
 import { WpApiClient } from 'wordpress-api-client'
 const client = new WpApiClient('https://my-wordpress-website.com')
+
 
 client.post().create()
 client.post().find()
@@ -62,6 +67,18 @@ client.plugin().create()
 client.plugin().find()
 client.plugin().delete()
 client.plugin().update()
+
+client.applicationPassword().create()
+client.applicationPassword().find()
+client.applicationPassword().delete()
+client.applicationPassword().update()
+
+client.reusableBlock().create()
+client.reusableBlock().find()
+client.reusableBlock().delete()
+client.reusableBlock().update()
+client.reusableBlock().autosave().create()
+client.reusableBlock().autosave().find()
 
 client.blockDirectory()
 client.blockType()
@@ -126,7 +143,7 @@ Specific posts can be retrieved via post id, e.g.:
 const [frontPage, contactPage, productPage] = await client.page().find(12, 34, 123)
 ```
 
-?> **Note:** If there is an error (e.g. [authentification](usage/authentification.md)),
+?> **Note:** If there is an error (e.g. [authentication](usage/authentication.md)),
 the respective promise will resolve to `null`.
 
 ?> You do not need to be authenticated to retrieve password-protected posts/pages
@@ -155,7 +172,7 @@ const revisions = await client.post(1).revision().find()
 When creating new content you should be aware of a couple of things, most of which
 an internal function of this package automatically takes care of:
 
-- You need to be [authenticated](usage/authentification.md)
+- You need to be [authenticated](usage/authentication.md)
 - The `id` field must be omitted (needs to be designated by WP)
 - Unlike the API response objects, the fields `title`, `content` and `excerpt`
   of the request body only accept plain HTML strings
@@ -171,7 +188,7 @@ The pointers above, for the `.create` method, are also valid for `.update`.
 
 ## .delete(id: number)
 
-You need to be [authenticated](usage/authentification.md) to use this method.
+You need to be [authenticated](usage/authentication.md) to use this method.
 
 ---
 
@@ -204,7 +221,7 @@ if your to-be-uploaded media is a string (e.g. a file retrieved via HTTP request
 Besides the usual `.create`, `.delete`, `.find`, and `.update` there are
 two additional `.user` methods, for the currently **logged-in user**: `.findMe`
 and `.deleteMe`. In order to delete or to retrieve their information,
-you do not have to provide a parameter – but you need to be [authenticated](usage/authentification.md).
+you do not have to provide a parameter – but you need to be [authenticated](usage/authentication.md).
 
 ---
 
@@ -226,7 +243,7 @@ The response is an array of `WP_REST_API_Search_Result`s.
 ## .plugin()
 
 You can list, install, activate and deactivate plugins with the client, although
-you need to be [authenticated](usage/authentification.md) to use this method.
+you need to be [authenticated](usage/authentication.md) to use this method.
 
 ---
 

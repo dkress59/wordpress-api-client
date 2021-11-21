@@ -7,7 +7,7 @@ to certain user roles, you will need to authenticate your client with WordPress.
 ## WP-Nonce
 
 The WP-Nonce is a WordPress built-in which you can utilise to authenticate your
-client. This authentification option works best in the wp-admin context, for example
+client. This authentication option works best in the wp-admin context, for example
 if you are developing a __JS/TS SPA for a designated options page__ inside the
 WordPress Admin.
 
@@ -96,7 +96,7 @@ export const CmsClient = new WpApiClient(
 
 Basic Authentification can be enabled for your WordPress installation with the plugin
 [WP-API/Basic-Auth](https://github.com/WP-API/Basic-Auth ':crossorgin'). This is
-arguably the most insecure authentification method you could choose, so it should
+arguably the most insecure authentication method you could choose, so it should
 exclusively be used **for development purposes**.
 
 !> **Be considerate**, my friend!
@@ -124,7 +124,7 @@ relies on the jsonwebtoken technology, which is a whole other deal in terms of
 security and therefore needs to be set up quite a bit more carefully. Always keep
 in mind that you can whitelist any end point of your WP REST API via PHP
 ("Whitelisting Endpoints" in the plugin's documentation). The routes which need
-authentification can be configured with the [protected](#blacklisting-whitelisting)
+authentication can be configured with the [protected](#blacklisting-whitelisting)
 option.
 
 ```typescript
@@ -149,7 +149,7 @@ if you really need one!
 
 ## Blacklisting / Whitelisting
 
-Routes, which require authentification can be set with the `protected` option.
+Routes, which require authentication can be set with the `protected` option.
 You can extend and/or filter the defaults, like this:
 
 ```typescript
@@ -174,15 +174,9 @@ export const CmsClient = new WpApiClient(
 
 ## User Role Restriction
 
-Methods/end points which require authentification usually are also restricted by
+Methods/end points which require authentication usually are also restricted by
 user role. For example, the `.page().create()` method is available to (authenticated)
 administrators, but it will throw an error for users with the role of 'subscriber'.
-
-In the examples above authentification is set globally on the AxiosInstance,
-for all POST and DELETE methods. It might be the case, though, that you have a
-REST route registered in WordPress which accepts POST requests and does not
-require authentification. In this case you need to configure a
-custom [Axios Interceptor](https://axios-http.com/docs/interceptors).
 
 It is also possible to restrict GET requests (e.g. to list posts of a custom
 post type) by user role. Here is an example of a custom post type which can only
