@@ -4,6 +4,7 @@ import fetch from 'cross-fetch'
 
 export class FetchClient {
 	baseUrl: string
+	headers: Record<string, string>
 
 	constructor(
 		baseUrl: URL,
@@ -12,11 +13,16 @@ export class FetchClient {
 			console.error(message)
 			throw new Error(message)
 		},
-		public headers: Record<string, string> = {},
+		headers: Record<string, string> = {},
 		public authHeader: Record<string, string> = {},
 		public protectedRoutes = END_POINT_PROTECTED,
 	) {
 		this.baseUrl = validateBaseUrl(baseUrl.toString()) + '/'
+		this.headers = {
+			'Accept': 'application/json',
+			'Content-Type': 'application/json',
+			...headers,
+		}
 	}
 
 	/** returns undefined if onError does not throw */
@@ -38,7 +44,7 @@ export class FetchClient {
 			})
 			if (response.status >= 400) throw response
 			return response.json() as unknown as T
-		} catch (error: unknown) {
+		} catch (error) {
 			const message = await getErrorMessage(error as Response)
 			this.onError(message)
 			return undefined

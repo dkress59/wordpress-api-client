@@ -456,7 +456,7 @@ export class WpApiClient {
 				subtype: string
 			}>,
 	): Promise<S[]> {
-		if (search) params = { ...params, search }
+		if (search) params = { ...(params as Record<string, string>), search }
 		const query = new URLSearchParams(params).toString()
 		return await this.http.get<S[]>(`${END_POINT.SEARCH}/?${query}`)
 	}
