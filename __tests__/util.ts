@@ -8,3 +8,12 @@ export const mockResponse = (error: unknown) => {
 		statusText: mockStatusText,
 	} as unknown as Response
 }
+
+export const defaultOptions = {
+	body: undefined,
+	headers: {
+		'Accept': 'application/json',
+		'Content-Type': 'application/json',
+	},
+	method: 'get',
+}

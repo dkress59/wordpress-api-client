@@ -3,6 +3,7 @@ import { POST_TYPE_MAP, WPPageFactory } from '../src/factories'
 import { URLSearchParams } from 'url'
 import { WPPost } from '../src/types'
 import { WP_Post_Type_Name } from 'wp-types'
+import { defaultOptions } from './util'
 import { getDefaultQueryList, getDefaultQuerySingle } from '../src/util'
 import { randomUUID } from 'crypto'
 import WpApiClient from '../src'
@@ -13,7 +14,6 @@ const mockFetch = fetch as jest.MockedFunction<typeof fetch>
 const mockJson = jest.fn() as jest.MockedFunction<any>
 const mockText = jest.fn() as jest.MockedFunction<any>
 
-const defaultOptions = { body: undefined, headers: {}, method: 'get' }
 const mockBaseURL = 'http://mock.url'
 const mockRestBase = mockBaseURL + '/wp-json/'
 
@@ -77,6 +77,7 @@ describe('WpApiClient', () => {
 				{
 					body: undefined,
 					headers: {
+						...defaultOptions.headers,
 						Authorization: `Basic ${Buffer.from(
 							username + ':' + password,
 						).toString('base64')}`,
@@ -98,6 +99,7 @@ describe('WpApiClient', () => {
 				{
 					body: undefined,
 					headers: {
+						...defaultOptions.headers,
 						Authorization: 'Bearer mock_token',
 					},
 					method: 'delete',
@@ -117,6 +119,7 @@ describe('WpApiClient', () => {
 				{
 					body: undefined,
 					headers: {
+						...defaultOptions.headers,
 						'X-WP-Nonce': 'mock_nonce',
 					},
 					method: 'delete',
@@ -131,8 +134,8 @@ describe('WpApiClient', () => {
 			expect(mockFetch).toHaveBeenCalledWith(
 				mockRestBase + END_POINT.POSTS + '/1',
 				{
+					...defaultOptions,
 					body: undefined,
-					headers: {},
 					method: 'delete',
 				},
 			)
@@ -153,6 +156,7 @@ describe('WpApiClient', () => {
 				{
 					body: undefined,
 					headers: {
+						...defaultOptions.headers,
 						Authorization: 'Bearer mock_token',
 						mock_key: 'mock_value',
 					},
@@ -367,6 +371,7 @@ describe('WpApiClient', () => {
 					{
 						body: data,
 						headers: {
+							...defaultOptions.headers,
 							'Content-Type': 'image/jpeg',
 							'Content-Disposition':
 								'application/x-www-form-urlencoded; filename="' +

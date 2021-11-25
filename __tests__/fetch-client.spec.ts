@@ -1,6 +1,6 @@
 import { END_POINT_PROTECTED, ERROR_MESSAGE } from '../src/constants'
 import { FetchClient } from '../src/fetch-client'
-import { mockResponse, mockStatusText } from './util'
+import { defaultOptions, mockResponse, mockStatusText } from './util'
 import fetch from 'cross-fetch'
 jest.mock('cross-fetch', () => jest.fn())
 
@@ -8,8 +8,6 @@ const mockBaseURL = new URL('http://mock-website.com')
 const mockFetch = fetch as jest.MockedFunction<typeof fetch>
 const mockJson = jest.fn() as jest.MockedFunction<any>
 const mockText = jest.fn() as jest.MockedFunction<any>
-
-const defaultOptions = { body: undefined, headers: {}, method: 'get' }
 
 describe('FetchClient', () => {
 	// eslint-disable-next-line no-console
@@ -51,7 +49,7 @@ describe('FetchClient', () => {
 					mockBaseURL.toString() + mockUri,
 					{
 						...defaultOptions,
-						headers: mockHeaders,
+						headers: { ...defaultOptions.headers, ...mockHeaders },
 						method: 'get',
 					},
 				)
@@ -63,7 +61,7 @@ describe('FetchClient', () => {
 					mockBaseURL.toString() + mockUri,
 					{
 						...defaultOptions,
-						headers: mockHeaders,
+						headers: { ...defaultOptions.headers, ...mockHeaders },
 						method: 'post',
 					},
 				)
@@ -75,7 +73,7 @@ describe('FetchClient', () => {
 					mockBaseURL.toString() + mockUri,
 					{
 						...defaultOptions,
-						headers: mockHeaders,
+						headers: { ...defaultOptions.headers, ...mockHeaders },
 						method: 'delete',
 					},
 				)
@@ -157,12 +155,13 @@ describe('FetchClient', () => {
 				mock_key: 'mock_value',
 			})
 			await http.get('mock_uri', { mock_key: 'overridden_value' })
+			const mockHeaders = { mock_key: 'overridden_value' }
 			expect(mockJson).toHaveBeenCalled()
 			expect(mockFetch).toHaveBeenCalledWith(
 				mockBaseURL.toString() + 'mock_uri',
 				{
 					...defaultOptions,
-					headers: { mock_key: 'overridden_value' },
+					headers: { ...defaultOptions.headers, ...mockHeaders },
 					method: 'get',
 				},
 			)
@@ -191,7 +190,10 @@ describe('FetchClient', () => {
 				mockBaseURL.toString() + 'mock_uri',
 				{
 					...defaultOptions,
-					headers: { mock_key: 'overridden_value' },
+					headers: {
+						...defaultOptions.headers,
+						mock_key: 'overridden_value',
+					},
 					method: 'post',
 				},
 			)
@@ -234,7 +236,10 @@ describe('FetchClient', () => {
 				mockBaseURL.toString() + 'mock_uri',
 				{
 					...defaultOptions,
-					headers: { mock_key: 'overridden_value' },
+					headers: {
+						...defaultOptions.headers,
+						mock_key: 'overridden_value',
+					},
 					method: 'delete',
 				},
 			)
