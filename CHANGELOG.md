@@ -2,6 +2,10 @@
 
 The current progress can be tracked [here](https://github.com/dkress59/wordpress-api-client/projects/1)
 
+- v0.3.1 "Accept"-default-header
+  - added default "Accept" and "Content-Type" headers
+  - fixed .createEndpointCustomPost()
+
 - v0.3.0 ACF v5.11.1
   - adjustment to Advanced Custom Fields v5.11.1
   - minor typing issue fixed: FetchClient.fetch
