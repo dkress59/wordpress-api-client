@@ -1,0 +1,24 @@
+name: Unit Tests
+
+on:
+    push:
+        branches: ['test/e2e']
+    pull_request:
+        branches: ['test/e2e', 'dependabot/*']
+
+jobs:
+    e2e:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v2
+            - uses: actions/setup-node@v1
+              with:
+                  node-version: '16'
+            - name: Install Dependencies
+              run: yarn
+            - uses: isbang/compose-action@v1.0.0
+              with:
+                compose-file: './__tests__/e2e/docker-compose.yml'
+                down-flags: '--volumes'
+            - name: Run end-to-end test-suite
+              run: yarn test __tests__/e2e/**/*.spec.ts

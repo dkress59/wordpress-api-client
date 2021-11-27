@@ -22,7 +22,7 @@ jobs:
                   node-version: ${{ matrix.node-version }}
             - run: yarn
             - run: yarn build
-            - run: yarn test
+            - run: yarn test __tests__/*.spec.ts
     
     coverage:
         runs-on: ubuntu-latest
@@ -34,4 +34,20 @@ jobs:
             - name: Install Dependencies
               run: yarn && yarn add codecov
             - name: Share Test Coverage
-              run: yarn test && yarn codecov
+              run: yarn test __tests__/*.spec.ts && yarn codecov
+    
+    e2e:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v2
+            - uses: actions/setup-node@v1
+              with:
+                  node-version: '16'
+            - name: Install Dependencies
+              run: yarn
+            - uses: isbang/compose-action@v1.0.0
+              with:
+                compose-file: './__tests__/e2e/docker-compose.yml'
+                down-flags: '--volumes'
+            - name: Run end-to-end test-suite
+              run: yarn test __tests__/e2e/**/*.spec.ts
