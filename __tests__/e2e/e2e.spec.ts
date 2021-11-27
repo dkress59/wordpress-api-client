@@ -2,6 +2,7 @@
 import 'jest-specific-snapshot'
 import { randomUUID } from 'crypto'
 import WpApiClient from '../../src'
+import fs from 'fs'
 import path from 'path'
 
 const mockTitle = {
@@ -20,9 +21,11 @@ const mockImage =
 const mockRawContent = { raw: mockContent.rendered, protected: false }
 const mockRawTitle = { raw: mockTitle.rendered, protected: false }
 
-function fileName(name: string) {
-	const snapshotPath = path.resolve(process.cwd(), './__snapshots__')
-	return path.join(snapshotPath, `e2e-${name}.spec.ts.snapshot`)
+const snapshotPath = path.resolve(process.cwd(), './__snapshots__')
+function fileName(name: string, dir?: string) {
+	const pathName = path.join(snapshotPath, dir ?? '')
+	if (dir && !fs.existsSync(pathName)) fs.mkdirSync(pathName)
+	return path.join(pathName, `e2e-${name}.snapshot`)
 }
 
 describe('End-to-end test', () => {
@@ -32,6 +35,10 @@ describe('End-to-end test', () => {
 			password: 'password',
 			username: 'admin',
 		},
+	})
+
+	beforeAll(() => () => {
+		if (!fs.existsSync(snapshotPath)) fs.mkdirSync(snapshotPath)
 	})
 
 	describe('.post', () => {
@@ -44,12 +51,12 @@ describe('End-to-end test', () => {
 
 		it('.find (all)', async () => {
 			expect(await client.post().find()).toMatchSpecificSnapshot(
-				fileName('post-find_all'),
+				fileName('find_all', 'post'),
 			)
 		})
 		it('.find (one)', async () => {
 			expect(await client.post().find(1)).toMatchSpecificSnapshot(
-				fileName('post-find_one'),
+				fileName('find_one', 'post'),
 			)
 		})
 		it('.create', async () => {
@@ -58,7 +65,7 @@ describe('End-to-end test', () => {
 				title: mockTitle,
 			})
 			newPostId = response?.id
-			expect(response).toMatchSpecificSnapshot(fileName('post-create'))
+			expect(response).toMatchSpecificSnapshot(fileName('create', 'post'))
 		})
 		it('.update', async () => {
 			const response = await client.post().create({
@@ -70,7 +77,7 @@ describe('End-to-end test', () => {
 				await client
 					.post()
 					.update({ title: mockUpdatedTitle }, response!.id),
-			).toMatchSpecificSnapshot(fileName('post-update'))
+			).toMatchSpecificSnapshot(fileName('update', 'post'))
 		})
 		it('.delete', async () => {
 			const response = await client.post().create({
@@ -79,7 +86,7 @@ describe('End-to-end test', () => {
 			})
 			expect(
 				await client.post().delete(response!.id),
-			).toMatchSpecificSnapshot(fileName('post-delete'))
+			).toMatchSpecificSnapshot(fileName('delete', 'post'))
 		})
 	})
 	describe('.page', () => {
@@ -92,12 +99,12 @@ describe('End-to-end test', () => {
 
 		it('.find (all)', async () => {
 			expect(await client.page().find()).toMatchSpecificSnapshot(
-				fileName('page-find_all'),
+				fileName('find_all', 'page'),
 			)
 		})
 		it('.find (one)', async () => {
 			expect(await client.page().find(2)).toMatchSpecificSnapshot(
-				fileName('page-find_one'),
+				fileName('find_one', 'page'),
 			)
 		})
 		it('.create', async () => {
@@ -106,7 +113,7 @@ describe('End-to-end test', () => {
 				title: mockTitle,
 			})
 			newPostId = response?.id
-			expect(response).toMatchSpecificSnapshot(fileName('page-create'))
+			expect(response).toMatchSpecificSnapshot(fileName('create', 'page'))
 		})
 		it('.update', async () => {
 			const response = await client.page().create({
@@ -118,7 +125,7 @@ describe('End-to-end test', () => {
 				await client
 					.page()
 					.update({ title: mockUpdatedTitle }, response!.id),
-			).toMatchSpecificSnapshot(fileName('page-update'))
+			).toMatchSpecificSnapshot(fileName('update', 'page'))
 		})
 		it('.delete', async () => {
 			const response = await client.page().create({
@@ -127,7 +134,7 @@ describe('End-to-end test', () => {
 			})
 			expect(
 				await client.page().delete(response!.id),
-			).toMatchSpecificSnapshot(fileName('page-delete'))
+			).toMatchSpecificSnapshot(fileName('delete', 'page'))
 		})
 	})
 	describe.skip('.applicationPassword', () => {
@@ -139,7 +146,7 @@ describe('End-to-end test', () => {
 				await client
 					.applicationPassword()
 					.create(userId, appId, 'mock-app-name'),
-			).toMatchSpecificSnapshot(fileName('applicationPassword-create'))
+			).toMatchSpecificSnapshot(fileName('create', 'applicationPassword'))
 		})
 	})
 	it.skip('.blockDirectory', async () => {
@@ -167,7 +174,9 @@ describe('End-to-end test', () => {
 				post: 1,
 			})
 			newCommentId = response?.id
-			expect(response).toMatchSpecificSnapshot(fileName('comment-create'))
+			expect(response).toMatchSpecificSnapshot(
+				fileName('create', 'comment'),
+			)
 		})
 		it('.delete', async () => {
 			const response = await client.comment().create({
@@ -176,7 +185,7 @@ describe('End-to-end test', () => {
 			})
 			expect(
 				await client.comment().delete(response!.id),
-			).toMatchSpecificSnapshot(fileName('comment-delete'))
+			).toMatchSpecificSnapshot(fileName('delete', 'comment'))
 		})
 		it('.find (all)', async () => {
 			const response = await client.comment().create({
@@ -185,7 +194,7 @@ describe('End-to-end test', () => {
 			})
 			newCommentId = response?.id
 			expect(await client.comment().find()).toMatchSpecificSnapshot(
-				fileName('comment-find_all'),
+				fileName('find_all', 'comment'),
 			)
 		})
 		it('.find (one)', async () => {
@@ -196,7 +205,7 @@ describe('End-to-end test', () => {
 			newCommentId = response?.id
 			expect(
 				await client.comment().find(response!.id),
-			).toMatchSpecificSnapshot(fileName('comment-find_one'))
+			).toMatchSpecificSnapshot(fileName('find_one', 'comment'))
 		})
 		it('.update', async () => {
 			const response = await client.comment().create({
@@ -211,7 +220,7 @@ describe('End-to-end test', () => {
 					},
 					response!.id,
 				),
-			).toMatchSpecificSnapshot(fileName('comment-update'))
+			).toMatchSpecificSnapshot(fileName('update', 'comment'))
 		})
 	})
 	describe('.media', () => {
@@ -232,7 +241,9 @@ describe('End-to-end test', () => {
 					'image/png',
 				)
 			newMediaId = response.id
-			expect(response).toMatchSpecificSnapshot(fileName('media-create'))
+			expect(response).toMatchSpecificSnapshot(
+				fileName('create', 'media'),
+			)
 		})
 		it('.delete', async () => {
 			const response = await client
@@ -244,7 +255,7 @@ describe('End-to-end test', () => {
 				)
 			expect(
 				await client.media().delete(response.id),
-			).toMatchSpecificSnapshot(fileName('media-delete'))
+			).toMatchSpecificSnapshot(fileName('delete', 'media'))
 		})
 		it('.find (all)', async () => {
 			const response = await client
@@ -256,7 +267,7 @@ describe('End-to-end test', () => {
 				)
 			newMediaId = response.id
 			expect(await client.media().find()).toMatchSpecificSnapshot(
-				fileName('media-find_all'),
+				fileName('find_all', 'media'),
 			)
 		})
 		it('.find (one)', async () => {
@@ -270,7 +281,7 @@ describe('End-to-end test', () => {
 			newMediaId = response.id
 			expect(
 				await client.media().find(response.id),
-			).toMatchSpecificSnapshot(fileName('media-find_one'))
+			).toMatchSpecificSnapshot(fileName('find_one', 'media'))
 		})
 		it('.update', async () => {
 			const response = await client
@@ -288,7 +299,7 @@ describe('End-to-end test', () => {
 						{ caption: { rendered: 'Mock Caption' } },
 						response.id,
 					),
-			).toMatchSpecificSnapshot(fileName('media-update'))
+			).toMatchSpecificSnapshot(fileName('update', 'media'))
 		})
 	})
 	describe('.plugin', () => {
@@ -298,27 +309,27 @@ describe('End-to-end test', () => {
 				await client
 					.plugin()
 					.create('advanced-custom-fields', 'active'),
-			).toMatchSpecificSnapshot(fileName('plugin-create'))
+			).toMatchSpecificSnapshot(fileName('create', 'plugin'))
 		})
 		it('.delete', async () => {
 			expect(
 				await client.plugin().delete('akismet/akismet'),
-			).toMatchSpecificSnapshot(fileName('plugin-delete'))
+			).toMatchSpecificSnapshot(fileName('delete', 'plugin'))
 		})
 		it('.find (all)', async () => {
 			expect(await client.plugin().find()).toMatchSpecificSnapshot(
-				fileName('plugin-find_all'),
+				fileName('find_all', 'plugin'),
 			)
 		})
 		it('.find (one)', async () => {
 			expect(await client.plugin().find('hello')).toMatchSpecificSnapshot(
-				fileName('plugin-find_one'),
+				fileName('find_one', 'plugin'),
 			)
 		})
 		it('.update', async () => {
 			expect(
 				await client.plugin().update('hello', 'active'),
-			).toMatchSpecificSnapshot(fileName('plugin-update'))
+			).toMatchSpecificSnapshot(fileName('update', 'plugin'))
 		})
 	})
 	describe('.postCategory', () => {
@@ -335,7 +346,7 @@ describe('End-to-end test', () => {
 			})
 			newCategoryId = response?.id
 			expect(response).toMatchSpecificSnapshot(
-				fileName('postCategory-create'),
+				fileName('create', 'postCategory'),
 			)
 		})
 		it('.delete', async () => {
@@ -344,16 +355,16 @@ describe('End-to-end test', () => {
 			})
 			expect(
 				await client.postCategory().delete(response!.id),
-			).toMatchSpecificSnapshot(fileName('postCategory-delete'))
+			).toMatchSpecificSnapshot(fileName('delete', 'postCategory'))
 		})
 		it('.find (all)', async () => {
 			expect(await client.postCategory().find()).toMatchSpecificSnapshot(
-				fileName('postCategory-find_all'),
+				fileName('find_all', 'postCategory'),
 			)
 		})
 		it('.find (one)', async () => {
 			expect(await client.postCategory().find(1)).toMatchSpecificSnapshot(
-				fileName('postCategory-find_one'),
+				fileName('find_one', 'postCategory'),
 			)
 		})
 		it('.update', async () => {
@@ -368,7 +379,7 @@ describe('End-to-end test', () => {
 					},
 					response!.id,
 				),
-			).toMatchSpecificSnapshot(fileName('postCategory-update'))
+			).toMatchSpecificSnapshot(fileName('update', 'postCategory'))
 		})
 	})
 	describe('.postTag', () => {
@@ -390,7 +401,9 @@ describe('End-to-end test', () => {
 				name: mockTitle.rendered,
 			})
 			newTagId = response?.id
-			expect(response).toMatchSpecificSnapshot(fileName('postTag-create'))
+			expect(response).toMatchSpecificSnapshot(
+				fileName('create', 'postTag'),
+			)
 		})
 		it('.delete', async () => {
 			const response = await client.postTag().create({
@@ -398,16 +411,16 @@ describe('End-to-end test', () => {
 			})
 			expect(
 				await client.postTag().delete(response!.id),
-			).toMatchSpecificSnapshot(fileName('postTag-delete'))
+			).toMatchSpecificSnapshot(fileName('delete', 'postTag'))
 		})
 		it('.find (all)', async () => {
 			expect(await client.postTag().find()).toMatchSpecificSnapshot(
-				fileName('postTag-find_all'),
+				fileName('find_all', 'postTag'),
 			)
 		})
 		it('.find (one)', async () => {
 			expect(await client.postTag().find(5)).toMatchSpecificSnapshot(
-				fileName('postTag-find_one'),
+				fileName('find_one', 'postTag'),
 			)
 		})
 		it('.update', async () => {
@@ -422,7 +435,7 @@ describe('End-to-end test', () => {
 					},
 					response!.id,
 				),
-			).toMatchSpecificSnapshot(fileName('postTag-update'))
+			).toMatchSpecificSnapshot(fileName('update', 'postTag'))
 		})
 	})
 	it('.postType', async () => {
@@ -459,14 +472,14 @@ describe('End-to-end test', () => {
 
 		it('.find (all)', async () => {
 			expect(await client.reusableBlock().find()).toMatchSpecificSnapshot(
-				fileName('reusableBlock-find_all'),
+				fileName('find_all', 'reusableBlock'),
 			)
 		})
 		it.skip('.find (one)', async () => {
 			// FixMe: Debug .reusableBlock().find(id) in RL
 			expect(
 				await client.reusableBlock().find(2),
-			).toMatchSpecificSnapshot(fileName('reusableBlock-find_one'))
+			).toMatchSpecificSnapshot(fileName('find_one', 'reusableBlock'))
 		})
 		it('.create', async () => {
 			const response = await client.reusableBlock().create({
@@ -475,7 +488,7 @@ describe('End-to-end test', () => {
 			})
 			newBlockId = response?.id
 			expect(response).toMatchSpecificSnapshot(
-				fileName('reusableBlock-create'),
+				fileName('create', 'reusableBlock'),
 			)
 		})
 		it('.update', async () => {
@@ -491,7 +504,7 @@ describe('End-to-end test', () => {
 						{ title: { raw: mockUpdatedTitle.rendered } },
 						response!.id,
 					),
-			).toMatchSpecificSnapshot(fileName('reusableBlock-update'))
+			).toMatchSpecificSnapshot(fileName('update', 'reusableBlock'))
 		})
 		it.skip('.delete', async () => {
 			// FixMe: Debug .reusableBlock().delete in RL
@@ -501,7 +514,7 @@ describe('End-to-end test', () => {
 			})
 			expect(
 				await client.reusableBlock().delete(response!.id),
-			).toMatchSpecificSnapshot(fileName('reusableBlock-delete'))
+			).toMatchSpecificSnapshot(fileName('delete', 'reusableBlock'))
 		})
 	})
 	it('.search', async () => {
@@ -535,7 +548,7 @@ describe('End-to-end test', () => {
 				name: mockTitle.rendered,
 			})
 			expect(response).toMatchSpecificSnapshot(
-				fileName('taxonomy-create'),
+				fileName('create', 'taxonomy'),
 			)
 		})
 		it.skip('.delete', async () => {
@@ -545,17 +558,17 @@ describe('End-to-end test', () => {
 			})
 			expect(
 				await client.taxonomy().delete(response!.id as number),
-			).toMatchSpecificSnapshot(fileName('taxonomy-delete'))
+			).toMatchSpecificSnapshot(fileName('delete', 'taxonomy'))
 		})
 		it('.find (all)', async () => {
 			expect(await client.taxonomy().find()).toMatchSpecificSnapshot(
-				fileName('taxonomy-find_all'),
+				fileName('find_all', 'taxonomy'),
 			)
 		})
 		it.skip('.find (one)', async () => {
 			// FixMe: "Invalid taxonomy." (404)
 			expect(await client.taxonomy().find(1)).toMatchSpecificSnapshot(
-				fileName('taxonomy-find_one'),
+				fileName('find_one', 'taxonomy'),
 			)
 		})
 		it.skip('.update', async () => {
@@ -570,7 +583,7 @@ describe('End-to-end test', () => {
 					},
 					response!.id as number,
 				),
-			).toMatchSpecificSnapshot(fileName('taxonomy-update'))
+			).toMatchSpecificSnapshot(fileName('update', 'taxonomy'))
 		})
 	})
 	it('.theme', async () => {
@@ -590,7 +603,7 @@ describe('End-to-end test', () => {
 				name: mockTitle.rendered,
 			})
 			newUserId = response?.id
-			expect(response).toMatchSpecificSnapshot(fileName('user-create'))
+			expect(response).toMatchSpecificSnapshot(fileName('create', 'user'))
 		})
 		it.skip('.delete', async () => {
 			// FixMe: "Missing parameter(s): username, email, password" (400)
@@ -599,21 +612,21 @@ describe('End-to-end test', () => {
 			})
 			expect(
 				await client.user().delete(response!.id),
-			).toMatchSpecificSnapshot(fileName('user-delete'))
+			).toMatchSpecificSnapshot(fileName('delete', 'user'))
 		})
 		it('.find (all)', async () => {
 			expect(await client.user().find()).toMatchSpecificSnapshot(
-				fileName('user-find_all'),
+				fileName('find_all', 'user'),
 			)
 		})
 		it.skip('.find (one)', async () => {
 			expect(await client.user().find(5)).toMatchSpecificSnapshot(
-				fileName('user-find_one'),
+				fileName('find_one', 'user'),
 			)
 		})
 		it('.find (me)', async () => {
 			expect(await client.user().findMe()).toMatchSpecificSnapshot(
-				fileName('user-find_me'),
+				fileName('find_me', 'user'),
 			)
 		})
 		it.skip('.update', async () => {
@@ -629,12 +642,12 @@ describe('End-to-end test', () => {
 					},
 					response!.id,
 				),
-			).toMatchSpecificSnapshot(fileName('user-update'))
+			).toMatchSpecificSnapshot(fileName('update', 'user'))
 		})
 		it.skip('.user.deleteMe', async () => {
 			// FixMe: "Missing parameter(s): reassign" (400)
 			expect(await client.user().deleteMe()).toMatchSpecificSnapshot(
-				fileName('user-deleteMe'),
+				fileName('deleteMe', 'user'),
 			)
 		})
 	})

@@ -1,0 +1,144 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`End-to-end test .postType 1`] = `
+Object {
+  "attachment": Object {
+    "_links": Object {
+      "collection": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/types",
+        },
+      ],
+      "curies": Array [
+        Object {
+          "href": "https://api.w.org/{rel}",
+          "name": "wp",
+          "templated": true,
+        },
+      ],
+      "wp:items": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/media",
+        },
+      ],
+    },
+    "description": "",
+    "hierarchical": false,
+    "name": "Media",
+    "rest_base": "media",
+    "slug": "attachment",
+    "taxonomies": Array [],
+  },
+  "page": Object {
+    "_links": Object {
+      "collection": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/types",
+        },
+      ],
+      "curies": Array [
+        Object {
+          "href": "https://api.w.org/{rel}",
+          "name": "wp",
+          "templated": true,
+        },
+      ],
+      "wp:items": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/pages",
+        },
+      ],
+    },
+    "description": "",
+    "hierarchical": true,
+    "name": "Pages",
+    "rest_base": "pages",
+    "slug": "page",
+    "taxonomies": Array [],
+  },
+  "post": Object {
+    "_links": Object {
+      "collection": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/types",
+        },
+      ],
+      "curies": Array [
+        Object {
+          "href": "https://api.w.org/{rel}",
+          "name": "wp",
+          "templated": true,
+        },
+      ],
+      "wp:items": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/posts",
+        },
+      ],
+    },
+    "description": "",
+    "hierarchical": false,
+    "name": "Posts",
+    "rest_base": "posts",
+    "slug": "post",
+    "taxonomies": Array [
+      "category",
+      "post_tag",
+    ],
+  },
+  "wp_block": Object {
+    "_links": Object {
+      "collection": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/types",
+        },
+      ],
+      "curies": Array [
+        Object {
+          "href": "https://api.w.org/{rel}",
+          "name": "wp",
+          "templated": true,
+        },
+      ],
+      "wp:items": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/blocks",
+        },
+      ],
+    },
+    "description": "",
+    "hierarchical": false,
+    "name": "Reusable blocks",
+    "rest_base": "blocks",
+    "slug": "wp_block",
+    "taxonomies": Array [],
+  },
+  "wp_template": Object {
+    "_links": Object {
+      "collection": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/types",
+        },
+      ],
+      "curies": Array [
+        Object {
+          "href": "https://api.w.org/{rel}",
+          "name": "wp",
+          "templated": true,
+        },
+      ],
+      "wp:items": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/templates",
+        },
+      ],
+    },
+    "description": "Templates to include in your theme.",
+    "hierarchical": false,
+    "name": "Templates",
+    "rest_base": "templates",
+    "slug": "wp_template",
+    "taxonomies": Array [],
+  },
+}
+`;

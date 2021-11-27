@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`End-to-end test .postTag .find (one) 1`] = `
+Array [
+  Object {
+    "_links": Object {
+      "about": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/taxonomies/post_tag",
+        },
+      ],
+      "collection": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/tags",
+        },
+      ],
+      "curies": Array [
+        Object {
+          "href": "https://api.w.org/{rel}",
+          "name": "wp",
+          "templated": true,
+        },
+      ],
+      "self": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/tags/5",
+        },
+      ],
+      "wp:post_type": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/posts?tags=5",
+        },
+      ],
+    },
+    "count": 0,
+    "description": "",
+    "id": 5,
+    "link": "http://localhost:8080/tag/initial-tag/",
+    "meta": Array [],
+    "name": "Initial Tag",
+    "slug": "initial-tag",
+    "taxonomy": "post_tag",
+  },
+]
+`;

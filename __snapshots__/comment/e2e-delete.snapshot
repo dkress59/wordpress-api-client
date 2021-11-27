@@ -1,0 +1,55 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`End-to-end test .comment .delete 1`] = `
+Array [
+  Object {
+    "_links": Object {
+      "author": Array [
+        Object {
+          "embeddable": true,
+          "href": "http://localhost:8080/wp-json/wp/v2/users/1",
+        },
+      ],
+      "collection": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/comments",
+        },
+      ],
+      "self": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/comments/3",
+        },
+      ],
+      "up": Array [
+        Object {
+          "embeddable": true,
+          "href": "http://localhost:8080/wp-json/wp/v2/posts/1",
+          "post_type": "post",
+        },
+      ],
+    },
+    "author": 1,
+    "author_avatar_urls": Object {
+      "24": "http://2.gravatar.com/avatar/5c0689e79c6f7fc399bb1459c5709046?s=24&d=mm&r=g",
+      "48": "http://2.gravatar.com/avatar/5c0689e79c6f7fc399bb1459c5709046?s=48&d=mm&r=g",
+      "96": "http://2.gravatar.com/avatar/5c0689e79c6f7fc399bb1459c5709046?s=96&d=mm&r=g",
+    },
+    "author_email": "admin@localhost.net",
+    "author_name": "admin",
+    "author_url": "http://localhost:8080",
+    "author_user_agent": "node-fetch/1.0 (+https://github.com/bitinn/node-fetch)",
+    "content": Object {
+      "raw": "<p>Mock Content</p>",
+      "rendered": "<p>Mock Content</p>
+",
+    },
+    "id": 3,
+    "link": "http://localhost:8080/2021/11/hello-world/#comment-3",
+    "meta": Array [],
+    "parent": 0,
+    "post": 1,
+    "status": "trash",
+    "type": "comment",
+  },
+]
+`;
