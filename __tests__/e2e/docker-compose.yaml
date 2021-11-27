@@ -1,0 +1,54 @@
+version: '3.9'
+
+services:
+
+  db:
+    image: mysql:8
+    cap_add:
+      - SYS_NICE # CAP_SYS_NICE
+    platform: linux/amd64 # Apple M1 fix
+    volumes:
+      - ./db.sql:/docker-entrypoint-initdb.d/db.sql
+    environment:
+      MYSQL_DATABASE: wordpress
+      MYSQL_PASSWORD: wordpress_db_password
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_USER: wordpress_db_user
+    networks:
+      - wpsite
+
+  #phpmyadmin:
+  #  image: phpmyadmin/phpmyadmin
+  #  depends_on:
+  #    - db
+  #  ports:
+  #    - '8000:80'
+  #  environment:
+  #    PMA_HOST: db^^
+  #    MYSQL_ROOT_PASSWORD: password
+  #  networks:
+  #    - wpsite
+
+  wordpress:
+    depends_on:
+      - db
+    build:
+      dockerfile: Dockerfile
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_NAME: wordpress
+      WORDPRESS_DB_PASSWORD: wordpress_db_password
+      WORDPRESS_DB_USER: wordpress_db_user
+      WORDPRESS_DEBUG: true
+      WORDPRESS_TABLE_PREFIX: wp_
+      WORDPRESS_CONFIG_EXTRA: |
+        define('FORCE_SSL_ADMIN', false);
+        define('WP_SITEURL', 'http://localhost:8080');
+    ports:
+      - "8080:80"
+    networks:
+      - wpsite
+
+
+networks:
+  wpsite:
