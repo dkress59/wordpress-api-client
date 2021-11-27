@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`End-to-end test .plugin .delete 1`] = `
+Object {
+  "deleted": true,
+  "previous": Object {
+    "author": "Automattic",
+    "author_uri": "https://automattic.com/wordpress-plugins/",
+    "description": Object {
+      "raw": "Used by millions, Akismet is quite possibly the best way in the world to <strong>protect your blog from spam</strong>. It keeps your site protected even while you sleep. To get started: activate the Akismet plugin and then go to your Akismet Settings page to set up your API key.",
+      "rendered": "Used by millions, Akismet is quite possibly the best way in the world to <strong>protect your blog from spam</strong>. It keeps your site protected even while you sleep. To get started: activate the Akismet plugin and then go to your Akismet Settings page to set up your API key. <cite>By <a href=\\"https://automattic.com/wordpress-plugins/\\">Automattic</a>.</cite>",
+    },
+    "name": "Akismet Anti-Spam",
+    "network_only": false,
+    "plugin": "akismet/akismet",
+    "plugin_uri": "https://akismet.com/",
+    "requires_php": "",
+    "requires_wp": "",
+    "status": "inactive",
+    "textdomain": "akismet",
+    "version": "4.2.1",
+  },
+}
+`;

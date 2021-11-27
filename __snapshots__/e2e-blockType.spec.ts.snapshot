@@ -1,0 +1,5622 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`End-to-end test .blockType 1`] = `
+Array [
+  Object {
+    "_links": Object {
+      "collection": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types",
+        },
+      ],
+      "curies": Array [
+        Object {
+          "href": "https://api.w.org/{rel}",
+          "name": "wp",
+          "templated": true,
+        },
+      ],
+      "self": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core/archives",
+        },
+      ],
+      "up": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core",
+        },
+      ],
+      "wp:render-block": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-renderer/core/archives?context=edit",
+        },
+      ],
+    },
+    "api_version": 2,
+    "attributes": Object {
+      "align": Object {
+        "enum": Array [
+          "left",
+          "center",
+          "right",
+          "wide",
+          "full",
+          "",
+        ],
+        "type": "string",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "displayAsDropdown": Object {
+        "default": false,
+        "type": "boolean",
+      },
+      "showPostCounts": Object {
+        "default": false,
+        "type": "boolean",
+      },
+    },
+    "category": "widgets",
+    "description": "Display a monthly archive of your posts.",
+    "editor_script": null,
+    "editor_style": null,
+    "example": null,
+    "icon": null,
+    "is_dynamic": true,
+    "keywords": Array [],
+    "name": "core/archives",
+    "parent": null,
+    "provides_context": Array [],
+    "script": null,
+    "style": null,
+    "styles": Array [],
+    "supports": Object {
+      "align": true,
+      "html": false,
+    },
+    "textdomain": null,
+    "title": "Archives",
+    "uses_context": Array [],
+    "variations": Array [],
+  },
+  Object {
+    "_links": Object {
+      "collection": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types",
+        },
+      ],
+      "curies": Array [
+        Object {
+          "href": "https://api.w.org/{rel}",
+          "name": "wp",
+          "templated": true,
+        },
+      ],
+      "self": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core/block",
+        },
+      ],
+      "up": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core",
+        },
+      ],
+      "wp:render-block": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-renderer/core/block?context=edit",
+        },
+      ],
+    },
+    "api_version": 2,
+    "attributes": Object {
+      "ref": Object {
+        "type": "number",
+      },
+    },
+    "category": "reusable",
+    "description": "Create and save content to reuse across your site. Update the block, and the changes apply everywhere it’s used.",
+    "editor_script": null,
+    "editor_style": null,
+    "example": null,
+    "icon": null,
+    "is_dynamic": true,
+    "keywords": Array [],
+    "name": "core/block",
+    "parent": null,
+    "provides_context": Array [],
+    "script": null,
+    "style": null,
+    "styles": Array [],
+    "supports": Object {
+      "customClassName": false,
+      "html": false,
+      "inserter": false,
+    },
+    "textdomain": null,
+    "title": "Reusable block",
+    "uses_context": Array [],
+    "variations": Array [],
+  },
+  Object {
+    "_links": Object {
+      "collection": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types",
+        },
+      ],
+      "curies": Array [
+        Object {
+          "href": "https://api.w.org/{rel}",
+          "name": "wp",
+          "templated": true,
+        },
+      ],
+      "self": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core/calendar",
+        },
+      ],
+      "up": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core",
+        },
+      ],
+      "wp:render-block": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-renderer/core/calendar?context=edit",
+        },
+      ],
+    },
+    "api_version": 2,
+    "attributes": Object {
+      "align": Object {
+        "enum": Array [
+          "left",
+          "center",
+          "right",
+          "wide",
+          "full",
+          "",
+        ],
+        "type": "string",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "month": Object {
+        "type": "integer",
+      },
+      "year": Object {
+        "type": "integer",
+      },
+    },
+    "category": "widgets",
+    "description": "A calendar of your site’s posts.",
+    "editor_script": null,
+    "editor_style": null,
+    "example": null,
+    "icon": null,
+    "is_dynamic": true,
+    "keywords": Array [
+      "posts",
+      "archive",
+    ],
+    "name": "core/calendar",
+    "parent": null,
+    "provides_context": Array [],
+    "script": null,
+    "style": null,
+    "styles": Array [],
+    "supports": Object {
+      "align": true,
+    },
+    "textdomain": null,
+    "title": "Calendar",
+    "uses_context": Array [],
+    "variations": Array [],
+  },
+  Object {
+    "_links": Object {
+      "collection": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types",
+        },
+      ],
+      "curies": Array [
+        Object {
+          "href": "https://api.w.org/{rel}",
+          "name": "wp",
+          "templated": true,
+        },
+      ],
+      "self": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core/categories",
+        },
+      ],
+      "up": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core",
+        },
+      ],
+      "wp:render-block": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-renderer/core/categories?context=edit",
+        },
+      ],
+    },
+    "api_version": 2,
+    "attributes": Object {
+      "align": Object {
+        "enum": Array [
+          "left",
+          "center",
+          "right",
+          "wide",
+          "full",
+          "",
+        ],
+        "type": "string",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "displayAsDropdown": Object {
+        "default": false,
+        "type": "boolean",
+      },
+      "showHierarchy": Object {
+        "default": false,
+        "type": "boolean",
+      },
+      "showPostCounts": Object {
+        "default": false,
+        "type": "boolean",
+      },
+    },
+    "category": "widgets",
+    "description": "Display a list of all categories.",
+    "editor_script": null,
+    "editor_style": null,
+    "example": null,
+    "icon": null,
+    "is_dynamic": true,
+    "keywords": Array [],
+    "name": "core/categories",
+    "parent": null,
+    "provides_context": Array [],
+    "script": null,
+    "style": null,
+    "styles": Array [],
+    "supports": Object {
+      "align": true,
+      "html": false,
+    },
+    "textdomain": null,
+    "title": "Categories",
+    "uses_context": Array [],
+    "variations": Array [],
+  },
+  Object {
+    "_links": Object {
+      "collection": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types",
+        },
+      ],
+      "curies": Array [
+        Object {
+          "href": "https://api.w.org/{rel}",
+          "name": "wp",
+          "templated": true,
+        },
+      ],
+      "self": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core/file",
+        },
+      ],
+      "up": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core",
+        },
+      ],
+      "wp:render-block": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-renderer/core/file?context=edit",
+        },
+      ],
+    },
+    "api_version": 2,
+    "attributes": Object {
+      "align": Object {
+        "enum": Array [
+          "left",
+          "center",
+          "right",
+          "wide",
+          "full",
+          "",
+        ],
+        "type": "string",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "displayPreview": Object {
+        "type": "boolean",
+      },
+      "downloadButtonText": Object {
+        "selector": "a[download]",
+        "source": "html",
+        "type": "string",
+      },
+      "fileName": Object {
+        "selector": "a:not([download])",
+        "source": "html",
+        "type": "string",
+      },
+      "href": Object {
+        "type": "string",
+      },
+      "id": Object {
+        "type": "number",
+      },
+      "previewHeight": Object {
+        "default": 600,
+        "type": "number",
+      },
+      "showDownloadButton": Object {
+        "default": true,
+        "type": "boolean",
+      },
+      "textLinkHref": Object {
+        "attribute": "href",
+        "selector": "a:not([download])",
+        "source": "attribute",
+        "type": "string",
+      },
+      "textLinkTarget": Object {
+        "attribute": "target",
+        "selector": "a:not([download])",
+        "source": "attribute",
+        "type": "string",
+      },
+    },
+    "category": "media",
+    "description": "Add a link to a downloadable file.",
+    "editor_script": null,
+    "editor_style": null,
+    "example": null,
+    "icon": null,
+    "is_dynamic": true,
+    "keywords": Array [
+      "document",
+      "pdf",
+      "download",
+    ],
+    "name": "core/file",
+    "parent": null,
+    "provides_context": Array [],
+    "script": null,
+    "style": null,
+    "styles": Array [],
+    "supports": Object {
+      "align": true,
+      "anchor": true,
+    },
+    "textdomain": null,
+    "title": "File",
+    "uses_context": Array [],
+    "variations": Array [],
+  },
+  Object {
+    "_links": Object {
+      "collection": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types",
+        },
+      ],
+      "curies": Array [
+        Object {
+          "href": "https://api.w.org/{rel}",
+          "name": "wp",
+          "templated": true,
+        },
+      ],
+      "self": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core/latest-comments",
+        },
+      ],
+      "up": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core",
+        },
+      ],
+      "wp:render-block": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-renderer/core/latest-comments?context=edit",
+        },
+      ],
+    },
+    "api_version": 2,
+    "attributes": Object {
+      "align": Object {
+        "enum": Array [
+          "left",
+          "center",
+          "right",
+          "wide",
+          "full",
+          "",
+        ],
+        "type": "string",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "commentsToShow": Object {
+        "default": 5,
+        "maximum": 100,
+        "minimum": 1,
+        "type": "number",
+      },
+      "displayAvatar": Object {
+        "default": true,
+        "type": "boolean",
+      },
+      "displayDate": Object {
+        "default": true,
+        "type": "boolean",
+      },
+      "displayExcerpt": Object {
+        "default": true,
+        "type": "boolean",
+      },
+    },
+    "category": "widgets",
+    "description": "Display a list of your most recent comments.",
+    "editor_script": null,
+    "editor_style": null,
+    "example": null,
+    "icon": null,
+    "is_dynamic": true,
+    "keywords": Array [
+      "recent comments",
+    ],
+    "name": "core/latest-comments",
+    "parent": null,
+    "provides_context": Array [],
+    "script": null,
+    "style": null,
+    "styles": Array [],
+    "supports": Object {
+      "align": true,
+      "html": false,
+    },
+    "textdomain": null,
+    "title": "Latest Comments",
+    "uses_context": Array [],
+    "variations": Array [],
+  },
+  Object {
+    "_links": Object {
+      "collection": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types",
+        },
+      ],
+      "curies": Array [
+        Object {
+          "href": "https://api.w.org/{rel}",
+          "name": "wp",
+          "templated": true,
+        },
+      ],
+      "self": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core/latest-posts",
+        },
+      ],
+      "up": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core",
+        },
+      ],
+      "wp:render-block": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-renderer/core/latest-posts?context=edit",
+        },
+      ],
+    },
+    "api_version": 2,
+    "attributes": Object {
+      "addLinkToFeaturedImage": Object {
+        "default": false,
+        "type": "boolean",
+      },
+      "align": Object {
+        "enum": Array [
+          "left",
+          "center",
+          "right",
+          "wide",
+          "full",
+          "",
+        ],
+        "type": "string",
+      },
+      "categories": Object {
+        "items": Object {
+          "type": "object",
+        },
+        "type": "array",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "columns": Object {
+        "default": 3,
+        "type": "number",
+      },
+      "displayAuthor": Object {
+        "default": false,
+        "type": "boolean",
+      },
+      "displayFeaturedImage": Object {
+        "default": false,
+        "type": "boolean",
+      },
+      "displayPostContent": Object {
+        "default": false,
+        "type": "boolean",
+      },
+      "displayPostContentRadio": Object {
+        "default": "excerpt",
+        "type": "string",
+      },
+      "displayPostDate": Object {
+        "default": false,
+        "type": "boolean",
+      },
+      "excerptLength": Object {
+        "default": 55,
+        "type": "number",
+      },
+      "featuredImageAlign": Object {
+        "enum": Array [
+          "left",
+          "center",
+          "right",
+        ],
+        "type": "string",
+      },
+      "featuredImageSizeHeight": Object {
+        "default": null,
+        "type": "number",
+      },
+      "featuredImageSizeSlug": Object {
+        "default": "thumbnail",
+        "type": "string",
+      },
+      "featuredImageSizeWidth": Object {
+        "default": null,
+        "type": "number",
+      },
+      "order": Object {
+        "default": "desc",
+        "type": "string",
+      },
+      "orderBy": Object {
+        "default": "date",
+        "type": "string",
+      },
+      "postLayout": Object {
+        "default": "list",
+        "type": "string",
+      },
+      "postsToShow": Object {
+        "default": 5,
+        "type": "number",
+      },
+      "selectedAuthor": Object {
+        "type": "number",
+      },
+    },
+    "category": "widgets",
+    "description": "Display a list of your most recent posts.",
+    "editor_script": null,
+    "editor_style": null,
+    "example": null,
+    "icon": null,
+    "is_dynamic": true,
+    "keywords": Array [
+      "recent posts",
+    ],
+    "name": "core/latest-posts",
+    "parent": null,
+    "provides_context": Array [],
+    "script": null,
+    "style": null,
+    "styles": Array [
+      Object {
+        "label": "Dividers",
+        "name": "twentytwentyone-latest-posts-dividers",
+      },
+      Object {
+        "label": "Borders",
+        "name": "twentytwentyone-latest-posts-borders",
+      },
+    ],
+    "supports": Object {
+      "align": true,
+      "html": false,
+    },
+    "textdomain": null,
+    "title": "Latest Posts",
+    "uses_context": Array [],
+    "variations": Array [],
+  },
+  Object {
+    "_links": Object {
+      "collection": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types",
+        },
+      ],
+      "curies": Array [
+        Object {
+          "href": "https://api.w.org/{rel}",
+          "name": "wp",
+          "templated": true,
+        },
+      ],
+      "self": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core/legacy-widget",
+        },
+      ],
+      "up": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core",
+        },
+      ],
+      "wp:render-block": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-renderer/core/legacy-widget?context=edit",
+        },
+      ],
+    },
+    "api_version": 2,
+    "attributes": Object {
+      "id": Object {
+        "default": null,
+        "type": "string",
+      },
+      "idBase": Object {
+        "default": null,
+        "type": "string",
+      },
+      "instance": Object {
+        "default": null,
+        "type": "object",
+      },
+    },
+    "category": "widgets",
+    "description": "Display a legacy widget.",
+    "editor_script": null,
+    "editor_style": null,
+    "example": null,
+    "icon": null,
+    "is_dynamic": true,
+    "keywords": Array [],
+    "name": "core/legacy-widget",
+    "parent": null,
+    "provides_context": Array [],
+    "script": null,
+    "style": null,
+    "styles": Array [],
+    "supports": Object {
+      "customClassName": false,
+      "html": false,
+      "reusable": false,
+    },
+    "textdomain": null,
+    "title": "Legacy Widget",
+    "uses_context": Array [],
+    "variations": Array [],
+  },
+  Object {
+    "_links": Object {
+      "collection": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types",
+        },
+      ],
+      "curies": Array [
+        Object {
+          "href": "https://api.w.org/{rel}",
+          "name": "wp",
+          "templated": true,
+        },
+      ],
+      "self": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core/loginout",
+        },
+      ],
+      "up": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core",
+        },
+      ],
+      "wp:render-block": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-renderer/core/loginout?context=edit",
+        },
+      ],
+    },
+    "api_version": 2,
+    "attributes": Object {
+      "className": Object {
+        "type": "string",
+      },
+      "displayLoginAsForm": Object {
+        "default": false,
+        "type": "boolean",
+      },
+      "redirectToCurrent": Object {
+        "default": true,
+        "type": "boolean",
+      },
+    },
+    "category": "theme",
+    "description": "Show login & logout links.",
+    "editor_script": null,
+    "editor_style": null,
+    "example": null,
+    "icon": null,
+    "is_dynamic": true,
+    "keywords": Array [
+      "login",
+      "logout",
+      "form",
+    ],
+    "name": "core/loginout",
+    "parent": null,
+    "provides_context": Array [],
+    "script": null,
+    "style": null,
+    "styles": Array [],
+    "supports": Object {
+      "className": true,
+      "typography": Object {
+        "fontSize": false,
+      },
+    },
+    "textdomain": null,
+    "title": "Login/out",
+    "uses_context": Array [],
+    "variations": Array [],
+  },
+  Object {
+    "_links": Object {
+      "collection": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types",
+        },
+      ],
+      "curies": Array [
+        Object {
+          "href": "https://api.w.org/{rel}",
+          "name": "wp",
+          "templated": true,
+        },
+      ],
+      "self": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core/page-list",
+        },
+      ],
+      "up": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core",
+        },
+      ],
+      "wp:render-block": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-renderer/core/page-list?context=edit",
+        },
+      ],
+    },
+    "api_version": 2,
+    "attributes": Object {
+      "className": Object {
+        "type": "string",
+      },
+    },
+    "category": "widgets",
+    "description": "Display a list of all pages.",
+    "editor_script": null,
+    "editor_style": null,
+    "example": null,
+    "icon": null,
+    "is_dynamic": true,
+    "keywords": Array [
+      "menu",
+      "navigation",
+    ],
+    "name": "core/page-list",
+    "parent": null,
+    "provides_context": Array [],
+    "script": null,
+    "style": null,
+    "styles": Array [],
+    "supports": Object {
+      "html": false,
+      "reusable": false,
+    },
+    "textdomain": null,
+    "title": "Page List",
+    "uses_context": Array [
+      "textColor",
+      "customTextColor",
+      "backgroundColor",
+      "customBackgroundColor",
+      "fontSize",
+      "customFontSize",
+      "showSubmenuIcon",
+      "style",
+    ],
+    "variations": Array [],
+  },
+  Object {
+    "_links": Object {
+      "collection": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types",
+        },
+      ],
+      "curies": Array [
+        Object {
+          "href": "https://api.w.org/{rel}",
+          "name": "wp",
+          "templated": true,
+        },
+      ],
+      "self": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core/post-content",
+        },
+      ],
+      "up": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core",
+        },
+      ],
+      "wp:render-block": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-renderer/core/post-content?context=edit",
+        },
+      ],
+    },
+    "api_version": 2,
+    "attributes": Object {
+      "align": Object {
+        "enum": Array [
+          "left",
+          "center",
+          "right",
+          "wide",
+          "full",
+          "",
+        ],
+        "type": "string",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "layout": Object {
+        "type": "object",
+      },
+    },
+    "category": "theme",
+    "description": "Displays the contents of a post or page.",
+    "editor_script": null,
+    "editor_style": null,
+    "example": null,
+    "icon": null,
+    "is_dynamic": true,
+    "keywords": Array [],
+    "name": "core/post-content",
+    "parent": null,
+    "provides_context": Array [],
+    "script": null,
+    "style": null,
+    "styles": Array [],
+    "supports": Object {
+      "__experimentalLayout": true,
+      "align": Array [
+        "wide",
+        "full",
+      ],
+      "html": false,
+    },
+    "textdomain": null,
+    "title": "Post Content",
+    "uses_context": Array [
+      "postId",
+      "postType",
+      "queryId",
+    ],
+    "variations": Array [],
+  },
+  Object {
+    "_links": Object {
+      "collection": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types",
+        },
+      ],
+      "curies": Array [
+        Object {
+          "href": "https://api.w.org/{rel}",
+          "name": "wp",
+          "templated": true,
+        },
+      ],
+      "self": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core/post-date",
+        },
+      ],
+      "up": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core",
+        },
+      ],
+      "wp:render-block": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-renderer/core/post-date?context=edit",
+        },
+      ],
+    },
+    "api_version": 2,
+    "attributes": Object {
+      "backgroundColor": Object {
+        "type": "string",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "fontSize": Object {
+        "type": "string",
+      },
+      "format": Object {
+        "type": "string",
+      },
+      "gradient": Object {
+        "type": "string",
+      },
+      "isLink": Object {
+        "default": false,
+        "type": "boolean",
+      },
+      "style": Object {
+        "type": "object",
+      },
+      "textAlign": Object {
+        "type": "string",
+      },
+      "textColor": Object {
+        "type": "string",
+      },
+    },
+    "category": "theme",
+    "description": "Add the date of this post.",
+    "editor_script": null,
+    "editor_style": null,
+    "example": null,
+    "icon": null,
+    "is_dynamic": true,
+    "keywords": Array [],
+    "name": "core/post-date",
+    "parent": null,
+    "provides_context": Array [],
+    "script": null,
+    "style": null,
+    "styles": Array [],
+    "supports": Object {
+      "color": Object {
+        "gradients": true,
+        "link": true,
+      },
+      "html": false,
+      "typography": Object {
+        "fontSize": true,
+        "lineHeight": true,
+      },
+    },
+    "textdomain": null,
+    "title": "Post Date",
+    "uses_context": Array [
+      "postId",
+      "postType",
+      "queryId",
+    ],
+    "variations": Array [],
+  },
+  Object {
+    "_links": Object {
+      "collection": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types",
+        },
+      ],
+      "curies": Array [
+        Object {
+          "href": "https://api.w.org/{rel}",
+          "name": "wp",
+          "templated": true,
+        },
+      ],
+      "self": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core/post-excerpt",
+        },
+      ],
+      "up": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core",
+        },
+      ],
+      "wp:render-block": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-renderer/core/post-excerpt?context=edit",
+        },
+      ],
+    },
+    "api_version": 2,
+    "attributes": Object {
+      "backgroundColor": Object {
+        "type": "string",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "fontSize": Object {
+        "type": "string",
+      },
+      "gradient": Object {
+        "type": "string",
+      },
+      "moreText": Object {
+        "type": "string",
+      },
+      "showMoreOnNewLine": Object {
+        "default": true,
+        "type": "boolean",
+      },
+      "style": Object {
+        "type": "object",
+      },
+      "textAlign": Object {
+        "type": "string",
+      },
+      "textColor": Object {
+        "type": "string",
+      },
+    },
+    "category": "theme",
+    "description": "Display a post's excerpt.",
+    "editor_script": null,
+    "editor_style": null,
+    "example": null,
+    "icon": null,
+    "is_dynamic": true,
+    "keywords": Array [],
+    "name": "core/post-excerpt",
+    "parent": null,
+    "provides_context": Array [],
+    "script": null,
+    "style": null,
+    "styles": Array [],
+    "supports": Object {
+      "color": Object {
+        "gradients": true,
+        "link": true,
+      },
+      "html": false,
+      "typography": Object {
+        "fontSize": true,
+        "lineHeight": true,
+      },
+    },
+    "textdomain": null,
+    "title": "Post Excerpt",
+    "uses_context": Array [
+      "postId",
+      "postType",
+      "queryId",
+    ],
+    "variations": Array [],
+  },
+  Object {
+    "_links": Object {
+      "collection": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types",
+        },
+      ],
+      "curies": Array [
+        Object {
+          "href": "https://api.w.org/{rel}",
+          "name": "wp",
+          "templated": true,
+        },
+      ],
+      "self": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core/post-featured-image",
+        },
+      ],
+      "up": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core",
+        },
+      ],
+      "wp:render-block": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-renderer/core/post-featured-image?context=edit",
+        },
+      ],
+    },
+    "api_version": 2,
+    "attributes": Object {
+      "align": Object {
+        "enum": Array [
+          "left",
+          "center",
+          "right",
+          "wide",
+          "full",
+          "",
+        ],
+        "type": "string",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "isLink": Object {
+        "default": false,
+        "type": "boolean",
+      },
+    },
+    "category": "theme",
+    "description": "Display a post's featured image.",
+    "editor_script": null,
+    "editor_style": null,
+    "example": null,
+    "icon": null,
+    "is_dynamic": true,
+    "keywords": Array [],
+    "name": "core/post-featured-image",
+    "parent": null,
+    "provides_context": Array [],
+    "script": null,
+    "style": null,
+    "styles": Array [],
+    "supports": Object {
+      "align": Array [
+        "left",
+        "right",
+        "center",
+        "wide",
+        "full",
+      ],
+      "html": false,
+    },
+    "textdomain": null,
+    "title": "Post Featured Image",
+    "uses_context": Array [
+      "postId",
+      "postType",
+      "queryId",
+    ],
+    "variations": Array [],
+  },
+  Object {
+    "_links": Object {
+      "collection": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types",
+        },
+      ],
+      "curies": Array [
+        Object {
+          "href": "https://api.w.org/{rel}",
+          "name": "wp",
+          "templated": true,
+        },
+      ],
+      "self": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core/post-terms",
+        },
+      ],
+      "up": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core",
+        },
+      ],
+      "wp:render-block": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-renderer/core/post-terms?context=edit",
+        },
+      ],
+    },
+    "api_version": 2,
+    "attributes": Object {
+      "backgroundColor": Object {
+        "type": "string",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "fontSize": Object {
+        "type": "string",
+      },
+      "gradient": Object {
+        "type": "string",
+      },
+      "style": Object {
+        "type": "object",
+      },
+      "term": Object {
+        "type": "string",
+      },
+      "textAlign": Object {
+        "type": "string",
+      },
+      "textColor": Object {
+        "type": "string",
+      },
+    },
+    "category": "design",
+    "description": "Post terms.",
+    "editor_script": null,
+    "editor_style": null,
+    "example": null,
+    "icon": null,
+    "is_dynamic": true,
+    "keywords": Array [],
+    "name": "core/post-terms",
+    "parent": null,
+    "provides_context": Array [],
+    "script": null,
+    "style": null,
+    "styles": Array [],
+    "supports": Object {
+      "color": Object {
+        "gradients": true,
+        "link": true,
+      },
+      "html": false,
+      "typography": Object {
+        "fontSize": true,
+        "lineHeight": true,
+      },
+    },
+    "textdomain": null,
+    "title": "Post Terms",
+    "uses_context": Array [
+      "postId",
+      "postType",
+    ],
+    "variations": Array [],
+  },
+  Object {
+    "_links": Object {
+      "collection": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types",
+        },
+      ],
+      "curies": Array [
+        Object {
+          "href": "https://api.w.org/{rel}",
+          "name": "wp",
+          "templated": true,
+        },
+      ],
+      "self": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core/post-title",
+        },
+      ],
+      "up": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core",
+        },
+      ],
+      "wp:render-block": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-renderer/core/post-title?context=edit",
+        },
+      ],
+    },
+    "api_version": 2,
+    "attributes": Object {
+      "align": Object {
+        "enum": Array [
+          "left",
+          "center",
+          "right",
+          "wide",
+          "full",
+          "",
+        ],
+        "type": "string",
+      },
+      "backgroundColor": Object {
+        "type": "string",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "fontSize": Object {
+        "type": "string",
+      },
+      "gradient": Object {
+        "type": "string",
+      },
+      "isLink": Object {
+        "default": false,
+        "type": "boolean",
+      },
+      "level": Object {
+        "default": 2,
+        "type": "number",
+      },
+      "linkTarget": Object {
+        "default": "_self",
+        "type": "string",
+      },
+      "rel": Object {
+        "attribute": "rel",
+        "default": "",
+        "type": "string",
+      },
+      "style": Object {
+        "type": "object",
+      },
+      "textAlign": Object {
+        "type": "string",
+      },
+      "textColor": Object {
+        "type": "string",
+      },
+    },
+    "category": "theme",
+    "description": "Displays the title of a post, page, or any other content-type.",
+    "editor_script": null,
+    "editor_style": null,
+    "example": null,
+    "icon": null,
+    "is_dynamic": true,
+    "keywords": Array [],
+    "name": "core/post-title",
+    "parent": null,
+    "provides_context": Array [],
+    "script": null,
+    "style": null,
+    "styles": Array [],
+    "supports": Object {
+      "align": Array [
+        "wide",
+        "full",
+      ],
+      "color": Object {
+        "gradients": true,
+        "link": true,
+      },
+      "html": false,
+      "typography": Object {
+        "__experimentalFontFamily": true,
+        "fontSize": true,
+        "lineHeight": true,
+      },
+    },
+    "textdomain": null,
+    "title": "Post Title",
+    "uses_context": Array [
+      "postId",
+      "postType",
+      "queryId",
+    ],
+    "variations": Array [],
+  },
+  Object {
+    "_links": Object {
+      "collection": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types",
+        },
+      ],
+      "curies": Array [
+        Object {
+          "href": "https://api.w.org/{rel}",
+          "name": "wp",
+          "templated": true,
+        },
+      ],
+      "self": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core/post-template",
+        },
+      ],
+      "up": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core",
+        },
+      ],
+      "wp:render-block": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-renderer/core/post-template?context=edit",
+        },
+      ],
+    },
+    "api_version": 2,
+    "attributes": Object {
+      "align": Object {
+        "enum": Array [
+          "left",
+          "center",
+          "right",
+          "wide",
+          "full",
+          "",
+        ],
+        "type": "string",
+      },
+      "className": Object {
+        "type": "string",
+      },
+    },
+    "category": "design",
+    "description": "Contains the block elements used to render a post, like the title, date, featured image, content or excerpt, and more.",
+    "editor_script": null,
+    "editor_style": null,
+    "example": null,
+    "icon": null,
+    "is_dynamic": true,
+    "keywords": Array [],
+    "name": "core/post-template",
+    "parent": Array [
+      "core/query",
+    ],
+    "provides_context": Array [],
+    "script": null,
+    "style": null,
+    "styles": Array [],
+    "supports": Object {
+      "align": true,
+      "html": false,
+      "reusable": false,
+    },
+    "textdomain": null,
+    "title": "Post Template",
+    "uses_context": Array [
+      "queryId",
+      "query",
+      "queryContext",
+      "displayLayout",
+      "templateSlug",
+    ],
+    "variations": Array [],
+  },
+  Object {
+    "_links": Object {
+      "collection": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types",
+        },
+      ],
+      "self": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core/query",
+        },
+      ],
+      "up": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core",
+        },
+      ],
+    },
+    "api_version": 2,
+    "attributes": Object {
+      "align": Object {
+        "enum": Array [
+          "left",
+          "center",
+          "right",
+          "wide",
+          "full",
+          "",
+        ],
+        "type": "string",
+      },
+      "backgroundColor": Object {
+        "type": "string",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "displayLayout": Object {
+        "default": Object {
+          "type": "list",
+        },
+        "type": "object",
+      },
+      "gradient": Object {
+        "type": "string",
+      },
+      "layout": Object {
+        "type": "object",
+      },
+      "query": Object {
+        "default": Object {
+          "author": "",
+          "categoryIds": Array [],
+          "exclude": Array [],
+          "inherit": true,
+          "offset": 0,
+          "order": "desc",
+          "orderBy": "date",
+          "pages": 0,
+          "perPage": null,
+          "postType": "post",
+          "search": "",
+          "sticky": "",
+          "tagIds": Array [],
+        },
+        "type": "object",
+      },
+      "queryId": Object {
+        "type": "number",
+      },
+      "style": Object {
+        "type": "object",
+      },
+      "tagName": Object {
+        "default": "div",
+        "type": "string",
+      },
+      "textColor": Object {
+        "type": "string",
+      },
+    },
+    "category": "theme",
+    "description": "An advanced block that allows displaying post types based on different query parameters and visual configurations.",
+    "editor_script": null,
+    "editor_style": null,
+    "example": null,
+    "icon": null,
+    "is_dynamic": false,
+    "keywords": Array [],
+    "name": "core/query",
+    "parent": null,
+    "provides_context": Object {
+      "displayLayout": "displayLayout",
+      "query": "query",
+      "queryId": "queryId",
+    },
+    "script": null,
+    "style": null,
+    "styles": Array [],
+    "supports": Object {
+      "__experimentalLayout": true,
+      "align": Array [
+        "wide",
+        "full",
+      ],
+      "color": Object {
+        "gradients": true,
+        "link": true,
+      },
+      "html": false,
+    },
+    "textdomain": null,
+    "title": "Query Loop",
+    "uses_context": Array [],
+    "variations": Array [],
+  },
+  Object {
+    "_links": Object {
+      "collection": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types",
+        },
+      ],
+      "self": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core/query-pagination",
+        },
+      ],
+      "up": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core",
+        },
+      ],
+    },
+    "api_version": 2,
+    "attributes": Object {
+      "align": Object {
+        "enum": Array [
+          "left",
+          "center",
+          "right",
+          "wide",
+          "full",
+          "",
+        ],
+        "type": "string",
+      },
+      "backgroundColor": Object {
+        "type": "string",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "gradient": Object {
+        "type": "string",
+      },
+      "style": Object {
+        "type": "object",
+      },
+      "textColor": Object {
+        "type": "string",
+      },
+    },
+    "category": "design",
+    "description": "Displays a paginated navigation to next/previous set of posts, when applicable.",
+    "editor_script": null,
+    "editor_style": null,
+    "example": null,
+    "icon": null,
+    "is_dynamic": false,
+    "keywords": Array [],
+    "name": "core/query-pagination",
+    "parent": Array [
+      "core/query",
+    ],
+    "provides_context": Array [],
+    "script": null,
+    "style": null,
+    "styles": Array [],
+    "supports": Object {
+      "align": true,
+      "color": Object {
+        "gradients": true,
+        "link": true,
+      },
+      "html": false,
+      "reusable": false,
+    },
+    "textdomain": null,
+    "title": "Query Pagination",
+    "uses_context": Array [
+      "queryId",
+      "query",
+    ],
+    "variations": Array [],
+  },
+  Object {
+    "_links": Object {
+      "collection": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types",
+        },
+      ],
+      "curies": Array [
+        Object {
+          "href": "https://api.w.org/{rel}",
+          "name": "wp",
+          "templated": true,
+        },
+      ],
+      "self": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core/query-pagination-next",
+        },
+      ],
+      "up": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core",
+        },
+      ],
+      "wp:render-block": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-renderer/core/query-pagination-next?context=edit",
+        },
+      ],
+    },
+    "api_version": 2,
+    "attributes": Object {
+      "backgroundColor": Object {
+        "type": "string",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "fontSize": Object {
+        "type": "string",
+      },
+      "gradient": Object {
+        "type": "string",
+      },
+      "label": Object {
+        "type": "string",
+      },
+      "style": Object {
+        "type": "object",
+      },
+      "textColor": Object {
+        "type": "string",
+      },
+    },
+    "category": "design",
+    "description": "Displays the next posts page link.",
+    "editor_script": null,
+    "editor_style": null,
+    "example": null,
+    "icon": null,
+    "is_dynamic": true,
+    "keywords": Array [],
+    "name": "core/query-pagination-next",
+    "parent": Array [
+      "core/query-pagination",
+    ],
+    "provides_context": Array [],
+    "script": null,
+    "style": null,
+    "styles": Array [],
+    "supports": Object {
+      "color": Object {
+        "gradients": true,
+        "link": true,
+      },
+      "html": false,
+      "reusable": false,
+      "typography": Object {
+        "fontSize": true,
+        "lineHeight": true,
+      },
+    },
+    "textdomain": null,
+    "title": "Query Pagination Next",
+    "uses_context": Array [
+      "queryId",
+      "query",
+    ],
+    "variations": Array [],
+  },
+  Object {
+    "_links": Object {
+      "collection": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types",
+        },
+      ],
+      "curies": Array [
+        Object {
+          "href": "https://api.w.org/{rel}",
+          "name": "wp",
+          "templated": true,
+        },
+      ],
+      "self": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core/query-pagination-numbers",
+        },
+      ],
+      "up": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core",
+        },
+      ],
+      "wp:render-block": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-renderer/core/query-pagination-numbers?context=edit",
+        },
+      ],
+    },
+    "api_version": 2,
+    "attributes": Object {
+      "className": Object {
+        "type": "string",
+      },
+    },
+    "category": "design",
+    "description": "Displays a list of page numbers for pagination",
+    "editor_script": null,
+    "editor_style": null,
+    "example": null,
+    "icon": null,
+    "is_dynamic": true,
+    "keywords": Array [],
+    "name": "core/query-pagination-numbers",
+    "parent": Array [
+      "core/query-pagination",
+    ],
+    "provides_context": Array [],
+    "script": null,
+    "style": null,
+    "styles": Array [],
+    "supports": Object {
+      "html": false,
+      "reusable": false,
+    },
+    "textdomain": null,
+    "title": "Query Pagination Numbers",
+    "uses_context": Array [
+      "queryId",
+      "query",
+    ],
+    "variations": Array [],
+  },
+  Object {
+    "_links": Object {
+      "collection": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types",
+        },
+      ],
+      "curies": Array [
+        Object {
+          "href": "https://api.w.org/{rel}",
+          "name": "wp",
+          "templated": true,
+        },
+      ],
+      "self": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core/query-pagination-previous",
+        },
+      ],
+      "up": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core",
+        },
+      ],
+      "wp:render-block": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-renderer/core/query-pagination-previous?context=edit",
+        },
+      ],
+    },
+    "api_version": 2,
+    "attributes": Object {
+      "backgroundColor": Object {
+        "type": "string",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "fontSize": Object {
+        "type": "string",
+      },
+      "gradient": Object {
+        "type": "string",
+      },
+      "label": Object {
+        "type": "string",
+      },
+      "style": Object {
+        "type": "object",
+      },
+      "textColor": Object {
+        "type": "string",
+      },
+    },
+    "category": "design",
+    "description": "Displays the previous posts page link.",
+    "editor_script": null,
+    "editor_style": null,
+    "example": null,
+    "icon": null,
+    "is_dynamic": true,
+    "keywords": Array [],
+    "name": "core/query-pagination-previous",
+    "parent": Array [
+      "core/query-pagination",
+    ],
+    "provides_context": Array [],
+    "script": null,
+    "style": null,
+    "styles": Array [],
+    "supports": Object {
+      "color": Object {
+        "gradients": true,
+        "link": true,
+      },
+      "html": false,
+      "reusable": false,
+      "typography": Object {
+        "fontSize": true,
+        "lineHeight": true,
+      },
+    },
+    "textdomain": null,
+    "title": "Query Pagination Previous",
+    "uses_context": Array [
+      "queryId",
+      "query",
+    ],
+    "variations": Array [],
+  },
+  Object {
+    "_links": Object {
+      "collection": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types",
+        },
+      ],
+      "curies": Array [
+        Object {
+          "href": "https://api.w.org/{rel}",
+          "name": "wp",
+          "templated": true,
+        },
+      ],
+      "self": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core/query-title",
+        },
+      ],
+      "up": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core",
+        },
+      ],
+      "wp:render-block": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-renderer/core/query-title?context=edit",
+        },
+      ],
+    },
+    "api_version": 2,
+    "attributes": Object {
+      "align": Object {
+        "enum": Array [
+          "left",
+          "center",
+          "right",
+          "wide",
+          "full",
+          "",
+        ],
+        "type": "string",
+      },
+      "backgroundColor": Object {
+        "type": "string",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "fontSize": Object {
+        "type": "string",
+      },
+      "gradient": Object {
+        "type": "string",
+      },
+      "level": Object {
+        "default": 1,
+        "type": "number",
+      },
+      "style": Object {
+        "type": "object",
+      },
+      "textAlign": Object {
+        "type": "string",
+      },
+      "textColor": Object {
+        "type": "string",
+      },
+      "type": Object {
+        "type": "string",
+      },
+    },
+    "category": "design",
+    "description": "Display the query title.",
+    "editor_script": null,
+    "editor_style": null,
+    "example": null,
+    "icon": null,
+    "is_dynamic": true,
+    "keywords": Array [],
+    "name": "core/query-title",
+    "parent": null,
+    "provides_context": Array [],
+    "script": null,
+    "style": null,
+    "styles": Array [],
+    "supports": Object {
+      "align": Array [
+        "wide",
+        "full",
+      ],
+      "color": Object {
+        "gradients": true,
+      },
+      "html": false,
+      "typography": Object {
+        "__experimentalFontFamily": true,
+        "fontSize": true,
+        "lineHeight": true,
+      },
+    },
+    "textdomain": null,
+    "title": "Query Title",
+    "uses_context": Array [],
+    "variations": Array [],
+  },
+  Object {
+    "_links": Object {
+      "collection": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types",
+        },
+      ],
+      "curies": Array [
+        Object {
+          "href": "https://api.w.org/{rel}",
+          "name": "wp",
+          "templated": true,
+        },
+      ],
+      "self": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core/rss",
+        },
+      ],
+      "up": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core",
+        },
+      ],
+      "wp:render-block": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-renderer/core/rss?context=edit",
+        },
+      ],
+    },
+    "api_version": 2,
+    "attributes": Object {
+      "align": Object {
+        "enum": Array [
+          "left",
+          "center",
+          "right",
+          "wide",
+          "full",
+          "",
+        ],
+        "type": "string",
+      },
+      "blockLayout": Object {
+        "default": "list",
+        "type": "string",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "columns": Object {
+        "default": 2,
+        "type": "number",
+      },
+      "displayAuthor": Object {
+        "default": false,
+        "type": "boolean",
+      },
+      "displayDate": Object {
+        "default": false,
+        "type": "boolean",
+      },
+      "displayExcerpt": Object {
+        "default": false,
+        "type": "boolean",
+      },
+      "excerptLength": Object {
+        "default": 55,
+        "type": "number",
+      },
+      "feedURL": Object {
+        "default": "",
+        "type": "string",
+      },
+      "itemsToShow": Object {
+        "default": 5,
+        "type": "number",
+      },
+    },
+    "category": "widgets",
+    "description": "Display entries from any RSS or Atom feed.",
+    "editor_script": null,
+    "editor_style": null,
+    "example": null,
+    "icon": null,
+    "is_dynamic": true,
+    "keywords": Array [
+      "atom",
+      "feed",
+    ],
+    "name": "core/rss",
+    "parent": null,
+    "provides_context": Array [],
+    "script": null,
+    "style": null,
+    "styles": Array [],
+    "supports": Object {
+      "align": true,
+      "html": false,
+    },
+    "textdomain": null,
+    "title": "RSS",
+    "uses_context": Array [],
+    "variations": Array [],
+  },
+  Object {
+    "_links": Object {
+      "collection": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types",
+        },
+      ],
+      "curies": Array [
+        Object {
+          "href": "https://api.w.org/{rel}",
+          "name": "wp",
+          "templated": true,
+        },
+      ],
+      "self": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core/search",
+        },
+      ],
+      "up": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core",
+        },
+      ],
+      "wp:render-block": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-renderer/core/search?context=edit",
+        },
+      ],
+    },
+    "api_version": 2,
+    "attributes": Object {
+      "align": Object {
+        "enum": Array [
+          "left",
+          "center",
+          "right",
+          "wide",
+          "full",
+          "",
+        ],
+        "type": "string",
+      },
+      "buttonPosition": Object {
+        "default": "button-outside",
+        "type": "string",
+      },
+      "buttonText": Object {
+        "__experimentalRole": "content",
+        "type": "string",
+      },
+      "buttonUseIcon": Object {
+        "default": false,
+        "type": "boolean",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "label": Object {
+        "__experimentalRole": "content",
+        "type": "string",
+      },
+      "placeholder": Object {
+        "__experimentalRole": "content",
+        "default": "",
+        "type": "string",
+      },
+      "showLabel": Object {
+        "default": true,
+        "type": "boolean",
+      },
+      "style": Object {
+        "type": "object",
+      },
+      "width": Object {
+        "type": "number",
+      },
+      "widthUnit": Object {
+        "type": "string",
+      },
+    },
+    "category": "widgets",
+    "description": "Help visitors find your content.",
+    "editor_script": null,
+    "editor_style": null,
+    "example": null,
+    "icon": null,
+    "is_dynamic": true,
+    "keywords": Array [
+      "find",
+    ],
+    "name": "core/search",
+    "parent": null,
+    "provides_context": Array [],
+    "script": null,
+    "style": null,
+    "styles": Array [],
+    "supports": Object {
+      "__experimentalBorder": Object {
+        "__experimentalSkipSerialization": true,
+        "radius": true,
+      },
+      "align": Array [
+        "left",
+        "center",
+        "right",
+      ],
+      "html": false,
+    },
+    "textdomain": null,
+    "title": "Search",
+    "uses_context": Array [],
+    "variations": Array [],
+  },
+  Object {
+    "_links": Object {
+      "collection": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types",
+        },
+      ],
+      "curies": Array [
+        Object {
+          "href": "https://api.w.org/{rel}",
+          "name": "wp",
+          "templated": true,
+        },
+      ],
+      "self": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core/shortcode",
+        },
+      ],
+      "up": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core",
+        },
+      ],
+      "wp:render-block": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-renderer/core/shortcode?context=edit",
+        },
+      ],
+    },
+    "api_version": 2,
+    "attributes": Object {
+      "text": Object {
+        "source": "html",
+        "type": "string",
+      },
+    },
+    "category": "widgets",
+    "description": "Insert additional custom elements with a WordPress shortcode.",
+    "editor_script": null,
+    "editor_style": null,
+    "example": null,
+    "icon": null,
+    "is_dynamic": true,
+    "keywords": Array [],
+    "name": "core/shortcode",
+    "parent": null,
+    "provides_context": Array [],
+    "script": null,
+    "style": null,
+    "styles": Array [],
+    "supports": Object {
+      "className": false,
+      "customClassName": false,
+      "html": false,
+    },
+    "textdomain": null,
+    "title": "Shortcode",
+    "uses_context": Array [],
+    "variations": Array [],
+  },
+  Object {
+    "_links": Object {
+      "collection": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types",
+        },
+      ],
+      "curies": Array [
+        Object {
+          "href": "https://api.w.org/{rel}",
+          "name": "wp",
+          "templated": true,
+        },
+      ],
+      "self": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core/site-tagline",
+        },
+      ],
+      "up": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core",
+        },
+      ],
+      "wp:render-block": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-renderer/core/site-tagline?context=edit",
+        },
+      ],
+    },
+    "api_version": 2,
+    "attributes": Object {
+      "backgroundColor": Object {
+        "type": "string",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "fontSize": Object {
+        "type": "string",
+      },
+      "gradient": Object {
+        "type": "string",
+      },
+      "style": Object {
+        "type": "object",
+      },
+      "textAlign": Object {
+        "type": "string",
+      },
+      "textColor": Object {
+        "type": "string",
+      },
+    },
+    "category": "design",
+    "description": "Describe in a few words what the website is about. The tagline can be used in search results or when sharing on social networks even if it's not displayed in the theme design.",
+    "editor_script": null,
+    "editor_style": null,
+    "example": null,
+    "icon": null,
+    "is_dynamic": true,
+    "keywords": Array [
+      "description",
+    ],
+    "name": "core/site-tagline",
+    "parent": null,
+    "provides_context": Array [],
+    "script": null,
+    "style": null,
+    "styles": Array [],
+    "supports": Object {
+      "color": Object {
+        "gradients": true,
+      },
+      "html": false,
+      "spacing": Object {
+        "margin": true,
+        "padding": true,
+      },
+      "typography": Object {
+        "__experimentalFontFamily": true,
+        "__experimentalTextTransform": true,
+        "fontSize": true,
+        "lineHeight": true,
+      },
+    },
+    "textdomain": null,
+    "title": "Site Tagline",
+    "uses_context": Array [],
+    "variations": Array [],
+  },
+  Object {
+    "_links": Object {
+      "collection": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types",
+        },
+      ],
+      "curies": Array [
+        Object {
+          "href": "https://api.w.org/{rel}",
+          "name": "wp",
+          "templated": true,
+        },
+      ],
+      "self": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core/site-logo",
+        },
+      ],
+      "up": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core",
+        },
+      ],
+      "wp:render-block": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-renderer/core/site-logo?context=edit",
+        },
+      ],
+    },
+    "api_version": 2,
+    "attributes": Object {
+      "align": Object {
+        "type": "string",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "isLink": Object {
+        "default": true,
+        "type": "boolean",
+      },
+      "linkTarget": Object {
+        "default": "_self",
+        "type": "string",
+      },
+      "width": Object {
+        "type": "number",
+      },
+    },
+    "category": "layout",
+    "description": "Useful for displaying a graphic mark, design, or symbol to represent the site. Once a site logo is set, it can be reused in different places and templates. It should not be confused with the site icon, which is the small image used in the dashboard, browser tabs, public search results, etc, to help recognize a site.",
+    "editor_script": null,
+    "editor_style": null,
+    "example": null,
+    "icon": null,
+    "is_dynamic": true,
+    "keywords": Array [],
+    "name": "core/site-logo",
+    "parent": null,
+    "provides_context": Array [],
+    "script": null,
+    "style": null,
+    "styles": Array [
+      Object {
+        "isDefault": true,
+        "label": "Default",
+        "name": "default",
+      },
+      Object {
+        "label": "Rounded",
+        "name": "rounded",
+      },
+    ],
+    "supports": Object {
+      "align": true,
+      "alignWide": false,
+      "html": false,
+    },
+    "textdomain": null,
+    "title": "Site Logo",
+    "uses_context": Array [],
+    "variations": Array [],
+  },
+  Object {
+    "_links": Object {
+      "collection": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types",
+        },
+      ],
+      "curies": Array [
+        Object {
+          "href": "https://api.w.org/{rel}",
+          "name": "wp",
+          "templated": true,
+        },
+      ],
+      "self": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core/site-title",
+        },
+      ],
+      "up": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core",
+        },
+      ],
+      "wp:render-block": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-renderer/core/site-title?context=edit",
+        },
+      ],
+    },
+    "api_version": 2,
+    "attributes": Object {
+      "align": Object {
+        "enum": Array [
+          "left",
+          "center",
+          "right",
+          "wide",
+          "full",
+          "",
+        ],
+        "type": "string",
+      },
+      "backgroundColor": Object {
+        "type": "string",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "fontSize": Object {
+        "type": "string",
+      },
+      "gradient": Object {
+        "type": "string",
+      },
+      "level": Object {
+        "default": 1,
+        "type": "number",
+      },
+      "style": Object {
+        "type": "object",
+      },
+      "textAlign": Object {
+        "type": "string",
+      },
+    },
+    "category": "design",
+    "description": "Displays and allows editing the name of the site. The site title usually appears in the browser title bar, in search results, and more. Also available in Settings > General.",
+    "editor_script": null,
+    "editor_style": null,
+    "example": null,
+    "icon": null,
+    "is_dynamic": true,
+    "keywords": Array [],
+    "name": "core/site-title",
+    "parent": null,
+    "provides_context": Array [],
+    "script": null,
+    "style": null,
+    "styles": Array [],
+    "supports": Object {
+      "align": Array [
+        "wide",
+        "full",
+      ],
+      "color": Object {
+        "gradients": true,
+        "link": true,
+        "text": false,
+      },
+      "html": false,
+      "spacing": Object {
+        "margin": true,
+        "padding": true,
+      },
+      "typography": Object {
+        "__experimentalFontFamily": true,
+        "__experimentalFontStyle": true,
+        "__experimentalFontWeight": true,
+        "__experimentalTextTransform": true,
+        "fontSize": true,
+        "lineHeight": true,
+      },
+    },
+    "textdomain": null,
+    "title": "Site Title",
+    "uses_context": Array [],
+    "variations": Array [],
+  },
+  Object {
+    "_links": Object {
+      "collection": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types",
+        },
+      ],
+      "curies": Array [
+        Object {
+          "href": "https://api.w.org/{rel}",
+          "name": "wp",
+          "templated": true,
+        },
+      ],
+      "self": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core/social-link",
+        },
+      ],
+      "up": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core",
+        },
+      ],
+      "wp:render-block": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-renderer/core/social-link?context=edit",
+        },
+      ],
+    },
+    "api_version": 2,
+    "attributes": Object {
+      "className": Object {
+        "type": "string",
+      },
+      "label": Object {
+        "type": "string",
+      },
+      "service": Object {
+        "type": "string",
+      },
+      "url": Object {
+        "type": "string",
+      },
+    },
+    "category": "widgets",
+    "description": "Display an icon linking to a social media profile or website.",
+    "editor_script": null,
+    "editor_style": null,
+    "example": null,
+    "icon": null,
+    "is_dynamic": true,
+    "keywords": Array [],
+    "name": "core/social-link",
+    "parent": Array [
+      "core/social-links",
+    ],
+    "provides_context": Array [],
+    "script": null,
+    "style": null,
+    "styles": Array [],
+    "supports": Object {
+      "html": false,
+      "reusable": false,
+    },
+    "textdomain": null,
+    "title": "Social Icon",
+    "uses_context": Array [
+      "openInNewTab",
+      "iconColorValue",
+      "iconBackgroundColorValue",
+    ],
+    "variations": Array [],
+  },
+  Object {
+    "_links": Object {
+      "collection": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types",
+        },
+      ],
+      "curies": Array [
+        Object {
+          "href": "https://api.w.org/{rel}",
+          "name": "wp",
+          "templated": true,
+        },
+      ],
+      "self": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core/tag-cloud",
+        },
+      ],
+      "up": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core",
+        },
+      ],
+      "wp:render-block": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-renderer/core/tag-cloud?context=edit",
+        },
+      ],
+    },
+    "api_version": 2,
+    "attributes": Object {
+      "align": Object {
+        "enum": Array [
+          "left",
+          "center",
+          "right",
+          "wide",
+          "full",
+          "",
+        ],
+        "type": "string",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "showTagCounts": Object {
+        "default": false,
+        "type": "boolean",
+      },
+      "taxonomy": Object {
+        "default": "post_tag",
+        "type": "string",
+      },
+    },
+    "category": "widgets",
+    "description": "A cloud of your most used tags.",
+    "editor_script": null,
+    "editor_style": null,
+    "example": null,
+    "icon": null,
+    "is_dynamic": true,
+    "keywords": Array [],
+    "name": "core/tag-cloud",
+    "parent": null,
+    "provides_context": Array [],
+    "script": null,
+    "style": null,
+    "styles": Array [],
+    "supports": Object {
+      "align": true,
+      "html": false,
+    },
+    "textdomain": null,
+    "title": "Tag Cloud",
+    "uses_context": Array [],
+    "variations": Array [],
+  },
+  Object {
+    "_links": Object {
+      "collection": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types",
+        },
+      ],
+      "self": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core/audio",
+        },
+      ],
+      "up": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core",
+        },
+      ],
+    },
+    "api_version": 2,
+    "attributes": Object {
+      "align": Object {
+        "enum": Array [
+          "left",
+          "center",
+          "right",
+          "wide",
+          "full",
+          "",
+        ],
+        "type": "string",
+      },
+      "autoplay": Object {
+        "attribute": "autoplay",
+        "selector": "audio",
+        "source": "attribute",
+        "type": "boolean",
+      },
+      "caption": Object {
+        "selector": "figcaption",
+        "source": "html",
+        "type": "string",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "id": Object {
+        "type": "number",
+      },
+      "loop": Object {
+        "attribute": "loop",
+        "selector": "audio",
+        "source": "attribute",
+        "type": "boolean",
+      },
+      "preload": Object {
+        "attribute": "preload",
+        "selector": "audio",
+        "source": "attribute",
+        "type": "string",
+      },
+      "src": Object {
+        "attribute": "src",
+        "selector": "audio",
+        "source": "attribute",
+        "type": "string",
+      },
+    },
+    "category": "media",
+    "description": "Embed a simple audio player.",
+    "editor_script": null,
+    "editor_style": null,
+    "example": null,
+    "icon": null,
+    "is_dynamic": false,
+    "keywords": Array [
+      "music",
+      "sound",
+      "podcast",
+      "recording",
+    ],
+    "name": "core/audio",
+    "parent": null,
+    "provides_context": Array [],
+    "script": null,
+    "style": null,
+    "styles": Array [],
+    "supports": Object {
+      "align": true,
+      "anchor": true,
+    },
+    "textdomain": null,
+    "title": "Audio",
+    "uses_context": Array [],
+    "variations": Array [],
+  },
+  Object {
+    "_links": Object {
+      "collection": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types",
+        },
+      ],
+      "self": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core/button",
+        },
+      ],
+      "up": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core",
+        },
+      ],
+    },
+    "api_version": 2,
+    "attributes": Object {
+      "align": Object {
+        "enum": Array [
+          "left",
+          "center",
+          "right",
+          "wide",
+          "full",
+          "",
+        ],
+        "type": "string",
+      },
+      "backgroundColor": Object {
+        "type": "string",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "fontSize": Object {
+        "type": "string",
+      },
+      "gradient": Object {
+        "type": "string",
+      },
+      "linkTarget": Object {
+        "attribute": "target",
+        "selector": "a",
+        "source": "attribute",
+        "type": "string",
+      },
+      "placeholder": Object {
+        "type": "string",
+      },
+      "rel": Object {
+        "attribute": "rel",
+        "selector": "a",
+        "source": "attribute",
+        "type": "string",
+      },
+      "style": Object {
+        "type": "object",
+      },
+      "text": Object {
+        "selector": "a",
+        "source": "html",
+        "type": "string",
+      },
+      "textColor": Object {
+        "type": "string",
+      },
+      "title": Object {
+        "attribute": "title",
+        "selector": "a",
+        "source": "attribute",
+        "type": "string",
+      },
+      "url": Object {
+        "attribute": "href",
+        "selector": "a",
+        "source": "attribute",
+        "type": "string",
+      },
+      "width": Object {
+        "type": "number",
+      },
+    },
+    "category": "design",
+    "description": "Prompt visitors to take action with a button-style link.",
+    "editor_script": null,
+    "editor_style": null,
+    "example": null,
+    "icon": null,
+    "is_dynamic": false,
+    "keywords": Array [
+      "link",
+    ],
+    "name": "core/button",
+    "parent": Array [
+      "core/buttons",
+    ],
+    "provides_context": Array [],
+    "script": null,
+    "style": null,
+    "styles": Array [
+      Object {
+        "isDefault": true,
+        "label": "Fill",
+        "name": "fill",
+      },
+      Object {
+        "label": "Outline",
+        "name": "outline",
+      },
+    ],
+    "supports": Object {
+      "__experimentalBorder": Object {
+        "__experimentalSkipSerialization": true,
+        "radius": true,
+      },
+      "__experimentalSelector": ".wp-block-button__link",
+      "align": true,
+      "alignWide": false,
+      "anchor": true,
+      "color": Object {
+        "__experimentalSkipSerialization": true,
+        "gradients": true,
+      },
+      "reusable": false,
+      "typography": Object {
+        "__experimentalFontFamily": true,
+        "fontSize": true,
+      },
+    },
+    "textdomain": null,
+    "title": "Button",
+    "uses_context": Array [],
+    "variations": Array [],
+  },
+  Object {
+    "_links": Object {
+      "collection": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types",
+        },
+      ],
+      "self": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core/buttons",
+        },
+      ],
+      "up": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core",
+        },
+      ],
+    },
+    "api_version": 2,
+    "attributes": Object {
+      "align": Object {
+        "enum": Array [
+          "left",
+          "center",
+          "right",
+          "wide",
+          "full",
+          "",
+        ],
+        "type": "string",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "contentJustification": Object {
+        "type": "string",
+      },
+      "orientation": Object {
+        "default": "horizontal",
+        "type": "string",
+      },
+    },
+    "category": "design",
+    "description": "Prompt visitors to take action with a group of button-style links.",
+    "editor_script": null,
+    "editor_style": null,
+    "example": null,
+    "icon": null,
+    "is_dynamic": false,
+    "keywords": Array [
+      "link",
+    ],
+    "name": "core/buttons",
+    "parent": null,
+    "provides_context": Array [],
+    "script": null,
+    "style": null,
+    "styles": Array [],
+    "supports": Object {
+      "align": Array [
+        "wide",
+        "full",
+      ],
+      "anchor": true,
+    },
+    "textdomain": null,
+    "title": "Buttons",
+    "uses_context": Array [],
+    "variations": Array [],
+  },
+  Object {
+    "_links": Object {
+      "collection": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types",
+        },
+      ],
+      "self": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core/code",
+        },
+      ],
+      "up": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core",
+        },
+      ],
+    },
+    "api_version": 2,
+    "attributes": Object {
+      "className": Object {
+        "type": "string",
+      },
+      "content": Object {
+        "selector": "code",
+        "source": "html",
+        "type": "string",
+      },
+      "fontSize": Object {
+        "type": "string",
+      },
+      "style": Object {
+        "type": "object",
+      },
+    },
+    "category": "text",
+    "description": "Display code snippets that respect your spacing and tabs.",
+    "editor_script": null,
+    "editor_style": null,
+    "example": null,
+    "icon": null,
+    "is_dynamic": false,
+    "keywords": Array [],
+    "name": "core/code",
+    "parent": null,
+    "provides_context": Array [],
+    "script": null,
+    "style": null,
+    "styles": Array [],
+    "supports": Object {
+      "anchor": true,
+      "typography": Object {
+        "fontSize": true,
+      },
+    },
+    "textdomain": null,
+    "title": "Code",
+    "uses_context": Array [],
+    "variations": Array [],
+  },
+  Object {
+    "_links": Object {
+      "collection": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types",
+        },
+      ],
+      "self": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core/column",
+        },
+      ],
+      "up": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core",
+        },
+      ],
+    },
+    "api_version": 2,
+    "attributes": Object {
+      "backgroundColor": Object {
+        "type": "string",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "gradient": Object {
+        "type": "string",
+      },
+      "style": Object {
+        "type": "object",
+      },
+      "templateLock": Object {
+        "enum": Array [
+          "all",
+          "insert",
+          false,
+        ],
+      },
+      "textColor": Object {
+        "type": "string",
+      },
+      "verticalAlignment": Object {
+        "type": "string",
+      },
+      "width": Object {
+        "type": "string",
+      },
+    },
+    "category": "text",
+    "description": "A single column within a columns block.",
+    "editor_script": null,
+    "editor_style": null,
+    "example": null,
+    "icon": null,
+    "is_dynamic": false,
+    "keywords": Array [],
+    "name": "core/column",
+    "parent": Array [
+      "core/columns",
+    ],
+    "provides_context": Array [],
+    "script": null,
+    "style": null,
+    "styles": Array [],
+    "supports": Object {
+      "anchor": true,
+      "color": Object {
+        "gradients": true,
+        "link": true,
+      },
+      "html": false,
+      "reusable": false,
+      "spacing": Object {
+        "padding": true,
+      },
+    },
+    "textdomain": null,
+    "title": "Column",
+    "uses_context": Array [],
+    "variations": Array [],
+  },
+  Object {
+    "_links": Object {
+      "collection": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types",
+        },
+      ],
+      "self": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core/columns",
+        },
+      ],
+      "up": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core",
+        },
+      ],
+    },
+    "api_version": 2,
+    "attributes": Object {
+      "align": Object {
+        "enum": Array [
+          "left",
+          "center",
+          "right",
+          "wide",
+          "full",
+          "",
+        ],
+        "type": "string",
+      },
+      "backgroundColor": Object {
+        "type": "string",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "gradient": Object {
+        "type": "string",
+      },
+      "style": Object {
+        "type": "object",
+      },
+      "textColor": Object {
+        "type": "string",
+      },
+      "verticalAlignment": Object {
+        "type": "string",
+      },
+    },
+    "category": "design",
+    "description": "Add a block that displays content in multiple columns, then add whatever content blocks you’d like.",
+    "editor_script": null,
+    "editor_style": null,
+    "example": null,
+    "icon": null,
+    "is_dynamic": false,
+    "keywords": Array [],
+    "name": "core/columns",
+    "parent": null,
+    "provides_context": Array [],
+    "script": null,
+    "style": null,
+    "styles": Array [
+      Object {
+        "label": "Overlap",
+        "name": "twentytwentyone-columns-overlap",
+      },
+    ],
+    "supports": Object {
+      "align": Array [
+        "wide",
+        "full",
+      ],
+      "anchor": true,
+      "color": Object {
+        "gradients": true,
+        "link": true,
+      },
+      "html": false,
+    },
+    "textdomain": null,
+    "title": "Columns",
+    "uses_context": Array [],
+    "variations": Array [],
+  },
+  Object {
+    "_links": Object {
+      "collection": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types",
+        },
+      ],
+      "self": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core/cover",
+        },
+      ],
+      "up": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core",
+        },
+      ],
+    },
+    "api_version": 2,
+    "attributes": Object {
+      "align": Object {
+        "enum": Array [
+          "left",
+          "center",
+          "right",
+          "wide",
+          "full",
+          "",
+        ],
+        "type": "string",
+      },
+      "backgroundType": Object {
+        "default": "image",
+        "type": "string",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "contentPosition": Object {
+        "type": "string",
+      },
+      "customGradient": Object {
+        "type": "string",
+      },
+      "customOverlayColor": Object {
+        "type": "string",
+      },
+      "dimRatio": Object {
+        "default": 50,
+        "type": "number",
+      },
+      "focalPoint": Object {
+        "type": "object",
+      },
+      "gradient": Object {
+        "type": "string",
+      },
+      "hasParallax": Object {
+        "default": false,
+        "type": "boolean",
+      },
+      "id": Object {
+        "type": "number",
+      },
+      "isRepeated": Object {
+        "default": false,
+        "type": "boolean",
+      },
+      "minHeight": Object {
+        "type": "number",
+      },
+      "minHeightUnit": Object {
+        "type": "string",
+      },
+      "overlayColor": Object {
+        "type": "string",
+      },
+      "style": Object {
+        "type": "object",
+      },
+      "url": Object {
+        "type": "string",
+      },
+    },
+    "category": "media",
+    "description": "Add an image or video with a text overlay — great for headers.",
+    "editor_script": null,
+    "editor_style": null,
+    "example": null,
+    "icon": null,
+    "is_dynamic": false,
+    "keywords": Array [],
+    "name": "core/cover",
+    "parent": null,
+    "provides_context": Array [],
+    "script": null,
+    "style": null,
+    "styles": Array [
+      Object {
+        "label": "Borders",
+        "name": "twentytwentyone-border",
+      },
+    ],
+    "supports": Object {
+      "align": true,
+      "anchor": true,
+      "color": Object {
+        "__experimentalDuotone": "> .wp-block-cover__image-background, > .wp-block-cover__video-background",
+        "background": false,
+        "text": false,
+      },
+      "html": false,
+      "spacing": Object {
+        "padding": true,
+      },
+    },
+    "textdomain": null,
+    "title": "Cover",
+    "uses_context": Array [],
+    "variations": Array [],
+  },
+  Object {
+    "_links": Object {
+      "collection": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types",
+        },
+      ],
+      "self": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core/embed",
+        },
+      ],
+      "up": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core",
+        },
+      ],
+    },
+    "api_version": 2,
+    "attributes": Object {
+      "align": Object {
+        "enum": Array [
+          "left",
+          "center",
+          "right",
+          "wide",
+          "full",
+          "",
+        ],
+        "type": "string",
+      },
+      "allowResponsive": Object {
+        "default": true,
+        "type": "boolean",
+      },
+      "caption": Object {
+        "selector": "figcaption",
+        "source": "html",
+        "type": "string",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "previewable": Object {
+        "default": true,
+        "type": "boolean",
+      },
+      "providerNameSlug": Object {
+        "type": "string",
+      },
+      "responsive": Object {
+        "default": false,
+        "type": "boolean",
+      },
+      "type": Object {
+        "type": "string",
+      },
+      "url": Object {
+        "type": "string",
+      },
+    },
+    "category": "embed",
+    "description": "Add a block that displays content pulled from other sites, like Twitter, Instagram or YouTube.",
+    "editor_script": null,
+    "editor_style": null,
+    "example": null,
+    "icon": null,
+    "is_dynamic": false,
+    "keywords": Array [],
+    "name": "core/embed",
+    "parent": null,
+    "provides_context": Array [],
+    "script": null,
+    "style": null,
+    "styles": Array [],
+    "supports": Object {
+      "align": true,
+    },
+    "textdomain": null,
+    "title": "Embed",
+    "uses_context": Array [],
+    "variations": Array [],
+  },
+  Object {
+    "_links": Object {
+      "collection": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types",
+        },
+      ],
+      "self": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core/freeform",
+        },
+      ],
+      "up": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core",
+        },
+      ],
+    },
+    "api_version": 2,
+    "attributes": Object {
+      "content": Object {
+        "source": "html",
+        "type": "string",
+      },
+    },
+    "category": "text",
+    "description": "Use the classic WordPress editor.",
+    "editor_script": null,
+    "editor_style": null,
+    "example": null,
+    "icon": null,
+    "is_dynamic": false,
+    "keywords": Array [],
+    "name": "core/freeform",
+    "parent": null,
+    "provides_context": Array [],
+    "script": null,
+    "style": null,
+    "styles": Array [],
+    "supports": Object {
+      "className": false,
+      "customClassName": false,
+      "reusable": false,
+    },
+    "textdomain": null,
+    "title": "Classic",
+    "uses_context": Array [],
+    "variations": Array [],
+  },
+  Object {
+    "_links": Object {
+      "collection": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types",
+        },
+      ],
+      "self": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core/gallery",
+        },
+      ],
+      "up": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core",
+        },
+      ],
+    },
+    "api_version": 2,
+    "attributes": Object {
+      "align": Object {
+        "enum": Array [
+          "left",
+          "center",
+          "right",
+          "wide",
+          "full",
+          "",
+        ],
+        "type": "string",
+      },
+      "caption": Object {
+        "selector": ".blocks-gallery-caption",
+        "source": "html",
+        "type": "string",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "columns": Object {
+        "maximum": 8,
+        "minimum": 1,
+        "type": "number",
+      },
+      "ids": Object {
+        "default": Array [],
+        "items": Object {
+          "type": "number",
+        },
+        "type": "array",
+      },
+      "imageCrop": Object {
+        "default": true,
+        "type": "boolean",
+      },
+      "images": Object {
+        "default": Array [],
+        "query": Object {
+          "alt": Object {
+            "attribute": "alt",
+            "default": "",
+            "selector": "img",
+            "source": "attribute",
+            "type": "string",
+          },
+          "caption": Object {
+            "selector": ".blocks-gallery-item__caption",
+            "source": "html",
+            "type": "string",
+          },
+          "fullUrl": Object {
+            "attribute": "data-full-url",
+            "selector": "img",
+            "source": "attribute",
+            "type": "string",
+          },
+          "id": Object {
+            "attribute": "data-id",
+            "selector": "img",
+            "source": "attribute",
+            "type": "string",
+          },
+          "link": Object {
+            "attribute": "data-link",
+            "selector": "img",
+            "source": "attribute",
+            "type": "string",
+          },
+          "url": Object {
+            "attribute": "src",
+            "selector": "img",
+            "source": "attribute",
+            "type": "string",
+          },
+        },
+        "selector": ".blocks-gallery-item",
+        "source": "query",
+        "type": "array",
+      },
+      "linkTo": Object {
+        "type": "string",
+      },
+      "sizeSlug": Object {
+        "default": "large",
+        "type": "string",
+      },
+    },
+    "category": "media",
+    "description": "Display multiple images in a rich gallery.",
+    "editor_script": null,
+    "editor_style": null,
+    "example": null,
+    "icon": null,
+    "is_dynamic": false,
+    "keywords": Array [
+      "images",
+      "photos",
+    ],
+    "name": "core/gallery",
+    "parent": null,
+    "provides_context": Array [],
+    "script": null,
+    "style": null,
+    "styles": Array [],
+    "supports": Object {
+      "align": true,
+      "anchor": true,
+    },
+    "textdomain": null,
+    "title": "Gallery",
+    "uses_context": Array [],
+    "variations": Array [],
+  },
+  Object {
+    "_links": Object {
+      "collection": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types",
+        },
+      ],
+      "self": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core/group",
+        },
+      ],
+      "up": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core",
+        },
+      ],
+    },
+    "api_version": 2,
+    "attributes": Object {
+      "align": Object {
+        "enum": Array [
+          "left",
+          "center",
+          "right",
+          "wide",
+          "full",
+          "",
+        ],
+        "type": "string",
+      },
+      "backgroundColor": Object {
+        "type": "string",
+      },
+      "borderColor": Object {
+        "type": "string",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "gradient": Object {
+        "type": "string",
+      },
+      "layout": Object {
+        "type": "object",
+      },
+      "style": Object {
+        "type": "object",
+      },
+      "tagName": Object {
+        "default": "div",
+        "type": "string",
+      },
+      "templateLock": Object {
+        "enum": Array [
+          "all",
+          "insert",
+          false,
+        ],
+      },
+      "textColor": Object {
+        "type": "string",
+      },
+    },
+    "category": "design",
+    "description": "Combine blocks into a group.",
+    "editor_script": null,
+    "editor_style": null,
+    "example": null,
+    "icon": null,
+    "is_dynamic": false,
+    "keywords": Array [
+      "container",
+      "wrapper",
+      "row",
+      "section",
+    ],
+    "name": "core/group",
+    "parent": null,
+    "provides_context": Array [],
+    "script": null,
+    "style": null,
+    "styles": Array [
+      Object {
+        "label": "Borders",
+        "name": "twentytwentyone-border",
+      },
+    ],
+    "supports": Object {
+      "__experimentalBorder": Object {
+        "color": true,
+        "radius": true,
+        "style": true,
+        "width": true,
+      },
+      "__experimentalLayout": true,
+      "align": Array [
+        "wide",
+        "full",
+      ],
+      "anchor": true,
+      "color": Object {
+        "gradients": true,
+        "link": true,
+      },
+      "html": false,
+      "spacing": Object {
+        "padding": true,
+      },
+    },
+    "textdomain": null,
+    "title": "Group",
+    "uses_context": Array [],
+    "variations": Array [],
+  },
+  Object {
+    "_links": Object {
+      "collection": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types",
+        },
+      ],
+      "self": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core/heading",
+        },
+      ],
+      "up": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core",
+        },
+      ],
+    },
+    "api_version": 2,
+    "attributes": Object {
+      "align": Object {
+        "enum": Array [
+          "left",
+          "center",
+          "right",
+          "wide",
+          "full",
+          "",
+        ],
+        "type": "string",
+      },
+      "backgroundColor": Object {
+        "type": "string",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "content": Object {
+        "__experimentalRole": "content",
+        "default": "",
+        "selector": "h1,h2,h3,h4,h5,h6",
+        "source": "html",
+        "type": "string",
+      },
+      "fontSize": Object {
+        "type": "string",
+      },
+      "level": Object {
+        "default": 2,
+        "type": "number",
+      },
+      "placeholder": Object {
+        "type": "string",
+      },
+      "style": Object {
+        "type": "object",
+      },
+      "textAlign": Object {
+        "type": "string",
+      },
+      "textColor": Object {
+        "type": "string",
+      },
+    },
+    "category": "text",
+    "description": "Introduce new sections and organize content to help visitors (and search engines) understand the structure of your content.",
+    "editor_script": null,
+    "editor_style": null,
+    "example": null,
+    "icon": null,
+    "is_dynamic": false,
+    "keywords": Array [
+      "title",
+      "subtitle",
+    ],
+    "name": "core/heading",
+    "parent": null,
+    "provides_context": Array [],
+    "script": null,
+    "style": null,
+    "styles": Array [],
+    "supports": Object {
+      "__experimentalSelector": "h1,h2,h3,h4,h5,h6",
+      "__unstablePasteTextInline": true,
+      "align": Array [
+        "wide",
+        "full",
+      ],
+      "anchor": true,
+      "className": false,
+      "color": Object {
+        "link": true,
+      },
+      "typography": Object {
+        "__experimentalFontWeight": true,
+        "fontSize": true,
+        "lineHeight": true,
+      },
+    },
+    "textdomain": null,
+    "title": "Heading",
+    "uses_context": Array [],
+    "variations": Array [],
+  },
+  Object {
+    "_links": Object {
+      "collection": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types",
+        },
+      ],
+      "self": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core/html",
+        },
+      ],
+      "up": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core",
+        },
+      ],
+    },
+    "api_version": 2,
+    "attributes": Object {
+      "content": Object {
+        "source": "html",
+        "type": "string",
+      },
+    },
+    "category": "widgets",
+    "description": "Add custom HTML code and preview it as you edit.",
+    "editor_script": null,
+    "editor_style": null,
+    "example": null,
+    "icon": null,
+    "is_dynamic": false,
+    "keywords": Array [
+      "embed",
+    ],
+    "name": "core/html",
+    "parent": null,
+    "provides_context": Array [],
+    "script": null,
+    "style": null,
+    "styles": Array [],
+    "supports": Object {
+      "className": false,
+      "customClassName": false,
+      "html": false,
+    },
+    "textdomain": null,
+    "title": "Custom HTML",
+    "uses_context": Array [],
+    "variations": Array [],
+  },
+  Object {
+    "_links": Object {
+      "collection": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types",
+        },
+      ],
+      "self": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core/image",
+        },
+      ],
+      "up": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core",
+        },
+      ],
+    },
+    "api_version": 2,
+    "attributes": Object {
+      "align": Object {
+        "type": "string",
+      },
+      "alt": Object {
+        "attribute": "alt",
+        "default": "",
+        "selector": "img",
+        "source": "attribute",
+        "type": "string",
+      },
+      "caption": Object {
+        "selector": "figcaption",
+        "source": "html",
+        "type": "string",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "height": Object {
+        "type": "number",
+      },
+      "href": Object {
+        "attribute": "href",
+        "selector": "figure > a",
+        "source": "attribute",
+        "type": "string",
+      },
+      "id": Object {
+        "type": "number",
+      },
+      "linkClass": Object {
+        "attribute": "class",
+        "selector": "figure > a",
+        "source": "attribute",
+        "type": "string",
+      },
+      "linkDestination": Object {
+        "type": "string",
+      },
+      "linkTarget": Object {
+        "attribute": "target",
+        "selector": "figure > a",
+        "source": "attribute",
+        "type": "string",
+      },
+      "rel": Object {
+        "attribute": "rel",
+        "selector": "figure > a",
+        "source": "attribute",
+        "type": "string",
+      },
+      "sizeSlug": Object {
+        "type": "string",
+      },
+      "style": Object {
+        "type": "object",
+      },
+      "title": Object {
+        "attribute": "title",
+        "selector": "img",
+        "source": "attribute",
+        "type": "string",
+      },
+      "url": Object {
+        "attribute": "src",
+        "selector": "img",
+        "source": "attribute",
+        "type": "string",
+      },
+      "width": Object {
+        "type": "number",
+      },
+    },
+    "category": "media",
+    "description": "Insert an image to make a visual statement.",
+    "editor_script": null,
+    "editor_style": null,
+    "example": null,
+    "icon": null,
+    "is_dynamic": false,
+    "keywords": Array [
+      "img",
+      "photo",
+      "picture",
+    ],
+    "name": "core/image",
+    "parent": null,
+    "provides_context": Array [],
+    "script": null,
+    "style": null,
+    "styles": Array [
+      Object {
+        "isDefault": true,
+        "label": "Default",
+        "name": "default",
+      },
+      Object {
+        "label": "Rounded",
+        "name": "rounded",
+      },
+      Object {
+        "label": "Borders",
+        "name": "twentytwentyone-border",
+      },
+      Object {
+        "label": "Frame",
+        "name": "twentytwentyone-image-frame",
+      },
+    ],
+    "supports": Object {
+      "__experimentalBorder": Object {
+        "radius": true,
+      },
+      "anchor": true,
+      "color": Object {
+        "__experimentalDuotone": "img",
+        "background": false,
+        "text": false,
+      },
+    },
+    "textdomain": null,
+    "title": "Image",
+    "uses_context": Array [],
+    "variations": Array [],
+  },
+  Object {
+    "_links": Object {
+      "collection": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types",
+        },
+      ],
+      "self": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core/list",
+        },
+      ],
+      "up": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core",
+        },
+      ],
+    },
+    "api_version": 2,
+    "attributes": Object {
+      "backgroundColor": Object {
+        "type": "string",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "fontSize": Object {
+        "type": "string",
+      },
+      "gradient": Object {
+        "type": "string",
+      },
+      "ordered": Object {
+        "__experimentalRole": "content",
+        "default": false,
+        "type": "boolean",
+      },
+      "placeholder": Object {
+        "type": "string",
+      },
+      "reversed": Object {
+        "type": "boolean",
+      },
+      "start": Object {
+        "type": "number",
+      },
+      "style": Object {
+        "type": "object",
+      },
+      "textColor": Object {
+        "type": "string",
+      },
+      "type": Object {
+        "type": "string",
+      },
+      "values": Object {
+        "__experimentalRole": "content",
+        "__unstableMultilineWrapperTags": Array [
+          "ol",
+          "ul",
+        ],
+        "default": "",
+        "multiline": "li",
+        "selector": "ol,ul",
+        "source": "html",
+        "type": "string",
+      },
+    },
+    "category": "text",
+    "description": "Create a bulleted or numbered list.",
+    "editor_script": null,
+    "editor_style": null,
+    "example": null,
+    "icon": null,
+    "is_dynamic": false,
+    "keywords": Array [
+      "bullet list",
+      "ordered list",
+      "numbered list",
+    ],
+    "name": "core/list",
+    "parent": null,
+    "provides_context": Array [],
+    "script": null,
+    "style": null,
+    "styles": Array [],
+    "supports": Object {
+      "__experimentalSelector": "ol,ul",
+      "__unstablePasteTextInline": true,
+      "anchor": true,
+      "className": false,
+      "color": Object {
+        "gradients": true,
+      },
+      "typography": Object {
+        "__experimentalFontFamily": true,
+        "fontSize": true,
+      },
+    },
+    "textdomain": null,
+    "title": "List",
+    "uses_context": Array [],
+    "variations": Array [],
+  },
+  Object {
+    "_links": Object {
+      "collection": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types",
+        },
+      ],
+      "self": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core/media-text",
+        },
+      ],
+      "up": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core",
+        },
+      ],
+    },
+    "api_version": 2,
+    "attributes": Object {
+      "align": Object {
+        "default": "wide",
+        "type": "string",
+      },
+      "backgroundColor": Object {
+        "type": "string",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "focalPoint": Object {
+        "type": "object",
+      },
+      "gradient": Object {
+        "type": "string",
+      },
+      "href": Object {
+        "attribute": "href",
+        "selector": "figure a",
+        "source": "attribute",
+        "type": "string",
+      },
+      "imageFill": Object {
+        "type": "boolean",
+      },
+      "isStackedOnMobile": Object {
+        "default": true,
+        "type": "boolean",
+      },
+      "linkClass": Object {
+        "attribute": "class",
+        "selector": "figure a",
+        "source": "attribute",
+        "type": "string",
+      },
+      "linkDestination": Object {
+        "type": "string",
+      },
+      "linkTarget": Object {
+        "attribute": "target",
+        "selector": "figure a",
+        "source": "attribute",
+        "type": "string",
+      },
+      "mediaAlt": Object {
+        "attribute": "alt",
+        "default": "",
+        "selector": "figure img",
+        "source": "attribute",
+        "type": "string",
+      },
+      "mediaId": Object {
+        "type": "number",
+      },
+      "mediaLink": Object {
+        "type": "string",
+      },
+      "mediaPosition": Object {
+        "default": "left",
+        "type": "string",
+      },
+      "mediaSizeSlug": Object {
+        "type": "string",
+      },
+      "mediaType": Object {
+        "type": "string",
+      },
+      "mediaUrl": Object {
+        "attribute": "src",
+        "selector": "figure video,figure img",
+        "source": "attribute",
+        "type": "string",
+      },
+      "mediaWidth": Object {
+        "default": 50,
+        "type": "number",
+      },
+      "rel": Object {
+        "attribute": "rel",
+        "selector": "figure a",
+        "source": "attribute",
+        "type": "string",
+      },
+      "style": Object {
+        "type": "object",
+      },
+      "textColor": Object {
+        "type": "string",
+      },
+      "verticalAlignment": Object {
+        "type": "string",
+      },
+    },
+    "category": "media",
+    "description": "Set media and words side-by-side for a richer layout.",
+    "editor_script": null,
+    "editor_style": null,
+    "example": null,
+    "icon": null,
+    "is_dynamic": false,
+    "keywords": Array [
+      "image",
+      "video",
+    ],
+    "name": "core/media-text",
+    "parent": null,
+    "provides_context": Array [],
+    "script": null,
+    "style": null,
+    "styles": Array [
+      Object {
+        "label": "Borders",
+        "name": "twentytwentyone-border",
+      },
+    ],
+    "supports": Object {
+      "align": Array [
+        "wide",
+        "full",
+      ],
+      "anchor": true,
+      "color": Object {
+        "gradients": true,
+        "link": true,
+      },
+      "html": false,
+    },
+    "textdomain": null,
+    "title": "Media & Text",
+    "uses_context": Array [],
+    "variations": Array [],
+  },
+  Object {
+    "_links": Object {
+      "collection": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types",
+        },
+      ],
+      "self": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core/missing",
+        },
+      ],
+      "up": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core",
+        },
+      ],
+    },
+    "api_version": 2,
+    "attributes": Object {
+      "originalContent": Object {
+        "source": "html",
+        "type": "string",
+      },
+      "originalName": Object {
+        "type": "string",
+      },
+      "originalUndelimitedContent": Object {
+        "type": "string",
+      },
+    },
+    "category": "text",
+    "description": "Your site doesn’t include support for this block.",
+    "editor_script": null,
+    "editor_style": null,
+    "example": null,
+    "icon": null,
+    "is_dynamic": false,
+    "keywords": Array [],
+    "name": "core/missing",
+    "parent": null,
+    "provides_context": Array [],
+    "script": null,
+    "style": null,
+    "styles": Array [],
+    "supports": Object {
+      "className": false,
+      "customClassName": false,
+      "html": false,
+      "inserter": false,
+      "reusable": false,
+    },
+    "textdomain": null,
+    "title": "Unsupported",
+    "uses_context": Array [],
+    "variations": Array [],
+  },
+  Object {
+    "_links": Object {
+      "collection": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types",
+        },
+      ],
+      "self": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core/more",
+        },
+      ],
+      "up": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core",
+        },
+      ],
+    },
+    "api_version": 2,
+    "attributes": Object {
+      "customText": Object {
+        "type": "string",
+      },
+      "noTeaser": Object {
+        "default": false,
+        "type": "boolean",
+      },
+    },
+    "category": "design",
+    "description": "Content before this block will be shown in the excerpt on your archives page.",
+    "editor_script": null,
+    "editor_style": null,
+    "example": null,
+    "icon": null,
+    "is_dynamic": false,
+    "keywords": Array [
+      "read more",
+    ],
+    "name": "core/more",
+    "parent": null,
+    "provides_context": Array [],
+    "script": null,
+    "style": null,
+    "styles": Array [],
+    "supports": Object {
+      "className": false,
+      "customClassName": false,
+      "html": false,
+      "multiple": false,
+    },
+    "textdomain": null,
+    "title": "More",
+    "uses_context": Array [],
+    "variations": Array [],
+  },
+  Object {
+    "_links": Object {
+      "collection": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types",
+        },
+      ],
+      "self": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core/nextpage",
+        },
+      ],
+      "up": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core",
+        },
+      ],
+    },
+    "api_version": 2,
+    "attributes": Array [],
+    "category": "design",
+    "description": "Separate your content into a multi-page experience.",
+    "editor_script": null,
+    "editor_style": null,
+    "example": null,
+    "icon": null,
+    "is_dynamic": false,
+    "keywords": Array [
+      "next page",
+      "pagination",
+    ],
+    "name": "core/nextpage",
+    "parent": Array [
+      "core/post-content",
+    ],
+    "provides_context": Array [],
+    "script": null,
+    "style": null,
+    "styles": Array [],
+    "supports": Object {
+      "className": false,
+      "customClassName": false,
+      "html": false,
+    },
+    "textdomain": null,
+    "title": "Page Break",
+    "uses_context": Array [],
+    "variations": Array [],
+  },
+  Object {
+    "_links": Object {
+      "collection": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types",
+        },
+      ],
+      "self": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core/paragraph",
+        },
+      ],
+      "up": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core",
+        },
+      ],
+    },
+    "api_version": 2,
+    "attributes": Object {
+      "align": Object {
+        "type": "string",
+      },
+      "backgroundColor": Object {
+        "type": "string",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "content": Object {
+        "__experimentalRole": "content",
+        "default": "",
+        "selector": "p",
+        "source": "html",
+        "type": "string",
+      },
+      "direction": Object {
+        "enum": Array [
+          "ltr",
+          "rtl",
+        ],
+        "type": "string",
+      },
+      "dropCap": Object {
+        "default": false,
+        "type": "boolean",
+      },
+      "fontSize": Object {
+        "type": "string",
+      },
+      "placeholder": Object {
+        "type": "string",
+      },
+      "style": Object {
+        "type": "object",
+      },
+      "textColor": Object {
+        "type": "string",
+      },
+    },
+    "category": "text",
+    "description": "Start with the building block of all narrative.",
+    "editor_script": null,
+    "editor_style": null,
+    "example": null,
+    "icon": null,
+    "is_dynamic": false,
+    "keywords": Array [
+      "text",
+    ],
+    "name": "core/paragraph",
+    "parent": null,
+    "provides_context": Array [],
+    "script": null,
+    "style": null,
+    "styles": Array [],
+    "supports": Object {
+      "__experimentalSelector": "p",
+      "__unstablePasteTextInline": true,
+      "anchor": true,
+      "className": false,
+      "color": Object {
+        "link": true,
+      },
+      "typography": Object {
+        "fontSize": true,
+        "lineHeight": true,
+      },
+    },
+    "textdomain": null,
+    "title": "Paragraph",
+    "uses_context": Array [],
+    "variations": Array [],
+  },
+  Object {
+    "_links": Object {
+      "collection": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types",
+        },
+      ],
+      "self": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core/preformatted",
+        },
+      ],
+      "up": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core",
+        },
+      ],
+    },
+    "api_version": 2,
+    "attributes": Object {
+      "backgroundColor": Object {
+        "type": "string",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "content": Object {
+        "__experimentalRole": "content",
+        "__unstablePreserveWhiteSpace": true,
+        "default": "",
+        "selector": "pre",
+        "source": "html",
+        "type": "string",
+      },
+      "fontSize": Object {
+        "type": "string",
+      },
+      "gradient": Object {
+        "type": "string",
+      },
+      "style": Object {
+        "type": "object",
+      },
+      "textColor": Object {
+        "type": "string",
+      },
+    },
+    "category": "text",
+    "description": "Add text that respects your spacing and tabs, and also allows styling.",
+    "editor_script": null,
+    "editor_style": null,
+    "example": null,
+    "icon": null,
+    "is_dynamic": false,
+    "keywords": Array [],
+    "name": "core/preformatted",
+    "parent": null,
+    "provides_context": Array [],
+    "script": null,
+    "style": null,
+    "styles": Array [],
+    "supports": Object {
+      "anchor": true,
+      "color": Object {
+        "gradients": true,
+      },
+      "typography": Object {
+        "fontSize": true,
+      },
+    },
+    "textdomain": null,
+    "title": "Preformatted",
+    "uses_context": Array [],
+    "variations": Array [],
+  },
+  Object {
+    "_links": Object {
+      "collection": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types",
+        },
+      ],
+      "self": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core/pullquote",
+        },
+      ],
+      "up": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core",
+        },
+      ],
+    },
+    "api_version": 2,
+    "attributes": Object {
+      "align": Object {
+        "enum": Array [
+          "left",
+          "center",
+          "right",
+          "wide",
+          "full",
+          "",
+        ],
+        "type": "string",
+      },
+      "citation": Object {
+        "__experimentalRole": "content",
+        "default": "",
+        "selector": "cite",
+        "source": "html",
+        "type": "string",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "customMainColor": Object {
+        "type": "string",
+      },
+      "customTextColor": Object {
+        "type": "string",
+      },
+      "mainColor": Object {
+        "type": "string",
+      },
+      "textColor": Object {
+        "type": "string",
+      },
+      "value": Object {
+        "__experimentalRole": "content",
+        "multiline": "p",
+        "selector": "blockquote",
+        "source": "html",
+        "type": "string",
+      },
+    },
+    "category": "text",
+    "description": "Give special visual emphasis to a quote from your text.",
+    "editor_script": null,
+    "editor_style": null,
+    "example": null,
+    "icon": null,
+    "is_dynamic": false,
+    "keywords": Array [],
+    "name": "core/pullquote",
+    "parent": null,
+    "provides_context": Array [],
+    "script": null,
+    "style": null,
+    "styles": Array [
+      Object {
+        "isDefault": true,
+        "label": "Default",
+        "name": "default",
+      },
+      Object {
+        "label": "Solid color",
+        "name": "solid-color",
+      },
+    ],
+    "supports": Object {
+      "align": Array [
+        "left",
+        "right",
+        "wide",
+        "full",
+      ],
+      "anchor": true,
+    },
+    "textdomain": null,
+    "title": "Pullquote",
+    "uses_context": Array [],
+    "variations": Array [],
+  },
+  Object {
+    "_links": Object {
+      "collection": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types",
+        },
+      ],
+      "self": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core/quote",
+        },
+      ],
+      "up": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core",
+        },
+      ],
+    },
+    "api_version": 2,
+    "attributes": Object {
+      "align": Object {
+        "type": "string",
+      },
+      "citation": Object {
+        "__experimentalRole": "content",
+        "default": "",
+        "selector": "cite",
+        "source": "html",
+        "type": "string",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "value": Object {
+        "__experimentalRole": "content",
+        "default": "",
+        "multiline": "p",
+        "selector": "blockquote",
+        "source": "html",
+        "type": "string",
+      },
+    },
+    "category": "text",
+    "description": "Give quoted text visual emphasis. \\"In quoting others, we cite ourselves.\\" — Julio Cortázar",
+    "editor_script": null,
+    "editor_style": null,
+    "example": null,
+    "icon": null,
+    "is_dynamic": false,
+    "keywords": Array [
+      "blockquote",
+      "cite",
+    ],
+    "name": "core/quote",
+    "parent": null,
+    "provides_context": Array [],
+    "script": null,
+    "style": null,
+    "styles": Array [
+      Object {
+        "isDefault": true,
+        "label": "Default",
+        "name": "default",
+      },
+      Object {
+        "label": "Large",
+        "name": "large",
+      },
+    ],
+    "supports": Object {
+      "anchor": true,
+    },
+    "textdomain": null,
+    "title": "Quote",
+    "uses_context": Array [],
+    "variations": Array [],
+  },
+  Object {
+    "_links": Object {
+      "collection": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types",
+        },
+      ],
+      "self": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core/separator",
+        },
+      ],
+      "up": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core",
+        },
+      ],
+    },
+    "api_version": 2,
+    "attributes": Object {
+      "align": Object {
+        "enum": Array [
+          "left",
+          "center",
+          "right",
+          "wide",
+          "full",
+          "",
+        ],
+        "type": "string",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "color": Object {
+        "type": "string",
+      },
+      "customColor": Object {
+        "type": "string",
+      },
+    },
+    "category": "design",
+    "description": "Create a break between ideas or sections with a horizontal separator.",
+    "editor_script": null,
+    "editor_style": null,
+    "example": null,
+    "icon": null,
+    "is_dynamic": false,
+    "keywords": Array [
+      "horizontal-line",
+      "hr",
+      "divider",
+    ],
+    "name": "core/separator",
+    "parent": null,
+    "provides_context": Array [],
+    "script": null,
+    "style": null,
+    "styles": Array [
+      Object {
+        "isDefault": true,
+        "label": "Default",
+        "name": "default",
+      },
+      Object {
+        "label": "Wide Line",
+        "name": "wide",
+      },
+      Object {
+        "label": "Dots",
+        "name": "dots",
+      },
+      Object {
+        "label": "Thick",
+        "name": "twentytwentyone-separator-thick",
+      },
+    ],
+    "supports": Object {
+      "align": Array [
+        "center",
+        "wide",
+        "full",
+      ],
+      "anchor": true,
+    },
+    "textdomain": null,
+    "title": "Separator",
+    "uses_context": Array [],
+    "variations": Array [],
+  },
+  Object {
+    "_links": Object {
+      "collection": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types",
+        },
+      ],
+      "self": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core/social-links",
+        },
+      ],
+      "up": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core",
+        },
+      ],
+    },
+    "api_version": 2,
+    "attributes": Object {
+      "align": Object {
+        "enum": Array [
+          "left",
+          "center",
+          "right",
+          "wide",
+          "full",
+          "",
+        ],
+        "type": "string",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "customIconBackgroundColor": Object {
+        "type": "string",
+      },
+      "customIconColor": Object {
+        "type": "string",
+      },
+      "iconBackgroundColor": Object {
+        "type": "string",
+      },
+      "iconBackgroundColorValue": Object {
+        "type": "string",
+      },
+      "iconColor": Object {
+        "type": "string",
+      },
+      "iconColorValue": Object {
+        "type": "string",
+      },
+      "openInNewTab": Object {
+        "default": false,
+        "type": "boolean",
+      },
+      "size": Object {
+        "type": "string",
+      },
+    },
+    "category": "widgets",
+    "description": "Display icons linking to your social media profiles or websites.",
+    "editor_script": null,
+    "editor_style": null,
+    "example": null,
+    "icon": null,
+    "is_dynamic": false,
+    "keywords": Array [
+      "links",
+    ],
+    "name": "core/social-links",
+    "parent": null,
+    "provides_context": Object {
+      "iconBackgroundColorValue": "iconBackgroundColorValue",
+      "iconColorValue": "iconColorValue",
+      "openInNewTab": "openInNewTab",
+    },
+    "script": null,
+    "style": null,
+    "styles": Array [
+      Object {
+        "isDefault": true,
+        "label": "Default",
+        "name": "default",
+      },
+      Object {
+        "label": "Logos Only",
+        "name": "logos-only",
+      },
+      Object {
+        "label": "Pill Shape",
+        "name": "pill-shape",
+      },
+      Object {
+        "label": "Dark gray",
+        "name": "twentytwentyone-social-icons-color",
+      },
+    ],
+    "supports": Object {
+      "align": Array [
+        "left",
+        "center",
+        "right",
+      ],
+      "anchor": true,
+    },
+    "textdomain": null,
+    "title": "Social Icons",
+    "uses_context": Array [],
+    "variations": Array [],
+  },
+  Object {
+    "_links": Object {
+      "collection": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types",
+        },
+      ],
+      "self": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core/spacer",
+        },
+      ],
+      "up": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core",
+        },
+      ],
+    },
+    "api_version": 2,
+    "attributes": Object {
+      "className": Object {
+        "type": "string",
+      },
+      "height": Object {
+        "default": 100,
+        "type": "number",
+      },
+      "width": Object {
+        "type": "number",
+      },
+    },
+    "category": "design",
+    "description": "Add white space between blocks and customize its height.",
+    "editor_script": null,
+    "editor_style": null,
+    "example": null,
+    "icon": null,
+    "is_dynamic": false,
+    "keywords": Array [],
+    "name": "core/spacer",
+    "parent": null,
+    "provides_context": Array [],
+    "script": null,
+    "style": null,
+    "styles": Array [],
+    "supports": Object {
+      "anchor": true,
+    },
+    "textdomain": null,
+    "title": "Spacer",
+    "uses_context": Array [
+      "orientation",
+    ],
+    "variations": Array [],
+  },
+  Object {
+    "_links": Object {
+      "collection": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types",
+        },
+      ],
+      "self": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core/table",
+        },
+      ],
+      "up": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core",
+        },
+      ],
+    },
+    "api_version": 2,
+    "attributes": Object {
+      "align": Object {
+        "enum": Array [
+          "left",
+          "center",
+          "right",
+          "wide",
+          "full",
+          "",
+        ],
+        "type": "string",
+      },
+      "backgroundColor": Object {
+        "type": "string",
+      },
+      "body": Object {
+        "default": Array [],
+        "query": Object {
+          "cells": Object {
+            "default": Array [],
+            "query": Object {
+              "align": Object {
+                "attribute": "data-align",
+                "source": "attribute",
+                "type": "string",
+              },
+              "content": Object {
+                "source": "html",
+                "type": "string",
+              },
+              "scope": Object {
+                "attribute": "scope",
+                "source": "attribute",
+                "type": "string",
+              },
+              "tag": Object {
+                "default": "td",
+                "source": "tag",
+                "type": "string",
+              },
+            },
+            "selector": "td,th",
+            "source": "query",
+            "type": "array",
+          },
+        },
+        "selector": "tbody tr",
+        "source": "query",
+        "type": "array",
+      },
+      "borderColor": Object {
+        "type": "string",
+      },
+      "caption": Object {
+        "default": "",
+        "selector": "figcaption",
+        "source": "html",
+        "type": "string",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "foot": Object {
+        "default": Array [],
+        "query": Object {
+          "cells": Object {
+            "default": Array [],
+            "query": Object {
+              "align": Object {
+                "attribute": "data-align",
+                "source": "attribute",
+                "type": "string",
+              },
+              "content": Object {
+                "source": "html",
+                "type": "string",
+              },
+              "scope": Object {
+                "attribute": "scope",
+                "source": "attribute",
+                "type": "string",
+              },
+              "tag": Object {
+                "default": "td",
+                "source": "tag",
+                "type": "string",
+              },
+            },
+            "selector": "td,th",
+            "source": "query",
+            "type": "array",
+          },
+        },
+        "selector": "tfoot tr",
+        "source": "query",
+        "type": "array",
+      },
+      "gradient": Object {
+        "type": "string",
+      },
+      "hasFixedLayout": Object {
+        "default": false,
+        "type": "boolean",
+      },
+      "head": Object {
+        "default": Array [],
+        "query": Object {
+          "cells": Object {
+            "default": Array [],
+            "query": Object {
+              "align": Object {
+                "attribute": "data-align",
+                "source": "attribute",
+                "type": "string",
+              },
+              "content": Object {
+                "source": "html",
+                "type": "string",
+              },
+              "scope": Object {
+                "attribute": "scope",
+                "source": "attribute",
+                "type": "string",
+              },
+              "tag": Object {
+                "default": "td",
+                "source": "tag",
+                "type": "string",
+              },
+            },
+            "selector": "td,th",
+            "source": "query",
+            "type": "array",
+          },
+        },
+        "selector": "thead tr",
+        "source": "query",
+        "type": "array",
+      },
+      "style": Object {
+        "type": "object",
+      },
+      "textColor": Object {
+        "type": "string",
+      },
+    },
+    "category": "text",
+    "description": "Insert a table — perfect for sharing charts and data.",
+    "editor_script": null,
+    "editor_style": null,
+    "example": null,
+    "icon": null,
+    "is_dynamic": false,
+    "keywords": Array [],
+    "name": "core/table",
+    "parent": null,
+    "provides_context": Array [],
+    "script": null,
+    "style": null,
+    "styles": Array [
+      Object {
+        "isDefault": true,
+        "label": "Default",
+        "name": "regular",
+      },
+      Object {
+        "label": "Stripes",
+        "name": "stripes",
+      },
+    ],
+    "supports": Object {
+      "__experimentalBorder": Object {
+        "__experimentalSkipSerialization": true,
+        "color": true,
+        "style": true,
+        "width": true,
+      },
+      "__experimentalSelector": ".wp-block-table > table",
+      "align": true,
+      "anchor": true,
+      "color": Object {
+        "__experimentalSkipSerialization": true,
+        "gradients": true,
+      },
+    },
+    "textdomain": null,
+    "title": "Table",
+    "uses_context": Array [],
+    "variations": Array [],
+  },
+  Object {
+    "_links": Object {
+      "collection": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types",
+        },
+      ],
+      "self": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core/text-columns",
+        },
+      ],
+      "up": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core",
+        },
+      ],
+    },
+    "api_version": 2,
+    "attributes": Object {
+      "className": Object {
+        "type": "string",
+      },
+      "columns": Object {
+        "default": 2,
+        "type": "number",
+      },
+      "content": Object {
+        "default": Array [
+          Array [],
+          Array [],
+        ],
+        "query": Object {
+          "children": Object {
+            "source": "html",
+            "type": "string",
+          },
+        },
+        "selector": "p",
+        "source": "query",
+        "type": "array",
+      },
+      "width": Object {
+        "type": "string",
+      },
+    },
+    "category": "design",
+    "description": "This block is deprecated. Please use the Columns block instead.",
+    "editor_script": null,
+    "editor_style": null,
+    "example": null,
+    "icon": "columns",
+    "is_dynamic": false,
+    "keywords": Array [],
+    "name": "core/text-columns",
+    "parent": null,
+    "provides_context": Array [],
+    "script": null,
+    "style": null,
+    "styles": Array [],
+    "supports": Object {
+      "inserter": false,
+    },
+    "textdomain": null,
+    "title": "Text Columns (deprecated)",
+    "uses_context": Array [],
+    "variations": Array [],
+  },
+  Object {
+    "_links": Object {
+      "collection": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types",
+        },
+      ],
+      "self": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core/verse",
+        },
+      ],
+      "up": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core",
+        },
+      ],
+    },
+    "api_version": 2,
+    "attributes": Object {
+      "backgroundColor": Object {
+        "type": "string",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "content": Object {
+        "__experimentalRole": "content",
+        "__unstablePreserveWhiteSpace": true,
+        "default": "",
+        "selector": "pre",
+        "source": "html",
+        "type": "string",
+      },
+      "fontSize": Object {
+        "type": "string",
+      },
+      "gradient": Object {
+        "type": "string",
+      },
+      "style": Object {
+        "type": "object",
+      },
+      "textAlign": Object {
+        "type": "string",
+      },
+      "textColor": Object {
+        "type": "string",
+      },
+    },
+    "category": "text",
+    "description": "Insert poetry. Use special spacing formats. Or quote song lyrics.",
+    "editor_script": null,
+    "editor_style": null,
+    "example": null,
+    "icon": null,
+    "is_dynamic": false,
+    "keywords": Array [
+      "poetry",
+      "poem",
+    ],
+    "name": "core/verse",
+    "parent": null,
+    "provides_context": Array [],
+    "script": null,
+    "style": null,
+    "styles": Array [],
+    "supports": Object {
+      "anchor": true,
+      "color": Object {
+        "gradients": true,
+        "link": true,
+      },
+      "spacing": Object {
+        "padding": true,
+      },
+      "typography": Object {
+        "__experimentalFontFamily": true,
+        "fontSize": true,
+      },
+    },
+    "textdomain": null,
+    "title": "Verse",
+    "uses_context": Array [],
+    "variations": Array [],
+  },
+  Object {
+    "_links": Object {
+      "collection": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types",
+        },
+      ],
+      "self": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core/video",
+        },
+      ],
+      "up": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core",
+        },
+      ],
+    },
+    "api_version": 2,
+    "attributes": Object {
+      "align": Object {
+        "enum": Array [
+          "left",
+          "center",
+          "right",
+          "wide",
+          "full",
+          "",
+        ],
+        "type": "string",
+      },
+      "autoplay": Object {
+        "attribute": "autoplay",
+        "selector": "video",
+        "source": "attribute",
+        "type": "boolean",
+      },
+      "caption": Object {
+        "selector": "figcaption",
+        "source": "html",
+        "type": "string",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "controls": Object {
+        "attribute": "controls",
+        "default": true,
+        "selector": "video",
+        "source": "attribute",
+        "type": "boolean",
+      },
+      "id": Object {
+        "type": "number",
+      },
+      "loop": Object {
+        "attribute": "loop",
+        "selector": "video",
+        "source": "attribute",
+        "type": "boolean",
+      },
+      "muted": Object {
+        "attribute": "muted",
+        "selector": "video",
+        "source": "attribute",
+        "type": "boolean",
+      },
+      "playsInline": Object {
+        "attribute": "playsinline",
+        "selector": "video",
+        "source": "attribute",
+        "type": "boolean",
+      },
+      "poster": Object {
+        "attribute": "poster",
+        "selector": "video",
+        "source": "attribute",
+        "type": "string",
+      },
+      "preload": Object {
+        "attribute": "preload",
+        "default": "metadata",
+        "selector": "video",
+        "source": "attribute",
+        "type": "string",
+      },
+      "src": Object {
+        "attribute": "src",
+        "selector": "video",
+        "source": "attribute",
+        "type": "string",
+      },
+      "tracks": Object {
+        "default": Array [],
+        "items": Object {
+          "type": "object",
+        },
+        "type": "array",
+      },
+    },
+    "category": "media",
+    "description": "Embed a video from your media library or upload a new one.",
+    "editor_script": null,
+    "editor_style": null,
+    "example": null,
+    "icon": null,
+    "is_dynamic": false,
+    "keywords": Array [
+      "movie",
+    ],
+    "name": "core/video",
+    "parent": null,
+    "provides_context": Array [],
+    "script": null,
+    "style": null,
+    "styles": Array [],
+    "supports": Object {
+      "align": true,
+      "anchor": true,
+    },
+    "textdomain": null,
+    "title": "Video",
+    "uses_context": Array [],
+    "variations": Array [],
+  },
+]
+`;

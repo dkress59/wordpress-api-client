@@ -193,11 +193,20 @@ export class WpApiClient {
 		}
 	}
 
-	protected createEndpointDelete<P>(endpoint: string): EndpointDelete<P> {
+	protected createEndpointDelete<P>(
+		endpoint: string,
+		params?: URLSearchParams,
+	): EndpointDelete<P> {
 		return async (...ids: number[]) => {
 			if (!ids.length) throw new Error(ERROR_MESSAGE.ID_REQUIRED)
 			return await Promise.all(
-				ids.map(id => this.http.delete<P>(`${endpoint}/${id}`)),
+				ids.map(id =>
+					this.http.delete<P>(
+						`${endpoint}/${id}${
+							params ? '/?' + params.toString() : ''
+						}`,
+					),
+				),
 			)
 		}
 	}
@@ -337,7 +346,10 @@ export class WpApiClient {
 				data,
 			)
 		}
-		const deleteOne = this.createEndpointDelete<P>(END_POINT.MEDIA)
+		const deleteOne = this.createEndpointDelete<P>(
+			END_POINT.MEDIA,
+			new URLSearchParams({ force: 'true' }),
+		)
 		const update = this.createEndpointPost<P>(END_POINT.MEDIA)
 		return {
 			find,
@@ -393,11 +405,25 @@ export class WpApiClient {
 	}
 
 	public postCategory<P = WPCategory>(): DefaultEndpoint<P> {
-		return this.addPostType<P>(END_POINT.CATEGORIES, false)
+		const deleteOne = this.createEndpointDelete<P>(
+			END_POINT.CATEGORIES,
+			new URLSearchParams({ force: 'true' }),
+		)
+		return {
+			...this.addPostType<P>(END_POINT.CATEGORIES, false),
+			delete: deleteOne,
+		}
 	}
 
 	public postTag<P = WPTag>(): DefaultEndpoint<P> {
-		return this.addPostType<P>(END_POINT.TAGS, false)
+		const deleteOne = this.createEndpointDelete<P>(
+			END_POINT.TAGS,
+			new URLSearchParams({ force: 'true' }),
+		)
+		return {
+			...this.addPostType<P>(END_POINT.TAGS, false),
+			delete: deleteOne,
+		}
 	}
 
 	public async postType<P = WP_REST_API_Type>(): Promise<P[]>
