@@ -21,7 +21,7 @@ services:
     depends_on:
       - db
     build:
-      context: __tests__/e2e
+      context: .
       dockerfile: Dockerfile
     environment:
       WORDPRESS_DB_HOST: db
