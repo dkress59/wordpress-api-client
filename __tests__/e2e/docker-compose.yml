@@ -8,6 +8,7 @@ services:
     cap_add:
       - SYS_NICE # CAP_SYS_NICE
     platform: linux/amd64 # Apple M1 fix
+    restart: always
     #volumes:
     #  - ./db.sql:/docker-entrypoint-initdb.d/db.sql
     environment:
