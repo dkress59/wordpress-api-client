@@ -22,7 +22,7 @@ jobs:
             #  run: docker exec -i e2e_db_1 sh -c 'exec mysql -u"wordpress_db_user" -p"wordpress_db_password" --protocol=tcp' < ./__tests__/e2e/db.sql
             - name: Docker compose up
               run: docker-compose -f __tests__/e2e/docker-compose.yml up --build -d
-            - name: sleep 15 && List containers/ports
+            - name: List containers/ports
               run: docker ps -a
             - name: Install Dependencies
               run: yarn install
