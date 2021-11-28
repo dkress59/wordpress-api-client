@@ -5,18 +5,17 @@ services:
   db:
     image: mariadb:10 
     ports:  
-      - 3306:3306 
+      - 3306:3306
     healthcheck:
       test: "/usr/bin/mysql --user=wordpress_db_user --password=wordpress_db_password --execute \"SHOW DATABASES;\""
       interval: 10s
-      timeout: 5s
+      timeout: 10s
       retries: 3
     cap_add:
       - SYS_NICE # CAP_SYS_NICE
     platform: linux/amd64 # Apple M1 fix
     restart: always
     volumes:
-      - db_data:/var/lib/mysql
       - ./db.sql:/docker-entrypoint-initdb.d/db.sql
     environment:
       MYSQL_DATABASE: wordpress
@@ -51,6 +50,3 @@ services:
 
 networks:
   wpsite:
-
-volumes:
-  db_data:
