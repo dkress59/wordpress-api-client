@@ -67,7 +67,8 @@
     "check:script": "eslint src --ext .ts --fix-dry-run --report-unused-disable-directives",
     "lint:script": "eslint src --ext .ts --fix",
     "prepublishOnly": "rm -rf .gitignore .jest coverage",
-    "test": "jest --verbose --runInBand",
+    "test": "jest --verbose --runInBand __tests__/*.spec.ts",
+    "test:e2e": "jest --verbose --runInBand e2e",
     "test:watch": "jest --watchAll",
     "prepare": "husky install"
   }
