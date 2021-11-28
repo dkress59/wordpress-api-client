@@ -9,8 +9,8 @@ services:
       - SYS_NICE # CAP_SYS_NICE
     platform: linux/amd64 # Apple M1 fix
     restart: always
-    #volumes:
-    #  - ./db.sql:/docker-entrypoint-initdb.d/db.sql
+    volumes:
+      - ./db.sql:/docker-entrypoint-initdb.d/db.sql
     environment:
       MYSQL_DATABASE: wordpress
       MYSQL_PASSWORD: wordpress_db_password
