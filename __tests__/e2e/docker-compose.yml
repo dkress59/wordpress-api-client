@@ -6,7 +6,11 @@ services:
     image: mariadb:10 
     ports:  
       - 3306:3306 
-    command: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+    healthcheck:
+      test: "/usr/bin/mysql --user=wordpress_db_user --password=wordpress_db_password --execute \"SHOW DATABASES;\""
+      interval: 10s
+      timeout: 5s
+      retries: 3
     cap_add:
       - SYS_NICE # CAP_SYS_NICE
     platform: linux/amd64 # Apple M1 fix
