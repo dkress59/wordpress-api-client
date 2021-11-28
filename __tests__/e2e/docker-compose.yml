@@ -3,13 +3,11 @@ version: '3.9'
 services:
 
   db:
-    image: mariadb:10 
-    ports:  
-      - 13306:3306
+    image: mysql:8
+    command: --default-authentication-plugin=mysql_native_password
     cap_add:
       - SYS_NICE # CAP_SYS_NICE
     platform: linux/amd64 # Apple M1 fix
-    restart: always
     volumes:
       - ./db.sql:/docker-entrypoint-initdb.d/db.sql
     environment:
