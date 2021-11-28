@@ -3,13 +3,16 @@ version: '3.9'
 services:
 
   db:
-    image: mysql:8
-    command: --default-authentication-plugin=mysql_native_password
+    image: mariadb:10 
+    ports:  
+      - 3306:3306 
+    command: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
     cap_add:
       - SYS_NICE # CAP_SYS_NICE
     platform: linux/amd64 # Apple M1 fix
     restart: always
     volumes:
+      #- db_data:/var/lib/mysql
       - ./db.sql:/docker-entrypoint-initdb.d/db.sql
     environment:
       MYSQL_DATABASE: wordpress
@@ -44,3 +47,6 @@ services:
 
 networks:
   wpsite:
+
+volumes:
+  db_data:
