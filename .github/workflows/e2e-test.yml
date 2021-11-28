@@ -19,7 +19,7 @@ jobs:
             - name: List containers/ports
               run: docker ps -a
             - name: Import test db
-              run: mysql -h 127.0.0.1 -u"wordpress_db_user" -p"wordpress_db_password" --protocol=tcp wordpress < db.sql
+              run: mysql -h 127.0.0.1 -u"wordpress_db_user" -p"wordpress_db_password" --protocol=tcp wordpress < __tests__/e2e/db.sql
             - name: Install Dependencies
               run: yarn install
             - name: Run end-to-end test
