@@ -20,6 +20,6 @@ jobs:
               with:
                 compose-file: './__tests__/e2e/docker-compose.yml'
                 down-flags: '--volumes'
-            - name: Run end-to-end test-suite
+            - name: Run end-to-end test
             # wait for db import
-              run: sleep 15 && yarn test e2e.spec.ts
+              run: sleep 30 && yarn test e2e.spec.ts
