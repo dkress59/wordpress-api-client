@@ -9,4 +9,4 @@ while ! docker exec $CONTAINER mysql --user=$USERNAME --password=$PASSWORD -e "S
     echo "testing connection..." && sleep 1
 done
 
-docker exec $CONTAINER mysql --user=$USERNAME --password=$PASSWORD -e "SELECT wordpress.*"
+docker exec $CONTAINER mysql --user=$USERNAME --password=$PASSWORD -e "USE wordpress; SELECT *"
