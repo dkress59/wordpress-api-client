@@ -21,6 +21,6 @@ jobs:
                 compose-file: './__tests__/e2e/docker-compose.yml'
                 down-flags: '--volumes'
             - name: Import test db
-              run: docker exec -i e2e-db-1 sh -c 'exec mysql -uwordpress_db_user -p"wordpress_db_password"' < ./__tests__/e2e/db.sql
+              run: docker exec -i e2e_db_1 sh -c 'exec mysql -uwordpress_db_user -p"wordpress_db_password"' < ./__tests__/e2e/db.sql
             - name: Run end-to-end test
               run: yarn test e2e.spec.ts
