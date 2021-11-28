@@ -16,10 +16,12 @@ jobs:
                   node-version: '16'
             - name: Docker compose up
               run: docker-compose -f __tests__/e2e/docker-compose.yml up --build -d
-            - name: List containers/ports
-              run: docker ps -a
             - name: Import test db
-              run: mysql -u"wordpress_db_user" -p"wordpress_db_password" --protocol=tcp wordpress < __tests__/e2e/db.sql
+              run: |
+                echo 'pausing: waiting for mysql to come available'
+                ./__tests__/e2e/wait-for-mysql.sh
+                echo 'un-pausing: mysql is now available'
+              #  mysql -P 13306 -u"wordpress_db_user" -p"wordpress_db_password" wordpress < ./__tests__/e2e/db.sql
             - name: Install Dependencies
               run: yarn install
             - name: Run end-to-end test
