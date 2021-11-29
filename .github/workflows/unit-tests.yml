@@ -53,4 +53,4 @@ jobs:
             - name: Install Dependencies
               run: yarn install
             - name: Run end-to-end test
-              run: yarn test e2e
+              run: yarn test e2e.spec.ts

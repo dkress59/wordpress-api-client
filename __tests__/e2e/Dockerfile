@@ -13,5 +13,8 @@ RUN apt-get -y update \
     && apt-get -y install unzip wget \
     && wget https://github.com/WP-API/Basic-Auth/archive/refs/heads/master.zip \
     && unzip -o master.zip -d wp-content/plugins
+RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar \
+    && chmod +x wp-cli.phar \
+    && mv ./wp-cli.phar /usr/local/bin/wp
 
 COPY wp-plugin.php wp-content/plugins

@@ -68,7 +68,7 @@
     "lint:script": "eslint src --ext .ts --fix",
     "prepublishOnly": "rm -rf .gitignore .jest coverage",
     "test": "jest --verbose --runInBand __tests__/*.spec.ts",
-    "test:e2e": "jest --verbose --runInBand e2e",
+    "test:e2e": "jest --verbose --runInBand e2e.spec.ts",
     "test:watch": "jest --watchAll",
     "prepare": "husky install"
   }
