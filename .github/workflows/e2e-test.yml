@@ -27,7 +27,7 @@ jobs:
                 docker exec e2e_wordpress_1 /bin/sh -c 'echo $WORDPRESS_DB_NAME'
                 #docker exec e2e_wordpress_1 /bin/sh -c 'wp --allow-root config create --force --dbhost=$WORDPRESS_DB_HOST --dbname=$WORDPRESS_DB_NAME --dbuser=$WORDPRESS_DB_USER --dbpass=$WORDPRESS_DB_PASSWORD'
                 docker exec e2e_wordpress_1 /bin/sh -c 'wp --allow-root plugin activate "wp-plugin"'
-                docker exec e2e_wordpress_1 /bin/sh -c 'wp --allow-root plugin activate "basic-auth/basic-auth"'
+                docker exec e2e_wordpress_1 /bin/sh -c 'wp --allow-root plugin activate "basic-auth"'
             - name: Install Dependencies
               run: yarn install
             - name: Run end-to-end test
