@@ -23,13 +23,17 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      args:
+        WORDPRESS_DB_HOST: db
+        WORDPRESS_DB_NAME: wordpress
+        WORDPRESS_DB_PASSWORD: wordpress_db_password
+        WORDPRESS_DB_USER: wordpress_db_user
     environment:
       WORDPRESS_DB_HOST: db
       WORDPRESS_DB_NAME: wordpress
       WORDPRESS_DB_PASSWORD: wordpress_db_password
       WORDPRESS_DB_USER: wordpress_db_user
       WORDPRESS_DEBUG: 1
-      WORDPRESS_TABLE_PREFIX: wp_
       WORDPRESS_CONFIG_EXTRA: |
         define('FORCE_SSL_ADMIN', 0);
         define('WP_SITEURL', 'http://localhost:8080');

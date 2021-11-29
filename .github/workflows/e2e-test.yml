@@ -23,9 +23,10 @@ jobs:
                 echo 'un-pausing: mysql is now available'
             - name: Activate WP plugins
               run: |
-                docker exec e2e_wordpress_1 echo $WORDPRESS_DB_NAME >/dev/null
-                docker exec e2e_wordpress_1 wp --allow-root plugin activate "Basic-Auth-master/basic-auth"
-                docker exec e2e_wordpress_1 wp --allow-root plugin activate "wp-plugin"
+                docker exec e2e_wordpress_1 /bin/sh -c 'echo $WORDPRESS_DB_NAME'
+                #docker exec e2e_wordpress_1 /bin/sh -c 'wp --allow-root config create --force --dbhost=$WORDPRESS_DB_HOST --dbname=$WORDPRESS_DB_NAME --dbuser=$WORDPRESS_DB_USER --dbpass=$WORDPRESS_DB_PASSWORD'
+                docker exec e2e_wordpress_1 /bin/sh -c 'wp --allow-root plugin activate "Basic-Auth-master/basic-auth"'
+                docker exec e2e_wordpress_1 /bin/sh -c 'wp --allow-root plugin activate "wp-plugin"'
             - name: Install Dependencies
               run: yarn install
             - name: Run end-to-end test
