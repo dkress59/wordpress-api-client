@@ -6,7 +6,7 @@ DB="wordpress"
 sleep 3
 while ! docker exec $CONTAINER /bin/sh -c "mysqladmin --protocol=tcp ping -ppassword"; do
     echo "testing connection..."
-    docker exec $CONTAINER /bin/sh -c "mysqladmin --protocol=tcp ping -ppassword"
+    #docker exec $CONTAINER /bin/sh -c "mysqladmin --protocol=tcp ping -ppassword"
     sleep 1
 done
 
