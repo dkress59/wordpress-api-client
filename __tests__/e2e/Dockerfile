@@ -17,8 +17,6 @@ RUN composer init \
 RUN ls .
 RUN composer require "wp-api/basic-auth"
 RUN mv vendor/wp-api/basic-auth wp-content/plugins
-
-RUN ls .
-RUN ls wp-content/plugins
+COPY wp-plugin.php wp-content/plugins
 
 WORKDIR /var/www/html
