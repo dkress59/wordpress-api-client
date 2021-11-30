@@ -21,13 +21,6 @@ jobs:
                 echo 'pausing: waiting for mysql to come available'
                 ./__tests__/e2e/wait-for-db-import.sh
                 echo 'un-pausing: mysql is now available'
-            - name: Activate WP plugins
-              run: |
-                docker exec e2e_wordpress_1 /bin/sh -c 'pwd && ls . && ls wp-content/plugins'
-                docker exec e2e_wordpress_1 /bin/sh -c 'wp --allow-root plugin list'
-                docker exec e2e_wordpress_1 /bin/sh -c 'ls vendor && ls wp-content/plugins && ls wp-content/plugins/basic-auth'
-                docker exec e2e_wordpress_1 /bin/sh -c 'wp --allow-root plugin activate "wp-plugin"'
-                docker exec e2e_wordpress_1 /bin/sh -c 'wp --allow-root plugin activate "basic-auth"'
             - name: Install Dependencies
               run: yarn install
             - name: Run end-to-end test
