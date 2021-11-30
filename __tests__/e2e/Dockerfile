@@ -14,6 +14,6 @@ RUN composer init \
       --name 'wordpress-api-client/e2e-test' \
       --repository '{"type":"composer","url":"https://wpackagist.org","only":["wpackagist-plugin/*","wpackagist-theme/*"]}' \
     && composer require "wp-api/basic-auth" \
-    && cp vendor/wp-api/basic-auth wp-content/plugins
+    && cp -r vendor/wp-api/basic-auth wp-content/plugins
 
 COPY wp-plugin.php wp-content/plugins
