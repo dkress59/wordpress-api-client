@@ -1,7 +1,5 @@
 FROM wordpress:php8.0
 
-WORKDIR /var/www/html
-
 RUN apt-get -y update \
     && apt-get -y upgrade \
     && apt-get -y install default-mysql-client unzip wget \
@@ -11,9 +9,12 @@ RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli
     && chmod +x wp-cli.phar \
     && mv ./wp-cli.phar /usr/local/bin/wp
 
+WORKDIR /var/www/html
+
 RUN composer init \
       --stability 'dev' \
       --name 'wordpress-api-client/e2e-test'
+RUN ls .
 RUN composer require "wp-api/basic-auth"
 
 COPY wp-plugin.php wp-content/plugins
