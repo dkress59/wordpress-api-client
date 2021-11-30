@@ -16,4 +16,8 @@ RUN composer init \
     && composer require "wp-api/basic-auth" \
     && cp -r vendor/wp-api/basic-auth wp-content/plugins
 
+RUN ls .
+RUN ls vendor
+RUN ls wp-content/plugins
+
 COPY wp-plugin.php wp-content/plugins
