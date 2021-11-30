@@ -29,38 +29,38 @@ Object {
     "replies": Array [
       Object {
         "embeddable": true,
-        "href": "http://localhost:8080/wp-json/wp/v2/comments?post=10",
+        "href": "http://localhost:8080/wp-json/wp/v2/comments?post=11",
       },
     ],
     "self": Array [
       Object {
-        "href": "http://localhost:8080/wp-json/wp/v2/pages/10",
+        "href": "http://localhost:8080/wp-json/wp/v2/pages/11",
       },
     ],
     "version-history": Array [
       Object {
         "count": 0,
-        "href": "http://localhost:8080/wp-json/wp/v2/pages/10/revisions",
+        "href": "http://localhost:8080/wp-json/wp/v2/pages/11/revisions",
       },
     ],
     "wp:action-assign-author": Array [
       Object {
-        "href": "http://localhost:8080/wp-json/wp/v2/pages/10",
+        "href": "http://localhost:8080/wp-json/wp/v2/pages/11",
       },
     ],
     "wp:action-publish": Array [
       Object {
-        "href": "http://localhost:8080/wp-json/wp/v2/pages/10",
+        "href": "http://localhost:8080/wp-json/wp/v2/pages/11",
       },
     ],
     "wp:action-unfiltered-html": Array [
       Object {
-        "href": "http://localhost:8080/wp-json/wp/v2/pages/10",
+        "href": "http://localhost:8080/wp-json/wp/v2/pages/11",
       },
     ],
     "wp:attachment": Array [
       Object {
-        "href": "http://localhost:8080/wp-json/wp/v2/media?parent=10",
+        "href": "http://localhost:8080/wp-json/wp/v2/media?parent=11",
       },
     ],
   },
@@ -82,11 +82,11 @@ Object {
   "featured_media": 0,
   "generated_slug": "mock-title",
   "guid": Object {
-    "raw": "http://localhost:8080/?page_id=10",
-    "rendered": "http://localhost:8080/?page_id=10",
+    "raw": "http://localhost:8080/?page_id=11",
+    "rendered": "http://localhost:8080/?page_id=11",
   },
-  "id": 10,
-  "link": "http://localhost:8080/?page_id=10",
+  "id": 11,
+  "link": "http://localhost:8080/?page_id=11",
   "menu_order": 0,
   "meta": Array [],
   "parent": 0,

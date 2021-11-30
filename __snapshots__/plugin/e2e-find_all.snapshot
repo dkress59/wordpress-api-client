@@ -54,7 +54,7 @@ Array [
     "_links": Object {
       "self": Array [
         Object {
-          "href": "http://localhost:8080/wp-json/wp/v2/plugins/Basic-Auth-master/basic-auth",
+          "href": "http://localhost:8080/wp-json/wp/v2/plugins/basic-auth/basic-auth",
         },
       ],
     },
@@ -66,12 +66,12 @@ Array [
     },
     "name": "JSON Basic Authentication",
     "network_only": false,
-    "plugin": "Basic-Auth-master/basic-auth",
+    "plugin": "basic-auth/basic-auth",
     "plugin_uri": "https://github.com/WP-API/Basic-Auth",
     "requires_php": "",
     "requires_wp": "",
     "status": "active",
-    "textdomain": "Basic-Auth-master",
+    "textdomain": "basic-auth",
     "version": "0.1",
   },
   Object {

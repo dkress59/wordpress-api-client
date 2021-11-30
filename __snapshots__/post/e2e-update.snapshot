@@ -28,81 +28,81 @@ Object {
     ],
     "predecessor-version": Array [
       Object {
-        "href": "http://localhost:8080/wp-json/wp/v2/posts/6/revisions/7",
-        "id": 7,
+        "href": "http://localhost:8080/wp-json/wp/v2/posts/7/revisions/8",
+        "id": 8,
       },
     ],
     "replies": Array [
       Object {
         "embeddable": true,
-        "href": "http://localhost:8080/wp-json/wp/v2/comments?post=6",
+        "href": "http://localhost:8080/wp-json/wp/v2/comments?post=7",
       },
     ],
     "self": Array [
       Object {
-        "href": "http://localhost:8080/wp-json/wp/v2/posts/6",
+        "href": "http://localhost:8080/wp-json/wp/v2/posts/7",
       },
     ],
     "version-history": Array [
       Object {
         "count": 1,
-        "href": "http://localhost:8080/wp-json/wp/v2/posts/6/revisions",
+        "href": "http://localhost:8080/wp-json/wp/v2/posts/7/revisions",
       },
     ],
     "wp:action-assign-author": Array [
       Object {
-        "href": "http://localhost:8080/wp-json/wp/v2/posts/6",
+        "href": "http://localhost:8080/wp-json/wp/v2/posts/7",
       },
     ],
     "wp:action-assign-categories": Array [
       Object {
-        "href": "http://localhost:8080/wp-json/wp/v2/posts/6",
+        "href": "http://localhost:8080/wp-json/wp/v2/posts/7",
       },
     ],
     "wp:action-assign-tags": Array [
       Object {
-        "href": "http://localhost:8080/wp-json/wp/v2/posts/6",
+        "href": "http://localhost:8080/wp-json/wp/v2/posts/7",
       },
     ],
     "wp:action-create-categories": Array [
       Object {
-        "href": "http://localhost:8080/wp-json/wp/v2/posts/6",
+        "href": "http://localhost:8080/wp-json/wp/v2/posts/7",
       },
     ],
     "wp:action-create-tags": Array [
       Object {
-        "href": "http://localhost:8080/wp-json/wp/v2/posts/6",
+        "href": "http://localhost:8080/wp-json/wp/v2/posts/7",
       },
     ],
     "wp:action-publish": Array [
       Object {
-        "href": "http://localhost:8080/wp-json/wp/v2/posts/6",
+        "href": "http://localhost:8080/wp-json/wp/v2/posts/7",
       },
     ],
     "wp:action-sticky": Array [
       Object {
-        "href": "http://localhost:8080/wp-json/wp/v2/posts/6",
+        "href": "http://localhost:8080/wp-json/wp/v2/posts/7",
       },
     ],
     "wp:action-unfiltered-html": Array [
       Object {
-        "href": "http://localhost:8080/wp-json/wp/v2/posts/6",
+        "href": "http://localhost:8080/wp-json/wp/v2/posts/7",
       },
     ],
     "wp:attachment": Array [
       Object {
-        "href": "http://localhost:8080/wp-json/wp/v2/media?parent=6",
+        "href": "http://localhost:8080/wp-json/wp/v2/media?parent=7",
       },
     ],
     "wp:term": Array [
       Object {
         "embeddable": true,
-        "href": "http://localhost:8080/wp-json/wp/v2/categories?post=6",
+        "href": "http://localhost:8080/wp-json/wp/v2/categories?post=7",
         "taxonomy": "category",
       },
       Object {
         "embeddable": true,
-        "href": "http://localhost:8080/wp-json/wp/v2/tags?post=6",
+        "href": "http://localhost:8080/wp-json/wp/v2/tags?post=7",
         "taxonomy": "post_tag",
       },
     ],
@@ -129,11 +129,11 @@ Object {
   "format": "standard",
   "generated_slug": "updated-title",
   "guid": Object {
-    "raw": "http://localhost:8080/?p=6",
-    "rendered": "http://localhost:8080/?p=6",
+    "raw": "http://localhost:8080/?p=7",
+    "rendered": "http://localhost:8080/?p=7",
   },
-  "id": 6,
-  "link": "http://localhost:8080/?p=6",
+  "id": 7,
+  "link": "http://localhost:8080/?p=7",
   "meta": Array [],
   "password": "",
   "permalink_template": "http://localhost:8080/2021/11/%postname%/",
