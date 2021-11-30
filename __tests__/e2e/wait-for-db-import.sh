@@ -4,13 +4,11 @@ CONTAINER="e2e_db_1"
 DB="wordpress"
 
 sleep 3
-while ! docker exec $CONTAINER mysqladmin ping -ppassword; do
-    docker ps -a
+while ! docker exec $CONTAINER /bin/sh -c "mysqladmin ping -ppassword"; do
     echo "testing connection..."
-    mysqladmin ping --password=password
+    docker exec $CONTAINER /bin/sh -c "mysqladmin ping -ppassword"
     sleep 1
 done
 
 docker cp __tests__/e2e/db.sql $CONTAINER:/
-docker ps -a
-docker exec $CONTAINER /bin/sh -c "mysql -uroot -ppassword $DB < /db.sql"
+docker exec $CONTAINER /bin/sh -c "mysql --protocol=tcp -uroot -ppassword $DB < /db.sql"

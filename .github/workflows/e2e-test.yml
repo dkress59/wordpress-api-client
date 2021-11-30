@@ -18,8 +18,6 @@ jobs:
               run: docker-compose -f __tests__/e2e/docker-compose.yml up --build -d
             - name: Wait for DB import
               run: |
-                docker network ls
-                docker ps -a
                 echo 'pausing: waiting for mysql to come available'
                 ./__tests__/e2e/wait-for-db-import.sh
                 echo 'un-pausing: mysql is now available'
