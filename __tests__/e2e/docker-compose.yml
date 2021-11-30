@@ -28,16 +28,16 @@ services:
         WORDPRESS_DB_NAME: wordpress
         WORDPRESS_DB_PASSWORD: wordpress_db_password
         WORDPRESS_DB_USER: wordpress_db_user
+        WORDPRESS_DEBUG: 1
+        WORDPRESS_CONFIG_EXTRA: |
+          define('FORCE_SSL_ADMIN', 0);
+          define('WP_SITEURL', 'http://localhost:8080');
+          define('ALLOW_UNFILTERED_UPLOADS', 1);
     environment:
       WORDPRESS_DB_HOST: db
       WORDPRESS_DB_NAME: wordpress
       WORDPRESS_DB_PASSWORD: wordpress_db_password
       WORDPRESS_DB_USER: wordpress_db_user
-      WORDPRESS_DEBUG: 1
-      WORDPRESS_CONFIG_EXTRA: |
-        define('FORCE_SSL_ADMIN', 0);
-        define('WP_SITEURL', 'http://localhost:8080');
-        define('ALLOW_UNFILTERED_UPLOADS', 1);
     ports:
       - "8080:80"
     networks:
