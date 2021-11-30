@@ -11,7 +11,7 @@ RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli
 
 WORKDIR /var/www/html
 
-RUN touch composer.json && echo '{"name":"wordpress-api-client/e2e-test","minimum-stability":"dev","require":{"wp-api/basic-auth":"dev-master"},"extra":{"installer-paths":{"wp-content/plugins":["wp-api/basic-auth"]}}}' > ./composer.json
+RUN touch /var/www/html/composer.json && echo '{"name":"wordpress-api-client/e2e-test","minimum-stability":"dev","require":{"wp-api/basic-auth":"dev-master"},"extra":{"installer-paths":{"wp-content/plugins":["wp-api/basic-auth"]}}}' > /var/www/html/composer.json
 RUN composer install
 
 RUN ls .
