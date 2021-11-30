@@ -35,8 +35,11 @@ export const ERROR_MESSAGE = {
 
 export const END_POINT_PROTECTED = {
 	GET: [
+		END_POINT.BLOCK_TYPES,
 		END_POINT.EDITOR_BLOCKS,
 		END_POINT.PLUGINS,
+		END_POINT.SETTINGS,
+		END_POINT.THEMES,
 		END_POINT.USER_APPLICATION_PASSWORDS,
 		END_POINT.USERS_ME,
 	],
@@ -47,7 +50,7 @@ export const END_POINT_PROTECTED = {
 export const END_POINT_PUBLIC = {
 	GET: Object.values(END_POINT).filter(
 		uri =>
-			uri !== END_POINT.USERS_ME &&
+			!END_POINT_PROTECTED.GET.includes(uri) &&
 			!(
 				uri.includes(END_POINT.USER_APPLICATION_PASSWORDS) &&
 				uri.includes(END_POINT.USERS)

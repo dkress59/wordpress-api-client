@@ -1,0 +1,71 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`End-to-end test .reusableBlock .create 1`] = `
+Object {
+  "_links": Object {
+    "about": Array [
+      Object {
+        "href": "http://localhost:8080/wp-json/wp/v2/types/wp_block",
+      },
+    ],
+    "collection": Array [
+      Object {
+        "href": "http://localhost:8080/wp-json/wp/v2/blocks",
+      },
+    ],
+    "curies": Array [
+      Object {
+        "href": "https://api.w.org/{rel}",
+        "name": "wp",
+        "templated": true,
+      },
+    ],
+    "self": Array [
+      Object {
+        "href": "http://localhost:8080/wp-json/wp/v2/blocks/23",
+      },
+    ],
+    "version-history": Array [
+      Object {
+        "count": 0,
+        "href": "http://localhost:8080/wp-json/wp/v2/blocks/23/revisions",
+      },
+    ],
+    "wp:action-publish": Array [
+      Object {
+        "href": "http://localhost:8080/wp-json/wp/v2/blocks/23",
+      },
+    ],
+    "wp:action-unfiltered-html": Array [
+      Object {
+        "href": "http://localhost:8080/wp-json/wp/v2/blocks/23",
+      },
+    ],
+    "wp:attachment": Array [
+      Object {
+        "href": "http://localhost:8080/wp-json/wp/v2/media?parent=23",
+      },
+    ],
+  },
+  "acf": Array [],
+  "content": Object {
+    "block_version": 0,
+    "protected": false,
+    "raw": "<p>Mock Content</p>",
+  },
+  "guid": Object {
+    "raw": "http://localhost:8080/?p=23",
+    "rendered": "http://localhost:8080/?p=23",
+  },
+  "id": 23,
+  "link": "http://localhost:8080/?p=23",
+  "password": "",
+  "slug": "",
+  "status": "draft",
+  "template": "",
+  "title": Object {
+    "raw": "Mock Title",
+  },
+  "type": "wp_block",
+}
+`;

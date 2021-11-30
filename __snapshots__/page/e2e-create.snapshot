@@ -1,0 +1,105 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`End-to-end test .page .create 1`] = `
+Object {
+  "_links": Object {
+    "about": Array [
+      Object {
+        "href": "http://localhost:8080/wp-json/wp/v2/types/page",
+      },
+    ],
+    "author": Array [
+      Object {
+        "embeddable": true,
+        "href": "http://localhost:8080/wp-json/wp/v2/users/1",
+      },
+    ],
+    "collection": Array [
+      Object {
+        "href": "http://localhost:8080/wp-json/wp/v2/pages",
+      },
+    ],
+    "curies": Array [
+      Object {
+        "href": "https://api.w.org/{rel}",
+        "name": "wp",
+        "templated": true,
+      },
+    ],
+    "replies": Array [
+      Object {
+        "embeddable": true,
+        "href": "http://localhost:8080/wp-json/wp/v2/comments?post=11",
+      },
+    ],
+    "self": Array [
+      Object {
+        "href": "http://localhost:8080/wp-json/wp/v2/pages/11",
+      },
+    ],
+    "version-history": Array [
+      Object {
+        "count": 0,
+        "href": "http://localhost:8080/wp-json/wp/v2/pages/11/revisions",
+      },
+    ],
+    "wp:action-assign-author": Array [
+      Object {
+        "href": "http://localhost:8080/wp-json/wp/v2/pages/11",
+      },
+    ],
+    "wp:action-publish": Array [
+      Object {
+        "href": "http://localhost:8080/wp-json/wp/v2/pages/11",
+      },
+    ],
+    "wp:action-unfiltered-html": Array [
+      Object {
+        "href": "http://localhost:8080/wp-json/wp/v2/pages/11",
+      },
+    ],
+    "wp:attachment": Array [
+      Object {
+        "href": "http://localhost:8080/wp-json/wp/v2/media?parent=11",
+      },
+    ],
+  },
+  "author": 1,
+  "comment_status": "closed",
+  "content": Object {
+    "block_version": 0,
+    "protected": false,
+    "raw": "<p>Mock Content</p>",
+    "rendered": "<p>Mock Content</p>
+",
+  },
+  "excerpt": Object {
+    "protected": false,
+    "raw": "",
+    "rendered": "<p>Mock Content</p>
+",
+  },
+  "featured_media": 0,
+  "generated_slug": "mock-title",
+  "guid": Object {
+    "raw": "http://localhost:8080/?page_id=11",
+    "rendered": "http://localhost:8080/?page_id=11",
+  },
+  "id": 11,
+  "link": "http://localhost:8080/?page_id=11",
+  "menu_order": 0,
+  "meta": Array [],
+  "parent": 0,
+  "password": "",
+  "permalink_template": "http://localhost:8080/%pagename%/",
+  "ping_status": "closed",
+  "slug": "",
+  "status": "draft",
+  "template": "",
+  "title": Object {
+    "raw": "Mock Title",
+    "rendered": "Mock Title",
+  },
+  "type": "page",
+}
+`;

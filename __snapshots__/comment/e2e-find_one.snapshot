@@ -1,0 +1,158 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`End-to-end test .comment .find (one) 1`] = `
+Array [
+  Object {
+    "_embedded": Object {
+      "author": Array [
+        Object {
+          "_links": Object {
+            "collection": Array [
+              Object {
+                "href": "http://localhost:8080/wp-json/wp/v2/users",
+              },
+            ],
+            "self": Array [
+              Object {
+                "href": "http://localhost:8080/wp-json/wp/v2/users/1",
+              },
+            ],
+          },
+          "avatar_urls": Object {
+            "24": "http://2.gravatar.com/avatar/5c0689e79c6f7fc399bb1459c5709046?s=24&d=mm&r=g",
+            "48": "http://2.gravatar.com/avatar/5c0689e79c6f7fc399bb1459c5709046?s=48&d=mm&r=g",
+            "96": "http://2.gravatar.com/avatar/5c0689e79c6f7fc399bb1459c5709046?s=96&d=mm&r=g",
+          },
+          "description": "",
+          "id": 1,
+          "link": "http://localhost:8080/author/admin/",
+          "name": "admin",
+          "slug": "admin",
+          "url": "http://localhost:8080",
+        },
+      ],
+      "up": Array [
+        Object {
+          "_links": Object {
+            "about": Array [
+              Object {
+                "href": "http://localhost:8080/wp-json/wp/v2/types/post",
+              },
+            ],
+            "author": Array [
+              Object {
+                "embeddable": true,
+                "href": "http://localhost:8080/wp-json/wp/v2/users/1",
+              },
+            ],
+            "collection": Array [
+              Object {
+                "href": "http://localhost:8080/wp-json/wp/v2/posts",
+              },
+            ],
+            "curies": Array [
+              Object {
+                "href": "https://api.w.org/{rel}",
+                "name": "wp",
+                "templated": true,
+              },
+            ],
+            "replies": Array [
+              Object {
+                "embeddable": true,
+                "href": "http://localhost:8080/wp-json/wp/v2/comments?post=1",
+              },
+            ],
+            "self": Array [
+              Object {
+                "href": "http://localhost:8080/wp-json/wp/v2/posts/1",
+              },
+            ],
+            "version-history": Array [
+              Object {
+                "count": 0,
+                "href": "http://localhost:8080/wp-json/wp/v2/posts/1/revisions",
+              },
+            ],
+            "wp:attachment": Array [
+              Object {
+                "href": "http://localhost:8080/wp-json/wp/v2/media?parent=1",
+              },
+            ],
+            "wp:term": Array [
+              Object {
+                "embeddable": true,
+                "href": "http://localhost:8080/wp-json/wp/v2/categories?post=1",
+                "taxonomy": "category",
+              },
+              Object {
+                "embeddable": true,
+                "href": "http://localhost:8080/wp-json/wp/v2/tags?post=1",
+                "taxonomy": "post_tag",
+              },
+            ],
+          },
+          "author": 1,
+          "excerpt": Object {
+            "protected": false,
+            "rendered": "<p>Welcome to WordPress. This is your first post. Edit or delete it, then start writing!</p>
+",
+          },
+          "featured_media": 0,
+          "id": 1,
+          "link": "http://localhost:8080/2021/11/hello-world/",
+          "slug": "hello-world",
+          "title": Object {
+            "rendered": "Hello world!",
+          },
+          "type": "post",
+        },
+      ],
+    },
+    "_links": Object {
+      "author": Array [
+        Object {
+          "embeddable": true,
+          "href": "http://localhost:8080/wp-json/wp/v2/users/1",
+        },
+      ],
+      "collection": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/comments",
+        },
+      ],
+      "self": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/comments/5",
+        },
+      ],
+      "up": Array [
+        Object {
+          "embeddable": true,
+          "href": "http://localhost:8080/wp-json/wp/v2/posts/1",
+          "post_type": "post",
+        },
+      ],
+    },
+    "author": 1,
+    "author_avatar_urls": Object {
+      "24": "http://2.gravatar.com/avatar/5c0689e79c6f7fc399bb1459c5709046?s=24&d=mm&r=g",
+      "48": "http://2.gravatar.com/avatar/5c0689e79c6f7fc399bb1459c5709046?s=48&d=mm&r=g",
+      "96": "http://2.gravatar.com/avatar/5c0689e79c6f7fc399bb1459c5709046?s=96&d=mm&r=g",
+    },
+    "author_name": "admin",
+    "author_url": "http://localhost:8080",
+    "content": Object {
+      "rendered": "<p>Mock Content</p>
+",
+    },
+    "id": 5,
+    "link": "http://localhost:8080/2021/11/hello-world/#comment-5",
+    "meta": Array [],
+    "parent": 0,
+    "post": 1,
+    "status": "approved",
+    "type": "comment",
+  },
+]
+`;

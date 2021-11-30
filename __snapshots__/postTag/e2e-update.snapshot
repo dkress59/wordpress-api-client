@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`End-to-end test .postTag .update 1`] = `
+Object {
+  "_links": Object {
+    "about": Array [
+      Object {
+        "href": "http://localhost:8080/wp-json/wp/v2/taxonomies/post_tag",
+      },
+    ],
+    "collection": Array [
+      Object {
+        "href": "http://localhost:8080/wp-json/wp/v2/tags",
+      },
+    ],
+    "curies": Array [
+      Object {
+        "href": "https://api.w.org/{rel}",
+        "name": "wp",
+        "templated": true,
+      },
+    ],
+    "self": Array [
+      Object {
+        "href": "http://localhost:8080/wp-json/wp/v2/tags/8",
+      },
+    ],
+    "wp:post_type": Array [
+      Object {
+        "href": "http://localhost:8080/wp-json/wp/v2/posts?tags=8",
+      },
+    ],
+  },
+  "count": 0,
+  "description": "",
+  "id": 8,
+  "link": "http://localhost:8080/tag/mock-title/",
+  "meta": Array [],
+  "name": "Updated Title",
+  "slug": "mock-title",
+  "taxonomy": "post_tag",
+}
+`;

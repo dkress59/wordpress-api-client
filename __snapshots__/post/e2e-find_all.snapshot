@@ -1,0 +1,214 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`End-to-end test .post .find (all) 1`] = `
+Array [
+  Object {
+    "_embedded": Object {
+      "author": Array [
+        Object {
+          "_links": Object {
+            "collection": Array [
+              Object {
+                "href": "http://localhost:8080/wp-json/wp/v2/users",
+              },
+            ],
+            "self": Array [
+              Object {
+                "href": "http://localhost:8080/wp-json/wp/v2/users/1",
+              },
+            ],
+          },
+          "avatar_urls": Object {
+            "24": "http://2.gravatar.com/avatar/5c0689e79c6f7fc399bb1459c5709046?s=24&d=mm&r=g",
+            "48": "http://2.gravatar.com/avatar/5c0689e79c6f7fc399bb1459c5709046?s=48&d=mm&r=g",
+            "96": "http://2.gravatar.com/avatar/5c0689e79c6f7fc399bb1459c5709046?s=96&d=mm&r=g",
+          },
+          "description": "",
+          "id": 1,
+          "link": "http://localhost:8080/author/admin/",
+          "name": "admin",
+          "slug": "admin",
+          "url": "http://localhost:8080",
+        },
+      ],
+      "replies": Array [
+        Array [
+          Object {
+            "_links": Object {
+              "collection": Array [
+                Object {
+                  "href": "http://localhost:8080/wp-json/wp/v2/comments",
+                },
+              ],
+              "self": Array [
+                Object {
+                  "href": "http://localhost:8080/wp-json/wp/v2/comments/1",
+                },
+              ],
+              "up": Array [
+                Object {
+                  "embeddable": true,
+                  "href": "http://localhost:8080/wp-json/wp/v2/posts/1",
+                  "post_type": "post",
+                },
+              ],
+            },
+            "author": 0,
+            "author_avatar_urls": Object {
+              "24": "http://1.gravatar.com/avatar/d7a973c7dab26985da5f961be7b74480?s=24&d=mm&r=g",
+              "48": "http://1.gravatar.com/avatar/d7a973c7dab26985da5f961be7b74480?s=48&d=mm&r=g",
+              "96": "http://1.gravatar.com/avatar/d7a973c7dab26985da5f961be7b74480?s=96&d=mm&r=g",
+            },
+            "author_name": "A WordPress Commenter",
+            "author_url": "https://wordpress.org/",
+            "content": Object {
+              "rendered": "<p>Hi, this is a comment.<br />
+To get started with moderating, editing, and deleting comments, please visit the Comments screen in the dashboard.<br />
+Commenter avatars come from <a href=\\"https://gravatar.com\\">Gravatar</a>.</p>
+",
+            },
+            "id": 1,
+            "link": "http://localhost:8080/2021/11/hello-world/#comment-1",
+            "parent": 0,
+            "type": "comment",
+          },
+        ],
+      ],
+      "wp:term": Array [
+        Array [
+          Object {
+            "_links": Object {
+              "about": Array [
+                Object {
+                  "href": "http://localhost:8080/wp-json/wp/v2/taxonomies/category",
+                },
+              ],
+              "collection": Array [
+                Object {
+                  "href": "http://localhost:8080/wp-json/wp/v2/categories",
+                },
+              ],
+              "curies": Array [
+                Object {
+                  "href": "https://api.w.org/{rel}",
+                  "name": "wp",
+                  "templated": true,
+                },
+              ],
+              "self": Array [
+                Object {
+                  "href": "http://localhost:8080/wp-json/wp/v2/categories/1",
+                },
+              ],
+              "wp:post_type": Array [
+                Object {
+                  "href": "http://localhost:8080/wp-json/wp/v2/posts?categories=1",
+                },
+              ],
+            },
+            "id": 1,
+            "link": "http://localhost:8080/category/uncategorized/",
+            "name": "Uncategorized",
+            "slug": "uncategorized",
+            "taxonomy": "category",
+          },
+        ],
+        Array [],
+      ],
+    },
+    "_links": Object {
+      "about": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/types/post",
+        },
+      ],
+      "author": Array [
+        Object {
+          "embeddable": true,
+          "href": "http://localhost:8080/wp-json/wp/v2/users/1",
+        },
+      ],
+      "collection": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/posts",
+        },
+      ],
+      "curies": Array [
+        Object {
+          "href": "https://api.w.org/{rel}",
+          "name": "wp",
+          "templated": true,
+        },
+      ],
+      "replies": Array [
+        Object {
+          "embeddable": true,
+          "href": "http://localhost:8080/wp-json/wp/v2/comments?post=1",
+        },
+      ],
+      "self": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/posts/1",
+        },
+      ],
+      "version-history": Array [
+        Object {
+          "count": 0,
+          "href": "http://localhost:8080/wp-json/wp/v2/posts/1/revisions",
+        },
+      ],
+      "wp:attachment": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/media?parent=1",
+        },
+      ],
+      "wp:term": Array [
+        Object {
+          "embeddable": true,
+          "href": "http://localhost:8080/wp-json/wp/v2/categories?post=1",
+          "taxonomy": "category",
+        },
+        Object {
+          "embeddable": true,
+          "href": "http://localhost:8080/wp-json/wp/v2/tags?post=1",
+          "taxonomy": "post_tag",
+        },
+      ],
+    },
+    "author": 1,
+    "categories": Array [
+      1,
+    ],
+    "comment_status": "open",
+    "content": Object {
+      "protected": false,
+      "rendered": "
+<p>Welcome to WordPress. This is your first post. Edit or delete it, then start writing!</p>
+",
+    },
+    "excerpt": Object {
+      "protected": false,
+      "rendered": "<p>Welcome to WordPress. This is your first post. Edit or delete it, then start writing!</p>
+",
+    },
+    "featured_media": 0,
+    "format": "standard",
+    "guid": Object {
+      "rendered": "http://localhost:8080/?p=1",
+    },
+    "id": 1,
+    "link": "http://localhost:8080/2021/11/hello-world/",
+    "meta": Array [],
+    "ping_status": "open",
+    "slug": "hello-world",
+    "status": "publish",
+    "sticky": false,
+    "tags": Array [],
+    "template": "",
+    "title": Object {
+      "rendered": "Hello world!",
+    },
+    "type": "post",
+  },
+]
+`;

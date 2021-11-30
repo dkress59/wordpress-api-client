@@ -1,0 +1,96 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`End-to-end test .media .update 1`] = `
+Object {
+  "_links": Object {
+    "about": Array [
+      Object {
+        "href": "http://localhost:8080/wp-json/wp/v2/types/attachment",
+      },
+    ],
+    "author": Array [
+      Object {
+        "embeddable": true,
+        "href": "http://localhost:8080/wp-json/wp/v2/users/1",
+      },
+    ],
+    "collection": Array [
+      Object {
+        "href": "http://localhost:8080/wp-json/wp/v2/media",
+      },
+    ],
+    "curies": Array [
+      Object {
+        "href": "https://api.w.org/{rel}",
+        "name": "wp",
+        "templated": true,
+      },
+    ],
+    "replies": Array [
+      Object {
+        "embeddable": true,
+        "href": "http://localhost:8080/wp-json/wp/v2/comments?post=21",
+      },
+    ],
+    "self": Array [
+      Object {
+        "href": "http://localhost:8080/wp-json/wp/v2/media/21",
+      },
+    ],
+    "wp:action-assign-author": Array [
+      Object {
+        "href": "http://localhost:8080/wp-json/wp/v2/media/21",
+      },
+    ],
+    "wp:action-unfiltered-html": Array [
+      Object {
+        "href": "http://localhost:8080/wp-json/wp/v2/media/21",
+      },
+    ],
+  },
+  "alt_text": "",
+  "author": 1,
+  "caption": Object {
+    "raw": "",
+    "rendered": "",
+  },
+  "comment_status": "open",
+  "description": Object {
+    "raw": "",
+    "rendered": "<p class=\\"attachment\\"><a href='http://localhost:8080/wp-content/uploads/2021/11/mock_filename.png'><img width=\\"1\\" height=\\"1\\" src=\\"http://localhost:8080/wp-content/uploads/2021/11/mock_filename.png\\" class=\\"attachment-medium size-medium\\" alt=\\"\\" loading=\\"lazy\\" /></a></p>
+",
+  },
+  "generated_slug": "mock_filename",
+  "guid": Object {
+    "raw": "http://localhost:8080/wp-content/uploads/2021/11/mock_filename.png",
+    "rendered": "http://localhost:8080/wp-content/uploads/2021/11/mock_filename.png",
+  },
+  "id": 21,
+  "link": "http://localhost:8080/mock_filename/",
+  "media_details": Object {},
+  "media_type": "image",
+  "meta": Array [],
+  "mime_type": "image/png",
+  "missing_image_sizes": Array [
+    "thumbnail",
+    "medium",
+    "medium_large",
+    "large",
+    "1536x1536",
+    "2048x2048",
+    "post-thumbnail",
+  ],
+  "permalink_template": "http://localhost:8080/?attachment_id=21",
+  "ping_status": "closed",
+  "post": null,
+  "slug": "mock_filename",
+  "source_url": "http://localhost:8080/wp-content/uploads/2021/11/mock_filename.png",
+  "status": "inherit",
+  "template": "",
+  "title": Object {
+    "raw": "mock_filename",
+    "rendered": "mock_filename",
+  },
+  "type": "attachment",
+}
+`;

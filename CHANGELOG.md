@@ -2,6 +2,12 @@
 
 The current progress can be tracked [here](https://github.com/dkress59/wordpress-api-client/projects/1)
 
+- v0.3.2
+  - added basic e2e test-suite
+  - fixed `.theme`, `.settings`, `.blockType`, `.media.delete`,
+    `.postCategory.delete`, `.postTag.delete`
+  -
+
 - v0.3.1 "Accept"-default-header
   - added default "Accept" and "Content-Type" headers
   - fixed .createEndpointCustomPost()

@@ -22,7 +22,7 @@ jobs:
                   node-version: ${{ matrix.node-version }}
             - run: yarn
             - run: yarn build
-            - run: yarn test
+            - run: yarn test __tests__/*.spec.ts
     
     coverage:
         runs-on: ubuntu-latest
@@ -34,4 +34,23 @@ jobs:
             - name: Install Dependencies
               run: yarn && yarn add codecov
             - name: Share Test Coverage
-              run: yarn test && yarn codecov
+              run: yarn test __tests__/*.spec.ts && yarn codecov
+
+    e2e:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v2
+            - uses: actions/setup-node@v1
+              with:
+                  node-version: '16'
+            - name: Bring up WordPress
+              run: docker-compose -f __tests__/e2e/docker-compose.yml up --build -d
+            - name: Wait for DB import
+              run: |
+                echo 'pausing: waiting for mysql to come available'
+                ./__tests__/e2e/wait-for-db-import.sh
+                echo 'un-pausing: mysql is now available'
+            - name: Install Dependencies
+              run: yarn install
+            - name: Run end-to-end test
+              run: yarn test:e2e

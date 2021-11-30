@@ -1,0 +1,95 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`End-to-end test .media .find (one) 1`] = `
+Array [
+  Object {
+    "_embedded": Object {
+      "author": Array [
+        Object {
+          "_links": Object {
+            "collection": Array [
+              Object {
+                "href": "http://localhost:8080/wp-json/wp/v2/users",
+              },
+            ],
+            "self": Array [
+              Object {
+                "href": "http://localhost:8080/wp-json/wp/v2/users/1",
+              },
+            ],
+          },
+          "avatar_urls": Object {
+            "24": "http://2.gravatar.com/avatar/5c0689e79c6f7fc399bb1459c5709046?s=24&d=mm&r=g",
+            "48": "http://2.gravatar.com/avatar/5c0689e79c6f7fc399bb1459c5709046?s=48&d=mm&r=g",
+            "96": "http://2.gravatar.com/avatar/5c0689e79c6f7fc399bb1459c5709046?s=96&d=mm&r=g",
+          },
+          "description": "",
+          "id": 1,
+          "link": "http://localhost:8080/author/admin/",
+          "name": "admin",
+          "slug": "admin",
+          "url": "http://localhost:8080",
+        },
+      ],
+    },
+    "_links": Object {
+      "about": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/types/attachment",
+        },
+      ],
+      "author": Array [
+        Object {
+          "embeddable": true,
+          "href": "http://localhost:8080/wp-json/wp/v2/users/1",
+        },
+      ],
+      "collection": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/media",
+        },
+      ],
+      "replies": Array [
+        Object {
+          "embeddable": true,
+          "href": "http://localhost:8080/wp-json/wp/v2/comments?post=20",
+        },
+      ],
+      "self": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/media/20",
+        },
+      ],
+    },
+    "alt_text": "",
+    "author": 1,
+    "caption": Object {
+      "rendered": "",
+    },
+    "comment_status": "open",
+    "description": Object {
+      "rendered": "<p class=\\"attachment\\"><a href='http://localhost:8080/wp-content/uploads/2021/11/mock_filename.png'><img width=\\"1\\" height=\\"1\\" src=\\"http://localhost:8080/wp-content/uploads/2021/11/mock_filename.png\\" class=\\"attachment-medium size-medium\\" alt=\\"\\" loading=\\"lazy\\" /></a></p>
+",
+    },
+    "guid": Object {
+      "rendered": "http://localhost:8080/wp-content/uploads/2021/11/mock_filename.png",
+    },
+    "id": 20,
+    "link": "http://localhost:8080/mock_filename/",
+    "media_details": Object {},
+    "media_type": "image",
+    "meta": Array [],
+    "mime_type": "image/png",
+    "ping_status": "closed",
+    "post": null,
+    "slug": "mock_filename",
+    "source_url": "http://localhost:8080/wp-content/uploads/2021/11/mock_filename.png",
+    "status": "inherit",
+    "template": "",
+    "title": Object {
+      "rendered": "mock_filename",
+    },
+    "type": "attachment",
+  },
+]
+`;
