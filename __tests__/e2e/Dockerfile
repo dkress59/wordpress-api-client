@@ -9,12 +9,14 @@ RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli
     && chmod +x wp-cli.phar \
     && mv ./wp-cli.phar /usr/local/bin/wp
 
-WORKDIR /var/www/html
+WORKDIR /usr/src/wordpress
 
-RUN touch /var/www/html/composer.json
-RUN echo '{"name":"wordpress-api-client/e2e-test","minimum-stability":"dev","require":{"wp-api/basic-auth":"dev-master"},"extra":{"installer-paths":{"wp-content/plugins":["wp-api/basic-auth"]}}}' >> /var/www/html/composer.json
+RUN touch composer.json
+RUN echo '{"name":"wordpress-api-client/e2e-test","minimum-stability":"dev","require":{"wp-api/basic-auth":"dev-master"},"extra":{"installer-paths":{"wp-content/plugins":["wp-api/basic-auth"]}}}' >> composer.json
 RUN ls .
 RUN composer install
 
 RUN ls .
 RUN ls wp-content/plugins
+
+WORKDIR /var/www/html
