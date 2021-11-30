@@ -11,10 +11,12 @@ RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli
 
 WORKDIR /usr/src/wordpress
 
-RUN touch composer.json
-RUN echo '{"name":"wordpress-api-client/e2e-test","minimum-stability":"dev","require":{"wp-api/basic-auth":"dev-master"},"extra":{"installer-paths":{"wp-content/plugins":["wp-api/basic-auth"]}}}' >> composer.json
+RUN composer init \
+      --stability 'dev' \
+      --name 'wordpress-api-client/e2e-test'
 RUN ls .
-RUN composer install
+RUN composer require "wp-api/basic-auth"
+RUN mv vendor/wp-api/basic-auth wp-content/plugins
 
 RUN ls .
 RUN ls wp-content/plugins
