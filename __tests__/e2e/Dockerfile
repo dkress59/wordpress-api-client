@@ -12,7 +12,6 @@ RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli
 RUN composer init \
       --stability 'dev' \
       --name 'wordpress-api-client/e2e-test' \
-      --repository '{"type":"composer","url":"https://wpackagist.org","only":["wpackagist-plugin/*","wpackagist-theme/*"]}' \
     && composer require "wp-api/basic-auth"
 
 RUN ls .
