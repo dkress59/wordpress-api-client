@@ -443,7 +443,7 @@ describe('End-to-end test', () => {
 		)
 	})
 	it.skip('.renderedBlock', async () => {
-		// FixMe: Debug .renderedBlock in RL
+		// FixMe: Find out what .renderedBlock actually is supposed to do
 		expect(
 			await client.renderedBlock({
 				name: 'mock-rendered-block',
@@ -470,14 +470,23 @@ describe('End-to-end test', () => {
 		}) */
 
 		it('.find (all)', async () => {
+			const response = await client.reusableBlock().create({
+				content: mockRawContent,
+				title: mockRawTitle,
+			})
+			newBlockId = response?.id
 			expect(await client.reusableBlock().find()).toMatchSpecificSnapshot(
 				fileName('find_all', 'reusableBlock'),
 			)
 		})
-		it.skip('.find (one)', async () => {
-			// FixMe: Debug .reusableBlock().find(id) in RL
+		it('.find (one)', async () => {
+			const response = await client.reusableBlock().create({
+				content: mockRawContent,
+				title: mockRawTitle,
+			})
+			newBlockId = response?.id
 			expect(
-				await client.reusableBlock().find(2),
+				await client.reusableBlock().find(newBlockId),
 			).toMatchSpecificSnapshot(fileName('find_one', 'reusableBlock'))
 		})
 		it('.create', async () => {
