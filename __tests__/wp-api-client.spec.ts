@@ -358,8 +358,30 @@ describe('WpApiClient', () => {
 		it('.postTag returns default entpoints', () => {
 			expect(client.postTag()).not.toBeNull()
 		})
-		it('.taxonomy returns default entpoints', () => {
-			expect(client.taxonomy()).not.toBeNull()
+		describe('.taxonomy', () => {
+			it('.find (list)', async () => {
+				await client.taxonomy()
+				expect(mockFetch).toHaveBeenCalledWith(
+					mockRestBase +
+						END_POINT.TAXONOMIES +
+						'/' +
+						getDefaultQueryList(),
+					defaultOptions,
+				)
+			})
+			it('.find (single)', async () => {
+				const mockTaxonomy = 'category'
+				await client.taxonomy(mockTaxonomy)
+				expect(mockFetch).toHaveBeenCalledWith(
+					mockRestBase +
+						END_POINT.TAXONOMIES +
+						'/' +
+						mockTaxonomy +
+						'/' +
+						getDefaultQuerySingle(),
+					defaultOptions,
+				)
+			})
 		})
 		describe('.media', () => {
 			it('.create', async () => {

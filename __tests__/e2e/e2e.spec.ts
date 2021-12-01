@@ -535,48 +535,15 @@ describe('End-to-end test', () => {
 		)
 	})
 	describe('.taxonomy', () => {
-		it.skip('.create', async () => {
-			// FixMe: Delete this method
-			const response = await client.taxonomy().create({
-				name: mockTitle.rendered,
-			})
-			expect(response).toMatchSpecificSnapshot(
-				fileName('create', 'taxonomy'),
-			)
-		})
-		it.skip('.delete', async () => {
-			// FixMe: Delete this method
-			const response = await client.taxonomy().create({
-				name: mockTitle.rendered,
-			})
-			expect(
-				await client.taxonomy().delete(response!.id as number),
-			).toMatchSpecificSnapshot(fileName('delete', 'taxonomy'))
-		})
 		it('.find (all)', async () => {
-			expect(await client.taxonomy().find()).toMatchSpecificSnapshot(
+			expect(await client.taxonomy()).toMatchSpecificSnapshot(
 				fileName('find_all', 'taxonomy'),
 			)
 		})
-		it.skip('.find (one)', async () => {
-			// FixMe: "Invalid taxonomy." (404)
-			expect(await client.taxonomy().find(1)).toMatchSpecificSnapshot(
+		it('.find (one)', async () => {
+			expect(await client.taxonomy('category')).toMatchSpecificSnapshot(
 				fileName('find_one', 'taxonomy'),
 			)
-		})
-		it.skip('.update', async () => {
-			// FixMe: Delete this method
-			const response = await client.taxonomy().create({
-				name: mockTitle.rendered,
-			})
-			expect(
-				await client.taxonomy().update(
-					{
-						name: mockUpdatedTitle.rendered,
-					},
-					response!.id as number,
-				),
-			).toMatchSpecificSnapshot(fileName('update', 'taxonomy'))
 		})
 	})
 	it('.theme', async () => {

@@ -3,18 +3,25 @@
 The current progress can be tracked [here](https://github.com/dkress59/wordpress-api-client/projects/1)
 
 - v0.3.2
-  - added basic e2e test-suite
-  - fixed `.theme`, `.settings`, `.blockType`, `.media.delete`,
-    `.postCategory.delete`, `.postTag.delete`
-  -
+  - full end-to-end test-suite added
+  - repaired default methods:
+    - `.blockDirectory`
+    - `.blockType`
+    - `.media.delete`
+    - `.postCategory.delete`
+    - `.postTag.delete`
+    - `.reusableBlock`
+    - `.settings`
+    - `.taxonomy`
+    - `.theme`
 
 - v0.3.1 "Accept"-default-header
   - added default "Accept" and "Content-Type" headers
-  - fixed .createEndpointCustomPost()
+  - repaired .createEndpointCustomPost()
 
 - v0.3.0 ACF v5.11.1
   - adjustment to Advanced Custom Fields v5.11.1
-  - minor typing issue fixed: FetchClient.fetch
+  - minor typing issue repaired: FetchClient.fetch
 
 - v0.2.3 default methods, error handling
   - implemented last two missing default methods

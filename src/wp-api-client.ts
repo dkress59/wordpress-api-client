@@ -15,7 +15,6 @@ import {
 	WPPlugin,
 	WPPost,
 	WPTag,
-	WPTaxonomy,
 	WPTheme,
 	WPUser,
 	WpApiOptions,
@@ -34,9 +33,11 @@ import {
 	WP_REST_API_Search_Result,
 	WP_REST_API_Settings,
 	WP_REST_API_Status,
+	WP_REST_API_Taxonomy,
 	WP_REST_API_Type,
 } from 'wp-types'
 import { getDefaultQueryList, getDefaultQuerySingle, postCreate } from './util'
+import { isRecord, isString } from '@tool-belt/type-predicates'
 
 interface PostCollection<P = any> {
 	postType: WP_Post_Type_Name | string
@@ -541,8 +542,42 @@ export class WpApiClient {
 		}
 	}
 
-	public taxonomy<P = WPTaxonomy>(): DefaultEndpoint<P> {
-		return this.addPostType<P>(END_POINT.TAXONOMIES, false)
+	public async taxonomy<P = WP_REST_API_Taxonomy>(
+		query: { context?: 'edit' | 'embed' | 'view'; type?: string },
+		...slugs: string[]
+	): Promise<P[]>
+	public async taxonomy<P = WP_REST_API_Taxonomy>(
+		...slugs: string[]
+	): Promise<P[]>
+	public async taxonomy<P = WP_REST_API_Taxonomy>(
+		query?: { context?: 'edit' | 'embed' | 'view'; type?: string } | string,
+		...slugs: string[]
+	): Promise<P[]> {
+		slugs = isString(query) ? [query, ...slugs] : slugs
+		query = isRecord(query) ? query : undefined
+		if (!slugs.length) {
+			return (
+				(await this.http.get<P[] | undefined>(
+					`${END_POINT.TAXONOMIES}/${getDefaultQueryList(
+						new URLSearchParams(query),
+					)}`,
+				)) ?? ([] as P[])
+			)
+		} else {
+			return await Promise.all(
+				slugs.map(slug =>
+					this.http.get<P>(
+						`${
+							END_POINT.TAXONOMIES
+						}/${slug}/${getDefaultQuerySingle(
+							isRecord(query)
+								? new URLSearchParams(query)
+								: undefined,
+						)}`,
+					),
+				),
+			)
+		}
 	}
 
 	public async theme<P = WPTheme>(): Promise<P[]> {
