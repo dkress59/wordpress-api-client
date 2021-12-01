@@ -38,5 +38,6 @@ services:
     networks:
       - wpsite
 
+
 networks:
   wpsite:

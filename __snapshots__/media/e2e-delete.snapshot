@@ -14,13 +14,13 @@ Array [
       "comment_status": "open",
       "description": Object {
         "raw": "",
-        "rendered": "<p class=\\"attachment\\"><a href='http://localhost:8080/wp-content/uploads/2021/11/mock_filename.png'><img width=\\"1\\" height=\\"1\\" src=\\"http://localhost:8080/wp-content/uploads/2021/11/mock_filename.png\\" class=\\"attachment-medium size-medium\\" alt=\\"\\" loading=\\"lazy\\" /></a></p>
+        "rendered": "<p class=\\"attachment\\"><a href='http://localhost:8080/wp-content/uploads/mock_filename.png'><img width=\\"1\\" height=\\"1\\" src=\\"http://localhost:8080/wp-content/uploads/mock_filename.png\\" class=\\"attachment-medium size-medium\\" alt=\\"\\" loading=\\"lazy\\" /></a></p>
 ",
       },
       "generated_slug": "mock_filename",
       "guid": Object {
-        "raw": "http://localhost:8080/wp-content/uploads/2021/11/mock_filename.png",
-        "rendered": "http://localhost:8080/wp-content/uploads/2021/11/mock_filename.png",
+        "raw": "http://localhost:8080/wp-content/uploads/mock_filename.png",
+        "rendered": "http://localhost:8080/wp-content/uploads/mock_filename.png",
       },
       "id": 18,
       "link": "http://localhost:8080/mock_filename/",
@@ -41,7 +41,7 @@ Array [
       "ping_status": "closed",
       "post": null,
       "slug": "mock_filename",
-      "source_url": "http://localhost:8080/wp-content/uploads/2021/11/mock_filename.png",
+      "source_url": "http://localhost:8080/wp-content/uploads/mock_filename.png",
       "status": "inherit",
       "template": "",
       "title": Object {

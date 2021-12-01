@@ -296,10 +296,20 @@ export class WpApiClient {
 			: await this.http.get<P[]>(END_POINT.BLOCK_TYPES)
 	}
 
-	public async blockDirectory<
-		P = WP_REST_API_Block_Directory_Item,
-	>(): Promise<P | P[]> {
-		return await this.http.get<P[]>(END_POINT.BLOCK_DIRECTORY)
+	public async blockDirectory<P = WP_REST_API_Block_Directory_Item>(
+		term: string,
+		page = 1,
+		perPage = 10,
+	): Promise<P | P[]> {
+		return await this.http.get<P[]>(
+			END_POINT.BLOCK_DIRECTORY +
+				'?' +
+				new URLSearchParams({
+					page: String(page),
+					per_page: String(perPage),
+					term,
+				}).toString(),
+		)
 	}
 
 	public comment<P = WPComment>(): DefaultEndpoint<P> {

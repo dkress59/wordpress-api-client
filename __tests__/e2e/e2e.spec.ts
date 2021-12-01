@@ -149,9 +149,8 @@ describe('End-to-end test', () => {
 			).toMatchSpecificSnapshot(fileName('create', 'applicationPassword'))
 		})
 	})
-	it.skip('.blockDirectory', async () => {
-		// FixMe: wp/v2/block-directory/search: "Missing parameter(s): term" (400)
-		expect(await client.blockDirectory()).toMatchSpecificSnapshot(
+	it('.blockDirectory', async () => {
+		expect(await client.blockDirectory(' ')).toMatchSpecificSnapshot(
 			fileName('blockDirectory'),
 		)
 	})

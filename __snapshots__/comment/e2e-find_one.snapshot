@@ -100,7 +100,7 @@ Array [
           },
           "featured_media": 0,
           "id": 1,
-          "link": "http://localhost:8080/2021/11/hello-world/",
+          "link": "http://localhost:8080/hello-world/",
           "slug": "hello-world",
           "title": Object {
             "rendered": "Hello world!",
@@ -147,7 +147,7 @@ Array [
 ",
     },
     "id": 5,
-    "link": "http://localhost:8080/2021/11/hello-world/#comment-5",
+    "link": "http://localhost:8080/hello-world/#comment-5",
     "meta": Array [],
     "parent": 0,
     "post": 1,

@@ -514,9 +514,16 @@ describe('WpApiClient', () => {
 		})
 		describe('.blockDirectory', () => {
 			it('list', async () => {
-				await client.blockDirectory()
+				await client.blockDirectory(' ')
 				expect(mockFetch).toHaveBeenCalledWith(
-					mockRestBase + END_POINT.BLOCK_DIRECTORY,
+					mockRestBase +
+						END_POINT.BLOCK_DIRECTORY +
+						'?' +
+						new URLSearchParams({
+							page: '1',
+							per_page: '10',
+							term: ' ',
+						}).toString(),
 					defaultOptions,
 				)
 			})

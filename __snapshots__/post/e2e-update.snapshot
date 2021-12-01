@@ -136,7 +136,7 @@ Object {
   "link": "http://localhost:8080/?p=7",
   "meta": Array [],
   "password": "",
-  "permalink_template": "http://localhost:8080/2021/11/%postname%/",
+  "permalink_template": "http://localhost:8080/%postname%/",
   "ping_status": "open",
   "slug": "",
   "status": "draft",

@@ -43,7 +43,7 @@ Object {
 ",
   },
   "id": 2,
-  "link": "http://localhost:8080/2021/11/hello-world/#comment-2",
+  "link": "http://localhost:8080/hello-world/#comment-2",
   "meta": Array [],
   "parent": 0,
   "post": 1,

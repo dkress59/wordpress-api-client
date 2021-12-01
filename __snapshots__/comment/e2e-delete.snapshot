@@ -44,7 +44,7 @@ Array [
 ",
     },
     "id": 3,
-    "link": "http://localhost:8080/2021/11/hello-world/#comment-3",
+    "link": "http://localhost:8080/hello-world/#comment-3",
     "meta": Array [],
     "parent": 0,
     "post": 1,
