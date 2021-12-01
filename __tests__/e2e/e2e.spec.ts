@@ -452,39 +452,28 @@ describe('End-to-end test', () => {
 		).toMatchSpecificSnapshot(fileName('renderedBlock'))
 	})
 	describe('.reusableBlock', () => {
-		let newBlockId: number | undefined
+		let newBlockId = 0
 
-		beforeAll(async () => {
-			await client.reusableBlock().create({
-				content: {
-					raw: '<p>Initial Block Content</p>',
-					protected: false,
-				},
-				title: { raw: 'Initial Block' },
-			})
-		})
-
-		/* afterEach(async () => {
-			if (newBlockId) await client.reusableBlock().delete(newBlockId)
-			newBlockId = 0
-		}) */
-
-		it('.find (all)', async () => {
+		beforeEach(async () => {
 			const response = await client.reusableBlock().create({
 				content: mockRawContent,
 				title: mockRawTitle,
+				status: 'publish',
 			})
-			newBlockId = response?.id
+			newBlockId = response!.id
+		})
+
+		afterEach(async () => {
+			if (newBlockId) await client.reusableBlock().delete(newBlockId)
+			newBlockId = 0
+		})
+
+		it('.find (all)', async () => {
 			expect(await client.reusableBlock().find()).toMatchSpecificSnapshot(
 				fileName('find_all', 'reusableBlock'),
 			)
 		})
 		it('.find (one)', async () => {
-			const response = await client.reusableBlock().create({
-				content: mockRawContent,
-				title: mockRawTitle,
-			})
-			newBlockId = response?.id
 			expect(
 				await client.reusableBlock().find(newBlockId),
 			).toMatchSpecificSnapshot(fileName('find_one', 'reusableBlock'))
@@ -493,32 +482,28 @@ describe('End-to-end test', () => {
 			const response = await client.reusableBlock().create({
 				content: mockRawContent,
 				title: mockRawTitle,
+				status: 'publish',
 			})
-			newBlockId = response?.id
+			newBlockId = response!.id
 			expect(response).toMatchSpecificSnapshot(
 				fileName('create', 'reusableBlock'),
 			)
 		})
 		it('.update', async () => {
-			const response = await client.reusableBlock().create({
-				content: mockRawContent,
-				title: mockRawTitle,
-			})
-			newBlockId = response?.id
 			expect(
 				await client
 					.reusableBlock()
 					.update(
 						{ title: { raw: mockUpdatedTitle.rendered } },
-						response!.id,
+						newBlockId,
 					),
 			).toMatchSpecificSnapshot(fileName('update', 'reusableBlock'))
 		})
-		it.skip('.delete', async () => {
-			// FixMe: Debug .reusableBlock().delete in RL
+		it('.delete', async () => {
 			const response = await client.reusableBlock().create({
 				content: mockRawContent,
 				title: mockRawTitle,
+				status: 'publish',
 			})
 			expect(
 				await client.reusableBlock().delete(response!.id),

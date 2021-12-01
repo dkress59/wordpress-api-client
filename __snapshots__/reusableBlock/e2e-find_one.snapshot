@@ -44,12 +44,12 @@ Array [
       "raw": "<p>Mock Content</p>",
     },
     "guid": Object {
-      "rendered": "http://localhost:8080/?p=24",
+      "rendered": "http://localhost:8080/mock-title/",
     },
     "id": 24,
-    "link": "http://localhost:8080/?p=24",
-    "slug": "",
-    "status": "draft",
+    "link": "http://localhost:8080/mock-title/",
+    "slug": "mock-title",
+    "status": "publish",
     "template": "",
     "title": Object {
       "raw": "Mock Title",

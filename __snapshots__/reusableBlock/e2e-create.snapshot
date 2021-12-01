@@ -22,28 +22,28 @@ Object {
     ],
     "self": Array [
       Object {
-        "href": "http://localhost:8080/wp-json/wp/v2/blocks/25",
+        "href": "http://localhost:8080/wp-json/wp/v2/blocks/27",
       },
     ],
     "version-history": Array [
       Object {
         "count": 0,
-        "href": "http://localhost:8080/wp-json/wp/v2/blocks/25/revisions",
+        "href": "http://localhost:8080/wp-json/wp/v2/blocks/27/revisions",
       },
     ],
     "wp:action-publish": Array [
       Object {
-        "href": "http://localhost:8080/wp-json/wp/v2/blocks/25",
+        "href": "http://localhost:8080/wp-json/wp/v2/blocks/27",
       },
     ],
     "wp:action-unfiltered-html": Array [
       Object {
-        "href": "http://localhost:8080/wp-json/wp/v2/blocks/25",
+        "href": "http://localhost:8080/wp-json/wp/v2/blocks/27",
       },
     ],
     "wp:attachment": Array [
       Object {
-        "href": "http://localhost:8080/wp-json/wp/v2/media?parent=25",
+        "href": "http://localhost:8080/wp-json/wp/v2/media?parent=27",
       },
     ],
   },
@@ -54,14 +54,14 @@ Object {
     "raw": "<p>Mock Content</p>",
   },
   "guid": Object {
-    "raw": "http://localhost:8080/?p=25",
-    "rendered": "http://localhost:8080/?p=25",
+    "raw": "http://localhost:8080/mock-title-2/",
+    "rendered": "http://localhost:8080/mock-title-2/",
   },
-  "id": 25,
-  "link": "http://localhost:8080/?p=25",
+  "id": 27,
+  "link": "http://localhost:8080/mock-title-2/",
   "password": "",
-  "slug": "",
-  "status": "draft",
+  "slug": "mock-title-2",
+  "status": "publish",
   "template": "",
   "title": Object {
     "raw": "Mock Title",
