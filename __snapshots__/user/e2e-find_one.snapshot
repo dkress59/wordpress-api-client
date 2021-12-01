@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`End-to-end test .user .find (one) 1`] = `
+Array [
+  Object {
+    "_links": Object {
+      "collection": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/users",
+        },
+      ],
+      "self": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/users/6",
+        },
+      ],
+    },
+    "acf": Array [],
+    "avatar_urls": Object {
+      "24": "http://2.gravatar.com/avatar/bcf2cb8656d6aa221cb96ece43a73ccd?s=24&d=mm&r=g",
+      "48": "http://2.gravatar.com/avatar/bcf2cb8656d6aa221cb96ece43a73ccd?s=48&d=mm&r=g",
+      "96": "http://2.gravatar.com/avatar/bcf2cb8656d6aa221cb96ece43a73ccd?s=96&d=mm&r=g",
+    },
+    "description": "",
+    "id": 6,
+    "link": "http://localhost:8080/author/mockuser4/",
+    "meta": Array [],
+    "name": "Mock Title",
+    "slug": "mockuser4",
+    "url": "",
+  },
+]
+`;

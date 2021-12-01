@@ -29,5 +29,32 @@ Array [
     "slug": "admin",
     "url": "http://localhost:8080",
   },
+  Object {
+    "_links": Object {
+      "collection": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/users",
+        },
+      ],
+      "self": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/users/5",
+        },
+      ],
+    },
+    "acf": Array [],
+    "avatar_urls": Object {
+      "24": "http://0.gravatar.com/avatar/9ea74214e4fda24b4e34fd7eb525c455?s=24&d=mm&r=g",
+      "48": "http://0.gravatar.com/avatar/9ea74214e4fda24b4e34fd7eb525c455?s=48&d=mm&r=g",
+      "96": "http://0.gravatar.com/avatar/9ea74214e4fda24b4e34fd7eb525c455?s=96&d=mm&r=g",
+    },
+    "description": "",
+    "id": 5,
+    "link": "http://localhost:8080/author/mockuser3/",
+    "meta": Array [],
+    "name": "Mock Title",
+    "slug": "mockuser3",
+    "url": "",
+  },
 ]
 `;

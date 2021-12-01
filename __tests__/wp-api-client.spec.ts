@@ -42,14 +42,17 @@ const client = new MockClient()
 describe('WpApiClient', () => {
 	// eslint-disable-next-line no-console
 	const originalError = console.error
+
 	beforeAll(() => {
 		// eslint-disable-next-line no-console
 		console.error = jest.fn()
 	})
+
 	afterAll(() => {
 		// eslint-disable-next-line no-console
 		console.error = originalError
 	})
+
 	beforeEach(() => {
 		mockJson.mockResolvedValue(mockData)
 		mockText.mockResolvedValue(JSON.stringify(mockData))
@@ -60,6 +63,7 @@ describe('WpApiClient', () => {
 			text: mockText,
 		} as Response)
 	})
+
 	describe('constructor', () => {
 		it('correctly sets headers for basic auth', async () => {
 			const password = 'mock_password'
@@ -165,6 +169,7 @@ describe('WpApiClient', () => {
 			)
 		})
 	})
+
 	describe('collection', () => {
 		beforeEach(() => {
 			MockClient.clearCollection()
@@ -212,6 +217,7 @@ describe('WpApiClient', () => {
 			expect(MockClient.collect(WP_Post_Type_Name.page)).toEqual([])
 		})
 	})
+
 	describe('helper methods', () => {
 		describe('.addPostType', () => {
 			it('can set default URLSearchParams', async () => {
@@ -428,9 +434,16 @@ describe('WpApiClient', () => {
 				)
 			})
 			it('.deleteMe', async () => {
-				await client.user().deleteMe()
+				const reassign = 2
+				await client.user().deleteMe(reassign)
 				expect(mockFetch).toHaveBeenCalledWith(
-					mockRestBase + END_POINT.USERS_ME,
+					mockRestBase +
+						END_POINT.USERS_ME +
+						'?' +
+						new URLSearchParams({
+							force: 'true',
+							reassign: String(reassign),
+						}).toString(),
 					{
 						...defaultOptions,
 						method: 'delete',

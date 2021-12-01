@@ -1,0 +1,48 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`End-to-end test .user .create 1`] = `
+Object {
+  "_links": Object {
+    "collection": Array [
+      Object {
+        "href": "http://localhost:8080/wp-json/wp/v2/users",
+      },
+    ],
+    "self": Array [
+      Object {
+        "href": "http://localhost:8080/wp-json/wp/v2/users/2",
+      },
+    ],
+  },
+  "acf": Array [],
+  "avatar_urls": Object {
+    "24": "http://2.gravatar.com/avatar/5065aac0330a46af9b5308cc9e2a4796?s=24&d=mm&r=g",
+    "48": "http://2.gravatar.com/avatar/5065aac0330a46af9b5308cc9e2a4796?s=48&d=mm&r=g",
+    "96": "http://2.gravatar.com/avatar/5065aac0330a46af9b5308cc9e2a4796?s=96&d=mm&r=g",
+  },
+  "capabilities": Object {
+    "level_0": true,
+    "read": true,
+    "subscriber": true,
+  },
+  "description": "",
+  "email": "0mock@email.com",
+  "extra_capabilities": Object {
+    "subscriber": true,
+  },
+  "first_name": "",
+  "id": 2,
+  "last_name": "",
+  "link": "http://localhost:8080/author/mockuser0/",
+  "locale": "en_US",
+  "meta": Array [],
+  "name": "Mock Title",
+  "nickname": "mockuser0",
+  "roles": Array [
+    "subscriber",
+  ],
+  "slug": "mockuser0",
+  "url": "",
+  "username": "mockuser0",
+}
+`;

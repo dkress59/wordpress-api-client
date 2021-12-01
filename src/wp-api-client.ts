@@ -527,17 +527,57 @@ export class WpApiClient {
 	public user<P = WPUser>(): {
 		find: EndpointFind<P>
 		findMe: EndpointFindOnly<P>
-		create: EndpointCreate<P>
-		update: EndpointUpdate<P>
-		delete: EndpointDelete<P>
-		deleteMe: EndpointFindOnly<P>
+		create: (
+			body: Partial<P> &
+				Required<{ email: string; username: string; password: string }>,
+		) => Promise<P | null>
+		update: (
+			body: Partial<P> & Required<{ password: string }>,
+			userId: number,
+		) => Promise<P | null>
+		delete: (
+			reassign: number,
+			...userIds: number[]
+		) => Promise<(P | null)[]>
+		deleteMe: (reassign: number) => Promise<P>
 	} {
 		const findMe = async () => await this.http.get<P>(END_POINT.USERS_ME)
-		const deleteMe = async () =>
-			await this.http.delete<P>(END_POINT.USERS_ME)
+		const deleteUsers = async (reassign: number, ...userIds: number[]) => {
+			if (!userIds.length)
+				throw new Error(
+					ERROR_MESSAGE.MISSING_REQUIRED_PARAM.replace(
+						'%PARAM%',
+						'"reassign"',
+					),
+				)
+			return await Promise.all(
+				userIds.map(id =>
+					this.http.delete<P>(
+						END_POINT.USERS +
+							'/' +
+							String(id) +
+							'?' +
+							new URLSearchParams({
+								force: 'true',
+								reassign: String(reassign),
+							}).toString(),
+					),
+				),
+			)
+		}
+		const deleteMe = async (reassign: number) =>
+			await this.http.delete<P>(
+				END_POINT.USERS_ME +
+					'?' +
+					new URLSearchParams({
+						force: 'true',
+						reassign: String(reassign),
+					}).toString(),
+			)
 		return {
 			...this.addPostType<P>(END_POINT.USERS),
 			findMe,
+			delete: deleteUsers,
 			deleteMe,
 		}
 	}

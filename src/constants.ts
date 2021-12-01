@@ -31,6 +31,8 @@ export const ERROR_MESSAGE = {
 	INVALID_BASEURL: '[WpApiClient Error] Invalid baseUrl: %url%',
 	INVALID_FILENAME:
 		'[WpApiClient Error] The fileName must include the file extension (e.g.: %fileName%.jpg).',
+	MISSING_REQUIRED_PARAM:
+		'[WpApiClient Error] Required param %PARAM% missing.',
 }
 
 export const END_POINT_PROTECTED = {
@@ -42,6 +44,7 @@ export const END_POINT_PROTECTED = {
 		END_POINT.SETTINGS,
 		END_POINT.THEMES,
 		END_POINT.USER_APPLICATION_PASSWORDS,
+		END_POINT.USERS,
 		END_POINT.USERS_ME,
 	],
 	POST: [...Object.values(END_POINT)],

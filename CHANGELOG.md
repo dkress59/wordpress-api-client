@@ -14,6 +14,10 @@ The current progress can be tracked [here](https://github.com/dkress59/wordpress
     - `.settings`
     - `.taxonomy`
     - `.theme`
+    - `.user.create`
+    - `.user.delete`
+    - `.user.deleteMe`
+    - `.user.update`
 
 - v0.3.1 "Accept"-default-header
   - added default "Accept" and "Content-Type" headers

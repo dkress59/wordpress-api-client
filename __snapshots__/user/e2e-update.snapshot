@@ -1,0 +1,48 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`End-to-end test .user .update 1`] = `
+Object {
+  "_links": Object {
+    "collection": Array [
+      Object {
+        "href": "http://localhost:8080/wp-json/wp/v2/users",
+      },
+    ],
+    "self": Array [
+      Object {
+        "href": "http://localhost:8080/wp-json/wp/v2/users/7",
+      },
+    ],
+  },
+  "acf": Array [],
+  "avatar_urls": Object {
+    "24": "http://2.gravatar.com/avatar/bffe87956a454372ee471b87b609a19b?s=24&d=mm&r=g",
+    "48": "http://2.gravatar.com/avatar/bffe87956a454372ee471b87b609a19b?s=48&d=mm&r=g",
+    "96": "http://2.gravatar.com/avatar/bffe87956a454372ee471b87b609a19b?s=96&d=mm&r=g",
+  },
+  "capabilities": Object {
+    "level_0": true,
+    "read": true,
+    "subscriber": true,
+  },
+  "description": "",
+  "email": "6mock@email.com",
+  "extra_capabilities": Object {
+    "subscriber": true,
+  },
+  "first_name": "",
+  "id": 7,
+  "last_name": "",
+  "link": "http://localhost:8080/author/mockuser6/",
+  "locale": "en_US",
+  "meta": Array [],
+  "name": "Updated Title",
+  "nickname": "mockuser6",
+  "roles": Array [
+    "subscriber",
+  ],
+  "slug": "mockuser6",
+  "url": "",
+  "username": "mockuser6",
+}
+`;

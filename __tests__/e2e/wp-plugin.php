@@ -36,6 +36,9 @@ function rest_hide_date_fields( $data, $post, $request ) {
 		unset($_data['modified']);
 		unset($_data['modified_gmt']);
 	}
+	if (isset($_data['registered_date'])) {
+		unset($_data['registered_date']);
+	}
 	$data->data = $_data;
 
 	return $data;

@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`End-to-end test .user .delete 1`] = `
+Array [
+  Object {
+    "deleted": true,
+    "previous": Object {
+      "acf": Array [],
+      "avatar_urls": Object {
+        "24": "http://1.gravatar.com/avatar/7c981bca7cd49f8032cda228c9ec3dcc?s=24&d=mm&r=g",
+        "48": "http://1.gravatar.com/avatar/7c981bca7cd49f8032cda228c9ec3dcc?s=48&d=mm&r=g",
+        "96": "http://1.gravatar.com/avatar/7c981bca7cd49f8032cda228c9ec3dcc?s=96&d=mm&r=g",
+      },
+      "capabilities": Object {
+        "level_0": true,
+        "read": true,
+        "subscriber": true,
+      },
+      "description": "",
+      "email": "1mock@email.com",
+      "extra_capabilities": Object {
+        "subscriber": true,
+      },
+      "first_name": "",
+      "id": 3,
+      "last_name": "",
+      "link": "http://localhost:8080/author/mockuser1/",
+      "locale": "en_US",
+      "meta": Array [],
+      "name": "Mock Title",
+      "nickname": "mockuser1",
+      "roles": Array [
+        "subscriber",
+      ],
+      "slug": "mockuser1",
+      "url": "",
+      "username": "mockuser1",
+    },
+  },
+]
+`;

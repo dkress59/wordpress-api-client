@@ -1,4 +1,3 @@
-/* eslint-disable jest/no-disabled-tests */
 import 'jest-specific-snapshot'
 import { randomUUID } from 'crypto'
 import WpApiClient from '../../src'
@@ -137,6 +136,7 @@ describe('End-to-end test', () => {
 			).toMatchSpecificSnapshot(fileName('delete', 'page'))
 		})
 	})
+	// eslint-disable-next-line jest/no-disabled-tests
 	describe.skip('.applicationPassword', () => {
 		// FixMe: requires SSL
 		it('.create', async () => {
@@ -442,6 +442,7 @@ describe('End-to-end test', () => {
 			fileName('postType'),
 		)
 	})
+	// eslint-disable-next-line jest/no-disabled-tests
 	it.skip('.renderedBlock', async () => {
 		// FixMe: Find out what .renderedBlock actually is supposed to do
 		expect(
@@ -550,37 +551,77 @@ describe('End-to-end test', () => {
 		expect(await client.theme()).toMatchSpecificSnapshot(fileName('theme'))
 	})
 	describe('.user', () => {
-		let newUserId: number | undefined
+		let i = 0
+		let newUserId = 0
+		const mockUsername = 'mockuser'
+		const mockEmail = 'mock@email.com'
+		const mockPassword = 'Mock_Password1'
 
 		afterEach(async () => {
-			if (newUserId) await client.user().delete(newUserId)
+			i++
+			if (newUserId) await client.user().delete(1, newUserId)
 			newUserId = 0
 		})
 
-		it.skip('.create', async () => {
-			// FixMe: "Missing parameter(s): username, email, password" (400)
+		it('.create', async () => {
 			const response = await client.user().create({
+				email: String(i) + mockEmail,
 				name: mockTitle.rendered,
+				password: mockPassword,
+				username: mockUsername + String(i),
 			})
-			newUserId = response?.id
+			newUserId = response!.id
 			expect(response).toMatchSpecificSnapshot(fileName('create', 'user'))
 		})
-		it.skip('.delete', async () => {
-			// FixMe: "Missing parameter(s): username, email, password" (400)
+		it('.delete', async () => {
 			const response = await client.user().create({
+				email: String(i) + mockEmail,
 				name: mockTitle.rendered,
+				password: mockPassword,
+				username: mockUsername + String(i),
 			})
 			expect(
-				await client.user().delete(response!.id),
+				await client.user().delete(1, response!.id),
 			).toMatchSpecificSnapshot(fileName('delete', 'user'))
 		})
+		it('.deleteMe', async () => {
+			const password = mockPassword
+			const username = mockUsername + String(i)
+			await client.user().create({
+				name: mockTitle.rendered,
+				email: String(i) + mockEmail,
+				password,
+				username,
+				roles: ['administrator'],
+			})
+			const newClient = new WpApiClient('http://localhost:8080', {
+				auth: { type: 'basic', username, password },
+			})
+			expect(await newClient.user().deleteMe(1)).toMatchSpecificSnapshot(
+				fileName('deleteMe', 'user'),
+			)
+		})
 		it('.find (all)', async () => {
+			const response = await client.user().create({
+				email: String(i) + mockEmail,
+				name: mockTitle.rendered,
+				password: mockPassword,
+				username: mockUsername + String(i),
+			})
+			newUserId = response!.id
 			expect(await client.user().find()).toMatchSpecificSnapshot(
 				fileName('find_all', 'user'),
 			)
 		})
-		it.skip('.find (one)', async () => {
-			expect(await client.user().find(5)).toMatchSpecificSnapshot(
+		it('.find (one)', async () => {
+			const response = await client.user().create({
+				email: String(i) + mockEmail,
+				name: mockTitle.rendered,
+				password: mockPassword,
+				username: mockUsername + String(i),
+			})
+			newUserId = response!.id
+			expect(await client.user().find(newUserId)).toMatchSpecificSnapshot(
 				fileName('find_one', 'user'),
 			)
 		})
@@ -589,26 +630,23 @@ describe('End-to-end test', () => {
 				fileName('find_me', 'user'),
 			)
 		})
-		it.skip('.update', async () => {
-			// FixMe: "Missing parameter(s): username, email, password" (400)
+		it('.update', async () => {
 			const response = await client.user().create({
 				name: mockTitle.rendered,
+				email: String(i) + mockEmail,
+				password: mockPassword,
+				username: mockUsername + String(i),
 			})
-			newUserId = response?.id
+			newUserId = response!.id
 			expect(
 				await client.user().update(
 					{
 						name: mockUpdatedTitle.rendered,
+						password: mockPassword,
 					},
-					response!.id,
+					newUserId,
 				),
 			).toMatchSpecificSnapshot(fileName('update', 'user'))
-		})
-		it.skip('.user.deleteMe', async () => {
-			// FixMe: "Missing parameter(s): reassign" (400)
-			expect(await client.user().deleteMe()).toMatchSpecificSnapshot(
-				fileName('deleteMe', 'user'),
-			)
 		})
 	})
 })
