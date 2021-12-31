@@ -10,6 +10,7 @@ import WpApiClient from '../src'
 import fetch from 'cross-fetch'
 jest.mock('cross-fetch', () => jest.fn())
 
+const originalFetch = jest.requireActual('cross-fetch')
 const mockFetch = fetch as jest.MockedFunction<typeof fetch>
 const mockJson = jest.fn() as jest.MockedFunction<any>
 const mockText = jest.fn() as jest.MockedFunction<any>
@@ -61,7 +62,8 @@ describe('WpApiClient', () => {
 			ok: true,
 			json: mockJson,
 			text: mockText,
-		} as Response)
+			headers: new originalFetch.Headers({ 'X-WP-TotalPages': '1' }),
+		} as unknown as Response)
 	})
 
 	describe('constructor', () => {

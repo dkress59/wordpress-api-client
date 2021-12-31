@@ -137,10 +137,9 @@ export class WpApiClient {
 					  })
 			let result: P[] = []
 			if (!ids.length) {
-				result =
-					(await this.http.get<P[] | undefined>(
-						`${endpoint}/${getDefaultQueryList(query)}`,
-					)) ?? ([] as P[])
+				result = await this.http.getAll<P>(
+					`${endpoint}/${getDefaultQueryList(query)}`,
+				)
 			} else {
 				result = await Promise.all(
 					ids.map(postId =>

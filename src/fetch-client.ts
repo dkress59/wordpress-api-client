@@ -11,7 +11,6 @@ export class FetchClient {
 		public onError: (message: string) => void = (message: string) => {
 			// eslint-disable-next-line no-console
 			console.error(message)
-			throw new Error(message)
 		},
 		headers: Record<string, string> = {},
 		public authHeader: Record<string, string> = {},
@@ -25,13 +24,13 @@ export class FetchClient {
 		}
 	}
 
-	/** returns undefined if onError does not throw */
+	/** will also throw if onError is defined */
 	private async fetch<T>(
 		url: string,
 		method: 'get' | 'post' | 'delete',
 		headers?: Record<string, string>,
 		body?: BodyInit,
-	) {
+	): Promise<{ data: T; headers: Headers }> {
 		body = body?.toString()
 		try {
 			headers = { ...this.headers, ...headers }
@@ -43,16 +42,47 @@ export class FetchClient {
 				method,
 			})
 			if (response.status >= 400) throw response
-			return response.json() as unknown as T
+			return {
+				data: (await response.json()) as T,
+				headers: response.headers,
+			}
 		} catch (error) {
 			const message = await getErrorMessage(error as Response)
 			this.onError(message)
-			return undefined
+			throw new Error(message)
 		}
 	}
 
 	async get<T>(url: string, headers?: Record<string, string>): Promise<T> {
-		return (await this.fetch(url, 'get', headers)) as T
+		return (await this.fetch<T>(url, 'get', headers)).data
+	}
+
+	async getAll<T>(
+		url: string,
+		headers?: Record<string, string>,
+	): Promise<T[]> {
+		const response = await this.fetch<T[] | undefined>(url, 'get', headers)
+		const result = response.data ?? []
+		const loadMore =
+			result.length &&
+			!url.includes('?page=') &&
+			!url.includes('&page=') &&
+			!url.includes('?offset=') &&
+			!url.includes('&offset=')
+		if (loadMore) {
+			const totalPages = Number(response.headers.get('X-WP-TotalPages'))
+			if (totalPages > 1) {
+				for (let i = 1; i < totalPages; i++) {
+					const page = await this.fetch<T[] | undefined>(
+						url + '&page=' + String(i + 1),
+						'get',
+						headers,
+					)
+					result.push(...(page.data ?? []))
+				}
+			}
+		}
+		return result
 	}
 
 	async post<T>(
@@ -60,10 +90,10 @@ export class FetchClient {
 		headers?: Record<string, string>,
 		body?: BodyInit,
 	): Promise<T> {
-		return (await this.fetch(url, 'post', headers, body)) as T
+		return (await this.fetch<T>(url, 'post', headers, body)).data
 	}
 
 	async delete<T>(url: string, headers?: Record<string, string>): Promise<T> {
-		return (await this.fetch(url, 'delete', headers)) as T
+		return (await this.fetch<T>(url, 'delete', headers)).data
 	}
 }
