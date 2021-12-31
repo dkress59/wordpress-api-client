@@ -72,14 +72,20 @@ export class FetchClient {
 		if (loadMore) {
 			const totalPages = Number(response.headers.get('X-WP-TotalPages'))
 			if (totalPages > 1) {
-				for (let i = 1; i < totalPages; i++) {
-					const page = await this.fetch<T[] | undefined>(
-						url + '&page=' + String(i + 1),
-						'get',
-						headers,
+				const pages = (
+					await Promise.all(
+						new Array(totalPages - 1).fill(null).map((_null, i) => {
+							return this.fetch<T[] | undefined>(
+								url + '&page=' + String(i + 2),
+								'get',
+								headers,
+							)
+						}),
 					)
-					result.push(...(page.data ?? []))
-				}
+				).map(page => page.data ?? [])
+				const entries: T[] = []
+				pages.forEach(page => entries.push(...page))
+				return entries
 			}
 		}
 		return result
