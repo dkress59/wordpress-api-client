@@ -2,6 +2,9 @@
 
 The current progress can be tracked [here](https://github.com/dkress59/wordpress-api-client/projects/1)
 
+- v0.3.3 FetchClient.getAll
+  - .find() with no arguments will return **all** items instead of the first 100
+
 - v0.3.2
   - full end-to-end test-suite added
   - repaired default methods:
