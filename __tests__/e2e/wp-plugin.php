@@ -24,6 +24,7 @@ add_filter( 'rest_prepare_taxonomy', 'rest_hide_date_fields', 10, 3 );
 add_filter( 'rest_prepare_theme', 'rest_hide_date_fields', 10, 3 );
 add_filter( 'rest_prepare_user', 'rest_hide_date_fields', 10, 3 );
 add_filter( 'rest_prepare_wp_block', 'rest_hide_date_fields', 10, 3 );
+
 function rest_hide_date_fields( $data, $post, $request ) {
 	$_data = $data->data;
 

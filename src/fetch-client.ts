@@ -85,7 +85,7 @@ export class FetchClient {
 				).map(page => page.data ?? [])
 				const entries: T[] = []
 				pages.forEach(page => entries.push(...page))
-				return entries
+				result.push(...entries)
 			}
 		}
 		return result
