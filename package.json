@@ -70,6 +70,8 @@
     "test": "jest --verbose --runInBand __tests__/*.spec.ts",
     "test:e2e": "jest --verbose --runInBand e2e.spec.ts",
     "test:watch": "jest __tests__/*.spec.ts --watchAll",
+    "docker": "docker-compose -f __tests__/e2e/docker-compose.yml up --build -d",
+    "docker:down": "docker-compose -f __tests__/e2e/docker-compose.yml down",
     "prepare": "husky install"
   }
 }

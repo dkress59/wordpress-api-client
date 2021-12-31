@@ -23,6 +23,6 @@ Object {
   "requires_wp": "",
   "status": "active",
   "textdomain": "acf",
-  "version": "5.11.3",
+  "version": "5.11.4",
 }
 `;
