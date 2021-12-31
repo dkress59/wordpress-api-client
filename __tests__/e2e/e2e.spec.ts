@@ -1,4 +1,5 @@
 import 'jest-specific-snapshot'
+import { WP_REST_API_Block_Directory_Item } from 'wp-types'
 import { randomUUID } from 'crypto'
 import WpApiClient from '../../src'
 import fs from 'fs'
@@ -150,9 +151,31 @@ describe('End-to-end test', () => {
 		})
 	})
 	it('.blockDirectory', async () => {
-		expect(await client.blockDirectory(' ')).toMatchSpecificSnapshot(
-			fileName('blockDirectory'),
-		)
+		expect(
+			(
+				(await client.blockDirectory(
+					' ',
+				)) as WP_REST_API_Block_Directory_Item[]
+			).map(block => {
+				// @ts-ignore
+				delete block.active_installs
+				// @ts-ignore
+				delete block.author_block_count
+				// @ts-ignore
+				delete block.author_block_rating
+				// @ts-ignore
+				delete block.description
+				// @ts-ignore
+				delete block.humanized_updated
+				// @ts-ignore
+				delete block.last_updated
+				// @ts-ignore
+				delete block.rating
+				// @ts-ignore
+				delete block.rating_count
+				return block
+			}),
+		).toMatchSpecificSnapshot(fileName('blockDirectory'))
 	})
 	it('.blockType', async () => {
 		expect(await client.blockType()).toMatchSpecificSnapshot(
