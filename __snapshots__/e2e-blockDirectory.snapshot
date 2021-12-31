@@ -166,7 +166,7 @@ Array [
     "author": "Andy Fragen",
     "author_block_count": 1,
     "author_block_rating": 4.5833333333333,
-    "description": "Embed a PDF from the Media Library or elsewhere via oEmbed or as a block&hellip;",
+    "description": "Embed a PDF from the Media Library or elsewhere via oEmbed or as a block into an object tag or Google Doc Viewer as fallback.",
     "humanized_updated": "6 months ago",
     "icon": "https://ps.w.org/embed-pdf-viewer/assets/icon.svg?rev=2488252",
     "id": "embed-pdf-viewer",
