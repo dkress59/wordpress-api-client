@@ -26,8 +26,12 @@
     "@types/jest": "27.4.0",
     "@types/jest-specific-snapshot": "0.5.5",
     "@types/node": "16.11.18",
+    "@typescript-eslint/eslint-plugin": "5.9.0",
+    "@typescript-eslint/parser": "5.9.0",
     "eslint": "8.6.0",
+    "eslint-config-prettier": "8.3.0",
     "eslint-import-resolver-typescript": "2.5.0",
+    "eslint-plugin-eslint-comments": "3.2.0",
     "eslint-plugin-import": "2.25.4",
     "eslint-plugin-jam3": "0.2.3",
     "eslint-plugin-jest": "25.3.4",
@@ -47,7 +51,7 @@
     "wp-types": "2.12.0"
   },
   "engines": {
-    "node": "^14.17.0 || >=16.0.0"
+    "node": "14.17.0 || >=16.0.0"
   },
   "keywords": [
     "wordpress",
@@ -70,6 +74,7 @@
     "test": "jest --verbose --runInBand __tests__/*.spec.ts",
     "test:e2e": "jest --verbose --runInBand e2e.spec.ts",
     "test:watch": "jest __tests__/*.spec.ts --watchAll",
+    "doctor": "yarn dlx @yarnpkg/doctor",
     "docker": "docker-compose -f __tests__/e2e/docker-compose.yml up --build -d",
     "docker:down": "docker-compose -f __tests__/e2e/docker-compose.yml down",
     "prepare": "husky install"
