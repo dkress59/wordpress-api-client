@@ -139,7 +139,7 @@ describe('End-to-end test', () => {
 	})
 	// eslint-disable-next-line jest/no-disabled-tests
 	describe.skip('.applicationPassword', () => {
-		// FixMe: requires SSL
+		// FixMe: .applicationPassword.create requires SSL
 		it('.create', async () => {
 			const appId = randomUUID()
 			const userId = (await client.user().findMe()).id
