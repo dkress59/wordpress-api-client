@@ -13,15 +13,15 @@ Array [
       ],
       "wp:install-plugin": Array [
         Object {
-          "href": "http://localhost:8080/wp-json/wp/v2/plugins?slug=contact-form-7",
+          "href": "http://localhost:8080/wp-json/wp/v2/plugins?slug=accordion-blocks",
         },
       ],
     },
-    "author": "Takayuki Miyoshi",
-    "icon": "https://ps.w.org/contact-form-7/assets/icon.svg?rev=2339255",
-    "id": "contact-form-7",
-    "name": "contact-form-7/contact-form-selector",
-    "title": "Contact Form 7",
+    "author": "Phil Buchanan",
+    "icon": "https://ps.w.org/accordion-blocks/assets/icon-128x128.png?rev=2198298",
+    "id": "accordion-blocks",
+    "name": "pb/accordion-item",
+    "title": "Accordion Item",
   },
   Object {
     "_links": Object {
@@ -34,15 +34,183 @@ Array [
       ],
       "wp:install-plugin": Array [
         Object {
-          "href": "http://localhost:8080/wp-json/wp/v2/plugins?slug=wpforms-lite",
+          "href": "http://localhost:8080/wp-json/wp/v2/plugins?slug=layout-grid",
         },
       ],
     },
-    "author": "WPForms",
-    "icon": "https://ps.w.org/wpforms-lite/assets/icon.svg?rev=2574198",
-    "id": "wpforms-lite",
-    "name": "wpforms/form-selector",
-    "title": "Contact Form by WPForms - Drag &amp; Drop Form Builder for WordPress",
+    "author": "Automattic",
+    "icon": "https://ps.w.org/layout-grid/assets/icon-128x128.png?rev=2187975",
+    "id": "layout-grid",
+    "name": "jetpack/layout-grid",
+    "title": "Layout Grid",
+  },
+  Object {
+    "_links": Object {
+      "curies": Array [
+        Object {
+          "href": "https://api.w.org/{rel}",
+          "name": "wp",
+          "templated": true,
+        },
+      ],
+      "wp:install-plugin": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/plugins?slug=map-block-gutenberg",
+        },
+      ],
+    },
+    "author": "WebFactory Ltd",
+    "icon": "https://ps.w.org/map-block-gutenberg/assets/icon-128x128.png?rev=1803377",
+    "id": "map-block-gutenberg",
+    "name": "webfactory/map",
+    "title": "Map",
+  },
+  Object {
+    "_links": Object {
+      "curies": Array [
+        Object {
+          "href": "https://api.w.org/{rel}",
+          "name": "wp",
+          "templated": true,
+        },
+      ],
+      "wp:install-plugin": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/plugins?slug=advanced-post-block",
+        },
+      ],
+    },
+    "author": "bPlugins LLC",
+    "icon": "https://ps.w.org/advanced-post-block/assets/icon-128x128.png?rev=2492849",
+    "id": "advanced-post-block",
+    "name": "ap-block/posts",
+    "title": "Advanced Posts",
+  },
+  Object {
+    "_links": Object {
+      "curies": Array [
+        Object {
+          "href": "https://api.w.org/{rel}",
+          "name": "wp",
+          "templated": true,
+        },
+      ],
+      "wp:install-plugin": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/plugins?slug=embed-pdf-viewer",
+        },
+      ],
+    },
+    "author": "Andy Fragen",
+    "icon": "https://ps.w.org/embed-pdf-viewer/assets/icon.svg?rev=2488252",
+    "id": "embed-pdf-viewer",
+    "name": "embed-pdf-viewer/pdf",
+    "title": "Embed PDF Viewer",
+  },
+  Object {
+    "_links": Object {
+      "curies": Array [
+        Object {
+          "href": "https://api.w.org/{rel}",
+          "name": "wp",
+          "templated": true,
+        },
+      ],
+      "wp:install-plugin": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/plugins?slug=image-hover-effects-block",
+        },
+      ],
+    },
+    "author": "Blocksera",
+    "icon": "https://ps.w.org/image-hover-effects-block/assets/icon-128x128.png?rev=2117422",
+    "id": "image-hover-effects-block",
+    "name": "block/image-hover-effects-block",
+    "title": "Image Hover Effects Block",
+  },
+  Object {
+    "_links": Object {
+      "curies": Array [
+        Object {
+          "href": "https://api.w.org/{rel}",
+          "name": "wp",
+          "templated": true,
+        },
+      ],
+      "wp:install-plugin": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/plugins?slug=wp-map-block",
+        },
+      ],
+    },
+    "author": "tusharimran",
+    "icon": "https://ps.w.org/wp-map-block/assets/icon-128x128.gif?rev=2455834",
+    "id": "wp-map-block",
+    "name": "wpmapblock/wp-map-block",
+    "title": "WP Map Block - Gutenberg Map Block for Google Map and OpenStreet Map",
+  },
+  Object {
+    "_links": Object {
+      "curies": Array [
+        Object {
+          "href": "https://api.w.org/{rel}",
+          "name": "wp",
+          "templated": true,
+        },
+      ],
+      "wp:install-plugin": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/plugins?slug=liquid-speech-balloon",
+        },
+      ],
+    },
+    "author": "LIQUID DESIGN Ltd.",
+    "icon": "https://ps.w.org/liquid-speech-balloon/assets/icon-128x128.png?rev=2148212",
+    "id": "liquid-speech-balloon",
+    "name": "liquid/speech-balloon",
+    "title": "Speech Balloon",
+  },
+  Object {
+    "_links": Object {
+      "curies": Array [
+        Object {
+          "href": "https://api.w.org/{rel}",
+          "name": "wp",
+          "templated": true,
+        },
+      ],
+      "wp:install-plugin": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/plugins?slug=highlighting-code-block",
+        },
+      ],
+    },
+    "author": "LOOS, Inc.",
+    "icon": "https://ps.w.org/highlighting-code-block/assets/icon-128x128.png?rev=2432522",
+    "id": "highlighting-code-block",
+    "name": "loos-hcb/code-block",
+    "title": "Highlighing Code Block",
+  },
+  Object {
+    "_links": Object {
+      "curies": Array [
+        Object {
+          "href": "https://api.w.org/{rel}",
+          "name": "wp",
+          "templated": true,
+        },
+      ],
+      "wp:install-plugin": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/plugins?slug=carousel-block",
+        },
+      ],
+    },
+    "author": "virgildia",
+    "icon": "https://ps.w.org/carousel-block/assets/icon.svg?rev=2024115",
+    "id": "carousel-block",
+    "name": "cb/slide",
+    "title": "Slide",
   },
 ]
 `;
