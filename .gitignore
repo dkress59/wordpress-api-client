@@ -1,6 +1,17 @@
+# yarn
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+
+# build
 dist/
 src/**/*.js
 
+# misc
 .DS_Store
 .idea/workspace.xml
 .jest/cache/
