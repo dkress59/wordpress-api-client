@@ -1,6 +1,6 @@
-import { END_POINT, ERROR_MESSAGE } from '../src/constants'
-import { POST_TYPE_MAP, WPPageFactory } from '../src/factories'
+import { END_POINT, ERROR_MESSAGE, POST_TYPE_MAP } from '../src/constants'
 import { URLSearchParams } from 'url'
+import { WPPageFactory } from '../src/factories'
 import { WPPost } from '../src/types'
 import { WP_Post_Type_Name } from 'wp-types'
 import { defaultOptions } from './util'

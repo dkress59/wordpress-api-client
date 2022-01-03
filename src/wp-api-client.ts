@@ -19,9 +19,13 @@ import {
 	WPUser,
 	WpApiOptions,
 } from './types'
-import { END_POINT, END_POINT_PROTECTED, ERROR_MESSAGE } from './constants'
+import {
+	END_POINT,
+	END_POINT_PROTECTED,
+	ERROR_MESSAGE,
+	POST_TYPE_MAP,
+} from './constants'
 import { FetchClient } from './fetch-client'
-import { POST_TYPE_MAP } from './factories'
 import { URLSearchParams } from 'url'
 import {
 	WP_Post_Type_Name,
@@ -50,7 +54,7 @@ export class WpApiClient {
 		| { 'X-WP-Nonce': string }
 	protected readonly headers?: Record<string, string>
 	protected readonly http: FetchClient
-	protected readonly baseUrl?: URL
+	protected readonly baseUrl: URL
 
 	constructor(
 		baseUrl: string,
