@@ -19,12 +19,7 @@ import {
 	WPUser,
 	WpApiOptions,
 } from './types'
-import {
-	END_POINT,
-	END_POINT_PROTECTED,
-	ERROR_MESSAGE,
-	POST_TYPE_MAP,
-} from './constants'
+import { END_POINT, END_POINT_PROTECTED, ERROR_MESSAGE } from './constants'
 import { FetchClient } from './fetch-client'
 import { URLSearchParams } from 'url'
 import {
@@ -42,11 +37,6 @@ import {
 } from 'wp-types'
 import { getDefaultQueryList, getDefaultQuerySingle, postCreate } from './util'
 import { isRecord, isString } from '@tool-belt/type-predicates'
-
-interface PostCollection<P = any> {
-	postType: WP_Post_Type_Name | string
-	posts: P[]
-}
 
 export class WpApiClient {
 	protected readonly authHeader?:
@@ -88,42 +78,6 @@ export class WpApiClient {
 		)
 	}
 
-	// STATIC
-
-	protected static collection: PostCollection[] = POST_TYPE_MAP.map(
-		postType => ({
-			postType,
-			posts: [],
-		}),
-	)
-
-	public static addCollection(...postTypes: string[]): void {
-		postTypes.forEach(postType =>
-			WpApiClient.collection.push({
-				postType,
-				posts: [],
-			}),
-		)
-	}
-
-	public static clearCollection(...postTypes: string[]): void {
-		WpApiClient.collection = WpApiClient.collection.map(collection => ({
-			...collection,
-			posts:
-				!postTypes.length || postTypes.includes(collection.postType)
-					? []
-					: collection.posts,
-		}))
-	}
-
-	public static collect<P = WPPost>(
-		postType: WP_Post_Type_Name | string,
-	): P[] | undefined {
-		return WpApiClient.collection.find(
-			collection => collection.postType === postType,
-		)?.posts as undefined | P[]
-	}
-
 	// PROTECTED
 
 	protected createEndpointGet<P>(
@@ -155,17 +109,7 @@ export class WpApiClient {
 					),
 				)
 			}
-			const postType =
-				result.length && !!result[0]
-					? (Reflect.get(
-							result[0] as Record<string, unknown>,
-							'type',
-					  ) as string)
-					: null
-			if (postType)
-				WpApiClient.collection
-					.find(collection => collection.postType === postType)
-					?.posts.push(...result)
+
 			return result
 		}
 	}

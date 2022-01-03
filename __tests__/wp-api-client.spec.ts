@@ -1,4 +1,4 @@
-import { END_POINT, ERROR_MESSAGE, POST_TYPE_MAP } from '../src/constants'
+import { END_POINT, ERROR_MESSAGE } from '../src/constants'
 import { URLSearchParams } from 'url'
 import { WPPageFactory } from '../src/factories'
 import { WPPost } from '../src/types'
@@ -169,54 +169,6 @@ describe('WpApiClient', () => {
 					method: 'delete',
 				},
 			)
-		})
-	})
-
-	describe('collection', () => {
-		beforeEach(() => {
-			MockClient.clearCollection()
-		})
-		it('sets up correctly', () => {
-			POST_TYPE_MAP.forEach(postType =>
-				expect(MockClient.collect(postType)).toEqual([]),
-			)
-		})
-		it('is extendable', () => {
-			MockClient.addCollection('order', 'product')
-			expect(MockClient.collect('order')).toEqual([])
-			expect(MockClient.collect('product')).toEqual([])
-			expect(MockClient.collect('undefined')).toBeUndefined()
-		})
-		it('is stored correctly', async () => {
-			mockJson.mockResolvedValueOnce([mockData])
-			await new MockClient().post().find()
-			await new MockClient().post().find(1)
-			await new MockClient().post().find(2, 3)
-			expect(MockClient.collect(WP_Post_Type_Name.post)).toEqual([
-				mockData,
-				mockData,
-				mockData,
-				mockData,
-			])
-			expect(MockClient.collect(WP_Post_Type_Name.attachment)).toEqual([])
-		})
-		it('can be cleared', async () => {
-			await new MockClient().post().find(2, 3)
-			MockClient.clearCollection()
-			expect(MockClient.collect(WP_Post_Type_Name.post)).toEqual([])
-		})
-		it('can be cleared partially', async () => {
-			mockJson.mockResolvedValueOnce({
-				...mockData,
-				type: WP_Post_Type_Name.page,
-			})
-			await new MockClient().post().find(1)
-			await new MockClient().page().find(2)
-			MockClient.clearCollection(WP_Post_Type_Name.page)
-			expect(MockClient.collect(WP_Post_Type_Name.post)).toEqual([
-				mockData,
-			])
-			expect(MockClient.collect(WP_Post_Type_Name.page)).toEqual([])
 		})
 	})
 
