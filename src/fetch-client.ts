@@ -17,7 +17,7 @@ export class FetchClient {
 		public authHeader: Record<string, string> = {},
 		public protectedRoutes = END_POINT_PROTECTED,
 		public publicRoutes = END_POINT_PUBLIC,
-		public authType: AUTH_TYPE | undefined,
+		public authType: AUTH_TYPE | undefined = undefined,
 	) {
 		this.baseUrl = validateBaseUrl(baseUrl.toString()) + '/'
 		this.headers = {

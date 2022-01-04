@@ -1,11 +1,12 @@
+import { AUTH_TYPE } from '../src'
 import { ERROR_MESSAGE } from '../src/constants'
 import { URLSearchParams } from 'url'
 import {
 	getDefaultQueryList,
 	getDefaultQuerySingle,
 	getErrorMessage,
-	isProtected,
 	postCreate,
+	useAuth,
 	validateBaseUrl,
 } from '../src/util'
 import { mockResponse, mockStatusText } from './util'
@@ -230,71 +231,454 @@ describe('util', () => {
 		})
 	})
 
-	describe('isProtected', () => {
-		const mockEndPoint = 'some/protected/route'
+	describe('useAuth', () => {
+		const mockEndPoint = 'mock/v0/protected'
+		const mockPublicEndPoint = 'mock/v0/public'
+		const mockMixedEndPoint = 'mock/v0/mixed'
 		const protectedList = {
-			GET: [mockEndPoint],
-			POST: [mockEndPoint],
-			DELETE: [mockEndPoint],
+			GET: [mockEndPoint, mockMixedEndPoint],
+			POST: [mockEndPoint, mockMixedEndPoint],
+			DELETE: [mockEndPoint, mockMixedEndPoint],
 		}
-		describe('GET', () => {
-			it('false for public routes', () => {
-				expect(
-					isProtected(
-						'http://mock.url/some/public/route',
-						'get',
-						protectedList,
-					),
-				).toBe(false)
+		const publicList = {
+			GET: [mockPublicEndPoint, mockMixedEndPoint],
+			POST: [mockPublicEndPoint, mockMixedEndPoint],
+			DELETE: [mockPublicEndPoint, mockMixedEndPoint],
+		}
+		const mockBaseUrl = 'http://mock.url/'
+		const protectedUrl = mockBaseUrl + mockEndPoint
+		const publicUrl = mockBaseUrl + mockPublicEndPoint
+		const mixedUrl = mockBaseUrl + mockMixedEndPoint
+		describe('basic', () => {
+			const mockAuthType = AUTH_TYPE.BASIC
+			describe('GET', () => {
+				it('true for public routes', () => {
+					expect(
+						useAuth(
+							publicUrl,
+							'get',
+							mockAuthType,
+							protectedList,
+							publicList,
+						),
+					).toBe(true)
+				})
+				it('true for protected routes', () => {
+					expect(
+						useAuth(
+							protectedUrl,
+							'get',
+							mockAuthType,
+							protectedList,
+							publicList,
+						),
+					).toBe(true)
+				})
+				it('true for mixed routes', () => {
+					expect(
+						useAuth(
+							mixedUrl,
+							'get',
+							mockAuthType,
+							protectedList,
+							publicList,
+						),
+					).toBe(true)
+				})
 			})
-			it('true for protected routes', () => {
-				expect(
-					isProtected(
-						'http://mock.url/' + mockEndPoint,
-						'get',
-						protectedList,
-					),
-				).toBe(true)
+			describe('POST', () => {
+				it('true for public routes', () => {
+					expect(
+						useAuth(
+							publicUrl,
+							'post',
+							mockAuthType,
+							protectedList,
+							publicList,
+						),
+					).toBe(true)
+				})
+				it('true for protected routes', () => {
+					expect(
+						useAuth(
+							protectedUrl,
+							'get',
+							mockAuthType,
+							protectedList,
+							publicList,
+						),
+					).toBe(true)
+				})
+				it('true for mixed routes', () => {
+					expect(
+						useAuth(
+							mixedUrl,
+							'get',
+							mockAuthType,
+							protectedList,
+							publicList,
+						),
+					).toBe(true)
+				})
+			})
+			describe('DELETE', () => {
+				it('true for public routes', () => {
+					expect(
+						useAuth(
+							publicUrl,
+							'delete',
+							mockAuthType,
+							protectedList,
+							publicList,
+						),
+					).toBe(true)
+				})
+				it('true for protected routes', () => {
+					expect(
+						useAuth(
+							protectedUrl,
+							'get',
+							mockAuthType,
+							protectedList,
+							publicList,
+						),
+					).toBe(true)
+				})
+				it('true for mixed routes', () => {
+					expect(
+						useAuth(
+							mixedUrl,
+							'get',
+							mockAuthType,
+							protectedList,
+							publicList,
+						),
+					).toBe(true)
+				})
 			})
 		})
-		describe('POST', () => {
-			it('false for public routes', () => {
-				expect(
-					isProtected(
-						'http://mock.url/some/public/route',
-						'post',
-						protectedList,
-					),
-				).toBe(false)
+		describe('jwt', () => {
+			const mockAuthType = AUTH_TYPE.JWT
+			describe('GET', () => {
+				it('false for public routes', () => {
+					expect(
+						useAuth(
+							publicUrl,
+							'get',
+							mockAuthType,
+							protectedList,
+							publicList,
+						),
+					).toBe(false)
+				})
+				it('true for protected routes', () => {
+					expect(
+						useAuth(
+							protectedUrl,
+							'get',
+							mockAuthType,
+							protectedList,
+							publicList,
+						),
+					).toBe(true)
+				})
+				it('true for mixed routes', () => {
+					expect(
+						useAuth(
+							mixedUrl,
+							'get',
+							mockAuthType,
+							protectedList,
+							publicList,
+						),
+					).toBe(true)
+				})
 			})
-			it('true for protected routes', () => {
-				expect(
-					isProtected(
-						'http://mock.url/' + mockEndPoint,
-						'get',
-						protectedList,
-					),
-				).toBe(true)
+			describe('POST', () => {
+				it('false for public routes', () => {
+					expect(
+						useAuth(
+							publicUrl,
+							'post',
+							mockAuthType,
+							protectedList,
+							publicList,
+						),
+					).toBe(false)
+				})
+				it('true for protected routes', () => {
+					expect(
+						useAuth(
+							protectedUrl,
+							'get',
+							mockAuthType,
+							protectedList,
+							publicList,
+						),
+					).toBe(true)
+				})
+				it('true for mixed routes', () => {
+					expect(
+						useAuth(
+							mixedUrl,
+							'get',
+							mockAuthType,
+							protectedList,
+							publicList,
+						),
+					).toBe(true)
+				})
+			})
+			describe('DELETE', () => {
+				it('false for public routes', () => {
+					expect(
+						useAuth(
+							publicUrl,
+							'delete',
+							mockAuthType,
+							protectedList,
+							publicList,
+						),
+					).toBe(false)
+				})
+				it('true for protected routes', () => {
+					expect(
+						useAuth(
+							protectedUrl,
+							'get',
+							mockAuthType,
+							protectedList,
+							publicList,
+						),
+					).toBe(true)
+				})
+				it('true for mixed routes', () => {
+					expect(
+						useAuth(
+							mixedUrl,
+							'get',
+							mockAuthType,
+							protectedList,
+							publicList,
+						),
+					).toBe(true)
+				})
 			})
 		})
-		describe('DELETE', () => {
-			it('false for public routes', () => {
-				expect(
-					isProtected(
-						'http://mock.url/some/public/route',
-						'delete',
-						protectedList,
-					),
-				).toBe(false)
+		describe('nonce', () => {
+			const mockAuthType = AUTH_TYPE.NONCE
+			describe('GET', () => {
+				it('true for public routes', () => {
+					expect(
+						useAuth(
+							publicUrl,
+							'get',
+							mockAuthType,
+							protectedList,
+							publicList,
+						),
+					).toBe(true)
+				})
+				it('true for protected routes', () => {
+					expect(
+						useAuth(
+							protectedUrl,
+							'get',
+							mockAuthType,
+							protectedList,
+							publicList,
+						),
+					).toBe(true)
+				})
+				it('true for mixed routes', () => {
+					expect(
+						useAuth(
+							mixedUrl,
+							'get',
+							mockAuthType,
+							protectedList,
+							publicList,
+						),
+					).toBe(true)
+				})
 			})
-			it('true for protected routes', () => {
-				expect(
-					isProtected(
-						'http://mock.url/' + mockEndPoint,
-						'get',
-						protectedList,
-					),
-				).toBe(true)
+			describe('POST', () => {
+				it('true for public routes', () => {
+					expect(
+						useAuth(
+							publicUrl,
+							'post',
+							mockAuthType,
+							protectedList,
+							publicList,
+						),
+					).toBe(true)
+				})
+				it('true for protected routes', () => {
+					expect(
+						useAuth(
+							protectedUrl,
+							'get',
+							mockAuthType,
+							protectedList,
+							publicList,
+						),
+					).toBe(true)
+				})
+				it('true for mixed routes', () => {
+					expect(
+						useAuth(
+							mixedUrl,
+							'get',
+							mockAuthType,
+							protectedList,
+							publicList,
+						),
+					).toBe(true)
+				})
+			})
+			describe('DELETE', () => {
+				it('true for public routes', () => {
+					expect(
+						useAuth(
+							publicUrl,
+							'delete',
+							mockAuthType,
+							protectedList,
+							publicList,
+						),
+					).toBe(true)
+				})
+				it('true for protected routes', () => {
+					expect(
+						useAuth(
+							protectedUrl,
+							'get',
+							mockAuthType,
+							protectedList,
+							publicList,
+						),
+					).toBe(true)
+				})
+				it('true for mixed routes', () => {
+					expect(
+						useAuth(
+							mixedUrl,
+							'get',
+							mockAuthType,
+							protectedList,
+							publicList,
+						),
+					).toBe(true)
+				})
+			})
+		})
+		describe('none', () => {
+			const mockAuthType = AUTH_TYPE.NONE
+			describe('GET', () => {
+				it('false for public routes', () => {
+					expect(
+						useAuth(
+							publicUrl,
+							'get',
+							mockAuthType,
+							protectedList,
+							publicList,
+						),
+					).toBe(false)
+				})
+				it('true for protected routes', () => {
+					expect(
+						useAuth(
+							protectedUrl,
+							'get',
+							mockAuthType,
+							protectedList,
+							publicList,
+						),
+					).toBe(true)
+				})
+				it('false for mixed routes', () => {
+					expect(
+						useAuth(
+							mixedUrl,
+							'get',
+							mockAuthType,
+							protectedList,
+							publicList,
+						),
+					).toBe(false)
+				})
+			})
+			describe('POST', () => {
+				it('false for public routes', () => {
+					expect(
+						useAuth(
+							publicUrl,
+							'post',
+							mockAuthType,
+							protectedList,
+							publicList,
+						),
+					).toBe(false)
+				})
+				it('true for protected routes', () => {
+					expect(
+						useAuth(
+							protectedUrl,
+							'get',
+							mockAuthType,
+							protectedList,
+							publicList,
+						),
+					).toBe(true)
+				})
+				it('false for mixed routes', () => {
+					expect(
+						useAuth(
+							mixedUrl,
+							'get',
+							mockAuthType,
+							protectedList,
+							publicList,
+						),
+					).toBe(false)
+				})
+			})
+			describe('DELETE', () => {
+				it('false for public routes', () => {
+					expect(
+						useAuth(
+							publicUrl,
+							'delete',
+							mockAuthType,
+							protectedList,
+							publicList,
+						),
+					).toBe(false)
+				})
+				it('true for protected routes', () => {
+					expect(
+						useAuth(
+							protectedUrl,
+							'get',
+							mockAuthType,
+							protectedList,
+							publicList,
+						),
+					).toBe(true)
+				})
+				it('false for mixed routes', () => {
+					expect(
+						useAuth(
+							mixedUrl,
+							'get',
+							mockAuthType,
+							protectedList,
+							publicList,
+						),
+					).toBe(false)
+				})
 			})
 		})
 	})

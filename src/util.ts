@@ -118,5 +118,5 @@ export function useAuth(
 	const isPublic = !!publicEndPoints.some(uri => url.includes(uri))
 
 	if (authType === AUTH_TYPE.JWT) return isProtected
-	return isProtected && !isPublic
+	return (isProtected && !isPublic) || false
 }
