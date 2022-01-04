@@ -1,8 +1,8 @@
 import { FixtureFactory } from 'interface-forge'
-import { POST_STATUS_MAP } from './constants'
 import { WPCategory, WPPage, WPPost, WPTag } from './types'
 import {
 	WP_Post_Comment_Status_Name,
+	WP_Post_Status_Name,
 	WP_Post_Type_Name,
 	WP_REST_API_Object_Links,
 	WP_Taxonomy_Name,
@@ -11,6 +11,30 @@ import faker from 'faker'
 import path from 'path'
 
 const fixtureDir = path.resolve(__dirname, '../../test')
+
+export const POST_STATUS_MAP = [
+	WP_Post_Status_Name.auto_draft,
+	WP_Post_Status_Name.draft,
+	WP_Post_Status_Name.future,
+	WP_Post_Status_Name.inherit,
+	WP_Post_Status_Name.pending,
+	WP_Post_Status_Name.private,
+	WP_Post_Status_Name.publish,
+	WP_Post_Status_Name.trash,
+]
+
+export const POST_TYPE_MAP = [
+	WP_Post_Type_Name.attachment,
+	WP_Post_Type_Name.custom_css,
+	WP_Post_Type_Name.customize_changeset,
+	WP_Post_Type_Name.nav_menu_item,
+	WP_Post_Type_Name.oembed_cache,
+	WP_Post_Type_Name.page,
+	WP_Post_Type_Name.post,
+	WP_Post_Type_Name.revision,
+	WP_Post_Type_Name.user_request,
+	WP_Post_Type_Name.wp_block,
+]
 
 export const WPObjectLinksFactory =
 	new FixtureFactory<WP_REST_API_Object_Links>(

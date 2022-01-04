@@ -17,4 +17,3 @@ src/**/*.js
 .jest/cache/
 coverage/
 node_modules/
-.yarn/
