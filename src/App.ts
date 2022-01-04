@@ -41,7 +41,16 @@ export async function App(req: http.IncomingMessage, res: http.ServerResponse) {
 			break
 
 		case '/get-posts':
-			res.write(JSON.stringify(await client.post().find()))
+			res.write(
+				JSON.stringify(
+					await client.post().find(
+						new URLSearchParams({
+							//password: 'password',
+							status: 'trash',
+						}),
+					),
+				),
+			)
 			break
 
 		case '/get-post':

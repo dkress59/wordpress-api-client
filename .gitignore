@@ -4,6 +4,15 @@ build/
 dist/
 node_modules/
 
+# Yarn3
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+
 # Logs
 logs
 *.log
@@ -29,8 +38,7 @@ coverage
 *.lcov
 
 
-# Other
+# Misc
 .DS_Store
 .idea/workspace.xml
 wp-content/
-.yarn/
