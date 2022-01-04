@@ -58,9 +58,9 @@ services:
     #command: 'sh -c "/var/www/script/post-deploy.sh && php-fpm"'
     volumes:
       - wordpress:/var/www/html
-      #- ./wp-content/uploads:/var/www/html/wp-content/uploads
-      - ./wp-plugin:/var/www/html/wp-content/plugins/demo-plugin
-      - ./wp-theme:/var/www/html/wp-content/themes/demo-theme
+      #- ./wp-content/uploads:/var/www/html/wp-content/uploads:Z
+      - ./wp-plugin:/var/www/html/wp-content/plugins/demo-plugin:Z
+      - ./wp-theme:/var/www/html/wp-content/themes/demo-theme:Z
     environment:
       DISALLOW_FILE_MODS: 0
       JWT_AUTH_CORS_ENABLE: 1

@@ -115,9 +115,9 @@ export async function App(req: http.IncomingMessage, res: http.ServerResponse) {
 			res.write(JSON.stringify(await client.user().findMe()))
 			break
 
-		case '/block-directory':
+		/* case '/block-directory':
 			res.write(JSON.stringify(await client.blockDirectory()))
-			break
+			break */
 
 		case '/block-type':
 			res.write(JSON.stringify(await client.blockType()))

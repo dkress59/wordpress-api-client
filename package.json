@@ -8,8 +8,7 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
-    "axios": "0.24.0",
-    "wordpress-api-client": "0.2.0"
+    "wordpress-api-client": "0.4.0"
   },
   "devDependencies": {
     "@sprylab/eslint-config": "1.6.0",
@@ -26,8 +25,7 @@
     "prettier": "2.4.1",
     "ts-node": "10.4.0",
     "typescript": "4.4.4",
-    "wp-types": "2.12.0",
-    "yarn-run-all": "3.1.1"
+    "wp-types": "2.12.0"
   },
   "scripts": {
     "build": "tsc",

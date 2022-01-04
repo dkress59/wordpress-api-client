@@ -1,4 +1,4 @@
-FROM php:8-fpm-alpine as composer
+FROM php:8.0-fpm-alpine as composer
 
 RUN apk upgrade && apk add --update --no-cache \
     curl-dev imagemagick imagemagick-dev libcap libmemcached-dev libpng-dev libzip-dev \
@@ -35,7 +35,7 @@ WORKDIR /var/www/html
 FROM composer as wordpress
 
 ARG WORDPRESS_LOCALE="en_US"
-ARG WORDPRESS_VERSION="5.8.1"
+ARG WORDPRESS_VERSION="5.8.2"
 RUN set -ex; \
         wp core download --version=$WORDPRESS_VERSION --locale=$WORDPRESS_LOCALE --skip-content --allow-root; \
         wp core verify-checksums --allow-root
@@ -45,23 +45,26 @@ RUN chmod -R 0777 wp-content/uploads
 RUN chown www-data:www-data /var/www/html/wp-content
 RUN chown -R www-data:www-data /var/www/html/wp-content/uploads
 
+COPY script /var/www/script
+RUN chmod +x ../script/post-deploy.sh
+
+COPY ./conf/opcache.php ../
+COPY ./conf/wp-config.php ./
+COPY ./conf/php.ini /usr/local/etc/php/php.ini
+
 COPY ./conf/composer.json ./
 RUN composer update --no-interaction
 RUN rm composer.json composer.lock
 
-COPY script /var/www/script
-RUN chmod +x ../script/post-deploy.sh
-
 COPY ./wp-theme/ ./wp-content/themes/demo-theme/
 COPY ./wp-plugin/ ./wp-content/plugins/demo-plugin/
 
-COPY ./conf/php.ini /usr/local/etc/php/php.ini
-
-COPY ./conf/wp-config.php ./
-COPY ./conf/opcache.php ../
-
 
 FROM wordpress AS docker-compose
+
+# Linux fix
+RUN apk add shadow
+RUN usermod -u 1000 www-data && groupmod -g 1000 www-data
 
 # Disable Opcache Preload
 RUN echo '<?php' > /var/www/opcache.php
