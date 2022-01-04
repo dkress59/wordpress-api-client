@@ -8,5 +8,5 @@ indent_style = tab
 [*.{json,md,yaml}]
 indent_style = space
 
-[*.json]
+[*.json,md]
 indent_size = 2

@@ -2,9 +2,13 @@
 
 The current progress can be tracked [here](https://github.com/dkress59/wordpress-api-client/projects/1)
 
+- v0.4.1
+  - basic auth improvements
+  - jwt auth improvements
+
 - v0.4.0
   - conversion to Yarn3 (zero-install)
-  - removal of static collectors
+  - **breaking** removal of static collectors
     - possible re-introduction in the future
   - dependency update
   - `POST_STATUS_MAP` moved back to `src/factories.ts`
