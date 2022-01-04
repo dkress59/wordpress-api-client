@@ -6,5 +6,5 @@ __tests__/
 .jest/
 .vscode/
 .yarn/
-codecov.yaml
+.codecov.yaml
 jest.config.ts
