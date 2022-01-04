@@ -345,20 +345,18 @@ describe('WpApiClient', () => {
 		})
 		describe('.media', () => {
 			it('.create', async () => {
-				const mockFileName = 'mock.file'
+				const mockFileName = 'mock_file.jpg'
 				const data = 'mock_data'
 				await client.media().create(mockFileName, Buffer.from(data))
 				expect(mockFetch).toHaveBeenCalledWith(
 					mockRestBase + END_POINT.MEDIA,
 					{
-						body: data,
+						body: Buffer.from(data),
 						headers: {
 							...defaultOptions.headers,
 							'Content-Type': 'image/jpeg',
 							'Content-Disposition':
-								'application/x-www-form-urlencoded; filename="' +
-								mockFileName +
-								'"',
+								'attachment; filename="' + mockFileName + '"',
 						},
 						method: 'post',
 					},

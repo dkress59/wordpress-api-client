@@ -267,7 +267,7 @@ export class WpApiClient {
 		return this.addPostType<P>(END_POINT.COMMENTS, false)
 	}
 
-	public media<P = WPMedia>(): {
+	public media<P extends WPMedia>(): {
 		find: EndpointFind<P>
 		create: (
 			fileName: string,
@@ -278,15 +278,18 @@ export class WpApiClient {
 		update: EndpointUpdate<P>
 	} {
 		const find = this.createEndpointGet<P>(END_POINT.MEDIA)
+		const update = this.createEndpointPost<P>(END_POINT.MEDIA)
 		/**
 		 * @param {string} fileName Must include the file extension
-		 * @param {Buffer} data Takes a `Buffer` as input
+		 * @param {Buffer} file Takes a `Buffer` as input
 		 * @param {string} mimeType E.g.: `image/jpeg`
+		 * @param {WPMedia} data Optional, populates media library item with a second request
 		 * */
 		const create = async (
 			fileName: string,
-			data: Buffer,
+			file: Buffer,
 			mimeType = 'image/jpeg',
+			data?: Partial<P>,
 		): Promise<P> => {
 			if (!fileName.includes('.'))
 				throw new Error(
@@ -295,23 +298,23 @@ export class WpApiClient {
 						fileName,
 					),
 				)
-			return await this.http.post<P>(
+			const headers = {
+				'Content-Disposition':
+					'attachment; filename="' + fileName + '"',
+				'Content-Type': mimeType,
+			}
+			const result = await this.http.post<P>(
 				`${END_POINT.MEDIA}`,
-				{
-					'Content-Type': mimeType,
-					'Content-Disposition':
-						'application/x-www-form-urlencoded; filename="' +
-						fileName +
-						'"',
-				},
-				data,
+				headers,
+				file,
 			)
+			if (data) await update(data, result.id)
+			return result
 		}
 		const deleteOne = this.createEndpointDelete<P>(
 			END_POINT.MEDIA,
 			new URLSearchParams({ force: 'true' }),
 		)
-		const update = this.createEndpointPost<P>(END_POINT.MEDIA)
 		return {
 			find,
 			create,

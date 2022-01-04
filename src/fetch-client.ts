@@ -31,10 +31,9 @@ export class FetchClient {
 	private async fetch<T>(
 		url: string,
 		method: 'get' | 'post' | 'delete',
-		headers?: Record<string, string>,
+		headers?: HeadersInit,
 		body?: BodyInit,
 	): Promise<{ data: T; headers: Headers }> {
-		body = body?.toString()
 		try {
 			headers = { ...this.headers, ...headers }
 			if (
