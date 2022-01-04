@@ -215,23 +215,30 @@ export interface RenderedBlockDto {
 	attributes?: string[]
 }
 
+export enum AUTH_TYPE {
+	BASIC = 'basic',
+	JWT = 'jwt',
+	NONCE = 'nonce',
+	NONE = 'none',
+}
+
 export interface WpApiOptions {
 	auth?:
 		| {
-				type: 'basic'
+				type: AUTH_TYPE.BASIC | 'basic'
 				username: string
 				password: string
 		  }
 		| {
-				type: 'jwt'
+				type: AUTH_TYPE.JWT | 'jwt'
 				token: string
 		  }
 		| {
-				type: 'nonce'
+				type: AUTH_TYPE.NONCE | 'nonce'
 				nonce: string
 		  }
 		| {
-				type: 'none'
+				type: AUTH_TYPE.NONE | 'none'
 		  }
 	headers?: Record<string, string>
 	onError?: (message: string) => void

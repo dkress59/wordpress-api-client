@@ -1,3 +1,4 @@
+import { AUTH_TYPE } from '.'
 import {
 	DefaultEndpoint,
 	DefaultEndpointWithRevision,
@@ -49,21 +50,21 @@ export class WpApiClient {
 	constructor(
 		baseUrl: string,
 		options: WpApiOptions = {
-			auth: { type: 'none' },
+			auth: { type: AUTH_TYPE.NONE },
 			protected: END_POINT_PROTECTED,
 		},
 	) {
-		if (options.auth?.type === 'basic')
+		if (options.auth?.type === AUTH_TYPE.BASIC)
 			this.authHeader = {
 				Authorization: `Basic ${Buffer.from(
 					options.auth.username + ':' + options.auth.password,
 				).toString('base64')}`,
 			}
-		if (options.auth?.type === 'jwt')
+		if (options.auth?.type === AUTH_TYPE.JWT)
 			this.authHeader = {
 				Authorization: `Bearer ${options.auth.token}`,
 			}
-		if (options.auth?.type === 'nonce')
+		if (options.auth?.type === AUTH_TYPE.NONCE)
 			this.authHeader = {
 				'X-WP-Nonce': options.auth.nonce,
 			}
@@ -75,6 +76,8 @@ export class WpApiClient {
 			this.headers,
 			this.authHeader,
 			options.protected,
+			options.public,
+			options.auth?.type as AUTH_TYPE | undefined,
 		)
 	}
 

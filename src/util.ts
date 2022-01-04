@@ -1,3 +1,4 @@
+import { AUTH_TYPE } from '.'
 import { BlackWhiteList } from './types'
 import { ERROR_MESSAGE } from './constants'
 import { URLSearchParams } from 'url'
@@ -91,16 +92,31 @@ export function postCreate<
 	return { ...body, content, excerpt, title }
 }
 
-export function isProtected(
+export function useAuth(
 	url: string,
 	method: 'get' | 'post' | 'delete',
+	authType: AUTH_TYPE = AUTH_TYPE.NONE,
 	protectedRoutes: BlackWhiteList,
+	publicRoutes: BlackWhiteList,
 ): boolean {
+	if (authType === AUTH_TYPE.BASIC || authType === AUTH_TYPE.NONCE)
+		return true
+
 	const protectedEndPoints =
 		method === 'get'
 			? protectedRoutes.GET
 			: method === 'delete'
 			? protectedRoutes.DELETE
 			: protectedRoutes.POST
-	return !!protectedEndPoints.filter(uri => url.includes(uri)).length
+	const publicEndPoints =
+		method === 'get'
+			? publicRoutes.GET
+			: method === 'delete'
+			? publicRoutes.DELETE
+			: publicRoutes.POST
+	const isProtected = !!protectedEndPoints.some(uri => url.includes(uri))
+	const isPublic = !!publicEndPoints.some(uri => url.includes(uri))
+
+	if (authType === AUTH_TYPE.JWT) return isProtected
+	return isProtected && !isPublic
 }

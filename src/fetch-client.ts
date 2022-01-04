@@ -1,5 +1,6 @@
-import { END_POINT_PROTECTED } from './constants'
-import { getErrorMessage, isProtected, validateBaseUrl } from './util'
+import { AUTH_TYPE } from './types'
+import { END_POINT_PROTECTED, END_POINT_PUBLIC } from './constants'
+import { getErrorMessage, useAuth, validateBaseUrl } from './util'
 import fetch from 'cross-fetch'
 
 export class FetchClient {
@@ -15,6 +16,8 @@ export class FetchClient {
 		headers: Record<string, string> = {},
 		public authHeader: Record<string, string> = {},
 		public protectedRoutes = END_POINT_PROTECTED,
+		public publicRoutes = END_POINT_PUBLIC,
+		public authType: AUTH_TYPE | undefined,
 	) {
 		this.baseUrl = validateBaseUrl(baseUrl.toString()) + '/'
 		this.headers = {
@@ -34,7 +37,15 @@ export class FetchClient {
 		body = body?.toString()
 		try {
 			headers = { ...this.headers, ...headers }
-			if (isProtected(url, method, this.protectedRoutes))
+			if (
+				useAuth(
+					url,
+					method,
+					this.authType,
+					this.protectedRoutes,
+					this.publicRoutes,
+				)
+			)
 				headers = { ...this.authHeader, ...headers }
 			const response = await fetch(this.baseUrl + url, {
 				body,

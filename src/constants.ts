@@ -47,6 +47,18 @@ export const END_POINT_PROTECTED = {
 		END_POINT.USERS,
 		END_POINT.USERS_ME,
 	],
-	POST: [...Object.values(END_POINT)],
-	DELETE: [...Object.values(END_POINT)],
+	POST: Object.values(END_POINT),
+	DELETE: Object.values(END_POINT),
+}
+
+export const END_POINT_PUBLIC = {
+	GET: Object.values(END_POINT).filter(
+		endPoint => !END_POINT_PROTECTED.GET.includes(endPoint),
+	),
+	POST: Object.values(END_POINT).filter(
+		endPoint => !END_POINT_PROTECTED.POST.includes(endPoint),
+	),
+	DELETE: Object.values(END_POINT).filter(
+		endPoint => !END_POINT_PROTECTED.DELETE.includes(endPoint),
+	),
 }
