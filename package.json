@@ -78,6 +78,5 @@
     "docker": "docker-compose -f __tests__/e2e/docker-compose.yml up --build -d",
     "docker:down": "docker-compose -f __tests__/e2e/docker-compose.yml down",
     "prepare": "husky install"
-  },
-  "packageManager": "yarn@3.1.1"
+  }
 }
