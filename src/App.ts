@@ -45,8 +45,8 @@ export async function App(req: http.IncomingMessage, res: http.ServerResponse) {
 				JSON.stringify(
 					await client.post().find(
 						new URLSearchParams({
-							//password: 'password',
-							status: 'trash',
+							password: 'postpassword',
+							status: 'publish,private,draft,trash',
 						}),
 					),
 				),

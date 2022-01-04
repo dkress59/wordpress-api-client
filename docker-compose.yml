@@ -10,6 +10,7 @@ services:
     # Apple M1 fix
     platform: linux/amd64
     volumes:
+      - db:/var/lib/mysql
       - ./conf/db.sql:/docker-entrypoint-initdb.d/db.sql
     environment:
       MYSQL_DATABASE: wordpress
