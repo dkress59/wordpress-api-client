@@ -36,6 +36,7 @@ describe('End-to-end test', () => {
 			username: 'admin',
 		},
 	})
+	const noAuthClient = new WpApiClient('http://localhost:8080')
 
 	beforeAll(() => () => {
 		if (!fs.existsSync(snapshotPath)) fs.mkdirSync(snapshotPath)
@@ -555,10 +556,17 @@ describe('End-to-end test', () => {
 			).toMatchSpecificSnapshot(fileName('siteSettings-update'))
 		})
 	})
-	it('.status', async () => {
-		expect(await client.status()).toMatchSpecificSnapshot(
-			fileName('status'),
-		)
+	describe('.status', () => {
+		it('unauthenticated', async () => {
+			expect(await noAuthClient.status()).toMatchSpecificSnapshot(
+				fileName('status'),
+			)
+		})
+		it('authenticated', async () => {
+			expect(await client.status()).toMatchSpecificSnapshot(
+				fileName('status-authenticated'),
+			)
+		})
 	})
 	describe('.taxonomy', () => {
 		it('.find (all)', async () => {

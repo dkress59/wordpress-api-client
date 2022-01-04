@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`End-to-end test .status 1`] = `
+exports[`End-to-end test .status unauthenticated 1`] = `
 Object {
   "acf-disabled": Object {
     "_links": Object {

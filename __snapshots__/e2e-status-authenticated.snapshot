@@ -1,0 +1,104 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`End-to-end test .status authenticated 1`] = `
+Object {
+  "acf-disabled": Object {
+    "_links": Object {
+      "archives": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/posts?status=acf-disabled",
+        },
+      ],
+    },
+    "date_floating": false,
+    "name": "Disabled",
+    "public": true,
+    "queryable": true,
+    "slug": "acf-disabled",
+  },
+  "draft": Object {
+    "_links": Object {
+      "archives": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/posts?status=draft",
+        },
+      ],
+    },
+    "date_floating": true,
+    "name": "Draft",
+    "public": false,
+    "queryable": false,
+    "slug": "draft",
+  },
+  "future": Object {
+    "_links": Object {
+      "archives": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/posts?status=future",
+        },
+      ],
+    },
+    "date_floating": false,
+    "name": "Scheduled",
+    "public": false,
+    "queryable": false,
+    "slug": "future",
+  },
+  "pending": Object {
+    "_links": Object {
+      "archives": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/posts?status=pending",
+        },
+      ],
+    },
+    "date_floating": true,
+    "name": "Pending",
+    "public": false,
+    "queryable": false,
+    "slug": "pending",
+  },
+  "private": Object {
+    "_links": Object {
+      "archives": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/posts?status=private",
+        },
+      ],
+    },
+    "date_floating": false,
+    "name": "Private",
+    "public": false,
+    "queryable": false,
+    "slug": "private",
+  },
+  "publish": Object {
+    "_links": Object {
+      "archives": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/posts",
+        },
+      ],
+    },
+    "date_floating": false,
+    "name": "Published",
+    "public": true,
+    "queryable": true,
+    "slug": "publish",
+  },
+  "trash": Object {
+    "_links": Object {
+      "archives": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/posts?status=trash",
+        },
+      ],
+    },
+    "date_floating": false,
+    "name": "Trash",
+    "public": false,
+    "queryable": false,
+    "slug": "trash",
+  },
+}
+`;
