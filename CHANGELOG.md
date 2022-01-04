@@ -2,6 +2,18 @@
 
 The current progress can be tracked [here](https://github.com/dkress59/wordpress-api-client/projects/1)
 
+- v0.4.0
+  - conversion to Yarn3 (zero-install)
+  - removal of static collectors
+    - possible re-introduction in the future
+  - dependency update
+  - `POST_STATUS_MAP` moved back to `src/factories.ts`
+  - `POST_TYPE_MAP` moved back to `src/factories.ts`
+
+- v0.3.5
+  - dependency update
+  - minor fixes
+
 - v0.3.4 .getAll fix
   - fixes the problem that .find() returns results starting on page 2
 
