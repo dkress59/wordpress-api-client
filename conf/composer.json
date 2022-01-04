@@ -14,18 +14,17 @@
     }
   ],
   "require": {
-    "php": "^8.0.11",
+    "php": "^8.0.14",
     "ext-curl": "*",
     "ext-exif": "*",
     "ext-gd": "*",
     "ext-imagick": "*",
     "ext-json": "*",
     "wp-api/basic-auth": "*",
-    "wpackagist-plugin/acf-to-rest-api": "3.3.2",
-    "wpackagist-plugin/advanced-custom-fields": "5.10.2",
+    "wpackagist-plugin/advanced-custom-fields": "5.11.14",
     "wpackagist-plugin/animate-wp-blocks": "2.0.2",
     "wpackagist-plugin/jwt-auth": "2.0.0",
-    "wpackagist-plugin/wordpress-seo": "17.5",
+    "wpackagist-plugin/wordpress-seo": "17.8",
     "wpackagist-theme/twentytwentyone": "1.4"
   },
   "extra": {
