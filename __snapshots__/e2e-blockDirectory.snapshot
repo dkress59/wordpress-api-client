@@ -160,27 +160,6 @@ Array [
       ],
       "wp:install-plugin": Array [
         Object {
-          "href": "http://localhost:8080/wp-json/wp/v2/plugins?slug=liquid-speech-balloon",
-        },
-      ],
-    },
-    "author": "LIQUID DESIGN Ltd.",
-    "icon": "https://ps.w.org/liquid-speech-balloon/assets/icon-128x128.png?rev=2148212",
-    "id": "liquid-speech-balloon",
-    "name": "liquid/speech-balloon",
-    "title": "Speech Balloon",
-  },
-  Object {
-    "_links": Object {
-      "curies": Array [
-        Object {
-          "href": "https://api.w.org/{rel}",
-          "name": "wp",
-          "templated": true,
-        },
-      ],
-      "wp:install-plugin": Array [
-        Object {
           "href": "http://localhost:8080/wp-json/wp/v2/plugins?slug=highlighting-code-block",
         },
       ],
@@ -202,15 +181,36 @@ Array [
       ],
       "wp:install-plugin": Array [
         Object {
-          "href": "http://localhost:8080/wp-json/wp/v2/plugins?slug=carousel-block",
+          "href": "http://localhost:8080/wp-json/wp/v2/plugins?slug=liquid-speech-balloon",
         },
       ],
     },
-    "author": "virgildia",
-    "icon": "https://ps.w.org/carousel-block/assets/icon.svg?rev=2024115",
-    "id": "carousel-block",
-    "name": "cb/slide",
-    "title": "Slide",
+    "author": "LIQUID DESIGN Ltd.",
+    "icon": "https://ps.w.org/liquid-speech-balloon/assets/icon-128x128.png?rev=2148212",
+    "id": "liquid-speech-balloon",
+    "name": "liquid/speech-balloon",
+    "title": "Speech Balloon",
+  },
+  Object {
+    "_links": Object {
+      "curies": Array [
+        Object {
+          "href": "https://api.w.org/{rel}",
+          "name": "wp",
+          "templated": true,
+        },
+      ],
+      "wp:install-plugin": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/plugins?slug=360-image",
+        },
+      ],
+    },
+    "author": "Kevin Bazira",
+    "icon": "https://ps.w.org/360-image/assets/icon-256x256.jpg?rev=1920277",
+    "id": "360-image",
+    "name": "algori-360-image/block-algori-360-image",
+    "title": "360 Image",
   },
 ]
 `;
