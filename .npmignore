@@ -1,0 +1,10 @@
+__snapshots__/
+__tests__/
+.github/
+.husky/
+.idea/
+.jest/
+.vscode/
+.yarn/
+codecov.yaml
+jest.config.ts
