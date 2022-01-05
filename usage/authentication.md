@@ -144,12 +144,12 @@ export const CmsClient = new WpApiClient(
 
 ## OAuth
 
-There is now example, yet, for WP+OAuth. Please report an [issue](https://github.com/dkress59/wordpress-api-client/issues),
+There is no example, yet, for WP with OAuth. Please report an [issue](https://github.com/dkress59/wordpress-api-client/issues),
 if you really need one!
 
 ## Blacklisting / Whitelisting
 
-Routes, which require authentication can be set with the `protected` option.
+Routes which require authentication can be set with the `protected` option.
 You can extend and/or filter the defaults, like this:
 
 ```typescript

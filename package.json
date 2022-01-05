@@ -2,7 +2,7 @@
   "name": "wordpress-api-client-docs",
   "private": true,
   "description": "Documentation of WordPress API Client",
-  "version": "0.3.0",
+  "version": "0.4.3.1",
   "author": "Damian Kress",
   "bugs": "https://github.com/dkress59/wordpress-api-client/issues",
   "license": "MIT",
@@ -16,7 +16,7 @@
   "dependencies": {},
   "devDependencies": {},
   "scripts": {
-    "install": "yarn global add docsify",
+    "install": "npm i docsify-cli -g",
     "start": "docsify serve ."
   }
 }
