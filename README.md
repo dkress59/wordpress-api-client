@@ -8,7 +8,7 @@
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=dkress59_wordpress-api-client&metric=coverage)](https://sonarcloud.io/summary/new_code?id=dkress59_wordpress-api-client)
 [![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=dkress59_wordpress-api-client&metric=reliability_rating)](https://sonarcloud.io/summary/new_code?id=dkress59_wordpress-api-client)
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=dkress59_wordpress-api-client&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=dkress59_wordpress-api-client)
-[![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=dkress59_wordpress-api-client&metric=duplicated_lines_density)](https://sonarcloud.io/summary/new_code?id=dkress59_wordpress-api-client)
+<!-- [![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=dkress59_wordpress-api-client&metric=duplicated_lines_density)](https://sonarcloud.io/summary/new_code?id=dkress59_wordpress-api-client)
 [![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=dkress59_wordpress-api-client&metric=sqale_index)](https://sonarcloud.io/summary/new_code?id=dkress59_wordpress-api-client)
 [![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=dkress59_wordpress-api-client&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=dkress59_wordpress-api-client)
 [![Bugs](https://sonarcloud.io/api/project_badges/measure?project=dkress59_wordpress-api-client&metric=bugs)](https://sonarcloud.io/summary/new_code?id=dkress59_wordpress-api-client) -->
