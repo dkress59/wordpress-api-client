@@ -87,7 +87,9 @@ describe('FetchClient', () => {
 			const mockOnError = jest.fn()
 			const http = new FetchClient(mockBaseURL, mockOnError)
 			mockFetch.mockRejectedValueOnce(mockResponse('mock_error'))
-			expect(await http.get('mock_uri')).toBeUndefined()
+			await expect(() => http.get('mock_uri')).rejects.toThrow(
+				'[WpApiClient Error] There was an error when calling the end point UNKNOWN: "Mock Server Error" (666)',
+			)
 			expect(mockError).not.toHaveBeenCalled()
 			expect(mockOnError).toHaveBeenCalled()
 			expect(mockFetch).toHaveBeenCalledWith(
