@@ -36,6 +36,8 @@ export const POST_TYPE_MAP = [
 	WP_Post_Type_Name.wp_block,
 ]
 
+const contentRendered = { rendered: `<p>${faker.lorem.paragraph()}</p>` }
+
 export const WPObjectLinksFactory =
 	new FixtureFactory<WP_REST_API_Object_Links>(
 		() => ({
@@ -104,10 +106,10 @@ export const WPPostFactory = new FixtureFactory<WPPost>(
 		author: faker.datatype.number(12),
 		categories: [],
 		comment_status: WP_Post_Comment_Status_Name.open,
-		content: { rendered: `<p>${faker.lorem.paragraph()}</p>` },
+		content: contentRendered,
 		date_gmt: faker.date.recent(),
 		date: faker.date.recent(),
-		excerpt: { rendered: `<p>${faker.lorem.paragraph()}</p>` },
+		excerpt: contentRendered,
 		featured_media: faker.datatype.number(123),
 		format: 'standard',
 		guid: faker.internet.url(),

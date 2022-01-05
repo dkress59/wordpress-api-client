@@ -624,7 +624,7 @@ export class WpApiClient {
 			if (name) params.set('name', name)
 			if (appId) params.set('app_id', appId)
 			return this.http.post<WP_REST_API_Application_Password>(
-				endpoint + '?' + new URLSearchParams(params).toString(),
+				`${endpoint}?${new URLSearchParams(params).toString()}`,
 			)
 		}
 		const deleteOne = async (userId: number, uuid: string) => {

@@ -443,7 +443,7 @@ describe('End-to-end test', () => {
 	})
 	// eslint-disable-next-line jest/no-disabled-tests
 	it.skip('.renderedBlock', async () => {
-		// FIXME: Find out what .renderedBlock actually is supposed to do
+		// ToDo: Find out what .renderedBlock actually is supposed to do
 		expect(
 			await client.renderedBlock({
 				name: 'mock-rendered-block',
