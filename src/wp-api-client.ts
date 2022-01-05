@@ -59,12 +59,14 @@ export class WpApiClient {
 			protected: END_POINT_PROTECTED,
 		},
 	) {
-		if (options.auth?.type === AUTH_TYPE.BASIC)
+		if (options.auth?.type === AUTH_TYPE.BASIC) {
+			const authString = `${options.auth.username}:${options.auth.password}`
 			this.authHeader = {
-				Authorization: `Basic ${Buffer.from(
-					options.auth.username + ':' + options.auth.password,
-				).toString('base64')}`,
+				Authorization: `Basic ${Buffer.from(authString).toString(
+					'base64',
+				)}`,
 			}
+		}
 		if (options.auth?.type === AUTH_TYPE.JWT)
 			this.authHeader = {
 				Authorization: `Bearer ${options.auth.token}`,
@@ -255,13 +257,11 @@ export class WpApiClient {
 		perPage = 10,
 	): Promise<P | P[]> {
 		return this.http.get<P[]>(
-			END_POINT.BLOCK_DIRECTORY +
-				'?' +
-				new URLSearchParams({
-					page: String(page),
-					per_page: String(perPage),
-					term,
-				}).toString(),
+			`${END_POINT.BLOCK_DIRECTORY}?${new URLSearchParams({
+				page: String(page),
+				per_page: String(perPage),
+				term,
+			}).toString()}`,
 		)
 	}
 
@@ -302,12 +302,11 @@ export class WpApiClient {
 					),
 				)
 			const headers = {
-				'Content-Disposition':
-					'attachment; filename="' + fileName + '"',
+				'Content-Disposition': `attachment; filename="${fileName}"`,
 				'Content-Type': mimeType,
 			}
 			const result = await this.http.post<P>(
-				`${END_POINT.MEDIA}`,
+				END_POINT.MEDIA,
 				headers,
 				file,
 			)
@@ -509,26 +508,22 @@ export class WpApiClient {
 			return Promise.all(
 				userIds.map(id =>
 					this.http.delete<P>(
-						END_POINT.USERS +
-							'/' +
-							String(id) +
-							'?' +
-							new URLSearchParams({
+						`${END_POINT.USERS}/${String(id)}?${new URLSearchParams(
+							{
 								force: String(true),
 								reassign: String(reassign),
-							}).toString(),
+							},
+						).toString()}`,
 					),
 				),
 			)
 		}
 		const deleteMe = async (reassign: number) =>
 			this.http.delete<P>(
-				END_POINT.USERS_ME +
-					'?' +
-					new URLSearchParams({
-						force: String(true),
-						reassign: String(reassign),
-					}).toString(),
+				`${END_POINT.USERS_ME}?${new URLSearchParams({
+					force: String(true),
+					reassign: String(reassign),
+				}).toString()}`,
 			)
 		return {
 			...this.addPostType<P>(END_POINT.USERS),
@@ -585,12 +580,9 @@ export class WpApiClient {
 			userId: number,
 			uuids: string[] = [],
 		): Promise<WP_REST_API_Application_Password[]> => {
-			const endpoint =
-				END_POINT.USERS +
-				'/' +
-				String(userId) +
-				'/' +
+			const endpoint = `${END_POINT.USERS}/${String(userId)}/${
 				END_POINT.USER_APPLICATION_PASSWORDS
+			}`
 			if (!uuids.length) {
 				return this.http.get<WP_REST_API_Application_Password[]>(
 					endpoint,
@@ -599,7 +591,7 @@ export class WpApiClient {
 			return Promise.all(
 				uuids.map(async uuid =>
 					this.http.get<WP_REST_API_Application_Password>(
-						endpoint + '/' + uuid,
+						`${endpoint}/${uuid}`,
 					),
 				),
 			)
@@ -609,16 +601,14 @@ export class WpApiClient {
 			appId: string,
 			name: string,
 		): Promise<Required<WP_REST_API_Application_Password>> => {
-			const endpoint =
-				END_POINT.USERS +
-				'/' +
-				String(userId) +
-				'/' +
+			const endpoint = `${END_POINT.USERS}/${String(userId)}/${
 				END_POINT.USER_APPLICATION_PASSWORDS
+			}`
 			return this.http.post<Required<WP_REST_API_Application_Password>>(
-				endpoint +
-					'?' +
-					new URLSearchParams({ app_id: appId, name }).toString(),
+				`${endpoint}?${new URLSearchParams({
+					app_id: appId,
+					name,
+				}).toString()}`,
 			)
 		}
 		const update = async (
@@ -627,14 +617,9 @@ export class WpApiClient {
 			appId?: string,
 			name?: string,
 		): Promise<WP_REST_API_Application_Password> => {
-			const endpoint =
-				END_POINT.USERS +
-				'/' +
-				String(userId) +
-				'/' +
-				END_POINT.USER_APPLICATION_PASSWORDS +
-				'/' +
-				uuid
+			const endpoint = `${END_POINT.USERS}/${String(userId)}/${
+				END_POINT.USER_APPLICATION_PASSWORDS
+			}/${uuid}`
 			const params = new Map()
 			if (name) params.set('name', name)
 			if (appId) params.set('app_id', appId)
@@ -643,14 +628,9 @@ export class WpApiClient {
 			)
 		}
 		const deleteOne = async (userId: number, uuid: string) => {
-			const endpoint =
-				END_POINT.USERS +
-				'/' +
-				String(userId) +
-				'/' +
-				END_POINT.USER_APPLICATION_PASSWORDS +
-				'/' +
-				uuid
+			const endpoint = `${END_POINT.USERS}/${String(userId)}/${
+				END_POINT.USER_APPLICATION_PASSWORDS
+			}/${uuid}`
 			return this.http.delete(endpoint)
 		}
 		return {

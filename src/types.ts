@@ -57,7 +57,7 @@ export type WPPost<A = unknown> = WP_REST_API_Post & ACFBase<A>
 
 export type WPMedia<A = unknown> = WP_REST_API_Attachment & ACFBase<A>
 
-// ToDo: Fix Omit<> type hinting
+// FIXME: Fix Omit<> type hinting
 export type WPPage<A = unknown> /* Omit< */ = WPPost<A> /* ,
 	'categories' | 'sticky' | 'tags'
 > */ & { menu_order: number; parent: number }

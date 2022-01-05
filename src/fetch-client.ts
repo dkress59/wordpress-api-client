@@ -88,7 +88,7 @@ export class FetchClient {
 							.fill(null)
 							.map((_null, i) => {
 								return this.fetch<T[] | undefined>(
-									url + '&page=' + String(i + 2),
+									`${url}&page=${String(i + 2)}`,
 									'get',
 									headers,
 								)

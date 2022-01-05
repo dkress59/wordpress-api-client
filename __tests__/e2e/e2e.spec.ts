@@ -151,7 +151,7 @@ describe('End-to-end test', () => {
 	})
 	// eslint-disable-next-line jest/no-disabled-tests
 	it.skip('.blockDirectory', async () => {
-		// FixMe: indeterminate .blockDirectory snapshots
+		// FIXME: indeterminate .blockDirectory snapshots
 		expect(
 			(
 				(await client.blockDirectory(
@@ -280,7 +280,7 @@ describe('End-to-end test', () => {
 					.media()
 					.create(mockFilename, mockJpg, undefined, {
 						alt_text: 'mock alt-text',
-						// FixMe: .media.create caption.rendered
+						// FIXME: .media.create caption.rendered
 						// caption: 'mock_caption',
 						title: mockTitle,
 						slug: 'mock_slug',
@@ -467,7 +467,7 @@ describe('End-to-end test', () => {
 	})
 	// eslint-disable-next-line jest/no-disabled-tests
 	it.skip('.renderedBlock', async () => {
-		// FixMe: Find out what .renderedBlock actually is supposed to do
+		// FIXME: Find out what .renderedBlock actually is supposed to do
 		expect(
 			await client.renderedBlock({
 				name: 'mock-rendered-block',
