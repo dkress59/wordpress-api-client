@@ -271,8 +271,9 @@ export class WpApiClient {
 		find: EndpointFind<P>
 		create: (
 			fileName: string,
-			data: Buffer,
+			file: Buffer,
 			mimeType?: string,
+			data?: Partial<P>,
 		) => Promise<P>
 		delete: EndpointDelete<P>
 		update: EndpointUpdate<P>
@@ -308,7 +309,7 @@ export class WpApiClient {
 				headers,
 				file,
 			)
-			if (data) await update(data, result.id)
+			if (data) return await update(data, result.id)
 			return result
 		}
 		const deleteOne = this.createEndpointDelete<P>(

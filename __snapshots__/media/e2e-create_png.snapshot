@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`End-to-end test .media .create default 1`] = `
+exports[`End-to-end test .media .create custom mime-type 1`] = `
 Object {
   "_links": Object {
     "about": Array [
@@ -29,22 +29,22 @@ Object {
     "replies": Array [
       Object {
         "embeddable": true,
-        "href": "http://localhost:8080/wp-json/wp/v2/comments?post=17",
+        "href": "http://localhost:8080/wp-json/wp/v2/comments?post=18",
       },
     ],
     "self": Array [
       Object {
-        "href": "http://localhost:8080/wp-json/wp/v2/media/17",
+        "href": "http://localhost:8080/wp-json/wp/v2/media/18",
       },
     ],
     "wp:action-assign-author": Array [
       Object {
-        "href": "http://localhost:8080/wp-json/wp/v2/media/17",
+        "href": "http://localhost:8080/wp-json/wp/v2/media/18",
       },
     ],
     "wp:action-unfiltered-html": Array [
       Object {
-        "href": "http://localhost:8080/wp-json/wp/v2/media/17",
+        "href": "http://localhost:8080/wp-json/wp/v2/media/18",
       },
     ],
   },
@@ -57,18 +57,18 @@ Object {
   "comment_status": "open",
   "description": Object {
     "raw": "",
-    "rendered": "<p class=\\"attachment\\"><a href='http://localhost:8080/wp-content/uploads/filename.jpg'><img width=\\"8\\" height=\\"8\\" src=\\"http://localhost:8080/wp-content/uploads/filename.jpg\\" class=\\"attachment-medium size-medium\\" alt=\\"\\" loading=\\"lazy\\" style=\\"width:100%;height:100%;max-width:8px;\\" /></a></p>
+    "rendered": "<p class=\\"attachment\\"><a href='http://localhost:8080/wp-content/uploads/filename.png'><img width=\\"8\\" height=\\"8\\" src=\\"http://localhost:8080/wp-content/uploads/filename.png\\" class=\\"attachment-medium size-medium\\" alt=\\"\\" loading=\\"lazy\\" style=\\"width:100%;height:100%;max-width:8px;\\" /></a></p>
 ",
   },
   "generated_slug": "filename",
   "guid": Object {
-    "raw": "http://localhost:8080/wp-content/uploads/filename.jpg",
-    "rendered": "http://localhost:8080/wp-content/uploads/filename.jpg",
+    "raw": "http://localhost:8080/wp-content/uploads/filename.png",
+    "rendered": "http://localhost:8080/wp-content/uploads/filename.png",
   },
-  "id": 17,
+  "id": 18,
   "link": "http://localhost:8080/filename/",
   "media_details": Object {
-    "file": "filename.jpg",
+    "file": "filename.png",
     "height": 8,
     "image_meta": Object {
       "aperture": "0",
@@ -89,13 +89,13 @@ Object {
   },
   "media_type": "image",
   "meta": Array [],
-  "mime_type": "image/jpeg",
+  "mime_type": "image/png",
   "missing_image_sizes": Array [],
-  "permalink_template": "http://localhost:8080/?attachment_id=17",
+  "permalink_template": "http://localhost:8080/?attachment_id=18",
   "ping_status": "closed",
   "post": null,
   "slug": "filename",
-  "source_url": "http://localhost:8080/wp-content/uploads/filename.jpg",
+  "source_url": "http://localhost:8080/wp-content/uploads/filename.png",
   "status": "inherit",
   "template": "",
   "title": Object {

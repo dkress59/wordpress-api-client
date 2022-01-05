@@ -2,6 +2,10 @@
 
 The current progress can be tracked [here](https://github.com/dkress59/wordpress-api-client/projects/1)
 
+- v0.4.2
+  - `.media.create()` fix
+  - `.media.create()` improvements
+
 - v0.4.1
   - basic auth improvements
   - jwt auth improvements

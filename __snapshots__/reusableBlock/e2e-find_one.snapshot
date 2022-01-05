@@ -23,18 +23,18 @@ Array [
       ],
       "self": Array [
         Object {
-          "href": "http://localhost:8080/wp-json/wp/v2/blocks/24",
+          "href": "http://localhost:8080/wp-json/wp/v2/blocks/26",
         },
       ],
       "version-history": Array [
         Object {
           "count": 0,
-          "href": "http://localhost:8080/wp-json/wp/v2/blocks/24/revisions",
+          "href": "http://localhost:8080/wp-json/wp/v2/blocks/26/revisions",
         },
       ],
       "wp:attachment": Array [
         Object {
-          "href": "http://localhost:8080/wp-json/wp/v2/media?parent=24",
+          "href": "http://localhost:8080/wp-json/wp/v2/media?parent=26",
         },
       ],
     },
@@ -46,7 +46,7 @@ Array [
     "guid": Object {
       "rendered": "http://localhost:8080/mock-title/",
     },
-    "id": 24,
+    "id": 26,
     "link": "http://localhost:8080/mock-title/",
     "slug": "mock-title",
     "status": "publish",
