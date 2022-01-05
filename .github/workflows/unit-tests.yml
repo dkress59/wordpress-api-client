@@ -2,9 +2,10 @@ name: Unit Tests
 
 on:
     push:
-        branches: [main]
+        branches: [main, sonar]
     pull_request:
         branches: [main, 'dependabot/*']
+        types: [opened, synchronize, reopened]
 
 jobs:
     test:
@@ -28,13 +29,20 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v2
+              with:
+                fetch-depth: 0  # better relevancy of analysis
             - uses: actions/setup-node@v1
               with:
                   node-version: '16'
             - name: Install Dependencies
-              run: yarn && yarn add codecov
-            - name: Share Test Coverage
-              run: yarn test __tests__/*.spec.ts && yarn codecov
+              run: yarn
+            - name: Run Tests
+              run: yarn test --ci __tests__/*.spec.ts
+            - name: SonarCloud Scan
+              uses: SonarSource/sonarcloud-github-action@master
+              env:
+                GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # PR information
+                SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
     e2e:
         runs-on: ubuntu-latest
