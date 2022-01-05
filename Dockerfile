@@ -45,19 +45,19 @@ RUN chmod -R 0777 wp-content/uploads
 RUN chown www-data:www-data /var/www/html/wp-content
 RUN chown -R www-data:www-data /var/www/html/wp-content/uploads
 
-COPY script /var/www/script
-RUN chmod +x ../script/post-deploy.sh
-
-COPY ./conf/opcache.php ../
-COPY ./conf/wp-config.php ./
-COPY ./conf/php.ini /usr/local/etc/php/php.ini
-
 COPY ./conf/composer.json ./
 RUN composer update --no-interaction
 RUN rm composer.json composer.lock
 
 COPY ./wp-theme/ ./wp-content/themes/demo-theme/
 COPY ./wp-plugin/ ./wp-content/plugins/demo-plugin/
+
+COPY script /var/www/script
+RUN chmod +x ../script/post-deploy.sh
+
+COPY ./conf/opcache.php ../
+COPY ./conf/wp-config.php ./
+COPY ./conf/php.ini /usr/local/etc/php/php.ini
 
 
 FROM wordpress AS docker-compose

@@ -4,6 +4,8 @@ import WpApiClient, { DefaultEndpointWithRevision } from 'wordpress-api-client'
 const EP_PRODUCTS = 'wp/v2/products'
 const EP_MENU = 'demo-plugin/v1/menu'
 
+const color = '\x1b[31m'
+
 export class WpClient extends WpApiClient {
 	constructor() {
 		super('http://localhost:8080', {
@@ -11,6 +13,10 @@ export class WpClient extends WpApiClient {
 				type: 'basic',
 				password: 'password',
 				username: 'admin',
+			},
+			onError: error => {
+				// eslint-disable-next-line no-console
+				console.error(color, error)
 			},
 		})
 	}

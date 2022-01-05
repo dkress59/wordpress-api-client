@@ -1,6 +1,6 @@
 {
   "name": "wordpress-api-client-demo",
-  "version": "0.4.1.1",
+  "version": "0.4.2.1",
   "description": "A demonstration of the wordpress-api-client npm package",
   "main": "src/index.js",
   "types": "src/types.ts",
@@ -8,7 +8,7 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
-    "wordpress-api-client": "0.4.0"
+    "wordpress-api-client": "0.4.2"
   },
   "devDependencies": {
     "@sprylab/eslint-config": "1.6.2",
@@ -44,5 +44,8 @@
     "lint:script": "eslint src --fix",
     "prepare": "husky install"
   },
-  "packageManager": "yarn@3.1.1"
+  "packageManager": "yarn@3.1.1",
+  "resolutions": {
+    "wordpress-api-client": "portal:/home/dkress/Web/wordpress-api-client"
+  }
 }

@@ -335,7 +335,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tool-belt/type-predicates@npm:^1.2.0":
+"@tool-belt/type-predicates@npm:1.2.0, @tool-belt/type-predicates@npm:^1.2.0":
   version: 1.2.0
   resolution: "@tool-belt/type-predicates@npm:1.2.0"
   checksum: 265ccd28ca19c31cb5cc59ecaf205a5b82a5fac6b80d8486d0750af31e594ecfb205f1821516db9b778350e47ec4b7988d9adf653c6dd300d676598a3cd88823
@@ -4200,19 +4200,20 @@ __metadata:
     prettier: 2.5.1
     ts-node: 10.4.0
     typescript: 4.5.4
-    wordpress-api-client: 0.4.0
+    wordpress-api-client: 0.4.2
     wp-types: 2.12.0
   languageName: unknown
   linkType: soft
 
-"wordpress-api-client@npm:0.4.0":
-  version: 0.4.0
-  resolution: "wordpress-api-client@npm:0.4.0"
+"wordpress-api-client@portal:/home/dkress/Web/wordpress-api-client::locator=wordpress-api-client-demo%40workspace%3A.":
+  version: 0.0.0-use.local
+  resolution: "wordpress-api-client@portal:/home/dkress/Web/wordpress-api-client::locator=wordpress-api-client-demo%40workspace%3A."
   dependencies:
+    "@tool-belt/type-predicates": 1.2.0
     cross-fetch: 3.1.4
-  checksum: 65394afbba166036a57aebd73c0be41708cb20aad5fbd26a4198c637ce00d201ac9ad49eba2e2c7117c57ac0c0ba5a556902023c8eddc34d27f89da47f1fffa2
+    wp-types: 2.12.0
   languageName: node
-  linkType: hard
+  linkType: soft
 
 "wp-types@npm:2.12.0":
   version: 2.12.0
