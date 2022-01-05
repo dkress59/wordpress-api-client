@@ -5,7 +5,13 @@
  ![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=flat&logo=typescript&logoColor=white)
  ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=flat&logo=javascript&logoColor=%23F7DF1E)
  ![Jest](https://img.shields.io/badge/-jest-%23C21325?style=flat&logo=jest&color=f07)
- [![codecov](https://codecov.io/gh/dkress59/wordpress-api-client/branch/main/graph/badge.svg?token=1Z3R5J16FK)](https://codecov.io/gh/dkress59/wordpress-api-client)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=dkress59_wordpress-api-client&metric=coverage)](https://sonarcloud.io/summary/new_code?id=dkress59_wordpress-api-client)
+[![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=dkress59_wordpress-api-client&metric=duplicated_lines_density)](https://sonarcloud.io/summary/new_code?id=dkress59_wordpress-api-client)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=dkress59_wordpress-api-client&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=dkress59_wordpress-api-client)
+[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=dkress59_wordpress-api-client&metric=reliability_rating)](https://sonarcloud.io/summary/new_code?id=dkress59_wordpress-api-client)
+[![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=dkress59_wordpress-api-client&metric=sqale_index)](https://sonarcloud.io/summary/new_code?id=dkress59_wordpress-api-client)
+[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=dkress59_wordpress-api-client&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=dkress59_wordpress-api-client)
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=dkress59_wordpress-api-client&metric=bugs)](https://sonarcloud.io/summary/new_code?id=dkress59_wordpress-api-client)
 
 A typed JavaScript client for your WordPress REST API. Super simple yet highly extensible.
 
@@ -116,7 +122,7 @@ await client.product().revision().update()
 await client.product().revision().delete()
 
 // default end points
-await client.siteSettings()
+await client.siteSettings.find()
 await client.taxonomy().find()
 await client.page().find()
 await client...

@@ -1,4 +1,4 @@
-import { AUTH_TYPE } from '.'
+import { AUTH_TYPE, WpRestApiContext } from '.'
 import {
 	DefaultEndpoint,
 	DefaultEndpointWithRevision,
@@ -127,7 +127,7 @@ export class WpApiClient {
 	): (body: Partial<P>, id?: number) => Promise<P> {
 		return async (body: Partial<P>, id = 0) => {
 			if (id)
-				return await this.http.post<P>(
+				return this.http.post<P>(
 					`${endpoint}/${id}`,
 					undefined,
 					JSON.stringify(
@@ -137,7 +137,7 @@ export class WpApiClient {
 					),
 				)
 			else
-				return await this.http.post<P>(
+				return this.http.post<P>(
 					`${endpoint}`,
 					undefined,
 					JSON.stringify(
@@ -153,18 +153,18 @@ export class WpApiClient {
 		endpoint: string,
 		params?: URLSearchParams,
 	): EndpointDelete<P> {
-		const force = !(this.options.trashable ?? TRASHABLE).includes(endpoint)
+		const trashable = this.options.trashable
+		function getUri(id: number): string {
+			const useForce = !(trashable ?? TRASHABLE).includes(endpoint)
+			const defaultParams = params ? '/?' + params.toString() : ''
+			const forceParam = (params ? '&' : '/?') + 'force=true'
+			return `${endpoint}/${id}${defaultParams}${
+				useForce ? forceParam : ''
+			}`
+		}
 		return async (...ids: number[]) => {
 			if (!ids.length) throw new Error(ERROR_MESSAGE.ID_REQUIRED)
-			return await Promise.all(
-				ids.map(id =>
-					this.http.delete<P>(
-						`${endpoint}/${id}${
-							params ? '/?' + params.toString() : ''
-						}${force ? (params ? '&' : '/?') + 'force=true' : ''}`,
-					),
-				),
-			)
+			return Promise.all(ids.map(id => this.http.delete<P>(getUri(id))))
 		}
 	}
 
@@ -172,7 +172,7 @@ export class WpApiClient {
 		endPoint: string,
 	): () => Promise<T | R> {
 		return async (): Promise<T | R> => {
-			return await this.http.get<T>(endPoint)
+			return this.http.get<T>(endPoint)
 		}
 	}
 
@@ -180,11 +180,7 @@ export class WpApiClient {
 		endPoint: string,
 	): (body: T) => Promise<T | R> {
 		return async (body: T): Promise<T | R> => {
-			return await this.http.post<T>(
-				endPoint,
-				undefined,
-				JSON.stringify(body),
-			)
+			return this.http.post<T>(endPoint, undefined, JSON.stringify(body))
 		}
 	}
 
@@ -212,7 +208,7 @@ export class WpApiClient {
 	): DefaultEndpoint<P>
 	protected addPostType<P = WPPost>(
 		endpoint: string,
-		withRevisions?: boolean,
+		withRevisions = false,
 		defaultParams?: URLSearchParams,
 	): {
 		find: EndpointFind<P>
@@ -249,8 +245,8 @@ export class WpApiClient {
 		blockType?: WP_Post_Type_Name | string,
 	): Promise<P | P[]> {
 		return blockType
-			? await this.http.get<P>(`${END_POINT.BLOCK_TYPES}/${blockType}`)
-			: await this.http.get<P[]>(END_POINT.BLOCK_TYPES)
+			? this.http.get<P>(`${END_POINT.BLOCK_TYPES}/${blockType}`)
+			: this.http.get<P[]>(END_POINT.BLOCK_TYPES)
 	}
 
 	public async blockDirectory<P = WP_REST_API_Block_Directory_Item>(
@@ -258,7 +254,7 @@ export class WpApiClient {
 		page = 1,
 		perPage = 10,
 	): Promise<P | P[]> {
-		return await this.http.get<P[]>(
+		return this.http.get<P[]>(
 			END_POINT.BLOCK_DIRECTORY +
 				'?' +
 				new URLSearchParams({
@@ -315,7 +311,7 @@ export class WpApiClient {
 				headers,
 				file,
 			)
-			if (data) return await update(data, result.id)
+			if (data) return update(data, result.id)
 			return result
 		}
 		const deleteOne = this.createEndpointDelete<P>(
@@ -340,13 +336,13 @@ export class WpApiClient {
 		update: (
 			plugin: string,
 			status?: 'active' | 'inactive',
-			context?: 'view' | 'embed' | 'edit',
+			context?: WpRestApiContext,
 		) => Promise<P>
 		delete: (plugin: string) => Promise<P>
 	} {
 		return {
 			create: async (plugin: string, status = 'inactive') =>
-				await this.http.post<P>(
+				this.http.post<P>(
 					END_POINT.PLUGINS,
 					undefined,
 					JSON.stringify({
@@ -361,13 +357,13 @@ export class WpApiClient {
 			update: async (
 				plugin: string,
 				status: 'active' | 'inactive' = 'inactive',
-				context: 'view' | 'embed' | 'edit' = 'view',
+				context: WpRestApiContext = 'view',
 			) =>
-				await this.http.post<P>(
+				this.http.post<P>(
 					`${END_POINT.PLUGINS}/${plugin}?status=${status}&context=${context}`,
 				),
 			delete: async (plugin: string) =>
-				await this.http.delete<P>(`${END_POINT.PLUGINS}/${plugin}`),
+				this.http.delete<P>(`${END_POINT.PLUGINS}/${plugin}`),
 		}
 	}
 
@@ -405,14 +401,14 @@ export class WpApiClient {
 		postType?: WP_Post_Type_Name | string,
 	): Promise<P | P[]> {
 		return postType
-			? await this.http.get<P>(`${END_POINT.TYPES}/type/${postType}`)
-			: await this.http.get<P[]>(END_POINT.TYPES)
+			? this.http.get<P>(`${END_POINT.TYPES}/type/${postType}`)
+			: this.http.get<P[]>(END_POINT.TYPES)
 	}
 
 	public async renderedBlock<P = WP_REST_API_Rendered_Block>(
 		body: RenderedBlockDto,
 	): Promise<P> {
-		return await this.http.post<P>(
+		return this.http.post<P>(
 			`${END_POINT.BLOCK_RENDERER}/${body.name}`,
 			undefined,
 			JSON.stringify({
@@ -455,7 +451,7 @@ export class WpApiClient {
 	): Promise<S[]> {
 		if (search) params = { ...(params as Record<string, string>), search }
 		const query = new URLSearchParams(params).toString()
-		return await this.http.get<S[]>(`${END_POINT.SEARCH}/?${query}`)
+		return this.http.get<S[]>(`${END_POINT.SEARCH}/?${query}`)
 	}
 
 	public siteSettings<P = WP_REST_API_Settings>(): {
@@ -480,8 +476,8 @@ export class WpApiClient {
 		status?: WP_Post_Type_Name | string,
 	): Promise<P | P[]> {
 		return status
-			? await this.http.get<P>(`${END_POINT.STATUSES}/${status}`)
-			: await this.http.get<P[]>(END_POINT.STATUSES)
+			? this.http.get<P>(`${END_POINT.STATUSES}/${status}`)
+			: this.http.get<P[]>(END_POINT.STATUSES)
 	}
 
 	public user<P = WPUser>(): {
@@ -501,7 +497,7 @@ export class WpApiClient {
 		) => Promise<(P | null)[]>
 		deleteMe: (reassign: number) => Promise<P>
 	} {
-		const findMe = async () => await this.http.get<P>(END_POINT.USERS_ME)
+		const findMe = async () => this.http.get<P>(END_POINT.USERS_ME)
 		const deleteUsers = async (reassign: number, ...userIds: number[]) => {
 			if (!userIds.length)
 				throw new Error(
@@ -510,7 +506,7 @@ export class WpApiClient {
 						'"reassign"',
 					),
 				)
-			return await Promise.all(
+			return Promise.all(
 				userIds.map(id =>
 					this.http.delete<P>(
 						END_POINT.USERS +
@@ -526,7 +522,7 @@ export class WpApiClient {
 			)
 		}
 		const deleteMe = async (reassign: number) =>
-			await this.http.delete<P>(
+			this.http.delete<P>(
 				END_POINT.USERS_ME +
 					'?' +
 					new URLSearchParams({
@@ -564,7 +560,7 @@ export class WpApiClient {
 				)) ?? ([] as P[])
 			)
 		} else {
-			return await Promise.all(
+			return Promise.all(
 				slugs.map(slug =>
 					this.http.get<P>(
 						`${
@@ -581,7 +577,7 @@ export class WpApiClient {
 	}
 
 	public async theme<P = WPTheme>(): Promise<P[]> {
-		return await this.http.get<P[]>(END_POINT.THEMES)
+		return this.http.get<P[]>(END_POINT.THEMES)
 	}
 
 	public applicationPassword() {
@@ -596,16 +592,15 @@ export class WpApiClient {
 				'/' +
 				END_POINT.USER_APPLICATION_PASSWORDS
 			if (!uuids.length) {
-				return await this.http.get<WP_REST_API_Application_Password[]>(
+				return this.http.get<WP_REST_API_Application_Password[]>(
 					endpoint,
 				)
 			}
 			return Promise.all(
-				uuids.map(
-					async uuid =>
-						await this.http.get<WP_REST_API_Application_Password>(
-							endpoint + '/' + uuid,
-						),
+				uuids.map(async uuid =>
+					this.http.get<WP_REST_API_Application_Password>(
+						endpoint + '/' + uuid,
+					),
 				),
 			)
 		}
@@ -620,9 +615,7 @@ export class WpApiClient {
 				String(userId) +
 				'/' +
 				END_POINT.USER_APPLICATION_PASSWORDS
-			return await this.http.post<
-				Required<WP_REST_API_Application_Password>
-			>(
+			return this.http.post<Required<WP_REST_API_Application_Password>>(
 				endpoint +
 					'?' +
 					new URLSearchParams({ app_id: appId, name }).toString(),
@@ -645,7 +638,7 @@ export class WpApiClient {
 			const params = new Map()
 			if (name) params.set('name', name)
 			if (appId) params.set('app_id', appId)
-			return await this.http.post<WP_REST_API_Application_Password>(
+			return this.http.post<WP_REST_API_Application_Password>(
 				endpoint + '?' + new URLSearchParams(params).toString(),
 			)
 		}
@@ -658,7 +651,7 @@ export class WpApiClient {
 				END_POINT.USER_APPLICATION_PASSWORDS +
 				'/' +
 				uuid
-			return await this.http.delete(endpoint)
+			return this.http.delete(endpoint)
 		}
 		return {
 			create,

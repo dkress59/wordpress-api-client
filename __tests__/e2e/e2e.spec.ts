@@ -138,9 +138,7 @@ describe('End-to-end test', () => {
 			).toMatchSpecificSnapshot(fileName('delete', 'page'))
 		})
 	})
-	// eslint-disable-next-line jest/no-disabled-tests
-	describe.skip('.applicationPassword', () => {
-		// FixMe: .applicationPassword.create requires SSL
+	describe('.applicationPassword', () => {
 		it('.create', async () => {
 			const appId = randomUUID()
 			const userId = (await client.user().findMe()).id

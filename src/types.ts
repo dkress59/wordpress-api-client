@@ -68,8 +68,6 @@ export type WPCategory<A = unknown> = WP_REST_API_Category & ACFBase<A>
 
 export type WPComment<A = unknown> = WP_REST_API_Comment & ACFBase<A>
 
-//export type WPSettings<A = unknown> = WP_REST_API_Settings & ACFBase<A>
-
 export type WPTag<A = unknown> = WP_REST_API_Tag & ACFBase<A>
 
 export type WPUser<A = unknown> = WP_REST_API_User & ACFBase<A>
@@ -198,6 +196,8 @@ export interface WPTheme {
 	}
 }
 
+export type WpRestApiContext = 'view' | 'embed' | 'edit'
+
 export interface PluginCreateDto {
 	plugin: string
 	status?: 'active' | 'inactive'
@@ -205,7 +205,7 @@ export interface PluginCreateDto {
 
 export interface PluginUpdateDto {
 	status?: 'active' | 'inactive'
-	context?: 'view' | 'embed' | 'edit'
+	context?: WpRestApiContext
 }
 
 export interface RenderedBlockDto {
@@ -222,24 +222,31 @@ export enum AUTH_TYPE {
 	NONE = 'none',
 }
 
+interface AuthOptionBasic {
+	type: AUTH_TYPE.BASIC | 'basic'
+	username: string
+	password: string
+}
+interface AuthOptionJwt {
+	type: AUTH_TYPE.JWT | 'jwt'
+	token: string
+}
+interface AuthOptionNonce {
+	type: AUTH_TYPE.NONCE | 'nonce'
+	nonce: string
+}
+interface AuthOptionNone {
+	type: AUTH_TYPE.NONE | 'none'
+}
+
+type AuthOptions =
+	| AuthOptionBasic
+	| AuthOptionJwt
+	| AuthOptionNonce
+	| AuthOptionNone
+
 export interface WpApiOptions {
-	auth?:
-		| {
-				type: AUTH_TYPE.BASIC | 'basic'
-				username: string
-				password: string
-		  }
-		| {
-				type: AUTH_TYPE.JWT | 'jwt'
-				token: string
-		  }
-		| {
-				type: AUTH_TYPE.NONCE | 'nonce'
-				nonce: string
-		  }
-		| {
-				type: AUTH_TYPE.NONE | 'none'
-		  }
+	auth?: AuthOptions
 	headers?: Record<string, string>
 	onError?: (message: string) => void
 	protected?: BlackWhiteList

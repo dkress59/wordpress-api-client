@@ -2,7 +2,7 @@ name: Unit Tests
 
 on:
     push:
-        branches: [main, sonar]
+        branches: [main]
     pull_request:
         branches: [main, 'dependabot/*']
         types: [opened, synchronize, reopened]

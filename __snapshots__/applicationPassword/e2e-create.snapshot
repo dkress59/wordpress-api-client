@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`End-to-end test .applicationPassword .create 1`] = `
+Object {
+  "_links": Object {
+    "self": Array [
+      Object {
+        "href": "http://localhost:8080/wp-json/wp/v2/users/1/application-passwords/9328823e-b777-4220-b817-0d4d209857d6",
+      },
+    ],
+  },
+  "app_id": "4923bc50-7407-4e22-b45c-7fe21160c237",
+  "created": "2022-01-05T16:06:54",
+  "last_ip": null,
+  "last_used": null,
+  "name": "mock-app-name",
+  "password": "xJYY Jcwn PYDW Cogf le6t UGfs",
+  "uuid": "9328823e-b777-4220-b817-0d4d209857d6",
+}
+`;

@@ -84,13 +84,15 @@ export class FetchClient {
 			if (totalPages > 1) {
 				const pages = (
 					await Promise.all(
-						new Array(totalPages - 1).fill(null).map((_null, i) => {
-							return this.fetch<T[] | undefined>(
-								url + '&page=' + String(i + 2),
-								'get',
-								headers,
-							)
-						}),
+						Array(totalPages - 1)
+							.fill(null)
+							.map((_null, i) => {
+								return this.fetch<T[] | undefined>(
+									url + '&page=' + String(i + 2),
+									'get',
+									headers,
+								)
+							}),
 					)
 				).map(page => page.data ?? [])
 				const entries: T[] = []

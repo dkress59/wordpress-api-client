@@ -1,9 +1,13 @@
 import { AUTH_TYPE } from '.'
 import { BlackWhiteList } from './types'
-import { ERROR_MESSAGE } from './constants'
+import {
+	END_POINT_PROTECTED,
+	END_POINT_PUBLIC,
+	ERROR_MESSAGE,
+} from './constants'
 import { URLSearchParams } from 'url'
 
-// FIXME: weird type casting issue
+// FIXME: improve + make use of type-predicates
 // eslint-disable-next-line sonarjs/cognitive-complexity
 function getDataFromResponse(json: unknown, statusText: string): string {
 	if (!json) return statusText
@@ -16,15 +20,14 @@ function getDataFromResponse(json: unknown, statusText: string): string {
 		hasMessage && Array.isArray((json as { message: string[] }).message)
 	const messageIsString =
 		hasMessage && typeof (json as { message: string }).message === 'string'
-	return !isJson
-		? statusText
-		: hasError && errorIsString
-		? (json as { error: string }).error
-		: hasMessage && messageIsArray
-		? (json as { message: string[] }).message[0]!
-		: hasMessage && messageIsString
-		? (json as { message: string }).message
-		: statusText
+
+	if (!isJson) return statusText
+	if (hasError && errorIsString) return (json as { error: string }).error
+	if (hasMessage && messageIsArray)
+		return (json as { message: string[] }).message[0]
+	if (hasMessage && messageIsString)
+		return (json as { message: string }).message
+	return statusText
 }
 
 export async function getErrorMessage(err: Response): Promise<string> {
@@ -96,26 +99,15 @@ export function useAuth(
 	url: string,
 	method: 'get' | 'post' | 'delete',
 	authType: AUTH_TYPE = AUTH_TYPE.NONE,
-	protectedRoutes: BlackWhiteList,
-	publicRoutes: BlackWhiteList,
+	protectedRoutes: BlackWhiteList = END_POINT_PROTECTED,
+	publicRoutes: BlackWhiteList = END_POINT_PUBLIC,
 ): boolean {
 	if (authType === AUTH_TYPE.BASIC || authType === AUTH_TYPE.NONCE)
 		return true
 
-	const protectedEndPoints =
-		method === 'get'
-			? protectedRoutes.GET
-			: method === 'delete'
-			? protectedRoutes.DELETE
-			: protectedRoutes.POST
-	const publicEndPoints =
-		method === 'get'
-			? publicRoutes.GET
-			: method === 'delete'
-			? publicRoutes.DELETE
-			: publicRoutes.POST
-	const isProtected = !!protectedEndPoints.some(uri => url.includes(uri))
-	const isPublic = !!publicEndPoints.some(uri => url.includes(uri))
+	const key = method.toUpperCase() as 'GET' | 'POST' | 'DELETE'
+	const isProtected = !!protectedRoutes[key].some(uri => url.includes(uri))
+	const isPublic = !!publicRoutes[key].some(uri => url.includes(uri))
 
 	if (authType === AUTH_TYPE.JWT) return isProtected
 	return (isProtected && !isPublic) || false

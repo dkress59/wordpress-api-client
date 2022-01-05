@@ -9,6 +9,7 @@
  * Author URI:        https://www.damiankress.de/
  */
 
+add_filter( 'wp_is_application_passwords_available', '__return_true' );
 add_filter( 'rest_prepare_application_password', 'rest_hide_date_fields', 10, 3 );
 add_filter( 'rest_prepare_attachment', 'rest_hide_date_fields', 10, 3 );
 add_filter( 'rest_prepare_autosave', 'rest_hide_date_fields', 10, 3 );
