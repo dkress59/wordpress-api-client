@@ -8,8 +8,7 @@ website to the constructor.
 With the second argument, the constructor options,
 you can define authentication, default headers, and an onError function.
 
-?> if your options.onError function does not throw, the errored response will
-return `undefined`
+?> if `options.onError` is undefined, any error will be printed to the console
 
 ## Methods List
 
