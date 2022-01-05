@@ -97,7 +97,7 @@ export class WpClient extends WpApiClient {
 }
 ```
 
-With this `WpClient` class, extended from this package's `WpApiClient` class, you will have full access to your WordPress's REST API, including your custom post types and end points:
+With this `WpClient` class, extended from this package's `WpApiClient` class, you have full access to your WordPress's REST API, including your custom post types, custom end points and Advanced Custom Fields:
 
 ```ts
 import { WpClient } from './wp-client'
