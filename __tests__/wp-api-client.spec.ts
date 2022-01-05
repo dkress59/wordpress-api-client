@@ -402,6 +402,46 @@ describe('WpApiClient', () => {
 					},
 				)
 			})
+			it('.delete validation', async () => {
+				const reassign = 1
+				await expect(() =>
+					client.user().delete(reassign),
+				).rejects.toThrow()
+			})
+			it('.delete', async () => {
+				const reassign = 1
+				await client.user().delete(reassign, 2, 3)
+				expect(mockFetch).toHaveBeenNthCalledWith(
+					1,
+					mockRestBase +
+						END_POINT.USERS +
+						'/2' +
+						'?' +
+						new URLSearchParams({
+							force: String(true),
+							reassign: String(reassign),
+						}).toString(),
+					{
+						...defaultOptions,
+						method: 'delete',
+					},
+				)
+				expect(mockFetch).toHaveBeenNthCalledWith(
+					2,
+					mockRestBase +
+						END_POINT.USERS +
+						'/3' +
+						'?' +
+						new URLSearchParams({
+							force: String(true),
+							reassign: String(reassign),
+						}).toString(),
+					{
+						...defaultOptions,
+						method: 'delete',
+					},
+				)
+			})
 		})
 		describe('.siteSettings', () => {
 			it('.find', async () => {

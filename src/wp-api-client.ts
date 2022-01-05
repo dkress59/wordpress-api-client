@@ -156,7 +156,7 @@ export class WpApiClient {
 		params?: URLSearchParams,
 	): EndpointDelete<P> {
 		const trashable = this.options.trashable
-		function getUri(id: number): string {
+		function getDeleteUri(id: number): string {
 			const useForce = !(trashable ?? TRASHABLE).includes(endpoint)
 			const defaultParams = params ? '/?' + params.toString() : ''
 			const forceParam = (params ? '&' : '/?') + 'force=true'
@@ -166,7 +166,9 @@ export class WpApiClient {
 		}
 		return async (...ids: number[]) => {
 			if (!ids.length) throw new Error(ERROR_MESSAGE.ID_REQUIRED)
-			return Promise.all(ids.map(id => this.http.delete<P>(getUri(id))))
+			return Promise.all(
+				ids.map(id => this.http.delete<P>(getDeleteUri(id))),
+			)
 		}
 	}
 
