@@ -65,10 +65,9 @@ async function getContent(): Promise<{
 ```
 
 If you would like to extend the client, adding post types and REST end points is
-as easy as you would expect:
+as easy as you would expect (example from the [demo project](https://github.com/dkress59/wordpress-api-client/tree/demo)):
 
 ```typescript
-// wp-client.ts
 import { CustomPost, WPMenu, WPProduct } from './types'
 import WpApiClient, { DefaultEndpointWithRevision } from 'wordpress-api-client'
 
@@ -101,7 +100,6 @@ export class WpClient extends WpApiClient {
 With this `WpClient` class, extended from this package's `WpApiClient` class, you will have full access to your WordPress's REST API, including your custom post types and end points:
 
 ```ts
-// app.ts
 import { WpClient } from './wp-client'
 const client = new WpClient()
 
@@ -120,11 +118,10 @@ await client.product().revision().delete()
 // default end points
 await client.siteSettings()
 await client.taxonomy().find()
+await client.page().find()
 await client...
 
 ```
-
-The example above was taken directly from the [demo project](https://github.com/dkress59/wordpress-api-client/tree/demo).
 
 ## Documentation
 
