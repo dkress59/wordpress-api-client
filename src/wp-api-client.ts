@@ -255,7 +255,7 @@ export class WpApiClient {
 		term: string,
 		page = 1,
 		perPage = 10,
-	): Promise<P | P[]> {
+	): Promise<P[]> {
 		return this.http.get<P[]>(
 			`${END_POINT.BLOCK_DIRECTORY}?${new URLSearchParams({
 				page: String(page),

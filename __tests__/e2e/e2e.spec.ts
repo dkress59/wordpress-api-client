@@ -1,5 +1,4 @@
 import 'jest-specific-snapshot'
-import { WP_REST_API_Block_Directory_Item } from 'wp-types'
 import { randomUUID } from 'crypto'
 import WpApiClient from '../../src'
 import fs from 'fs'
@@ -141,42 +140,19 @@ describe('End-to-end test', () => {
 	describe('.applicationPassword', () => {
 		it('.create', async () => {
 			const appId = randomUUID()
+			const mockAppName = 'mock-app-name'
 			const userId = (await client.user().findMe()).id
-			expect(
-				await client
-					.applicationPassword()
-					.create(userId, appId, 'mock-app-name'),
-			).toMatchSpecificSnapshot(fileName('create', 'applicationPassword'))
+			const response = await client
+				.applicationPassword()
+				.create(userId, appId, mockAppName)
+			expect(response._links.self).toHaveLength(1)
+			expect(response.name).toEqual(mockAppName)
+			expect(response.last_used).toBeNull()
 		})
 	})
-	// eslint-disable-next-line jest/no-disabled-tests
-	it.skip('.blockDirectory', async () => {
-		// FIXME: indeterminate .blockDirectory snapshots
-		expect(
-			(
-				(await client.blockDirectory(
-					' ',
-				)) as WP_REST_API_Block_Directory_Item[]
-			).map(block => {
-				// @ts-ignore
-				delete block.active_installs
-				// @ts-ignore
-				delete block.author_block_count
-				// @ts-ignore
-				delete block.author_block_rating
-				// @ts-ignore
-				delete block.description
-				// @ts-ignore
-				delete block.humanized_updated
-				// @ts-ignore
-				delete block.last_updated
-				// @ts-ignore
-				delete block.rating
-				// @ts-ignore
-				delete block.rating_count
-				return block
-			}),
-		).toMatchSpecificSnapshot(fileName('blockDirectory'))
+	it('.blockDirectory', async () => {
+		const response = await client.blockDirectory(' ')
+		expect(response.some(Boolean)).toBe(true)
 	})
 	it('.blockType', async () => {
 		expect(await client.blockType()).toMatchSpecificSnapshot(

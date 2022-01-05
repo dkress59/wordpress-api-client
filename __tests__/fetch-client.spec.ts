@@ -14,9 +14,10 @@ const mockBaseURL = new URL('http://mock-website.com')
 describe('FetchClient', () => {
 	// eslint-disable-next-line no-console
 	const originalError = console.error
+	const mockError = jest.fn()
 	beforeAll(() => {
 		// eslint-disable-next-line no-console
-		console.error = jest.fn()
+		console.error = mockError
 	})
 	afterAll(() => {
 		// eslint-disable-next-line no-console
@@ -82,13 +83,12 @@ describe('FetchClient', () => {
 				)
 			})
 		})
-		// eslint-disable-next-line jest/no-disabled-tests
-		it.skip('can suppress errors with onError', async () => {
-			// tbd: bug or feature?
+		it('can suppress console errors with onError', async () => {
 			const mockOnError = jest.fn()
 			const http = new FetchClient(mockBaseURL, mockOnError)
 			mockFetch.mockRejectedValueOnce(mockResponse('mock_error'))
 			expect(await http.get('mock_uri')).toBeUndefined()
+			expect(mockError).not.toHaveBeenCalled()
 			expect(mockOnError).toHaveBeenCalled()
 			expect(mockFetch).toHaveBeenCalledWith(
 				mockBaseURL.toString() + 'mock_uri',
