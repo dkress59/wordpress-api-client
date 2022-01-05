@@ -51,6 +51,12 @@ export const END_POINT_PROTECTED = {
 	DELETE: Object.values(END_POINT),
 }
 
+export const TRASHABLE = [
+	END_POINT.EDITOR_BLOCKS,
+	END_POINT.PAGES,
+	END_POINT.POSTS,
+]
+
 export const END_POINT_PUBLIC = {
 	GET: Object.values(END_POINT).filter(
 		endPoint => !END_POINT_PROTECTED.GET.includes(endPoint),

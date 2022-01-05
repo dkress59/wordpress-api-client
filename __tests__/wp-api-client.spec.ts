@@ -309,13 +309,13 @@ describe('WpApiClient', () => {
 	})
 
 	describe('default methods', () => {
-		it('.comment returns default entpoints', () => {
+		it('.comment returns default endpoints', () => {
 			expect(client.comment()).not.toBeNull()
 		})
-		it('.postCategory returns default entpoints', () => {
+		it('.postCategory returns default endpoints', () => {
 			expect(client.postCategory()).not.toBeNull()
 		})
-		it('.postTag returns default entpoints', () => {
+		it('.postTag returns default endpoints', () => {
 			expect(client.postTag()).not.toBeNull()
 		})
 		describe('.taxonomy', () => {
@@ -393,7 +393,7 @@ describe('WpApiClient', () => {
 						END_POINT.USERS_ME +
 						'?' +
 						new URLSearchParams({
-							force: 'true',
+							force: String(true),
 							reassign: String(reassign),
 						}).toString(),
 					{
@@ -765,7 +765,7 @@ describe('WpApiClient', () => {
 			})
 		})
 		describe('.reusableBlock', () => {
-			it('returns default entpoints', () => {
+			it('returns default endpoints', () => {
 				expect(client.reusableBlock()).not.toBeNull()
 			})
 			it('can create autosave', async () => {

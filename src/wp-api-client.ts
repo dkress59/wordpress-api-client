@@ -20,7 +20,12 @@ import {
 	WPUser,
 	WpApiOptions,
 } from './types'
-import { END_POINT, END_POINT_PROTECTED, ERROR_MESSAGE } from './constants'
+import {
+	END_POINT,
+	END_POINT_PROTECTED,
+	ERROR_MESSAGE,
+	TRASHABLE,
+} from './constants'
 import { FetchClient } from './fetch-client'
 import { URLSearchParams } from 'url'
 import {
@@ -49,7 +54,7 @@ export class WpApiClient {
 
 	constructor(
 		baseUrl: string,
-		options: WpApiOptions = {
+		protected readonly options: WpApiOptions = {
 			auth: { type: AUTH_TYPE.NONE },
 			protected: END_POINT_PROTECTED,
 		},
@@ -148,6 +153,7 @@ export class WpApiClient {
 		endpoint: string,
 		params?: URLSearchParams,
 	): EndpointDelete<P> {
+		const force = !(this.options.trashable ?? TRASHABLE).includes(endpoint)
 		return async (...ids: number[]) => {
 			if (!ids.length) throw new Error(ERROR_MESSAGE.ID_REQUIRED)
 			return await Promise.all(
@@ -155,7 +161,7 @@ export class WpApiClient {
 					this.http.delete<P>(
 						`${endpoint}/${id}${
 							params ? '/?' + params.toString() : ''
-						}`,
+						}${force ? (params ? '&' : '/?') + 'force=true' : ''}`,
 					),
 				),
 			)
@@ -314,7 +320,7 @@ export class WpApiClient {
 		}
 		const deleteOne = this.createEndpointDelete<P>(
 			END_POINT.MEDIA,
-			new URLSearchParams({ force: 'true' }),
+			new URLSearchParams({}),
 		)
 		return {
 			find,
@@ -372,7 +378,7 @@ export class WpApiClient {
 	public postCategory<P = WPCategory>(): DefaultEndpoint<P> {
 		const deleteOne = this.createEndpointDelete<P>(
 			END_POINT.CATEGORIES,
-			new URLSearchParams({ force: 'true' }),
+			new URLSearchParams({}),
 		)
 		return {
 			...this.addPostType<P>(END_POINT.CATEGORIES, false),
@@ -383,7 +389,7 @@ export class WpApiClient {
 	public postTag<P = WPTag>(): DefaultEndpoint<P> {
 		const deleteOne = this.createEndpointDelete<P>(
 			END_POINT.TAGS,
-			new URLSearchParams({ force: 'true' }),
+			new URLSearchParams({}),
 		)
 		return {
 			...this.addPostType<P>(END_POINT.TAGS, false),
@@ -512,7 +518,7 @@ export class WpApiClient {
 							String(id) +
 							'?' +
 							new URLSearchParams({
-								force: 'true',
+								force: String(true),
 								reassign: String(reassign),
 							}).toString(),
 					),
@@ -524,7 +530,7 @@ export class WpApiClient {
 				END_POINT.USERS_ME +
 					'?' +
 					new URLSearchParams({
-						force: 'true',
+						force: String(true),
 						reassign: String(reassign),
 					}).toString(),
 			)

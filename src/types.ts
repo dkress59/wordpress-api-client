@@ -245,6 +245,7 @@ export interface WpApiOptions {
 	protected?: BlackWhiteList
 	public?: BlackWhiteList
 	restBase?: string
+	trashable?: string[]
 }
 
 export interface BlackWhiteList {

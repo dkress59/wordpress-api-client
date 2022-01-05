@@ -5,9 +5,9 @@
   "author": "Damian Kress",
   "bugs": "https://github.com/dkress59/wordpress-api-client/issues",
   "license": "MIT",
-  "main": "dist/index.js",
+  "main": "./dist/index.js",
   "repository": "https://github.com/dkress59/wordpress-api-client",
-  "types": "src/index.ts",
+  "types": "./src/index.ts",
   "contributors": [
     {
       "name": "Damian Kress",
