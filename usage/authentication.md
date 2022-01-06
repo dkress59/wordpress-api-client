@@ -4,7 +4,7 @@ If you would like to use any method to create, update or delete content, or if
 you would like to retrieve content which is [restricted](#user-role-restriction)
 to certain user roles, you will need to authenticate your client with WordPress.
 
-? > When using the `basic` and the `nonce` auth option **all** requests made by
+?> When using the `basic` and the `nonce` auth option **all** requests made by
 your WordPress client will be using the generated authentication headers. With
 the `jwt` option your client will only use its authentication headers when necessary
 (e.g. to create or update posts or retrieve a list of used plugins). This dictionary
@@ -159,7 +159,7 @@ export const CmsClient = new WpApiClient(
 
 ## WP Basic-Auth
 
-Basic Authentification can be enabled for your WordPress installation with the plugin
+Basic Authentication can be enabled for your WordPress installation with the plugin
 [WP-API/Basic-Auth](https://github.com/WP-API/Basic-Auth ':crossorgin'). This is
 arguably the most insecure authentication method you could choose, so it should
 exclusively be used **for development purposes**.
@@ -212,6 +212,8 @@ export const CmsClient = new WpApiClient(
 There is no example, yet, for WP with OAuth. Please report an [issue](https://github.com/dkress59/wordpress-api-client/issues),
 if you really need one!
 
+---
+
 ## Blacklisting / Whitelisting
 
 Routes which require authentication can be set with the `protected` option.
@@ -248,7 +250,7 @@ post type) by user role. Here is an example of a custom post type which can only
 be requested by authenticated users ('minimum' default WP user role is 'subscriber'),
 and can only be edited by administrators:
 
-[ ToDo: Example CPT "Change Log" ]
+<!-- // ToDo: Example CPT "Change Log" -->
 
 Even if authenticated, as demonstrated above, some methods/end points still might
 not be available. In your theme/plugin, make sure that the paramenter 'show_in_rest'

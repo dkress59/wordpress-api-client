@@ -1,106 +1,27 @@
-# Default Methods
+# Defaults & Options
 
-With a bare instance of WpApiClient you will get methods to retreive, add and
+With a bare instance of WpApiClient you will get methods to retrieve, add and
 update any post, page, media item, post category or post tag.
-To instantiate a WP-API Client you need to pass the base URL of your WordPress
-website to the constructor.
+To instantiate a WP-API Client you only need to pass the base URL of your WordPress
+website to the WpApiClient's constructor.
 
-With the second argument, the constructor options,
-you can define authentication, default headers, and an onError function.
+Refer to the WP [REST API Handbook](https://developer.wordpress.org/rest-api/) for
+a quick-start on the WP-REST-API basics.
 
-?> If `options.onError` is undefined, any error will be printed to the console
+---
 
-<details>
-<summary>
-  <h2 style="display:inline-block">Methods List </h2>
-</summary>
-
-```typescript
-import { WpApiClient } from 'wordpress-api-client'
-const client = new WpApiClient('https://my-wordpress-website.com')
-
-
-client.post().create()
-client.post().find()
-client.post().delete()
-client.post().update()
-client.post().revision().create()
-client.post().revision().find()
-client.post().revision().delete()
-client.post().revision().update()
-
-client.page().create()
-client.page().find()
-client.page().delete()
-client.page().update()
-client.page().revision().create()
-client.page().revision().find()
-client.page().revision().delete()
-client.page().revision().update()
-
-client.comment().create()
-client.comment().find()
-client.comment().delete()
-client.comment().update()
-
-client.postCategory().create()
-client.postCategory().find()
-client.postCategory().delete()
-client.postCategory().update()
-
-client.postTag().create()
-client.postTag().find()
-client.postTag().delete()
-client.postTag().update()
-
-client.media().create()
-client.media().find()
-client.media().delete()
-client.media().update()
-
-client.user().create()
-client.user().find()
-client.user().findMe()
-client.user().delete()
-client.user().deleteMe()
-client.user().update()
-
-client.plugin().create()
-client.plugin().find()
-client.plugin().delete()
-client.plugin().update()
-
-client.applicationPassword().create()
-client.applicationPassword().find()
-client.applicationPassword().delete()
-client.applicationPassword().update()
-
-client.reusableBlock().create()
-client.reusableBlock().find()
-client.reusableBlock().delete()
-client.reusableBlock().update()
-client.reusableBlock().autosave().create()
-client.reusableBlock().autosave().find()
-
-client.blockDirectory()
-client.blockType()
-client.postType()
-client.search()
-client.siteSettings()
-client.status()
-
-WpApiClient.addCollection()
-WpApiClient.collect()
-WpApiClient.clearCollection()
-
-```
-
-</details>
+## Default Methods
 
 <details>
 <summary>
-  <h2 style="display:inline-block">.find(...ids: number[])</h2>
+  <h2 style="display:inline-block">.find(params?: URLSearchParams, ...ids: number[])</h2>
 </summary>
+
+All `.find` methods (except `.plugin().find()` and `.siteSettings().find()`) can
+take a URLSearchParams object as optional parameter. The available query filters
+vary depending on the installed WP plugins and themes, although there is, of course,
+a set of [defaults](https://developer.wordpress.org/rest-api/using-the-rest-api/),
+such as `page`, `per_page`, `order`, `orderby` and many more.
 
 ### find all
 
@@ -108,7 +29,7 @@ To retrieve a list of all of your site's posts, call `await client.post().find()
 The response will be an empty array if no posts were found, otherwise it will
 return **all** of your posts.
 
-? > The WP REST API is capped at a maximum of 100 entries per page, so any `.find()`
+?> The WP REST API is capped at a maximum of 100 entries per page, so any `.find()`
 method will perform as many requests as necessary in order to return **all** results.
 To disable this behavior and to only return a maximum of 100 results from a single
 response, the `page` or `offset` query params can be used (e.g.
@@ -184,9 +105,7 @@ const revisions = await client.post(1).revision().find()
 </details>
 
 <details>
-<summary>
-  <h2 style="display:inline-block">.create(body: WPCreate<WPPost>)</h2>
-</summary>
+<summary><h2 style="display:inline-block">.create(body: WPCreate<WPPost>)</h2></summary>
 
 When creating new content you should be aware of a couple of things, most of which
 an internal function of this package automatically takes care of:
@@ -204,18 +123,14 @@ an internal function of this package automatically takes care of:
 </details>
 
 <details>
-<summary>
-  <h2 style="display:inline-block">.update(body: WPCreate<WPPost>, id: number)</h2>
-</summary>
+<summary><h2 style="display:inline-block">.update(body: WPCreate<WPPost>, id: number)</h2></summary>
 
 The pointers above, for the `.create` method, are also valid for `.update`.
 
-</details
+</details>
 
 <details>
-<summary>
-  <h2 style="display:inline-block">.delete(id: number)</h2>
-</summary>
+<summary><h2 style="display:inline-block">.delete(id: number)</h2></summary>
 
 You need to be [authenticated](usage/authentication.md) to use this method.
 DELETE for objects that have no trash can status (e.g. categories or media) will
@@ -227,90 +142,100 @@ with the `trashable` constructor option, which receives a list of end points (e.
 
 ---
 
-## .media()
+## Constructor Options
 
-This library supports easy uploading of media to your WP Media Library:
+With the second constructor argument, the constructor options,
+you can define authentication, default headers, and an onError function.
 
-```typescript
-client.media().create(
-	fileName: string,
-	file: Buffer,
-	mimeType?: string,
-	data: Partial<>
-)
-```
+?> If `options.onError` is undefined, any error will be printed to the console.
 
-The `file` parameter only accepts a Buffer which will be base64-encoded for transmission.
-This makes import-jobs uncomplicated, where you can buffer a file from disk and
-do not have to care about encoding. But if your to-be-uploaded media is a string
-(e.g. a file retrieved via HTTP request) there is always:
-
-```typescript
-Buffer.from('my-file-string')
-// or e.g.
-Buffer.from('my-b64-encoded-file-string', 'base64')
-```
-
-You provide meta data for the media library item, such as a title, description,
-caption or a post it is supposed to be attached to, with the last param. WpApiClient
-therefore internally performs a second update-request to the newly created media
-library item.
-
-```typescript
-import fs from 'fs'
-import path from 'path'
-
-const sourceFile = fs.readFileSync(
-	path.resolve(__dirname, './image.png'),
-)
-
-async function uploadMedia() {
-	const mediaLibraryItem = await client.media().create(
-		'new-filename.png',
-		sourceFile,
-		'image/png',
-		{
-			alt_text: 'alt-text for the <img /> alt property',
-			caption: 'caption for the <figure /> html node',
-			post: 123,
-		},
-	)
-}
-```
+<!-- ToDo: Constructor Options -->
 
 ---
 
-## .user()
+## Function Reference
 
-Besides the usual `.create`, `.delete`, `.find`, and `.update` there are
-two additional `.user` methods, for the currently **logged-in user**: `.findMe`
-and `.deleteMe`. In order to delete or to retrieve their information,
-you do not have to provide a parameter – but you need to be [authenticated](usage/authentication.md).
-
----
-
-## .search()
-
-You can simply search by text and/or modify the search query:
+<details>
+<summary><h2 style="display:inline-block">Methods List </h2></summary>
 
 ```typescript
-const searchResults = await client.search(
-	'Search by string.',
-	new URLSearchParams({ per_page: '25' }),
-)
+import { WpApiClient } from 'wordpress-api-client'
+const client = new WpApiClient('https://my-wordpress-website.com')
+
+
+client.post().create()
+client.post().find()
+client.post().delete()
+client.post().update()
+client.post().revision().create()
+client.post().revision().find()
+client.post().revision().delete()
+client.post().revision().update()
+
+client.page().create()
+client.page().find()
+client.page().delete()
+client.page().update()
+client.page().revision().create()
+client.page().revision().find()
+client.page().revision().delete()
+client.page().revision().update()
+
+client.comment().create()
+client.comment().find()
+client.comment().delete()
+client.comment().update()
+
+client.postCategory().create()
+client.postCategory().find()
+client.postCategory().delete()
+client.postCategory().update()
+
+client.postTag().create()
+client.postTag().find()
+client.postTag().delete()
+client.postTag().update()
+
+client.media().create()
+client.media().find()
+client.media().delete()
+client.media().update()
+
+client.user().create()
+client.user().find()
+client.user().findMe()
+client.user().delete()
+client.user().deleteMe()
+client.user().update()
+
+client.plugin().create()
+client.plugin().find()
+client.plugin().delete()
+client.plugin().update()
+
+client.applicationPassword().create()
+client.applicationPassword().find()
+client.applicationPassword().delete()
+client.applicationPassword().update()
+
+client.reusableBlock().create()
+client.reusableBlock().find()
+client.reusableBlock().delete()
+client.reusableBlock().update()
+client.reusableBlock().autosave().create()
+client.reusableBlock().autosave().find()
+
+client.blockDirectory()
+client.blockType()
+client.postType()
+client.renderedBlock()
+client.search()
+client.siteSettings()
+client.status()
+
 ```
 
-The response is an array of `WP_REST_API_Search_Result`s.
+</details>
 
----
-
-## .plugin()
-
-You can list, install, activate and deactivate plugins with the client, although
-you need to be [authenticated](usage/authentication.md) to use this method.
-
----
-
-## .theme()
-
-The `.theme` method only returns a list of the installed themes.
+Take a look at the [Function Reference](function-reference/README.md) for more details
+on all of the class methods.

@@ -1,8 +1,8 @@
-# Static Collectors
+# Static Methods
 
 !> **deprecated since v0.4.0** but might be re-introduced after v1.0.0
 
-Everytime you retrieve a post (any post type) or taxonomy the results will be collected
+Every time you retrieve a post (any post type) or taxonomy the results will be collected
 in a static field on the WpApiClient class. You can use `WpApiClient.collect('pages')`
 to get a copy of all previously retrieved pages, if you would like to enable
 collecting of your custom post type / custom taxonomy, there is

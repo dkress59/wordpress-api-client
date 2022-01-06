@@ -107,7 +107,7 @@ With this `WpClient` class, extended from this package's `WpApiClient` class,
 you have full access to your WordPress's REST API, including your custom post
 types, custom end points and Advanced Custom Fields:
 
-```ts
+```typescript
 import { WpClient } from './wp-client'
 const client = new WpClient()
 
