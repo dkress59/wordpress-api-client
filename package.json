@@ -1,7 +1,7 @@
 {
   "name": "wordpress-api-client",
   "description": "WordPress-API Client for JS/TS",
-  "version": "0.4.2",
+  "version": "0.4.3",
   "author": "Damian Kress",
   "bugs": "https://github.com/dkress59/wordpress-api-client/issues",
   "license": "MIT",
@@ -26,7 +26,7 @@
     "@types/faker": "5.5.9",
     "@types/jest": "27.4.0",
     "@types/jest-specific-snapshot": "0.5.5",
-    "@types/node": "16.11.18",
+    "@types/node": "16.11.19",
     "@typescript-eslint/eslint-plugin": "5.9.0",
     "@typescript-eslint/parser": "5.9.0",
     "eslint": "8.6.0",
@@ -43,8 +43,9 @@
     "faker": "5.5.3",
     "husky": "7.0.4",
     "interface-forge": "1.4.5",
-    "jest": "27.4.5",
+    "jest": "27.4.7",
     "jest-specific-snapshot": "5.0.0",
+    "pinst": "2.1.6",
     "prettier": "2.5.1",
     "ts-jest": "27.1.2",
     "ts-node": "10.4.0",
@@ -70,14 +71,16 @@
     "build": "tsc -p tsconfig.build.json",
     "check:script": "eslint src --ext .ts --fix-dry-run --report-unused-disable-directives",
     "lint:script": "eslint src --ext .ts --fix",
-    "prepublishOnly": "rm -rf .gitignore .jest coverage",
+    "prepublishOnly": "pinst --disable",
     "test": "jest --verbose --runInBand __tests__/*.spec.ts",
     "test:e2e": "jest --verbose --runInBand e2e.spec.ts",
     "test:watch": "jest __tests__/*.spec.ts --watchAll",
     "doctor": "yarn dlx @yarnpkg/doctor",
     "docker": "docker-compose -f __tests__/e2e/docker-compose.yml up --build -d",
     "docker:down": "docker-compose -f __tests__/e2e/docker-compose.yml down",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "postinstall": "husky install",
+    "postpublish": "pinst --enable"
   },
   "packageManager": "yarn@3.1.1"
 }
