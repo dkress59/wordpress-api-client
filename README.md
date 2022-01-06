@@ -40,7 +40,7 @@ If you only need to access public REST routes from a vanilla WordPress installat
 all you need is:
 
 ```typescript
-import WpApiClient, { WPCategory, WPPage, WPPost } from 'wordpress-api-client'
+import WpApiClient from 'wordpress-api-client'
 export const client = new WpApiClient('https://my-wordpress-website.com')
 ```
 
@@ -48,7 +48,7 @@ The next example shows how this bare setup, from above, will already cover most
 of your needs:
 
 ```typescript
-import WpApiClient from 'wordpress-api-client'
+import WpApiClient, { WPCategory, WPPage, WPPost } from 'wordpress-api-client'
 
 async function getContent(): Promise<{
     aboutPage: WPPage | null
@@ -103,7 +103,9 @@ export class WpClient extends WpApiClient {
 }
 ```
 
-With this `WpClient` class, extended from this package's `WpApiClient` class, you have full access to your WordPress's REST API, including your custom post types, custom end points and Advanced Custom Fields:
+With this `WpClient` class, extended from this package's `WpApiClient` class,
+you have full access to your WordPress's REST API, including your custom post
+types, custom end points and Advanced Custom Fields:
 
 ```ts
 import { WpClient } from './wp-client'
