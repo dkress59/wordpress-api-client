@@ -3,7 +3,8 @@
 The current progress can be tracked [here](https://github.com/dkress59/wordpress-api-client/projects/1)
 
 - v0.4.3
-  - introduction of TRASHABLE constant (appends `&force=true` to the URIs of delete requests for non-trashable objects)
+  - introduction of TRASHABLE constant (appends `&force=true` to the URIs of delete
+  requests for non-trashable objects)
 
 - v0.4.2
   - `.media.create()` fix
