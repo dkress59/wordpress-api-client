@@ -8,9 +8,12 @@ website to the constructor.
 With the second argument, the constructor options,
 you can define authentication, default headers, and an onError function.
 
-?> if `options.onError` is undefined, any error will be printed to the console
+?> If `options.onError` is undefined, any error will be printed to the console
 
-## Methods List
+<details>
+<summary>
+  <h2 style="display:inline-block">Methods List </h2>
+</summary>
 
 ```typescript
 import { WpApiClient } from 'wordpress-api-client'
@@ -92,13 +95,25 @@ WpApiClient.clearCollection()
 
 ```
 
-## .find(...ids: number[])
+</details>
+
+<details>
+<summary>
+  <h2 style="display:inline-block">.find(...ids: number[])</h2>
+</summary>
 
 ### find all
 
 To retrieve a list of all of your site's posts, call `await client.post().find()`.
-The response will be empty if no posts were found, otherwise it is paginated at
-100 objects per page.
+The response will be an empty array if no posts were found, otherwise it will
+return **all** of your posts.
+
+? > The WP REST API is capped at a maximum of 100 entries per page, so any `.find()`
+method will perform as many requests as necessary in order to return **all** results.
+To disable this behavior and to only return a maximum of 100 results from a single
+response, the `page` or `offset` query params can be used (e.g.
+  `await client.post().find(new URLSearchParams({ page: '1' }))`
+).
 
 Below is an example how to change up the default query parameters, e.g. if you would
 like to change the defaults for the `.post` methods. But you can also
@@ -146,27 +161,32 @@ const [frontPage, contactPage, productPage] = await client.page().find(12, 34, 1
 the respective promise will resolve to `null`.
 
 ?> You do not need to be authenticated to retrieve password-protected posts/pages
-– the password musst be appended as URLSearchParams:
+– the password must be appended as URLSearchParams:
 
 ### find with params
 
-Query paramenters can be added/modified for any `.find` method by simply providing
+Query parameters can be added/modified for any `.find` method by simply providing
 an instance of URLSearchParams to it, as the first parameter:
 
 ```typescript
 const posts = await client.post().find(new URLSearchParams({ per_page: '12' }))
 ```
 
-### find revisios
+### find revision
 
-You cannot retrieve a list of revisions of all posts, but you can retreive all
+You cannot retrieve a list of revisions of all posts, but you can retrieve all
 revisions for a specific post:
 
 ```typescript
 const revisions = await client.post(1).revision().find()
 ```
 
-## .create(body: WPCreate<WPPost>)
+</details>
+
+<details>
+<summary>
+  <h2 style="display:inline-block">.create(body: WPCreate<WPPost>)</h2>
+</summary>
 
 When creating new content you should be aware of a couple of things, most of which
 an internal function of this package automatically takes care of:
@@ -176,42 +196,87 @@ an internal function of this package automatically takes care of:
 - Unlike the API response objects, the fields `title`, `content` and `excerpt`
   of the request body only accept plain HTML strings
 - Taxonomies can be assigned by referencing the respective term IDs, e.g.
-  `categories: [ 2, 34 ], tags: [5, 67]`
+  `categories: [2, 34], tags: [5, 67]`
 
 ?> See [Helper Methods](usage/helper-methods.md) for more info on the
 `WPCreate` type
 
-## .update(body: WPCreate<WPPost>, id: number)
+</details>
+
+<details>
+<summary>
+  <h2 style="display:inline-block">.update(body: WPCreate<WPPost>, id: number)</h2>
+</summary>
 
 The pointers above, for the `.create` method, are also valid for `.update`.
 
-## .delete(id: number)
+</details
+
+<details>
+<summary>
+  <h2 style="display:inline-block">.delete(id: number)</h2>
+</summary>
 
 You need to be [authenticated](usage/authentication.md) to use this method.
+DELETE for objects that have no trash can status (e.g. categories or media) will
+be called with the query parameter `force=true`. This behavior can be controlled
+with the `trashable` constructor option, which receives a list of end points (e.g.
+`trashable: ['wp/v2/media', 'wp/v2/categories']`).
+
+</details>
 
 ---
 
 ## .media()
 
-This library only supports one way of uploading media to your WP Media Library:
+This library supports easy uploading of media to your WP Media Library:
 
 ```typescript
 client.media().create(
 	fileName: string,
-	data: Buffer,
+	file: Buffer,
 	mimeType?: string,
+	data: Partial<>
 )
 ```
 
-The `data` parameter only accepts a Buffer which will be base64-encoded for transmission.
+The `file` parameter only accepts a Buffer which will be base64-encoded for transmission.
 This makes import-jobs uncomplicated, where you can buffer a file from disk and
-do not have to care about encoding. But there is always
+do not have to care about encoding. But if your to-be-uploaded media is a string
+(e.g. a file retrieved via HTTP request) there is always:
 
 ```typescript
-Buffer.from('my-encoded-data')
+Buffer.from('my-file-string')
+// or e.g.
+Buffer.from('my-b64-encoded-file-string', 'base64')
 ```
 
-if your to-be-uploaded media is a string (e.g. a file retrieved via HTTP request).
+You provide meta data for the media library item, such as a title, description,
+caption or a post it is supposed to be attached to, with the last param. WpApiClient
+therefore internally performs a second update-request to the newly created media
+library item.
+
+```typescript
+import fs from 'fs'
+import path from 'path'
+
+const sourceFile = fs.readFileSync(
+	path.resolve(__dirname, './image.png'),
+)
+
+async function uploadMedia() {
+	const mediaLibraryItem = await client.media().create(
+		'new-filename.png',
+		sourceFile,
+		'image/png',
+		{
+			alt_text: 'alt-text for the <img /> alt property',
+			caption: 'caption for the <figure /> html node',
+			post: 123,
+		},
+	)
+}
+```
 
 ---
 

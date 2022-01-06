@@ -1,8 +1,73 @@
-# Authentification
+# Authentication
 
 If you would like to use any method to create, update or delete content, or if
 you would like to retrieve content which is [restricted](#user-role-restriction)
 to certain user roles, you will need to authenticate your client with WordPress.
+
+? > When using the `basic` and the `nonce` auth option **all** requests made by
+your WordPress client will be using the generated authentication headers. With
+the `jwt` option your client will only use its authentication headers when necessary
+(e.g. to create or update posts or retrieve a list of used plugins). This dictionary
+of protected end points can be controlled with the `protected option`:
+
+```typescript
+const client = new WpApiClient({
+	auth: {
+		type: 'jwt',
+		token: 'my-token',
+	},
+	protected: {
+		GET: [],
+		DELETE: [],
+		POST: [],
+	},
+})
+```
+
+## Password-Protected Content
+
+WordPress post types such as Posts and Pages have a visibility option that can be
+set in the admin interface, which allows posts to be protected by password.
+These posts will appear as published posts in the REST API results, but certain
+fields, such as `content`, `excerpt` and `title` have empty strings as values for
+their `rendered` subfields, and their `protected`-subfield will be set to `true`.
+
+Example Response:
+
+```json
+[
+  {
+    "id": 123.
+    "content": {
+      "protected": false,
+      "rendered": "<p>Some rendered html-content.</p>"
+    },
+    "title": {
+      "protected": false,
+      "rendered": "Some Post Title"
+    },
+    ...
+  },
+  {
+    "id": 124.
+    "content": {
+      "protected": true,
+      "rendered": ""
+    },
+    "title": {
+      "protected": true,
+      "rendered": ""
+    },
+    ...
+  },
+  ...
+]
+```
+
+In order to gain access to the restricted content, the password must be passed as
+the `password` query parameter, e.g.:
+`await client.post().find(new URLSearchParams({ password: 'post-password' }), 124)`
+.
 
 ## WP-Nonce
 
