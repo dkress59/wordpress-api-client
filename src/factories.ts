@@ -36,30 +36,12 @@ export const POST_TYPE_MAP = [
 	WP_Post_Type_Name.wp_block,
 ]
 
-function fakeUrl() {
-	return faker.internet.url()
-}
-
-function fakeNumber(max?: number) {
-	return faker.datatype.number(max)
-}
-
-function recentDate() {
-	return faker.date.recent()
-}
-
-function randomWord() {
-	return faker.random.word()
-}
-
-function randomWords() {
-	return faker.random.words()
-}
-
-function fakeSentence() {
-	return faker.lorem.sentence()
-}
-
+const fakeUrl = () => faker.internet.url()
+const fakeNumber = (max?: number) => faker.datatype.number(max)
+const recentDate = () => faker.date.recent()
+const randomWord = () => faker.random.word()
+const randomWords = () => faker.random.words()
+const fakeSentence = () => faker.lorem.sentence()
 const contentRendered = { rendered: `<p>${faker.lorem.paragraph()}</p>` }
 
 export const WPObjectLinksFactory =
