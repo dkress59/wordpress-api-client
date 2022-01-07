@@ -164,7 +164,7 @@ return **all** of your posts.
 method will perform as many requests as necessary in order to return **all** results.
 To disable this behavior and to only return a maximum of 100 results from a single
 response, the `page` or `offset` query params can be used (e.g.
-  `await client.post().find(new URLSearchParams({ page: '1' }))`
+`client.post().find( new URLSearchParams({ page: '1' }) )`
 ).
 
 Below is an example how to change up the default query parameters, e.g. if you would
@@ -194,7 +194,10 @@ export class CmsClient extends WpApiClient {
         return {
 			...this.defaultEndpoints(END_POINT.POSTS, queryParams),
 			revision: {
-				...this.defaultEndpoints(END_POINT.POSTS + '/revisions', queryParams)
+				...this.defaultEndpoints(
+					`${END_POINT.POSTS}/revisions`,
+					queryParams,
+				)
 			},
 		}
     }
@@ -206,11 +209,11 @@ export class CmsClient extends WpApiClient {
 Specific posts can be retrieved via post id, e.g.:
 
 ```typescript
-const [frontPage, contactPage, productPage] = await client.page().find(12, 34, 123)
+const [welcome, contact, products] = await client.page().find(12, 34, 123)
 ```
 
-?> **Note:** If there is an error (e.g. [authentication](usage/authentication.md)),
-the respective promise will resolve to `null`.
+?> **Note:** If there is an error with one of the posts, the respective promise
+will resolve to `null`.
 
 ?> You do not need to be authenticated to retrieve password-protected posts/pages
 – the password must be appended as URLSearchParams:
