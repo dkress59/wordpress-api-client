@@ -36,6 +36,30 @@ export const POST_TYPE_MAP = [
 	WP_Post_Type_Name.wp_block,
 ]
 
+function fakeUrl() {
+	return faker.internet.url()
+}
+
+function fakeNumber(max?: number) {
+	return faker.datatype.number(max)
+}
+
+function recentDate() {
+	return faker.date.recent()
+}
+
+function randomWord() {
+	return faker.random.word()
+}
+
+function randomWords() {
+	return faker.random.words()
+}
+
+function fakeSentence() {
+	return faker.lorem.sentence()
+}
+
 const contentRendered = { rendered: `<p>${faker.lorem.paragraph()}</p>` }
 
 export const WPObjectLinksFactory =
@@ -43,56 +67,56 @@ export const WPObjectLinksFactory =
 		() => ({
 			'predecessor-version': [
 				{
-					href: faker.internet.url(),
-					id: faker.datatype.number(),
+					href: fakeUrl(),
+					id: fakeNumber(),
 				},
 			],
 			'version-history': [
 				{
-					href: faker.internet.url(),
-					id: faker.datatype.number(),
+					href: fakeUrl(),
+					id: fakeNumber(),
 				},
 			],
 			'wp:attachment': [
 				{
-					href: faker.internet.url(),
-					id: faker.datatype.number(),
+					href: fakeUrl(),
+					id: fakeNumber(),
 				},
 			],
 			'wp:featuredmedia': [
 				{
-					href: faker.internet.url(),
-					id: faker.datatype.number(),
+					href: fakeUrl(),
+					id: fakeNumber(),
 				},
 			],
 			'wp:term': [
 				{
-					href: faker.internet.url(),
-					id: faker.datatype.number(),
+					href: fakeUrl(),
+					id: fakeNumber(),
 				},
 			],
 			'about': [
 				{
-					href: faker.internet.url(),
-					id: faker.datatype.number(),
+					href: fakeUrl(),
+					id: fakeNumber(),
 				},
 			],
 			'collection': [
 				{
-					href: faker.internet.url(),
-					id: faker.datatype.number(),
+					href: fakeUrl(),
+					id: fakeNumber(),
 				},
 			],
 			'counter': [
 				{
-					href: faker.internet.url(),
-					id: faker.datatype.number(),
+					href: fakeUrl(),
+					id: fakeNumber(),
 				},
 			],
 			'curies': [
 				{
-					href: faker.internet.url(),
-					id: faker.datatype.number(),
+					href: fakeUrl(),
+					id: fakeNumber(),
 				},
 			],
 		}),
@@ -103,31 +127,31 @@ export const WPObjectLinksFactory =
 export const WPPostFactory = new FixtureFactory<WPPost>(
 	() => ({
 		acf: undefined,
-		author: faker.datatype.number(12),
+		author: fakeNumber(12),
 		categories: [],
 		comment_status: WP_Post_Comment_Status_Name.open,
 		content: contentRendered,
-		date_gmt: faker.date.recent(),
-		date: faker.date.recent(),
+		date_gmt: recentDate(),
+		date: recentDate(),
 		excerpt: contentRendered,
-		featured_media: faker.datatype.number(123),
+		featured_media: fakeNumber(123),
 		format: 'standard',
-		guid: faker.internet.url(),
-		id: faker.datatype.number(2345),
-		link: faker.internet.url(),
-		menu_order: faker.datatype.number(20),
+		guid: fakeUrl(),
+		id: fakeNumber(2345),
+		link: fakeUrl(),
+		menu_order: fakeNumber(20),
 		meta: [],
-		modified_gmt: faker.date.recent(),
-		modified: faker.date.recent(),
+		modified_gmt: recentDate(),
+		modified: recentDate(),
 		ping_status: WP_Post_Comment_Status_Name.open,
-		slug: faker.random.word(),
+		slug: randomWord(),
 		status: FixtureFactory.sample(POST_STATUS_MAP),
 		sticky: false,
 		tags: [],
 		template: 'default.php',
-		title: { rendered: faker.random.words() },
+		title: { rendered: randomWords() },
 		type: WP_Post_Type_Name.post,
-		yoastHead: `<meta title="${faker.random.words()}" />`,
+		yoastHead: `<meta title="${randomWords()}" />`,
 		_links: WPObjectLinksFactory,
 	}),
 	undefined,
@@ -139,7 +163,7 @@ export const WPPageFactory = new FixtureFactory<WPPage>(
 		...WPPostFactory.buildSync(),
 		type: WP_Post_Type_Name.page,
 		menu_order: 0,
-		parent: FixtureFactory.sample([0, 0, faker.datatype.number()]),
+		parent: FixtureFactory.sample([0, 0, fakeNumber()]),
 	}),
 	undefined,
 	fixtureDir,
@@ -149,13 +173,13 @@ export const WPCategoryFactory = new FixtureFactory<WPCategory>(
 	() => ({
 		_links: WPObjectLinksFactory,
 		acf: undefined,
-		count: faker.datatype.number(12),
-		description: faker.lorem.sentence(),
-		id: faker.datatype.number(),
-		link: faker.internet.url(),
+		count: fakeNumber(12),
+		description: fakeSentence(),
+		id: fakeNumber(),
+		link: fakeUrl(),
 		meta: [],
-		name: faker.random.words(),
-		slug: faker.random.words().replace(' ', '-').toLowerCase(),
+		name: randomWords(),
+		slug: randomWords().replace(' ', '-').toLowerCase(),
 		taxonomy: WP_Taxonomy_Name.category,
 		parent: 0,
 	}),
@@ -167,13 +191,13 @@ export const WPTagFactory = new FixtureFactory<WPTag>(
 	() => ({
 		_links: WPObjectLinksFactory,
 		acf: undefined,
-		count: faker.datatype.number(12),
-		description: faker.lorem.sentence(),
-		id: faker.datatype.number(),
-		link: faker.internet.url(),
+		count: fakeNumber(12),
+		description: fakeSentence(),
+		id: fakeNumber(),
+		link: fakeUrl(),
 		meta: [],
-		name: faker.random.words(),
-		slug: faker.random.words().replace(' ', '-').toLowerCase(),
+		name: randomWords(),
+		slug: randomWords().replace(' ', '-').toLowerCase(),
 		taxonomy: WP_Taxonomy_Name.post_tag,
 	}),
 	undefined,
