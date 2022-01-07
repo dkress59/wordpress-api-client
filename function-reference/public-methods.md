@@ -5,7 +5,7 @@
 
 [[WP Endpoint Reference](https://developer.wordpress.org/rest-api/reference/application-passwords/)]
 
-See [Default Methods](usage/default-methods.md#default-methods).
+See [Default Methods](usage/defaults-and-options.md#default-methods).
 
 Your WP must have SSL enabled, to be able to use this feature via the REST API.
 Refer to the [WP Integration Guide](https://make.wordpress.org/core/2020/11/05/application-passwords-integration-guide/)
@@ -38,7 +38,7 @@ to find out more.
 
 [[WP Endpoint Reference](https://developer.wordpress.org/rest-api/reference/comments/)]
 
-See [Default Methods](usage/default-methods.md#default-methods).
+See [Default Methods](usage/defaults-and-options.md#default-methods).
 
 </details>
 
@@ -49,16 +49,16 @@ See [Default Methods](usage/default-methods.md#default-methods).
 
 [[WP Endpoint Reference](https://developer.wordpress.org/rest-api/reference/media/)]
 
-See [Default Methods](usage/default-methods.md#default-methods).
+See [Default Methods](usage/defaults-and-options.md#default-methods).
 
 This library supports easy uploading of media to your WP Media Library:
 
 ```typescript
-client.media().create(
+client.media<P = WPMedia>().create(
 	fileName: string,
 	file: Buffer,
 	mimeType?: string,
-	data: Partial<>
+	data?: Partial<P>
 )
 ```
 
@@ -109,7 +109,7 @@ async function uploadMedia() {
 
 [[WP Endpoint Reference](https://developer.wordpress.org/rest-api/reference/pages/)]
 
-See [Default Methods](usage/default-methods.md#default-methods).
+See [Default Methods](usage/defaults-and-options.md#default-methods).
 
 </details>
 
@@ -132,7 +132,7 @@ you need to be [authenticated](usage/authentication.md) to use this method.
 
 [[WP Endpoint Reference](https://developer.wordpress.org/rest-api/reference/posts/)]
 
-See [Default Methods](usage/default-methods.md#default-methods).
+See [Default Methods](usage/defaults-and-options.md#default-methods).
 
 </details>
 
@@ -143,7 +143,7 @@ See [Default Methods](usage/default-methods.md#default-methods).
 
 [[WP Endpoint Reference](https://developer.wordpress.org/rest-api/reference/categories/)]
 
-See [Default Methods](usage/default-methods.md#default-methods).
+See [Default Methods](usage/defaults-and-options.md#default-methods).
 
 </details>
 
@@ -154,7 +154,7 @@ See [Default Methods](usage/default-methods.md#default-methods).
 
 [[WP Endpoint Reference](https://developer.wordpress.org/rest-api/reference/tags/)]
 
-See [Default Methods](usage/default-methods.md#default-methods).
+See [Default Methods](usage/defaults-and-options.md#default-methods).
 
 </details>
 
@@ -183,7 +183,7 @@ See [Default Methods](usage/default-methods.md#default-methods).
 
 [[WP Endpoint Reference](https://developer.wordpress.org/rest-api/reference/blocks/)]
 
-See [Default Methods](usage/default-methods.md#default-methods).
+See [Default Methods](usage/defaults-and-options.md#default-methods).
 
 </details>
 
@@ -254,7 +254,7 @@ The `.theme` method only returns a list of the installed themes.
 
 [[WP Endpoint Reference](https://developer.wordpress.org/rest-api/reference/users/)]
 
-See [Default Methods](usage/default-methods.md#default-methods).
+See [Default Methods](usage/defaults-and-options.md#default-methods).
 
 Besides the usual `.create`, `.delete`, `.find`, and `.update` there are
 two additional `.user` methods, for the currently **logged-in user**: `.findMe`

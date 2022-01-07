@@ -2,7 +2,7 @@
 
 * [Start](/ "WordPress API Client Documentation")
 * Usage
-  * [Defaults & Options](usage/default-methods.md "Defaults & Options")
+  * [Defaults & Options](usage/defaults-and-options.md "Defaults & Options")
   * [Extending Default Routes](usage/extending-default-routes.md)
   * [Custom Post Types](usage/custom-post-types.md)
   * [Custom End Points](usage/custom-end-points.md)

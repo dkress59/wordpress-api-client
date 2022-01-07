@@ -28,9 +28,9 @@ import WpApiClient, { DefaultEndpointWithRevision } from 'wordpress-api-client'
 import { baseURL } from './constants'
 import { CustomPage } from './types'
 
-type CustomPage = WPPage & Required<{
+type CustomPage = WPPage & {
     menu_order: number
-}>
+}
 
 export class CmsClient extends WpApiClient {
     constructor() {

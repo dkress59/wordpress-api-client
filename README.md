@@ -59,7 +59,11 @@ async function getContent(): Promise<{
 }> {
     const client = new WpApiClient('https://my-wordpress-website.com')
 
-    const [aboutPage, contactPage, frontPage] = await client.page().find(12, 23, 34)
+    const [
+        aboutPage,
+        contactPage,
+        frontPage
+    ] = await client.page().find(12, 23, 34)
     const categories = await client.postCategories().find()
     const recent25posts = await client.posts().find(new URLSearchParams({
         order: 'desc',
