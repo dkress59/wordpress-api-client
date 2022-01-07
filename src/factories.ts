@@ -39,68 +39,40 @@ export const POST_TYPE_MAP = [
 const fakeUrl = () => faker.internet.url()
 const fakeNumber = (max?: number) => faker.datatype.number(max)
 const recentDate = () => faker.date.recent()
-const randomWord = () => faker.random.word()
 const randomWords = () => faker.random.words()
 const fakeSentence = () => faker.lorem.sentence()
 const contentRendered = { rendered: `<p>${faker.lorem.paragraph()}</p>` }
+const fakeObjectLink = () => ({
+	href: fakeUrl(),
+	id: fakeNumber(),
+})
+const fakeBase = () => ({
+	_links: WPObjectLinksFactory,
+	acf: undefined,
+	id: fakeNumber(),
+	link: fakeUrl(),
+	meta: [],
+	slug: randomWords().replace(' ', '-').toLowerCase(),
+})
+const fakeTaxonomy = () => ({
+	...fakeBase(),
+	count: fakeNumber(12),
+	description: fakeSentence(),
+	name: randomWords(),
+})
 
 export const WPObjectLinksFactory =
 	new FixtureFactory<WP_REST_API_Object_Links>(
 		() => ({
-			'predecessor-version': [
-				{
-					href: fakeUrl(),
-					id: fakeNumber(),
-				},
-			],
-			'version-history': [
-				{
-					href: fakeUrl(),
-					id: fakeNumber(),
-				},
-			],
-			'wp:attachment': [
-				{
-					href: fakeUrl(),
-					id: fakeNumber(),
-				},
-			],
-			'wp:featuredmedia': [
-				{
-					href: fakeUrl(),
-					id: fakeNumber(),
-				},
-			],
-			'wp:term': [
-				{
-					href: fakeUrl(),
-					id: fakeNumber(),
-				},
-			],
-			'about': [
-				{
-					href: fakeUrl(),
-					id: fakeNumber(),
-				},
-			],
-			'collection': [
-				{
-					href: fakeUrl(),
-					id: fakeNumber(),
-				},
-			],
-			'counter': [
-				{
-					href: fakeUrl(),
-					id: fakeNumber(),
-				},
-			],
-			'curies': [
-				{
-					href: fakeUrl(),
-					id: fakeNumber(),
-				},
-			],
+			'predecessor-version': [fakeObjectLink],
+			'version-history': [fakeObjectLink],
+			'wp:attachment': [fakeObjectLink],
+			'wp:featuredmedia': [fakeObjectLink],
+			'wp:term': [fakeObjectLink],
+			'about': [fakeObjectLink],
+			'collection': [fakeObjectLink],
+			'counter': [fakeObjectLink],
+			'curies': [fakeObjectLink],
 		}),
 		undefined,
 		fixtureDir,
@@ -108,7 +80,7 @@ export const WPObjectLinksFactory =
 
 export const WPPostFactory = new FixtureFactory<WPPost>(
 	() => ({
-		acf: undefined,
+		...fakeBase(),
 		author: fakeNumber(12),
 		categories: [],
 		comment_status: WP_Post_Comment_Status_Name.open,
@@ -119,14 +91,10 @@ export const WPPostFactory = new FixtureFactory<WPPost>(
 		featured_media: fakeNumber(123),
 		format: 'standard',
 		guid: fakeUrl(),
-		id: fakeNumber(2345),
-		link: fakeUrl(),
 		menu_order: fakeNumber(20),
-		meta: [],
 		modified_gmt: recentDate(),
 		modified: recentDate(),
 		ping_status: WP_Post_Comment_Status_Name.open,
-		slug: randomWord(),
 		status: FixtureFactory.sample(POST_STATUS_MAP),
 		sticky: false,
 		tags: [],
@@ -134,7 +102,6 @@ export const WPPostFactory = new FixtureFactory<WPPost>(
 		title: { rendered: randomWords() },
 		type: WP_Post_Type_Name.post,
 		yoastHead: `<meta title="${randomWords()}" />`,
-		_links: WPObjectLinksFactory,
 	}),
 	undefined,
 	fixtureDir,
@@ -153,17 +120,9 @@ export const WPPageFactory = new FixtureFactory<WPPage>(
 
 export const WPCategoryFactory = new FixtureFactory<WPCategory>(
 	() => ({
-		_links: WPObjectLinksFactory,
-		acf: undefined,
-		count: fakeNumber(12),
-		description: fakeSentence(),
-		id: fakeNumber(),
-		link: fakeUrl(),
-		meta: [],
-		name: randomWords(),
-		slug: randomWords().replace(' ', '-').toLowerCase(),
+		...fakeTaxonomy(),
 		taxonomy: WP_Taxonomy_Name.category,
-		parent: 0,
+		parent: FixtureFactory.sample([0, 0, fakeNumber()]),
 	}),
 	undefined,
 	fixtureDir,
@@ -171,15 +130,7 @@ export const WPCategoryFactory = new FixtureFactory<WPCategory>(
 
 export const WPTagFactory = new FixtureFactory<WPTag>(
 	() => ({
-		_links: WPObjectLinksFactory,
-		acf: undefined,
-		count: fakeNumber(12),
-		description: fakeSentence(),
-		id: fakeNumber(),
-		link: fakeUrl(),
-		meta: [],
-		name: randomWords(),
-		slug: randomWords().replace(' ', '-').toLowerCase(),
+		...fakeTaxonomy(),
 		taxonomy: WP_Taxonomy_Name.post_tag,
 	}),
 	undefined,
