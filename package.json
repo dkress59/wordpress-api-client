@@ -71,14 +71,15 @@
     "build": "tsc -p tsconfig.build.json",
     "check:script": "eslint src --ext .ts --fix-dry-run --report-unused-disable-directives",
     "lint:script": "eslint src --ext .ts --fix",
+    "prepublishOnly": "pinst --disable",
     "test": "jest --verbose --runInBand __tests__/*.spec.ts",
     "test:e2e": "jest --verbose --runInBand e2e.spec.ts",
     "test:watch": "jest __tests__/*.spec.ts --watchAll",
     "doctor": "yarn dlx @yarnpkg/doctor",
     "docker": "docker-compose -f __tests__/e2e/docker-compose.yml up --build -d",
     "docker:down": "docker-compose -f __tests__/e2e/docker-compose.yml down",
+    "prepare": "husky install",
     "postinstall": "husky install",
-    "prepublishOnly": "pinst --disable",
     "postpublish": "pinst --enable"
   },
   "packageManager": "yarn@3.1.1"
