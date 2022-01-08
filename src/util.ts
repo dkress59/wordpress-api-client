@@ -4,6 +4,7 @@ import {
 	END_POINT_PROTECTED,
 	END_POINT_PUBLIC,
 	ERROR_MESSAGE,
+	TRASHABLE,
 } from './constants'
 import { URLSearchParams } from 'url'
 
@@ -112,4 +113,16 @@ export function useAuth(
 
 	if (authType === AUTH_TYPE.JWT) return isProtected
 	return (isProtected && !isPublic) || false
+}
+
+export function getDeleteUri(
+	endpoint: string,
+	id: number,
+	params?: URLSearchParams,
+	trashable: string[] = TRASHABLE,
+): string {
+	const useForce = !trashable.includes(endpoint) && !params?.has('force')
+	const defaultParams = params ? '/?' + params.toString() : ''
+	const forceParam = (params ? '&' : '/?') + 'force=true'
+	return `${endpoint}/${id}${defaultParams}${useForce ? forceParam : ''}`
 }

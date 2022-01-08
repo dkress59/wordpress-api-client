@@ -41,7 +41,12 @@ import {
 	WP_REST_API_Taxonomy,
 	WP_REST_API_Type,
 } from 'wp-types'
-import { getDefaultQueryList, getDefaultQuerySingle, postCreate } from './util'
+import {
+	getDefaultQueryList,
+	getDefaultQuerySingle,
+	getDeleteUri,
+	postCreate,
+} from './util'
 import { isRecord, isString } from '@tool-belt/type-predicates'
 
 export class WpApiClient {
@@ -152,19 +157,15 @@ export class WpApiClient {
 		endpoint: string,
 		params?: URLSearchParams,
 	): EndpointDelete<P> {
-		const trashable = this.options.trashable
-		function getDeleteUri(id: number): string {
-			const useForce = !(trashable ?? TRASHABLE).includes(endpoint)
-			const defaultParams = params ? '/?' + params.toString() : ''
-			const forceParam = (params ? '&' : '/?') + 'force=true'
-			return `${endpoint}/${id}${defaultParams}${
-				useForce ? forceParam : ''
-			}`
-		}
+		const trashable = this.options.trashable ?? TRASHABLE
 		return async (...ids: number[]) => {
 			if (!ids.length) throw new Error(ERROR_MESSAGE.ID_REQUIRED)
 			return Promise.all(
-				ids.map(id => this.http.delete<P>(getDeleteUri(id))),
+				ids.map(id =>
+					this.http.delete<P>(
+						getDeleteUri(endpoint, id, params, trashable),
+					),
+				),
 			)
 		}
 	}

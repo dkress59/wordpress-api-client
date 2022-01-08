@@ -1,9 +1,10 @@
 import { AUTH_TYPE } from '../src'
-import { ERROR_MESSAGE } from '../src/constants'
+import { END_POINT, ERROR_MESSAGE } from '../src/constants'
 import { URLSearchParams } from 'url'
 import {
 	getDefaultQueryList,
 	getDefaultQuerySingle,
+	getDeleteUri,
 	getErrorMessage,
 	postCreate,
 	useAuth,
@@ -680,6 +681,36 @@ describe('util', () => {
 					).toBe(false)
 				})
 			})
+		})
+	})
+	describe('getDeleteUri', () => {
+		it('defaults correctly', () => {
+			expect(getDeleteUri(END_POINT.USERS, 1)).toContain('force=true')
+			expect(getDeleteUri(END_POINT.PAGES, 1)).not.toContain('force=true')
+			expect(getDeleteUri(END_POINT.POSTS, 1)).not.toContain('force=true')
+			expect(getDeleteUri(END_POINT.EDITOR_BLOCKS, 1)).not.toContain(
+				'force=true',
+			)
+		})
+		it('correctly picks up query params', () => {
+			const mockEndPoint = 'mock/v0/endpoint'
+			expect(
+				getDeleteUri(
+					mockEndPoint,
+					1,
+					new URLSearchParams({ custom: 'var' }),
+				),
+			).toBe(`${mockEndPoint}/1/?custom=var&force=true`)
+		})
+		it('lets "force" to be set to false', () => {
+			const mockEndPoint = 'mock/v0/endpoint'
+			expect(
+				getDeleteUri(
+					mockEndPoint,
+					1,
+					new URLSearchParams({ custom: 'var', force: 'false' }),
+				),
+			).toBe(`${mockEndPoint}/1/?custom=var&force=false`)
 		})
 	})
 })
