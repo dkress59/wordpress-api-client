@@ -9,9 +9,12 @@ export class FetchClient {
 
 	constructor(
 		baseUrl: URL,
-		public onError: (message: string) => void = (message: string) => {
+		public onError: (message: string) => Promise<void> = (
+			message: string,
+		) => {
 			// eslint-disable-next-line no-console
 			console.error(message)
+			return Promise.resolve()
 		},
 		headers: Record<string, string> = {},
 		public authHeader: Record<string, string> = {},
@@ -58,7 +61,7 @@ export class FetchClient {
 			}
 		} catch (error) {
 			const message = await getErrorMessage(error as Response)
-			this.onError(message)
+			await this.onError(message)
 			throw new Error(message)
 		}
 	}

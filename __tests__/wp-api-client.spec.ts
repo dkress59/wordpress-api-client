@@ -23,7 +23,6 @@ const mockData = {
 	title: 'mock_data',
 	type: WP_Post_Type_Name.post,
 }
-const mockData2 = { ...mockData, title: mockData.title + '2' }
 
 const mockPage = WPPageFactory.buildSync()
 

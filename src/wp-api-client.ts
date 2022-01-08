@@ -103,14 +103,13 @@ export class WpApiClient {
 							...Object.fromEntries(defaultQuery),
 							...Object.fromEntries(query ?? defaultQuery),
 					  })
-			let result: P[] = []
 			if (!ids.length) {
-				result = await this.http.getAll<P>(
+				return await this.http.getAll<P>(
 					`${endpoint}/${getDefaultQueryList(query)}`,
 				)
 			} else {
-				result = await Promise.all(
-					ids.map(postId =>
+				return await Promise.all(
+					ids.map(async postId =>
 						this.http.get<P>(
 							`${endpoint}/${postId}/${getDefaultQuerySingle(
 								query as undefined | URLSearchParams,
@@ -119,8 +118,6 @@ export class WpApiClient {
 					),
 				)
 			}
-
-			return result
 		}
 	}
 
@@ -354,7 +351,7 @@ export class WpApiClient {
 			find: async (plugin = '') =>
 				plugin
 					? [await this.http.get<P>(`${END_POINT.PLUGINS}/${plugin}`)]
-					: await this.http.get<P[]>(`${END_POINT.PLUGINS}`),
+					: this.http.get<P[]>(`${END_POINT.PLUGINS}`),
 			update: async (
 				plugin: string,
 				status: 'active' | 'inactive' = 'inactive',

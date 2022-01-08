@@ -30,12 +30,13 @@ function getDataFromResponse(json: unknown, statusText: string): string {
 	return statusText
 }
 
-export async function getErrorMessage(err: Response): Promise<string> {
-	const { statusText } = err
-	const json = (await err.json()) as null | string | Record<string, unknown>
-	const status = err.status
-	const url = err.url
+export async function getErrorMessage(err?: Response): Promise<string> {
+	const statusText = err?.statusText ?? ''
+	const json = (await err?.json()) as null | string | Record<string, unknown>
+	const status = err?.status ?? 500
+	const url = err?.url
 	const data = getDataFromResponse(json, statusText)
+	// eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
 	return ERROR_MESSAGE.ERROR_RESPONSE.replace('%url%', url || 'UNKNOWN')
 		.replace('%error%', JSON.stringify(data))
 		.replace('%status%', status.toString())

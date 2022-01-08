@@ -12,7 +12,7 @@ import {
 export type EndpointFind<P> = (
 	query?: URLSearchParams | number,
 	...ids: number[]
-) => Promise<P[]>
+) => Promise<(P | null)[]>
 
 export type EndpointFindOnly<P> = () => Promise<P>
 
@@ -248,7 +248,7 @@ type AuthOptions =
 export interface WpApiOptions {
 	auth?: AuthOptions
 	headers?: Record<string, string>
-	onError?: (message: string) => void
+	onError?: (message: string) => Promise<void>
 	protected?: BlackWhiteList
 	public?: BlackWhiteList
 	restBase?: string
