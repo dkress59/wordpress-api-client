@@ -13,7 +13,7 @@ a quick-start on the WP-REST-API basics.
 ## Constructor Options
 
 With the second constructor argument, the constructor options, authentication can
-be configured, auth-protected routes and default headers can be defined, an
+be configured, auth-protected routes and default headers can be defined, an async
 `onError` function can be set and also the API url-base and the list of post types
 with trash bins can be adjusted.
 
@@ -32,7 +32,7 @@ interface WpApiOptions {
 		nonce?: string //nonce
 	}
 	headers?: Record<string, string>
-	onError?: (message: string) => void
+	onError?: (message: string) => Promise<void>
 	protected?: {
 		GET: string[] // ['wp/v2/users', ...]
 		POST: string[] // ['wp/v2/posts', ...]
@@ -212,8 +212,8 @@ Specific posts can be retrieved via post id, e.g.:
 const [welcome, contact, products] = await client.page().find(12, 34, 123)
 ```
 
-?> **Note:** If there is an error with one of the posts, the respective promise
-will resolve to `null`.
+?> **Note:** If there is an error with one of the posts, the client will throw
+an informative error – requests should always be wrapped in a try-catch block.
 
 ?> You do not need to be authenticated to retrieve password-protected posts/pages
 – the password must be appended as URLSearchParams:

@@ -2,7 +2,7 @@
   "name": "wordpress-api-client-docs",
   "private": true,
   "description": "Documentation of WordPress API Client",
-  "version": "0.4.3.3",
+  "version": "0.4.4.1",
   "author": "Damian Kress",
   "bugs": "https://github.com/dkress59/wordpress-api-client/issues",
   "license": "MIT",
