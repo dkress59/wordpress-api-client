@@ -54,9 +54,11 @@ describe('WpApiClient', () => {
 	})
 
 	beforeEach(() => {
+		mockFetch.mockReset()
+		mockJson.mockReset()
+		mockText.mockReset()
 		mockJson.mockResolvedValue(mockData)
 		mockText.mockResolvedValue(JSON.stringify(mockData))
-		mockFetch.mockReset()
 		mockFetch.mockResolvedValue({
 			ok: true,
 			json: mockJson,
@@ -341,39 +343,80 @@ describe('WpApiClient', () => {
 					defaultOptions,
 				)
 			})
-		})
-		describe('.media', () => {
-			it('.create', async () => {
-				const mockFileName = 'mock_file.jpg'
-				const data = 'mock_data'
-				await client.media().create(mockFileName, Buffer.from(data))
+			it('.find (empty list)', async () => {
+				mockJson.mockResolvedValueOnce(undefined)
+				const response = await client.taxonomy()
+				expect(response).toEqual([])
+			})
+			it('.find (single params)', async () => {
+				const mockTaxonomy = 'category'
+				await client.taxonomy({ context: 'view' }, mockTaxonomy)
 				expect(mockFetch).toHaveBeenCalledWith(
-					mockRestBase + END_POINT.MEDIA,
-					{
-						body: Buffer.from(data),
-						headers: {
-							...defaultOptions.headers,
-							'Content-Type': 'image/jpeg',
-							'Content-Disposition':
-								'attachment; filename="' + mockFileName + '"',
-						},
-						method: 'post',
-					},
+					mockRestBase +
+						END_POINT.TAXONOMIES +
+						'/' +
+						mockTaxonomy +
+						'/' +
+						getDefaultQuerySingle(
+							new URLSearchParams({ context: 'view' }),
+						),
+					defaultOptions,
 				)
 			})
-			it('throws invalid filename', async () => {
-				const mockFileName = 'mock_file'
-				const data = 'mock_data'
-				await expect(
-					client.media().create(mockFileName, Buffer.from(data)),
-				).rejects.toThrow(
-					new Error(
-						ERROR_MESSAGE.INVALID_FILENAME.replace(
-							'%fileName%',
-							mockFileName,
+		})
+		describe('.media', () => {
+			describe('.create', () => {
+				it('works correctly', async () => {
+					const mockFileName = 'mock_file.jpg'
+					const data = 'mock_data'
+					mockJson.mockResolvedValueOnce('created')
+					mockJson.mockResolvedValueOnce('updated')
+					const response = await client
+						.media()
+						.create(mockFileName, Buffer.from(data))
+					expect(response).toBe('created')
+					expect(mockFetch).toHaveBeenCalledWith(
+						mockRestBase + END_POINT.MEDIA,
+						{
+							body: Buffer.from(data),
+							headers: {
+								...defaultOptions.headers,
+								'Content-Type': 'image/jpeg',
+								'Content-Disposition':
+									'attachment; filename="' +
+									mockFileName +
+									'"',
+							},
+							method: 'post',
+						},
+					)
+				})
+				it('throws invalid filename', async () => {
+					const mockFileName = 'mock_file'
+					const data = 'mock_data'
+					await expect(
+						client.media().create(mockFileName, Buffer.from(data)),
+					).rejects.toThrow(
+						new Error(
+							ERROR_MESSAGE.INVALID_FILENAME.replace(
+								'%fileName%',
+								mockFileName,
+							),
 						),
-					),
-				)
+					)
+				})
+				it('returns update, if data provided', async () => {
+					mockJson.mockResolvedValueOnce('created')
+					mockJson.mockResolvedValueOnce('updated')
+					const mockFileName = 'mock_file.jpg'
+					const data = 'mock_data'
+					const response = await client
+						.media()
+						.create(mockFileName, Buffer.from(data), 'image/jpeg', {
+							slug: 'mock_slug',
+						})
+					expect(response).toBe('updated')
+				})
 			})
 		})
 		describe('.user', () => {
