@@ -8,7 +8,7 @@ import {
 } from './constants'
 import { URLSearchParams } from 'url'
 
-// FIXME: improve + make use of type-predicates
+// ToDo: improve + make use of type-predicates
 // eslint-disable-next-line sonarjs/cognitive-complexity
 function getDataFromResponse(json: unknown, statusText: string): string {
 	if (!json) return statusText

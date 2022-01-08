@@ -256,8 +256,6 @@ describe('End-to-end test', () => {
 					.media()
 					.create(mockFilename, mockJpg, undefined, {
 						alt_text: 'mock alt-text',
-						// FIXME: .media.create caption.rendered
-						// caption: 'mock_caption',
 						title: mockTitle,
 						slug: 'mock_slug',
 					})

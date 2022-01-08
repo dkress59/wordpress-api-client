@@ -109,11 +109,11 @@ export class WpApiClient {
 							...Object.fromEntries(query ?? defaultQuery),
 					  })
 			if (!ids.length) {
-				return await this.http.getAll<P>(
+				return this.http.getAll<P>(
 					`${endpoint}/${getDefaultQueryList(query)}`,
 				)
 			} else {
-				return await Promise.all(
+				return Promise.all(
 					ids.map(async postId =>
 						this.http.get<P>(
 							`${endpoint}/${postId}/${getDefaultQuerySingle(
@@ -294,6 +294,8 @@ export class WpApiClient {
 			mimeType = 'image/jpeg',
 			data?: Partial<P>,
 		): Promise<P> => {
+			// FIXME: .media.create caption.rendered
+			// caption: 'mock_caption',
 			if (!fileName.includes('.'))
 				throw new Error(
 					ERROR_MESSAGE.INVALID_FILENAME.replace(
