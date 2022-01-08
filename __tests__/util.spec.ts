@@ -106,6 +106,11 @@ describe('util', () => {
 					.replace('%status%', '666'),
 			)
 		})
+		it('undefined', async () => {
+			expect(await getErrorMessage(undefined)).toEqual(
+				ERROR_MESSAGE.ERROR_RESPONSE.replace('%url%', 'UNKNOWN'),
+			)
+		})
 	})
 
 	describe('validateBaseUrl', () => {
