@@ -1,26 +1,14 @@
 # Helper Methods
 
-The WpApiClient class uses three utility types and four helper methods:
-
-- WPCreate
-- EndpointCreate
-- EndpointUpdate
-- createEndpointGet
-- createEndpointPost
-- createEndpointCustomGet
-- createEndpointCustomPost
-- defaultEndpoints (ToDo: Docs)
-- addPostType (ToDo: Docs)
-
 To understand `.createEndpointGet()` and `.createEndpointPost()`, one needs to
-know a few things about the WordPress API itself: To retreive a list of posts,
+know a few things about the WordPress API itself: To retrieve a list of posts,
 one needs to GET-request the route `/posts`. For a specific post the route that
 needs to be requested `/posts/{id}`. The same goes for pages; `/pages`, `/pages/{id}`.
 
 To update a specific post or page, a POST request must be sent to `/posts{id}` or
 `/pages/{id}`, for a new post/page the POST request goes directly to `/posts`/
 `/pages`. This schema is valid for all WordPress-built-ins (Posts, Pages, Post-
-Categories, Post-Tags, Media), and also for all registered [Custom Post Types](https://developer.wordpress.org/reference/functions/register_post_type/ ':crossorgin')
+Categories, Post-Tags, Media), and also for all registered[Custom Post Types](https://developer.wordpress.org/reference/functions/register_post_type/ ':crossorgin')
 and [Custom Taxonomies](https://developer.wordpress.org/reference/functions/register_taxonomy/ ':crossorgin').
 
 For this recurring schema the WpApiClient class (and any sub-class) can use the
@@ -33,7 +21,7 @@ output format of the `post_content` and `post_title` fields is an object
 string. _Note:_ A default query-param string will be added to the end point when
 using `.createEndpointGet()`: Collections will have the query `?_embed=true&order=asc&orderby=menu_order&per_page=100`
 appended, single posts will be queried with [?_embed=true](https://developer.wordpress.org/rest-api/using-the-rest-api/global-parameters/#_embed ':crossorgin').
-The query can be overriden with the second parameter, e.g:
+The query can be overridden with the second parameter, e.g:
 `.createEndpointGet('wp/v2/posts', { _embed: 'author' })`.
 
 The utility type `WPCreate<T>` will strip the `id` field from any type (e.g. POST
