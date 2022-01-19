@@ -23,5 +23,6 @@ module.exports = {
 		'curly': 'off',
 		'no-console': 'error',
 		'unused-imports/no-unused-imports': 'error',
+		"no-restricted-imports": ["error", { "paths": ["."] }]
 	},
 }

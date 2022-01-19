@@ -1,5 +1,5 @@
-import { AUTH_TYPE, WpRestApiContext } from '.'
 import {
+	AUTH_TYPE,
 	DefaultEndpoint,
 	DefaultEndpointWithRevision,
 	EndpointCreate,
@@ -19,6 +19,7 @@ import {
 	WPTheme,
 	WPUser,
 	WpApiOptions,
+	WpRestApiContext,
 } from './types'
 import {
 	END_POINT,

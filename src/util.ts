@@ -1,5 +1,4 @@
-import { AUTH_TYPE } from '.'
-import { BlackWhiteList } from './types'
+import { AUTH_TYPE, BlackWhiteList } from './types'
 import {
 	END_POINT_PROTECTED,
 	END_POINT_PUBLIC,

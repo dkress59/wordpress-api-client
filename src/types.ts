@@ -53,7 +53,10 @@ export interface ACFBase<A = unknown> {
 }
 
 // ToDo: Omit<WP_REST_API_Post, 'menu_order'>
-export type WPPost<A = unknown> = WP_REST_API_Post & ACFBase<A>
+export type WPPost<A = unknown> = WP_REST_API_Post &
+	ACFBase<A> & {
+		yoast_head_json?: YoastHead
+	}
 
 export type WPMedia<A = unknown> = WP_REST_API_Attachment & ACFBase<A>
 
@@ -259,4 +262,94 @@ export interface BlackWhiteList {
 	GET: string[]
 	POST: string[]
 	DELETE: string[]
+}
+
+export interface YoastHead {
+	title: string
+	robots: YoastRobots
+	og_locale: string
+	og_type: string
+	og_title: string
+	og_description: string
+	og_url: string
+	og_site_name: string
+	article_modified_time?: Date
+	article_published_time: Date
+	og_image?: [
+		{
+			width: number
+			height: number
+			url: string
+			type: string
+		},
+	]
+	twitter_card: string
+	twitter_misc: YoastTwitterMisc
+	schema: YoastSchema
+}
+
+export interface YoastRobots {
+	'index': string
+	'follow': string
+	'max-snippet': string
+	'max-image-preview': string
+	'max-video-preview': string
+}
+
+export interface YoastSchema {
+	'@context': string
+	'@graph': YoastGraph[]
+}
+
+export interface YoastGraph {
+	'@type': string
+	'@id': string
+	'url'?: string
+	'name'?: string
+	'description'?: string
+	'potentialAction'?: YoastPotentialAction[]
+	'inLanguage'?: string
+	'isPartOf'?: YoastAuthor
+	'datePublished'?: Date
+	'dateModified'?: Date
+	'author'?: YoastAuthor
+	'breadcrumb'?: YoastAuthor
+	'itemListElement'?: YoastItemListElement[]
+	'image'?: YoastImage
+	'sameAs'?: string[]
+}
+
+export interface YoastAuthor {
+	'@id': string
+}
+
+export interface YoastImage {
+	'@type': string
+	'@id': string
+	'inLanguage': string
+	'url': string
+	'contentUrl': string
+	'caption': string
+}
+
+export interface YoastItemListElement {
+	'@type': string
+	'position': number
+	'name': string
+	'item'?: string
+}
+
+export interface YoastPotentialAction {
+	'@type': string
+	'target': string[] | YoastTargetClass
+	'query-input'?: string
+}
+
+export interface YoastTargetClass {
+	'@type': string
+	'urlTemplate': string
+}
+
+export interface YoastTwitterMisc {
+	'Written by': string
 }
