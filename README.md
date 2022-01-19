@@ -15,7 +15,7 @@
 
 A typed JavaScript client for your WordPress REST API. Super simple yet highly extensible.
 
-This library covers all* built-in WP REST API routes and can easily be extended
+This library covers all built-in WP REST API routes and can easily be extended
 with custom routes.
 
 ---
