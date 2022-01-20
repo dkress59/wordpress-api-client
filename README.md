@@ -51,9 +51,9 @@ of your needs:
 import WpApiClient, { WPCategory, WPPage, WPPost } from 'wordpress-api-client'
 
 async function getContent(): Promise<{
-    aboutPage: WPPage | null
-    contactPage: WPPage | null
-    frontPage: WPPage | null
+    aboutPage: WPPage
+    contactPage: WPPage
+    frontPage: WPPage
     categories: WPCategory[]
     recent25posts: WPPost[]
 }> {

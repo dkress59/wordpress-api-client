@@ -52,26 +52,35 @@ export interface ACFBase<A = unknown> {
 	acf: A
 }
 
-// ToDo: Omit<WP_REST_API_Post, 'menu_order'>
-export type WPPost<A = unknown> = WP_REST_API_Post &
-	ACFBase<A> & {
-		yoast_head_json?: YoastHead
-	}
+export interface YoastBase {
+	yoast_head_json?: YoastHead
+}
 
-export type WPMedia<A = unknown> = WP_REST_API_Attachment & ACFBase<A>
+// ToDo: Omit<WP_REST_API_Post, 'menu_order'>
+export type WPPost<A = unknown> = WP_REST_API_Post & ACFBase<A> & YoastBase
+
+export type WPMedia<A = unknown> = WP_REST_API_Attachment &
+	ACFBase<A> &
+	YoastBase
 
 // ToDo: Fix Omit<> type hinting
 export type WPPage<A = unknown> /* Omit< */ = WPPost<A> /* ,
 	'categories' | 'sticky' | 'tags'
 > */ & { menu_order: number; parent: number }
 
-export type WPTaxonomy<A = unknown> = WP_REST_API_Taxonomy & ACFBase<A>
+export type WPTaxonomy<A = unknown> = WP_REST_API_Taxonomy &
+	ACFBase<A> &
+	YoastBase
 
-export type WPCategory<A = unknown> = WP_REST_API_Category & ACFBase<A>
+export type WPCategory<A = unknown> = WP_REST_API_Category &
+	ACFBase<A> &
+	YoastBase
 
-export type WPComment<A = unknown> = WP_REST_API_Comment & ACFBase<A>
+export type WPComment<A = unknown> = WP_REST_API_Comment &
+	ACFBase<A> &
+	YoastBase
 
-export type WPTag<A = unknown> = WP_REST_API_Tag & ACFBase<A>
+export type WPTag<A = unknown> = WP_REST_API_Tag & ACFBase<A> & YoastBase
 
 export type WPUser<A = unknown> = WP_REST_API_User & ACFBase<A>
 
@@ -275,14 +284,12 @@ export interface YoastHead {
 	og_site_name: string
 	article_modified_time?: Date
 	article_published_time: Date
-	og_image?: [
-		{
-			width: number
-			height: number
-			url: string
-			type: string
-		},
-	]
+	og_image?: {
+		width: number
+		height: number
+		url: string
+		type: string
+	}[]
 	twitter_card: string
 	twitter_misc: YoastTwitterMisc
 	schema: YoastSchema
