@@ -1,7 +1,7 @@
 # Extending Default Routes
 
 WordPress plugins, such as [Advanced Custom Fields](https://www.advancedcustomfields.com/),
-can extend/modify the WP-API's response of default obects (WPPage, WPPost, …),
+can extend/modify the WP-API's response of default objects (WPPage, WPPost, …),
 which of course needs to be reflected in the API client's responses. If you are
 using TypeScript, the default methods can be extended with your custom typing.
 
@@ -106,72 +106,30 @@ export interface CustomPost extends WPPost {
 
 ## Yoast SEO (wordpress-seo)
 
-If you are familiar with WordPress and SEO, you probably know Yoast! SEO. If you
-would like to use the Yoast! meta from your posts, pages, media and custom post types,
-you can add extend the WP REST API with thos fields.
+If you are familiar with WordPress and SEO, you probably know
+[Yoast! SEO](https://wordpress.org/plugins/wordpress-seo).
+Since v17.x, Yoast's generated meta-tags are available via the REST API by default
+for Posts, Pages, Categories, Tags, Media and Users. The output for these content
+types, as well as the output for custom post types and taxonomies can be controlled
+via Yoast's UI. The typings for the "Yoast Head" are already included in this package,
+but the WordPress plugin itself must, of course, be installed and active.
 
-The example below will add a `yoastHead` field to the REST response for all posts,
-pages, products and media – containing all the yoast meta for the given post objects.
+```typescript
+import WpApiClient, { WPPage, YoastBase } from 'wordpress-api-client'
 
-<details>
-<summary>PHP Example (Click to expand)</summary>
-<br />
+const EP_PORTFOLIO = 'wp/v2/portfolio'
 
-```php
-<?php
+type WPPortfolio = WPPage & YoastBase & {
+	gallery: string[]
+} 
 
-use WP_REST_Response;
-
-class RESTEndpoints {
-
-    public function __construct() {
-		add_action('rest_api_init', [$this, 'add_yoast_field'], 20);
-    }
-
-	public static function get_yoast_headers(array $post): string {
-		if (function_exists('YoastSEO')) {
-			$post_id     = isset($post['id']) ? (int) $post['id'] : (int) $post['ID'];
-			$meta_helper = YoastSEO()->meta->for_post($post_id);
-			$meta        = $meta_helper;
-			$headers     = $meta->get_head();
-            // You can either return a html string
-            // or a proper JSON object
-			// return $headers->json;
-			return $headers->html;
-		}
-		return '';
+class CmsClient extends WpApiClient {
+	__constructor() {
+		super('https://mywebsite.com')
 	}
 
-	public function add_yoast_field() {
-		register_rest_field(
-			'attachment',
-			'yoastHead',
-			['get_callback' => [$this, 'get_yoast_headers']],
-		);
-		register_rest_field(
-			'post',
-			'yoastHead',
-			['get_callback' => [$this, 'get_yoast_headers']],
-		);
-		register_rest_field(
-			'page',
-			'yoastHead',
-			['get_callback' => [$this, 'get_yoast_headers']],
-		);
-		register_rest_field(
-			'product',
-			'yoastHead',
-			['get_callback' => [$this, 'get_yoast_headers']],
-		);
-	}
-
+	portfolio = this.addPostType<WPPortfolio>(EP_PORTFOLIO)
 }
 
-new RESTEndpoints();
+export const cmsClient = new CmsClient()
 ```
-
-</details>
-<br />
-
-?> Since Yoast! SEO v17.x the REST-API output in the JSON format can be controlled
-via the WP-Admin-UI. The corresponding typings will soon be integrated.

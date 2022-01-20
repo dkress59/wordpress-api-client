@@ -86,7 +86,7 @@ const EP_MENU = 'demo-plugin/v1/menu'
 
 export class WpClient extends WpApiClient {
     constructor() {
-        super('http://localhost:8080', {
+        super('https://mywebsite.com', {
             auth: {
                 type: 'basic',
                 password: 'password',

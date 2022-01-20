@@ -19,7 +19,7 @@ const customEndpoint = 'custom/endpoint'
 
 class CmsClient extends WpApiClient {
 	constructor() {
-		super('http://mywebsite.com')
+		super('https://mywebsite.com')
     }
 
     findSomething = this.createEndpointGet(
@@ -31,11 +31,11 @@ class CmsClient extends WpApiClient {
 const client = new CmsClient()
 
 await client.findSomething(new URLSearchParams({ per_page: '8' }))
-// GET http://mywebsite.com/wp-json/custom/endpoint?per_page=8
+// GET https://mywebsite.com/wp-json/custom/endpoint?per_page=8
 
 await client.findSomething(new URLSearchParams({ context: 'view' }), 1, 2)
-// GET http://mywebsite.com/wp-json/custom/endpoint/1?per_page=25&context=view
-// GET http://mywebsite.com/wp-json/custom/endpoint/2?per_page=25&context=view
+// GET https://mywebsite.com/wp-json/custom/endpoint/1?per_page=25&context=view
+// GET https://mywebsite.com/wp-json/custom/endpoint/2?per_page=25&context=view
 
 ```
 
@@ -51,7 +51,7 @@ const customEndpoint = 'custom/endpoint'
 
 class CmsClient extends WpApiClient {
 	constructor() {
-		super('http://mywebsite.com')
+		super('https://mywebsite.com')
     }
 
     postSomething = this.createEndpointPost(customEndpoint)
@@ -60,10 +60,10 @@ class CmsClient extends WpApiClient {
 const client = new CmsClient()
 
 await client.postSomething({ title: 'New Title'})
-// POST http://mywebsite.com/wp-json/custom/endpoint
+// POST https://mywebsite.com/wp-json/custom/endpoint
 
 await client.postSomething({ title: 'Updated Title'}, 1)
-// POST http://mywebsite.com/wp-json/custom/endpoint/1
+// POST https://mywebsite.com/wp-json/custom/endpoint/1
 
 ```
 
@@ -79,7 +79,7 @@ const customEndpoint = 'custom/endpoint'
 
 class CmsClient extends WpApiClient {
 	constructor() {
-		super('http://mywebsite.com')
+		super('https://mywebsite.com')
     }
 
     deleteSomething = this.createEndpointDelete(
@@ -91,8 +91,8 @@ class CmsClient extends WpApiClient {
 const client = new CmsClient()
 
 await client.deleteSomething(new URLSearchParams({ context: 'edit' }), 1, 2)
-// DELETE http://mywebsite.com/wp-json/custom/endpoint/1?example=true&context=edit
-// DELETE http://mywebsite.com/wp-json/custom/endpoint/2?example=true&context=edit
+// DELETE https://mywebsite.com/wp-json/custom/endpoint/1?example=true&context=edit
+// DELETE https://mywebsite.com/wp-json/custom/endpoint/2?example=true&context=edit
 
 ```
 

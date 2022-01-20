@@ -79,7 +79,7 @@ interface WPMenu {
 
 export class CmsClient extends WpApiClient {
     constructor() {
-        super('https://my-wordpress-website.com')
+        super('https://mywebsite.com')
     }
 
     menu = this.createEndpointCustomGet<WPMenu>(EP_MENU)
