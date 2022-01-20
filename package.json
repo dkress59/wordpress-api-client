@@ -1,7 +1,7 @@
 {
   "name": "wordpress-api-client",
   "description": "WordPress-API Client for JS/TS",
-  "version": "0.4.4",
+  "version": "0.4.5",
   "author": "Damian Kress",
   "bugs": "https://github.com/dkress59/wordpress-api-client/issues",
   "license": "MIT",
@@ -55,6 +55,7 @@
     "node": "14.17.0 || >=16.0.0"
   },
   "keywords": [
+    "typescript",
     "wordpress",
     "headless",
     "nodejs",
@@ -62,7 +63,8 @@
     "api client",
     "wpapi",
     "wp-api",
-    "typescript",
+    "wp-json",
+    "json",
     "js",
     "ts",
     "wp"
