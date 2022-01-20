@@ -23,8 +23,8 @@
     "wp-api/basic-auth": "*",
     "wpackagist-plugin/advanced-custom-fields": "5.11.4",
     "wpackagist-plugin/animate-wp-blocks": "2.0.2",
-    "wpackagist-plugin/jwt-auth": "2.0.0",
-    "wpackagist-plugin/wordpress-seo": "17.8",
+    "wpackagist-plugin/jwt-auth": "2.1.0",
+    "wpackagist-plugin/wordpress-seo": "17.9",
     "wpackagist-theme/twentytwentyone": "1.4"
   },
   "extra": {

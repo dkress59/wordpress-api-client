@@ -17,6 +17,7 @@ export class WpClient extends WpApiClient {
 			onError: error => {
 				// eslint-disable-next-line no-console
 				console.error(color, error)
+				return Promise.resolve()
 			},
 		})
 	}

@@ -9,7 +9,7 @@ class RESTEndpoints {
 
 	public function __construct() {
 		add_action('rest_api_init', [$this, 'add_endpoints']);
-		add_action('rest_api_init', [$this, 'add_yoast_field'], 20);
+		// add_action('rest_api_init', [$this, 'add_yoast_field'], 20); // redundant since Yoast v17.x
 		add_filter('wp_nav_menu_objects', [$this, 'nav_menu_icons'], 10, 2);
 	}
 

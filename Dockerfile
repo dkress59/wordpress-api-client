@@ -35,7 +35,7 @@ WORKDIR /var/www/html
 FROM composer as wordpress
 
 ARG WORDPRESS_LOCALE="en_US"
-ARG WORDPRESS_VERSION="5.8.2"
+ARG WORDPRESS_VERSION="5.8.3"
 RUN set -ex; \
         wp core download --version=$WORDPRESS_VERSION --locale=$WORDPRESS_LOCALE --skip-content --allow-root; \
         wp core verify-checksums --allow-root
