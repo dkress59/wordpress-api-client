@@ -141,7 +141,7 @@ is not helping.
 
 ## Contributors ✨
 
-Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+<!-- Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)): -->
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
@@ -163,8 +163,8 @@ This project follows the [all-contributors](https://github.com/all-contributors/
 specification. Contributions of any kind welcome!
 
 Please fork the upstream repository into your own account and apply your changes
-to a new branch. Make sure to add tests, if necessary, before opening a PR to
-against upstream main-branch.
+to a new branch. Make sure to add tests, if necessary, before opening a PR against
+the upstream main-branch.
 
 Comment on an issue or on a PR and the
 [all-contributors bot](https://allcontributors.org/docs/en/bot/usage) will add

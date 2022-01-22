@@ -2,7 +2,7 @@
   "name": "wordpress-api-client",
   "description": "WordPress-API Client for JS/TS",
   "version": "0.4.5",
-  "author": "Damian Kress",
+  "author": "dkress59",
   "bugs": "https://github.com/dkress59/wordpress-api-client/issues",
   "license": "MIT",
   "main": "./dist/index.js",
@@ -11,7 +11,7 @@
   "contributors": [
     {
       "name": "Damian Kress",
-      "email": "mail@damiankress.de"
+      "email": "wordpress@damiankress.de"
     }
   ],
   "dependencies": {
