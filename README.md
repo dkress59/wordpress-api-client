@@ -7,7 +7,9 @@
  ![Jest](https://img.shields.io/badge/-jest-%23C21325?style=flat&logo=jest&color=f07)
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=dkress59_wordpress-api-client&metric=coverage)](https://sonarcloud.io/summary/new_code?id=dkress59_wordpress-api-client)
 [![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=dkress59_wordpress-api-client&metric=reliability_rating)](https://sonarcloud.io/summary/new_code?id=dkress59_wordpress-api-client)
-[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=dkress59_wordpress-api-client&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=dkress59_wordpress-api-client)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=dkress59_wordpress-api-client&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=dkress59_wordpress-api-client)<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+<!-- ALL-CONTRIBUTORS-BADGE:END -->
 <!-- [![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=dkress59_wordpress-api-client&metric=duplicated_lines_density)](https://sonarcloud.io/summary/new_code?id=dkress59_wordpress-api-client)
 [![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=dkress59_wordpress-api-client&metric=sqale_index)](https://sonarcloud.io/summary/new_code?id=dkress59_wordpress-api-client)
 [![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=dkress59_wordpress-api-client&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=dkress59_wordpress-api-client)
@@ -136,3 +138,34 @@ await client...
 Feel free to report an [issue](https://github.com/dkress59/wordpress-api-client/issues)
 if you are having trouble and the [documentation](https://dkress59.github.io/wordpress-api-client/)
 is not helping.
+
+## Contributors ✨
+
+Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tr>
+    <td align="center"><a href="http://www.damiankress.de"><img src="https://avatars.githubusercontent.com/u/28515387?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Damian</b></sub></a><br /><a href="https://github.com/dkress59/wordpress-api-client/commits?author=dkress59" title="Code">💻</a> <a href="https://github.com/dkress59/wordpress-api-client/commits?author=dkress59" title="Documentation">📖</a> <a href="#example-dkress59" title="Examples">💡</a> <a href="#maintenance-dkress59" title="Maintenance">🚧</a> <a href="https://github.com/dkress59/wordpress-api-client/commits?author=dkress59" title="Tests">⚠️</a></td>
+  </tr>
+</table>
+
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+### Contributing Guidelines
+
+This project follows the [all-contributors](https://github.com/all-contributors/all-contributors)
+specification. Contributions of any kind welcome!
+
+Please fork the upstream repository into your own account and apply your changes
+to a new branch. Make sure to add tests, if necessary, before opening a PR to
+against upstream main-branch.
+
+Comment on an issue or on a PR and the
+[all-contributors bot](https://allcontributors.org/docs/en/bot/usage) will add
+you to the list above :)
