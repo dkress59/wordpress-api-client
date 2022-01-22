@@ -6,7 +6,7 @@ The current progress can be tracked [here](https://github.com/dkress59/wordpress
   - typings for Yoast! SEO now included
   - internal imports repaired (+ `no-restricted-imports` rule added)
 
-- v0..4
+- v0.4.4
   - allows for `options.onError` to be asynchronous
   - fixes `delete` query param to be overridden for DELETE requests
 
