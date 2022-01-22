@@ -157,10 +157,14 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
+### Contributing Guidelines
+
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors)
 specification. Contributions of any kind welcome!
 
-### Contributing
+Please fork the upstream repository into your own account and apply your changes
+to a new branch. Make sure to add tests, if necessary, before opening a PR to
+against upstream main-branch.
 
 Comment on an issue or on a PR and the
 [all-contributors bot](https://allcontributors.org/docs/en/bot/usage) will add
