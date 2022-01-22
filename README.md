@@ -1,7 +1,4 @@
 # WordPress-API Client
-<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
-<!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 [![npm version](https://badge.fury.io/js/wordpress-api-client.svg)](https://badge.fury.io/js/wordpress-api-client)
  ![WordPress](https://img.shields.io/badge/WordPress-%23117AC9.svg?style=flat&logo=WordPress&logoColor=white)
@@ -15,6 +12,9 @@
 [![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=dkress59_wordpress-api-client&metric=sqale_index)](https://sonarcloud.io/summary/new_code?id=dkress59_wordpress-api-client)
 [![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=dkress59_wordpress-api-client&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=dkress59_wordpress-api-client)
 [![Bugs](https://sonarcloud.io/api/project_badges/measure?project=dkress59_wordpress-api-client&metric=bugs)](https://sonarcloud.io/summary/new_code?id=dkress59_wordpress-api-client) -->
+<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+<!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 A typed JavaScript client for your WordPress REST API. Super simple yet highly extensible.
 
@@ -158,4 +158,11 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
-This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
+This project follows the [all-contributors](https://github.com/all-contributors/all-contributors)
+specification. Contributions of any kind welcome!
+
+### Contributing
+
+Comment on an issue or on a PR and the
+[all-contributors bot](https://allcontributors.org/docs/en/bot/usage) will add
+you to the list above :)
