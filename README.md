@@ -1,4 +1,7 @@
 # WordPress-API Client
+<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+<!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 [![npm version](https://badge.fury.io/js/wordpress-api-client.svg)](https://badge.fury.io/js/wordpress-api-client)
  ![WordPress](https://img.shields.io/badge/WordPress-%23117AC9.svg?style=flat&logo=WordPress&logoColor=white)
@@ -136,3 +139,23 @@ await client...
 Feel free to report an [issue](https://github.com/dkress59/wordpress-api-client/issues)
 if you are having trouble and the [documentation](https://dkress59.github.io/wordpress-api-client/)
 is not helping.
+
+## Contributors ✨
+
+Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tr>
+    <td align="center"><a href="http://www.damiankress.de"><img src="https://avatars.githubusercontent.com/u/28515387?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Damian</b></sub></a><br /><a href="https://github.com/dkress59/wordpress-api-client/commits?author=dkress59" title="Code">💻</a> <a href="https://github.com/dkress59/wordpress-api-client/commits?author=dkress59" title="Documentation">📖</a> <a href="#example-dkress59" title="Examples">💡</a> <a href="#maintenance-dkress59" title="Maintenance">🚧</a> <a href="https://github.com/dkress59/wordpress-api-client/commits?author=dkress59" title="Tests">⚠️</a></td>
+  </tr>
+</table>
+
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
