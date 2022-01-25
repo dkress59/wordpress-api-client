@@ -2,6 +2,11 @@
 
 The current progress can be tracked [here](https://github.com/dkress59/wordpress-api-client/projects/1)
 
+- v0.4.6
+  - new method `.{postType}.total()`
+  - reverted `.{postType}.find()` in favour of:
+  - new method `.{postType}.dangerouslyFindAll()`
+
 - v0.4.5
   - typings for Yoast! SEO now included
   - internal imports repaired (+ `no-restricted-imports` rule added)

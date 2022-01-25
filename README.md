@@ -7,9 +7,7 @@
  ![Jest](https://img.shields.io/badge/-jest-%23C21325?style=flat&logo=jest&color=f07)
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=dkress59_wordpress-api-client&metric=coverage)](https://sonarcloud.io/summary/new_code?id=dkress59_wordpress-api-client)
 [![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=dkress59_wordpress-api-client&metric=reliability_rating)](https://sonarcloud.io/summary/new_code?id=dkress59_wordpress-api-client)
-[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=dkress59_wordpress-api-client&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=dkress59_wordpress-api-client)<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
-<!-- ALL-CONTRIBUTORS-BADGE:END -->
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=dkress59_wordpress-api-client&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=dkress59_wordpress-api-client)
 <!-- [![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=dkress59_wordpress-api-client&metric=duplicated_lines_density)](https://sonarcloud.io/summary/new_code?id=dkress59_wordpress-api-client)
 [![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=dkress59_wordpress-api-client&metric=sqale_index)](https://sonarcloud.io/summary/new_code?id=dkress59_wordpress-api-client)
 [![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=dkress59_wordpress-api-client&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=dkress59_wordpress-api-client)
