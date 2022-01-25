@@ -5,7 +5,9 @@ import {
 	EndpointCreate,
 	EndpointDelete,
 	EndpointFind,
+	EndpointFindAll,
 	EndpointFindOnly,
+	EndpointTotal,
 	EndpointUpdate,
 	EndpointUpdatePartial,
 	RenderedBlockDto,
@@ -110,8 +112,10 @@ export class WpApiClient {
 							...Object.fromEntries(query ?? defaultQuery),
 					  })
 			if (!ids.length) {
-				return this.http.getAll<P>(
-					`${endpoint}/${getDefaultQueryList(query)}`,
+				return (
+					(await this.http.get<P[] | undefined>(
+						`${endpoint}/${getDefaultQueryList(query)}`,
+					)) ?? ([] as P[])
 				)
 			} else {
 				return Promise.all(
@@ -124,6 +128,21 @@ export class WpApiClient {
 					),
 				)
 			}
+		}
+	}
+
+	protected createEndpointGetAll<P>(
+		endpoint: string,
+		defaultQuery = new URLSearchParams({ page: '1' }),
+	): EndpointFindAll<P> {
+		return async (query?: URLSearchParams) => {
+			query = new URLSearchParams({
+				...Object.fromEntries(defaultQuery),
+				...Object.fromEntries(query ?? defaultQuery),
+			})
+			return this.http.getAll<P>(
+				`${endpoint}/${getDefaultQueryList(query)}`,
+			)
 		}
 	}
 
@@ -187,15 +206,24 @@ export class WpApiClient {
 		}
 	}
 
+	protected createEndpointTotal(endpoint: string): EndpointTotal {
+		return async () => this.http.getTotal(endpoint)
+	}
+
 	protected defaultEndpoints<P = WPPost>(
 		endpoint: string,
 		defaultParams?: URLSearchParams,
 	): DefaultEndpoint<P> {
 		return {
-			find: this.createEndpointGet<P>(endpoint, defaultParams),
 			create: this.createEndpointPost<P>(endpoint),
+			find: this.createEndpointGet<P>(endpoint, defaultParams),
 			update: this.createEndpointPost<P>(endpoint),
 			delete: this.createEndpointDelete<P>(endpoint),
+			dangerouslyFindAll: this.createEndpointGetAll<P>(
+				endpoint,
+				defaultParams,
+			),
+			total: this.createEndpointTotal(endpoint),
 		}
 	}
 

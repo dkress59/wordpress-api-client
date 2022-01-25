@@ -174,6 +174,30 @@ describe('FetchClient', () => {
 			)
 		})
 	})
+	describe('getTotal', () => {
+		it('returns total pages', async () => {
+			mockFetch.mockResolvedValueOnce({
+				ok: true,
+				json: mockJson,
+				text: mockText,
+				headers: new originalFetch.Headers({
+					'X-WP-TotalPages': '123',
+				}),
+			} as Response)
+			const http = new FetchClient(mockBaseURL)
+			expect(await http.getTotal('mock_uri')).toBe(123)
+		})
+		it('returns 0 by default', async () => {
+			mockFetch.mockResolvedValueOnce({
+				ok: true,
+				json: mockJson,
+				text: mockText,
+				headers: new originalFetch.Headers(),
+			} as Response)
+			const http = new FetchClient(mockBaseURL)
+			expect(await http.getTotal('mock_uri')).toBe(0)
+		})
+	})
 	describe('getAll', () => {
 		it('fetches the correct URL', async () => {
 			const http = new FetchClient(mockBaseURL)

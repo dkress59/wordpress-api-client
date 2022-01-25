@@ -98,11 +98,12 @@ export function postCreate<
 
 export function useAuth(
 	url: string,
-	method: 'get' | 'post' | 'delete',
+	method: 'get' | 'post' | 'delete' | 'options',
 	authType: AUTH_TYPE = AUTH_TYPE.NONE,
 	protectedRoutes: BlackWhiteList = END_POINT_PROTECTED,
 	publicRoutes: BlackWhiteList = END_POINT_PUBLIC,
 ): boolean {
+	if (method === 'options') method = 'get'
 	if (authType === AUTH_TYPE.BASIC || authType === AUTH_TYPE.NONCE)
 		return true
 

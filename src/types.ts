@@ -14,6 +14,8 @@ export type EndpointFind<P> = (
 	...ids: number[]
 ) => Promise<(P | null)[]>
 
+export type EndpointFindAll<P> = (query?: URLSearchParams) => Promise<P[]>
+
 export type EndpointFindOnly<P> = () => Promise<P>
 
 export type EndpointCreate<P> = (body: Partial<P>) => Promise<P | null>
@@ -25,26 +27,32 @@ export type EndpointUpdate<P> = (
 	id: number,
 ) => Promise<P | null>
 
+export type EndpointTotal = () => Promise<number>
+
 export type EndpointUpdatePartial<P> = (body: Partial<P>) => Promise<P>
 
 export interface DefaultEndpoint<P = WPPost> {
-	find: EndpointFind<P>
 	create: EndpointCreate<P>
-	delete: EndpointDelete<P>
+	find: EndpointFind<P>
 	update: EndpointUpdate<P>
+	delete: EndpointDelete<P>
+	dangerouslyFindAll: EndpointFindAll<P>
+	total: EndpointTotal
 }
 
 export interface DefaultEndpointWithRevision<P = WPPost> {
-	find: EndpointFind<P>
 	create: EndpointCreate<P>
-	delete: EndpointDelete<P>
+	find: EndpointFind<P>
 	update: EndpointUpdate<P>
+	delete: EndpointDelete<P>
+	dangerouslyFindAll: EndpointFindAll<P>
+	total: EndpointTotal
 	revision: (postId: number) => {
 		// WP_REST_API_Revision
-		find: EndpointFind<P>
 		create: EndpointCreate<P>
-		delete: EndpointDelete<P>
+		find: EndpointFind<P>
 		update: EndpointUpdate<P>
+		delete: EndpointDelete<P>
 	}
 }
 

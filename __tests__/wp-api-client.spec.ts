@@ -307,6 +307,28 @@ describe('WpApiClient', () => {
 				)
 			})
 		})
+		describe('.createEndpointGetAll', () => {
+			it('.dangerouslyFindAll default URLSearchParams are set', async () => {
+				await client.page().dangerouslyFindAll()
+				expect(mockFetch).toHaveBeenCalledWith(
+					mockBaseURL +
+						`/wp-json/${END_POINT.PAGES}/?_embed=true&order=asc&per_page=100&page=1`,
+					{ ...defaultOptions, method: 'get' },
+				)
+			})
+			it('.dangerouslyFindAll URLSearchParams can be modified', async () => {
+				await client
+					.page()
+					.dangerouslyFindAll(
+						new URLSearchParams({ mock_param: 'mock_value' }),
+					)
+				expect(mockFetch).toHaveBeenCalledWith(
+					mockBaseURL +
+						`/wp-json/${END_POINT.PAGES}/?_embed=true&order=asc&per_page=100&page=1&mock_param=mock_value`,
+					{ ...defaultOptions, method: 'get' },
+				)
+			})
+		})
 	})
 
 	describe('default methods', () => {

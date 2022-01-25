@@ -33,7 +33,7 @@ export class FetchClient {
 	/** will also throw if onError is defined */
 	private async fetch<T>(
 		url: string,
-		method: 'get' | 'post' | 'delete',
+		method: 'get' | 'post' | 'delete' | 'options',
 		headers?: HeadersInit,
 		body?: BodyInit,
 	): Promise<{ data: T; headers: Headers }> {
@@ -104,6 +104,11 @@ export class FetchClient {
 			}
 		}
 		return result
+	}
+
+	async getTotal(url: string): Promise<number> {
+		const { headers } = await this.fetch(url, 'options')
+		return Number(headers.get('X-WP-TotalPages'))
 	}
 
 	async post<T>(

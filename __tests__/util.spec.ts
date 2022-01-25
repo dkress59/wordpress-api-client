@@ -687,6 +687,9 @@ describe('util', () => {
 				})
 			})
 		})
+		it('uses GET auth for OPTIONS request', () => {
+			expect(useAuth(protectedUrl, 'options', AUTH_TYPE.BASIC)).toBe(true)
+		})
 	})
 	describe('getDeleteUri', () => {
 		it('defaults correctly', () => {
