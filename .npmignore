@@ -6,6 +6,8 @@ __tests__/
 .jest/
 .vscode/
 .yarn/
+.all-contributorsrc
 .codecov.yaml
 coverage/
 jest.config.ts
+sonar-project.properties
