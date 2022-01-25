@@ -64,63 +64,77 @@ const client = new WpApiClient('https://my-wordpress-website.com')
 
 client.post().create()
 client.post().find()
-client.post().delete()
 client.post().update()
+client.post().delete()
+client.post().total()
+client.post().dangerouslyFindAll()
 client.post().revision().create()
 client.post().revision().find()
-client.post().revision().delete()
 client.post().revision().update()
+client.post().revision().delete()
 
 client.page().create()
 client.page().find()
-client.page().delete()
 client.page().update()
+client.page().delete()
+client.page().total()
+client.page().dangerouslyFindAll()
 client.page().revision().create()
 client.page().revision().find()
-client.page().revision().delete()
 client.page().revision().update()
+client.page().revision().delete()
 
 client.comment().create()
 client.comment().find()
-client.comment().delete()
 client.comment().update()
+client.comment().delete()
 
 client.postCategory().create()
 client.postCategory().find()
-client.postCategory().delete()
 client.postCategory().update()
+client.postCategory().delete()
+client.postCategory().total()
+client.postCategory().dangerouslyFindAll()
 
 client.postTag().create()
 client.postTag().find()
-client.postTag().delete()
 client.postTag().update()
+client.postTag().delete()
+client.postTag().total()
+client.postTag().dangerouslyFindAll()
 
 client.media().create()
 client.media().find()
-client.media().delete()
 client.media().update()
+client.media().delete()
+client.media().total()
+client.media().dangerouslyFindAll()
 
 client.user().create()
 client.user().find()
 client.user().findMe()
 client.user().delete()
-client.user().deleteMe()
 client.user().update()
+client.user().deleteMe()
+client.user().total()
+client.user().dangerouslyFindAll()
 
 client.plugin().create()
 client.plugin().find()
-client.plugin().delete()
 client.plugin().update()
+client.plugin().delete()
 
 client.applicationPassword().create()
 client.applicationPassword().find()
-client.applicationPassword().delete()
 client.applicationPassword().update()
+client.applicationPassword().delete()
 
 client.reusableBlock().create()
 client.reusableBlock().find()
-client.reusableBlock().delete()
 client.reusableBlock().update()
+client.reusableBlock().delete()
+client.reusableBlock().total()
+client.reusableBlock().dangerouslyFindAll()
 client.reusableBlock().autosave().create()
 client.reusableBlock().autosave().find()
 
@@ -158,14 +172,8 @@ such as `page`, `per_page`, `order`, `orderby` and many more.
 
 To retrieve a list of all of your site's posts, call `await client.post().find()`.
 The response will be an empty array if no posts were found, otherwise it will
-return **all** of your posts.
-
-?> The WP REST API is capped at a maximum of 100 entries per page, so any `.find()`
-method will perform as many requests as necessary in order to return **all** results.
-To disable this behavior and to only return a maximum of 100 results from a single
-response, the `page` or `offset` query params can be used (e.g.
-`client.post().find( new URLSearchParams({ page: '1' }) )`
-).
+return a maximum of the first 100 posts. You can find out how many pages of posts
+you need to fetch by calling [`.total()`](#total).
 
 Below is an example how to change up the default query parameters, e.g. if you would
 like to change the defaults for the `.post` methods. But you can also
@@ -203,6 +211,16 @@ export class CmsClient extends WpApiClient {
     }
 }
 ```
+
+#### dangerously find all
+
+The WP REST API is capped at a maximum of 100 entries per page, so any `.dangerouslyFindAll()`
+method will perform as many parallel requests as necessary in order to return
+**all** results in one response.
+
+If your WordPress hosts tens of thousands of posts, executing this method will most
+definitely put a heavy strain both on your WordPress and on your Browser or NodeJS
+thread – you should only **use it very carefully**.
 
 #### find one or many
 
@@ -264,6 +282,26 @@ DELETE for objects that have no trash can status (e.g. categories or media) will
 be called with the query parameter `force=true`. This behavior can be controlled
 with the `trashable` constructor option, which receives a list of end points (e.g.
 `trashable: ['wp/v2/media', 'wp/v2/categories']`).
+
+</details>
+
+<details>
+<summary><h3 style="display:inline-block" id="total">
+  .total()
+</h3></summary>
+
+The WordPress REST API is capped at a maximum of 100 posts per page. This means
+that if you call `client.post().find(new URLSearchParams({ per_page: '25' }))`
+you will get the first set of 25 of all of your posts. If you call
+`client.post().find(new URLSearchParams({ per_page: '2500' }))`, on the other
+hand, you will only get the first 100 of your posts.
+
+If [`.dangerouslyFindAll()`](#dangerously-find-all) is not an option for you, you can paginate
+through all of your posts via URLSearchParams
+(`client.post().find(new URLSearchParams({ per_page: '25', page: '2' }))`).
+
+`.total()` tells you how many pages you have to iterate over (with the default 
+`per_page=100`) in order to have retrieved a complete list of your posts.
 
 </details>
 
