@@ -7,7 +7,7 @@
   "license": "MIT",
   "main": "./dist/index.js",
   "repository": "https://github.com/dkress59/wordpress-api-client",
-  "types": "./src/index.ts",
+  "types": "./dist/index.d.ts",
   "contributors": [
     {
       "name": "Damian Kress",
