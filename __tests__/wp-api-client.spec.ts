@@ -1,13 +1,15 @@
-import { END_POINT, ERROR_MESSAGE } from '../src/constants'
+import fetch from 'cross-fetch'
+import { randomUUID } from 'crypto'
 import { URLSearchParams } from 'url'
+import { WP_Post_Type_Name } from 'wp-types'
+
+import WpApiClient from '../src'
+import { END_POINT, ERROR_MESSAGE } from '../src/constants'
 import { WPPageFactory } from '../src/factories'
 import { WPPost } from '../src/types'
-import { WP_Post_Type_Name } from 'wp-types'
-import { defaultOptions } from './util'
 import { getDefaultQueryList, getDefaultQuerySingle } from '../src/util'
-import { randomUUID } from 'crypto'
-import WpApiClient from '../src'
-import fetch from 'cross-fetch'
+import { defaultOptions } from './util'
+
 jest.mock('cross-fetch', () => jest.fn())
 
 const originalFetch = jest.requireActual('cross-fetch')
@@ -326,6 +328,34 @@ describe('WpApiClient', () => {
 					mockBaseURL +
 						`/wp-json/${END_POINT.PAGES}/?_embed=true&order=asc&per_page=100&page=1&mock_param=mock_value`,
 					{ ...defaultOptions, method: 'get' },
+				)
+			})
+		})
+		describe('.createEndpointGetTotal', () => {
+			it('can set default URLSearchParams', async () => {
+				const mockParam = 'mock_param'
+				const mockValue = 'mock_value'
+				class SearchParamsClient extends WpApiClient {
+					constructor() {
+						super(mockBaseURL)
+					}
+
+					public post<P = WPPost>() {
+						return this.addPostType<P>(
+							END_POINT.POSTS,
+							true,
+							new URLSearchParams({
+								[mockParam]: mockValue,
+							}),
+						)
+					}
+				}
+				const mockClient = new SearchParamsClient()
+				await mockClient.post().total()
+				expect(mockFetch).toHaveBeenCalledWith(
+					mockBaseURL +
+						`/wp-json/${END_POINT.POSTS}/?${mockParam}=${mockValue}`,
+					{ ...defaultOptions, method: 'options' },
 				)
 			})
 		})

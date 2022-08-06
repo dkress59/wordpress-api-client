@@ -1,4 +1,8 @@
 {
+  "cSpell.language": "en_US,en_GB",
+  "cSpell.words": [
+      "trashable"
+  ],
   "editor.codeActionsOnSave": {
     "source.fixAll": true
   },
@@ -11,5 +15,5 @@
   },
   "eslint.nodePath": ".yarn/sdks",
   "prettier.prettierPath": ".yarn/sdks/prettier/index.js",
-  "typescript.enablePromptUseWorkspaceTsdk": true
+"typescript.enablePromptUseWorkspaceTsdk": true
 }

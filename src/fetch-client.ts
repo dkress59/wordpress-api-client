@@ -108,8 +108,8 @@ export class FetchClient {
 	}
 
 	async getTotal(url: string): Promise<number> {
-		const { headers } = await this.fetch(url, 'options')
-		return Number(headers.get('X-WP-TotalPages'))
+		const response = await this.fetch(url, 'options')
+		return Number(response.headers.get('X-WP-TotalPages'))
 	}
 
 	async post<T>(

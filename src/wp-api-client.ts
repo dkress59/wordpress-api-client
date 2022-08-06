@@ -207,8 +207,12 @@ export class WpApiClient {
 		}
 	}
 
-	protected createEndpointTotal(endpoint: string): EndpointTotal {
-		return async () => this.http.getTotal(endpoint)
+	protected createEndpointTotal(
+		endpoint: string,
+		defaultQuery = new URLSearchParams(),
+	): EndpointTotal {
+		return async () =>
+			this.http.getTotal(`${endpoint}/?${defaultQuery.toString()}`)
 	}
 
 	protected defaultEndpoints<P = WPPost>(
@@ -224,7 +228,7 @@ export class WpApiClient {
 				endpoint,
 				defaultParams,
 			),
-			total: this.createEndpointTotal(endpoint),
+			total: this.createEndpointTotal(endpoint, defaultParams),
 		}
 	}
 
@@ -452,7 +456,7 @@ export class WpApiClient {
 	}
 
 	public reusableBlock<P = WP_REST_API_Block>(): DefaultEndpoint<P> & {
-		autosave: (blocktId: number) => {
+		autosave: (blockId: number) => {
 			create: EndpointCreate<P & { parent: number }>
 			find: EndpointFind<P & { parent: number }>
 		}

@@ -1,13 +1,15 @@
+import fetch from 'cross-fetch'
+
 import { END_POINT_PROTECTED, ERROR_MESSAGE } from '../src/constants'
 import { FetchClient } from '../src/fetch-client'
 import { defaultOptions, mockResponse, mockStatusText } from './util'
-import fetch from 'cross-fetch'
+
 jest.mock('cross-fetch', () => jest.fn())
 
 const originalFetch = jest.requireActual('cross-fetch')
 const mockFetch = fetch as jest.MockedFunction<typeof fetch>
-const mockJson = jest.fn() as jest.MockedFunction<any>
-const mockText = jest.fn() as jest.MockedFunction<any>
+const mockJson = <jest.MockedFunction<any>>jest.fn()
+const mockText = <jest.MockedFunction<any>>jest.fn()
 
 const mockBaseURL = new URL('http://mock-website.com')
 
@@ -331,6 +333,54 @@ describe('FetchClient', () => {
 					method: 'get',
 				},
 			)
+		})
+		it('returns all pages', async () => {
+			<jest.Mock>mockJson.mockClear()
+			const mockResponse1 = ['mock_page_1', 'mock_page_2']
+			const mockResponse2 = ['mock_page_3', 'mock_page_4']
+			const mockResponse3 = ['mock_page_5', 'mock_page_6']
+			mockJson.mockResolvedValueOnce(mockResponse1)
+			mockJson.mockResolvedValueOnce(mockResponse2)
+			mockJson.mockResolvedValueOnce(mockResponse3)
+			mockFetch.mockResolvedValue({
+				ok: true,
+				json: mockJson,
+				text: mockText,
+				headers: new originalFetch.Headers({ 'X-WP-TotalPages': '3' }),
+			} as Response)
+			const http = new FetchClient(mockBaseURL)
+			const result = await http.getAll('mock_uri')
+			expect(result).toEqual([
+				mockResponse1[0],
+				mockResponse1[1],
+				mockResponse2[0],
+				mockResponse2[1],
+				mockResponse3[0],
+				mockResponse3[1],
+			])
+		})
+		it('falls back to empty array on subsequent requests', async () => {
+			<jest.Mock>mockJson.mockClear()
+			const mockResponse1 = ['mock_page_1', 'mock_page_2']
+			const mockResponse2 = null
+			const mockResponse3 = ['mock_page_5', 'mock_page_6']
+			mockJson.mockResolvedValueOnce(mockResponse1)
+			mockJson.mockResolvedValueOnce(mockResponse2)
+			mockJson.mockResolvedValueOnce(mockResponse3)
+			mockFetch.mockResolvedValue({
+				ok: true,
+				json: mockJson,
+				text: mockText,
+				headers: new originalFetch.Headers({ 'X-WP-TotalPages': '3' }),
+			} as Response)
+			const http = new FetchClient(mockBaseURL)
+			const result = await http.getAll('mock_uri')
+			expect(result).toEqual([
+				mockResponse1[0],
+				mockResponse1[1],
+				mockResponse3[0],
+				mockResponse3[1],
+			])
 		})
 	})
 	describe('post', () => {

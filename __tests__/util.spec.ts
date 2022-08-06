@@ -1,6 +1,7 @@
+import { URLSearchParams } from 'url'
+
 import { AUTH_TYPE } from '../src'
 import { END_POINT, ERROR_MESSAGE } from '../src/constants'
-import { URLSearchParams } from 'url'
 import {
 	getDefaultQueryList,
 	getDefaultQuerySingle,

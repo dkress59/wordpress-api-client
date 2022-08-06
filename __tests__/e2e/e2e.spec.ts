@@ -1,8 +1,10 @@
 import 'jest-specific-snapshot'
+
 import { randomUUID } from 'crypto'
-import WpApiClient from '../../src'
 import fs from 'fs'
 import path from 'path'
+
+import WpApiClient from '../../src'
 
 const mockTitle = {
 	rendered: 'Mock Title',
