@@ -1,6 +1,6 @@
 #!/bin/sh
 
-CONTAINER="e2e_db_1"
+CONTAINER="e2e-db"
 DB="wordpress"
 
 sleep 3
