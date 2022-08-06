@@ -147,6 +147,7 @@ is not helping.
 <table>
   <tr>
     <td align="center"><a href="http://www.damiankress.de"><img src="https://avatars.githubusercontent.com/u/28515387?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Damian</b></sub></a><br /><a href="https://github.com/dkress59/wordpress-api-client/commits?author=dkress59" title="Code">💻</a> <a href="https://github.com/dkress59/wordpress-api-client/commits?author=dkress59" title="Documentation">📖</a> <a href="#example-dkress59" title="Examples">💡</a> <a href="#maintenance-dkress59" title="Maintenance">🚧</a> <a href="https://github.com/dkress59/wordpress-api-client/commits?author=dkress59" title="Tests">⚠️</a></td>
+    <td align="center"><a href="https://jonathanwolfe.github.io"><img src="https://avatars.githubusercontent.com/u/1449779?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Jon Wolfe</b></sub></a><br /><a href="https://github.com/dkress59/wordpress-api-client/commits?author=JonathanWolfe" title="Code">💻</a> <a href="#ideas-JonathanWolfe" title="Ideas, Planning, & Feedback">🤔</a></td>
   </tr>
 </table>
 
