@@ -1,7 +1,8 @@
-import { AUTH_TYPE } from './types'
-import { END_POINT_PROTECTED, END_POINT_PUBLIC } from './constants'
-import { getErrorMessage, useAuth, validateBaseUrl } from './util'
 import fetch from 'cross-fetch'
+
+import { END_POINT_PROTECTED, END_POINT_PUBLIC } from './constants'
+import { AUTH_TYPE } from './types'
+import { getErrorMessage, useAuth, validateBaseUrl } from './util'
 
 export class FetchClient {
 	baseUrl: string

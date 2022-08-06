@@ -1,35 +1,4 @@
-import {
-	AUTH_TYPE,
-	DefaultEndpoint,
-	DefaultEndpointWithRevision,
-	EndpointCreate,
-	EndpointDelete,
-	EndpointFind,
-	EndpointFindAll,
-	EndpointFindOnly,
-	EndpointTotal,
-	EndpointUpdate,
-	EndpointUpdatePartial,
-	RenderedBlockDto,
-	WPCategory,
-	WPComment,
-	WPMedia,
-	WPPage,
-	WPPlugin,
-	WPPost,
-	WPTag,
-	WPTheme,
-	WPUser,
-	WpApiOptions,
-	WpRestApiContext,
-} from './types'
-import {
-	END_POINT,
-	END_POINT_PROTECTED,
-	ERROR_MESSAGE,
-	TRASHABLE,
-} from './constants'
-import { FetchClient } from './fetch-client'
+import { isRecord, isString } from '@tool-belt/type-predicates'
 import { URLSearchParams } from 'url'
 import {
 	WP_Post_Type_Name,
@@ -44,13 +13,45 @@ import {
 	WP_REST_API_Taxonomy,
 	WP_REST_API_Type,
 } from 'wp-types'
+
+import {
+	END_POINT,
+	END_POINT_PROTECTED,
+	ERROR_MESSAGE,
+	TRASHABLE,
+} from './constants'
+import { FetchClient } from './fetch-client'
+import {
+	AUTH_TYPE,
+	DefaultEndpoint,
+	DefaultEndpointWithRevision,
+	EndpointCreate,
+	EndpointDelete,
+	EndpointFind,
+	EndpointFindAll,
+	EndpointFindOnly,
+	EndpointTotal,
+	EndpointUpdate,
+	EndpointUpdatePartial,
+	RenderedBlockDto,
+	WpApiOptions,
+	WPCategory,
+	WPComment,
+	WPMedia,
+	WPPage,
+	WPPlugin,
+	WPPost,
+	WpRestApiContext,
+	WPTag,
+	WPTheme,
+	WPUser,
+} from './types'
 import {
 	getDefaultQueryList,
 	getDefaultQuerySingle,
 	getDeleteUri,
 	postCreate,
 } from './util'
-import { isRecord, isString } from '@tool-belt/type-predicates'
 
 export class WpApiClient {
 	protected readonly authHeader?:

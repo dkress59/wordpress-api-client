@@ -1,11 +1,12 @@
-import { AUTH_TYPE, BlackWhiteList } from './types'
+import { URLSearchParams } from 'url'
+
 import {
 	END_POINT_PROTECTED,
 	END_POINT_PUBLIC,
 	ERROR_MESSAGE,
 	TRASHABLE,
 } from './constants'
-import { URLSearchParams } from 'url'
+import { AUTH_TYPE, BlackWhiteList } from './types'
 
 // ToDo: improve + make use of type-predicates
 // eslint-disable-next-line sonarjs/cognitive-complexity

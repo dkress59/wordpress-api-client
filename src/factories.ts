@@ -1,5 +1,6 @@
+import faker from 'faker'
 import { FixtureFactory } from 'interface-forge'
-import { WPCategory, WPPage, WPPost, WPTag } from './types'
+import path from 'path'
 import {
 	WP_Post_Comment_Status_Name,
 	WP_Post_Status_Name,
@@ -7,8 +8,8 @@ import {
 	WP_REST_API_Object_Links,
 	WP_Taxonomy_Name,
 } from 'wp-types'
-import faker from 'faker'
-import path from 'path'
+
+import { WPCategory, WPPage, WPPost, WPTag } from './types'
 
 const fixtureDir = path.resolve(__dirname, '../../test')
 

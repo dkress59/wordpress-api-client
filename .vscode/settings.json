@@ -2,6 +2,7 @@
   "editor.codeActionsOnSave": {
     "source.fixAll": true
   },
+  "editor.experimental.stickyScroll.enabled": true,
   "typescript.preferences.importModuleSpecifier": "relative",
   "typescript.tsdk": ".yarn/sdks/typescript/lib",
   "search.exclude": {

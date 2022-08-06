@@ -24,7 +24,7 @@ Array [
     "requires_wp": "",
     "status": "active",
     "textdomain": "acf",
-    "version": "5.11.4",
+    "version": "5.12.3",
   },
   Object {
     "_links": Object {
