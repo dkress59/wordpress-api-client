@@ -2,6 +2,9 @@
 
 The current progress can be tracked [here](https://github.com/dkress59/wordpress-api-client/projects/1)
 
+- v0.4.7
+  - implements the `defaultQuery` argument on the `.{postType}.total()` methods
+
 - v0.4.6
   - new method `.{postType}.total()`
   - reverted `.{postType}.find()` in favour of:
