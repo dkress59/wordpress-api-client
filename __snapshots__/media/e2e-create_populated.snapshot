@@ -69,6 +69,7 @@ Object {
   "link": "http://localhost:8080/mock_slug/",
   "media_details": Object {
     "file": "filename.jpg",
+    "filesize": 697,
     "height": 8,
     "image_meta": Object {
       "aperture": "0",

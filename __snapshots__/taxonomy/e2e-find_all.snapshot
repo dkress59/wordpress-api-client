@@ -26,9 +26,40 @@ Object {
     "hierarchical": true,
     "name": "Categories",
     "rest_base": "categories",
+    "rest_namespace": "wp/v2",
     "slug": "category",
     "types": Array [
       "post",
+    ],
+  },
+  "nav_menu": Object {
+    "_links": Object {
+      "collection": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/taxonomies",
+        },
+      ],
+      "curies": Array [
+        Object {
+          "href": "https://api.w.org/{rel}",
+          "name": "wp",
+          "templated": true,
+        },
+      ],
+      "wp:items": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/menus",
+        },
+      ],
+    },
+    "description": "",
+    "hierarchical": false,
+    "name": "Navigation Menus",
+    "rest_base": "menus",
+    "rest_namespace": "wp/v2",
+    "slug": "nav_menu",
+    "types": Array [
+      "nav_menu_item",
     ],
   },
   "post_tag": Object {
@@ -55,6 +86,7 @@ Object {
     "hierarchical": false,
     "name": "Tags",
     "rest_base": "tags",
+    "rest_namespace": "wp/v2",
     "slug": "post_tag",
     "types": Array [
       "post",

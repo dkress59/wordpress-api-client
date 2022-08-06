@@ -15,8 +15,9 @@
     "test:e2e": "jest --verbose --runInBand e2e.spec.ts",
     "test:watch": "jest __tests__/*.spec.ts --watchAll",
     "doctor": "yarn dlx @yarnpkg/doctor",
-    "docker": "docker-compose -f __tests__/e2e/docker-compose.yml up --build -d",
-    "docker:down": "docker-compose -f __tests__/e2e/docker-compose.yml down",
+    "docker": "docker compose -f __tests__/e2e/docker-compose.yml up -d",
+    "docker:build": "docker compose -f __tests__/e2e/docker-compose.yml build --no-cache --pull",
+    "docker:down": "docker compose -f __tests__/e2e/docker-compose.yml down --rmi=all --volumes",
     "postinstall": "husky install",
     "prepack": "pinst --disable",
     "postpack": "pinst --enable"

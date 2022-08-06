@@ -26,8 +26,39 @@ Object {
     "hierarchical": false,
     "name": "Media",
     "rest_base": "media",
+    "rest_namespace": "wp/v2",
     "slug": "attachment",
     "taxonomies": Array [],
+  },
+  "nav_menu_item": Object {
+    "_links": Object {
+      "collection": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/types",
+        },
+      ],
+      "curies": Array [
+        Object {
+          "href": "https://api.w.org/{rel}",
+          "name": "wp",
+          "templated": true,
+        },
+      ],
+      "wp:items": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/menu-items",
+        },
+      ],
+    },
+    "description": "",
+    "hierarchical": false,
+    "name": "Navigation Menu Items",
+    "rest_base": "menu-items",
+    "rest_namespace": "wp/v2",
+    "slug": "nav_menu_item",
+    "taxonomies": Array [
+      "nav_menu",
+    ],
   },
   "page": Object {
     "_links": Object {
@@ -53,6 +84,7 @@ Object {
     "hierarchical": true,
     "name": "Pages",
     "rest_base": "pages",
+    "rest_namespace": "wp/v2",
     "slug": "page",
     "taxonomies": Array [],
   },
@@ -80,6 +112,7 @@ Object {
     "hierarchical": false,
     "name": "Posts",
     "rest_base": "posts",
+    "rest_namespace": "wp/v2",
     "slug": "post",
     "taxonomies": Array [
       "category",
@@ -110,7 +143,36 @@ Object {
     "hierarchical": false,
     "name": "Reusable blocks",
     "rest_base": "blocks",
+    "rest_namespace": "wp/v2",
     "slug": "wp_block",
+    "taxonomies": Array [],
+  },
+  "wp_navigation": Object {
+    "_links": Object {
+      "collection": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/types",
+        },
+      ],
+      "curies": Array [
+        Object {
+          "href": "https://api.w.org/{rel}",
+          "name": "wp",
+          "templated": true,
+        },
+      ],
+      "wp:items": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/navigation",
+        },
+      ],
+    },
+    "description": "Navigation menus that can be inserted into your site.",
+    "hierarchical": false,
+    "name": "Navigation Menus",
+    "rest_base": "navigation",
+    "rest_namespace": "wp/v2",
+    "slug": "wp_navigation",
     "taxonomies": Array [],
   },
   "wp_template": Object {
@@ -137,7 +199,36 @@ Object {
     "hierarchical": false,
     "name": "Templates",
     "rest_base": "templates",
+    "rest_namespace": "wp/v2",
     "slug": "wp_template",
+    "taxonomies": Array [],
+  },
+  "wp_template_part": Object {
+    "_links": Object {
+      "collection": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/types",
+        },
+      ],
+      "curies": Array [
+        Object {
+          "href": "https://api.w.org/{rel}",
+          "name": "wp",
+          "templated": true,
+        },
+      ],
+      "wp:items": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/template-parts",
+        },
+      ],
+    },
+    "description": "Template parts to include in your templates.",
+    "hierarchical": false,
+    "name": "Template Parts",
+    "rest_base": "template-parts",
+    "rest_namespace": "wp/v2",
+    "slug": "wp_template_part",
     "taxonomies": Array [],
   },
 }

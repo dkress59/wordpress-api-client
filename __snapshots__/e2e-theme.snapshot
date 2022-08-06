@@ -11,67 +11,6 @@ Array [
       ],
       "self": Array [
         Object {
-          "href": "http://localhost:8080/wp-json/wp/v2/themes/twentynineteen",
-        },
-      ],
-    },
-    "author": Object {
-      "raw": "the WordPress team",
-      "rendered": "<a href=\\"https://wordpress.org/\\">the WordPress team</a>",
-    },
-    "author_uri": Object {
-      "raw": "https://wordpress.org/",
-      "rendered": "https://wordpress.org/",
-    },
-    "description": Object {
-      "raw": "Our 2019 default theme is designed to show off the power of the block editor. It features custom styles for all the default blocks, and is built so that what you see in the editor looks like what you'll see on your website. Twenty Nineteen is designed to be adaptable to a wide range of websites, whether you’re running a photo blog, launching a new business, or supporting a non-profit. Featuring ample whitespace and modern sans-serif headlines paired with classic serif body text, it's built to be beautiful on all screen sizes.",
-      "rendered": "Our 2019 default theme is designed to show off the power of the block editor. It features custom styles for all the default blocks, and is built so that what you see in the editor looks like what you&#8217;ll see on your website. Twenty Nineteen is designed to be adaptable to a wide range of websites, whether you’re running a photo blog, launching a new business, or supporting a non-profit. Featuring ample whitespace and modern sans-serif headlines paired with classic serif body text, it&#8217;s built to be beautiful on all screen sizes.",
-    },
-    "name": Object {
-      "raw": "Twenty Nineteen",
-      "rendered": "Twenty Nineteen",
-    },
-    "requires_php": "5.2.4",
-    "requires_wp": "4.9.6",
-    "screenshot": "http://localhost:8080/wp-content/themes/twentynineteen/screenshot.png",
-    "status": "inactive",
-    "stylesheet": "twentynineteen",
-    "tags": Object {
-      "raw": Array [
-        "one-column",
-        "flexible-header",
-        "accessibility-ready",
-        "custom-colors",
-        "custom-menu",
-        "custom-logo",
-        "editor-style",
-        "featured-images",
-        "footer-widgets",
-        "rtl-language-support",
-        "sticky-post",
-        "threaded-comments",
-        "translation-ready",
-        "block-patterns",
-      ],
-      "rendered": "one-column, flexible-header, accessibility-ready, custom-colors, custom-menu, custom-logo, editor-style, featured-images, footer-widgets, rtl-language-support, sticky-post, threaded-comments, translation-ready, block-patterns",
-    },
-    "template": "twentynineteen",
-    "textdomain": "twentynineteen",
-    "theme_uri": Object {
-      "raw": "https://wordpress.org/themes/twentynineteen/",
-      "rendered": "https://wordpress.org/themes/twentynineteen/",
-    },
-    "version": "2.1",
-  },
-  Object {
-    "_links": Object {
-      "collection": Array [
-        Object {
-          "href": "http://localhost:8080/wp-json/wp/v2/themes",
-        },
-      ],
-      "self": Array [
-        Object {
           "href": "http://localhost:8080/wp-json/wp/v2/themes/twentytwenty",
         },
       ],
@@ -127,7 +66,7 @@ Array [
       "raw": "https://wordpress.org/themes/twentytwenty/",
       "rendered": "https://wordpress.org/themes/twentytwenty/",
     },
-    "version": "1.8",
+    "version": "2.0",
   },
   Object {
     "_links": Object {
@@ -136,9 +75,21 @@ Array [
           "href": "http://localhost:8080/wp-json/wp/v2/themes",
         },
       ],
+      "curies": Array [
+        Object {
+          "href": "https://api.w.org/{rel}",
+          "name": "wp",
+          "templated": true,
+        },
+      ],
       "self": Array [
         Object {
           "href": "http://localhost:8080/wp-json/wp/v2/themes/twentytwentyone",
+        },
+      ],
+      "wp:user-global-styles": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/global-styles/37",
         },
       ],
     },
@@ -186,6 +137,7 @@ Array [
     "theme_supports": Object {
       "align-wide": true,
       "automatic-feed-links": true,
+      "block-templates": false,
       "custom-background": Object {
         "default-attachment": "scroll",
         "default-color": "d1e4dd",
@@ -372,7 +324,65 @@ Array [
       "raw": "https://wordpress.org/themes/twentytwentyone/",
       "rendered": "https://wordpress.org/themes/twentytwentyone/",
     },
-    "version": "1.4",
+    "version": "1.6",
+  },
+  Object {
+    "_links": Object {
+      "collection": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/themes",
+        },
+      ],
+      "self": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/themes/twentytwentytwo",
+        },
+      ],
+    },
+    "author": Object {
+      "raw": "the WordPress team",
+      "rendered": "<a href=\\"https://wordpress.org/\\">the WordPress team</a>",
+    },
+    "author_uri": Object {
+      "raw": "https://wordpress.org/",
+      "rendered": "https://wordpress.org/",
+    },
+    "description": Object {
+      "raw": "Built on a solidly designed foundation, Twenty Twenty-Two embraces the idea that everyone deserves a truly unique website. The theme’s subtle styles are inspired by the diversity and versatility of birds: its typography is lightweight yet strong, its color palette is drawn from nature, and its layout elements sit gently on the page. The true richness of Twenty Twenty-Two lies in its opportunity for customization. The theme is built to take advantage of the Full Site Editing features introduced in WordPress 5.9, which means that colors, typography, and the layout of every single page on your site can be customized to suit your vision. It also includes dozens of block patterns, opening the door to a wide range of professionally designed layouts in just a few clicks. Whether you’re building a single-page website, a blog, a business website, or a portfolio, Twenty Twenty-Two will help you create a site that is uniquely yours.",
+      "rendered": "Built on a solidly designed foundation, Twenty Twenty-Two embraces the idea that everyone deserves a truly unique website. The theme’s subtle styles are inspired by the diversity and versatility of birds: its typography is lightweight yet strong, its color palette is drawn from nature, and its layout elements sit gently on the page. The true richness of Twenty Twenty-Two lies in its opportunity for customization. The theme is built to take advantage of the Full Site Editing features introduced in WordPress 5.9, which means that colors, typography, and the layout of every single page on your site can be customized to suit your vision. It also includes dozens of block patterns, opening the door to a wide range of professionally designed layouts in just a few clicks. Whether you’re building a single-page website, a blog, a business website, or a portfolio, Twenty Twenty-Two will help you create a site that is uniquely yours.",
+    },
+    "name": Object {
+      "raw": "Twenty Twenty-Two",
+      "rendered": "Twenty Twenty-Two",
+    },
+    "requires_php": "5.6",
+    "requires_wp": "5.9",
+    "screenshot": "http://localhost:8080/wp-content/themes/twentytwentytwo/screenshot.png",
+    "status": "inactive",
+    "stylesheet": "twentytwentytwo",
+    "tags": Object {
+      "raw": Array [
+        "one-column",
+        "custom-colors",
+        "custom-menu",
+        "custom-logo",
+        "editor-style",
+        "featured-images",
+        "full-site-editing",
+        "block-patterns",
+        "rtl-language-support",
+        "sticky-post",
+        "threaded-comments",
+      ],
+      "rendered": "one-column, custom-colors, custom-menu, custom-logo, editor-style, featured-images, full-site-editing, block-patterns, rtl-language-support, sticky-post, threaded-comments",
+    },
+    "template": "twentytwentytwo",
+    "textdomain": "twentytwentytwo",
+    "theme_uri": Object {
+      "raw": "https://wordpress.org/themes/twentytwentytwo/",
+      "rendered": "https://wordpress.org/themes/twentytwentytwo/",
+    },
+    "version": "1.2",
   },
 ]
 `;

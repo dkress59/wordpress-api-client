@@ -69,6 +69,7 @@ Object {
   "link": "http://localhost:8080/filename/",
   "media_details": Object {
     "file": "filename.png",
+    "filesize": 99,
     "height": 8,
     "image_meta": Object {
       "aperture": "0",

@@ -26,6 +26,7 @@ Array [
     "hierarchical": true,
     "name": "Categories",
     "rest_base": "categories",
+    "rest_namespace": "wp/v2",
     "slug": "category",
     "types": Array [
       "post",
