@@ -5,9 +5,9 @@ import { WP_Post_Type_Name } from 'wp-types'
 
 import WpApiClient from '../src'
 import { END_POINT, ERROR_MESSAGE } from '../src/constants'
-import { WPPageFactory } from '../src/factories'
 import { WPPost } from '../src/types'
 import { getDefaultQueryList, getDefaultQuerySingle } from '../src/util'
+import { WPPageFactory } from './factories/page.factory'
 import { defaultOptions } from './util'
 
 jest.mock('cross-fetch', () => jest.fn())

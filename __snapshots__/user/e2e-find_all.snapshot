@@ -15,7 +15,6 @@ Array [
         },
       ],
     },
-    "acf": Array [],
     "avatar_urls": Object {
       "24": "http://2.gravatar.com/avatar/5c0689e79c6f7fc399bb1459c5709046?s=24&d=mm&r=g",
       "48": "http://2.gravatar.com/avatar/5c0689e79c6f7fc399bb1459c5709046?s=48&d=mm&r=g",
@@ -42,7 +41,6 @@ Array [
         },
       ],
     },
-    "acf": Array [],
     "avatar_urls": Object {
       "24": "http://0.gravatar.com/avatar/9ea74214e4fda24b4e34fd7eb525c455?s=24&d=mm&r=g",
       "48": "http://0.gravatar.com/avatar/9ea74214e4fda24b4e34fd7eb525c455?s=48&d=mm&r=g",

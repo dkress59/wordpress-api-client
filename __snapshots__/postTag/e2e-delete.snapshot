@@ -7,7 +7,7 @@ Array [
     "previous": Object {
       "count": 0,
       "description": "",
-      "id": 7,
+      "id": 4,
       "link": "http://localhost:8080/tag/mock-title/",
       "meta": Array [],
       "name": "Mock Title",

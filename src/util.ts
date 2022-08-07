@@ -10,33 +10,35 @@ import { AUTH_TYPE, BlackWhiteList } from './types'
 
 // ToDo: improve + make use of type-predicates
 // eslint-disable-next-line sonarjs/cognitive-complexity
-function getDataFromResponse(json: unknown, statusText: string): string {
+export function getDataFromResponse(json: unknown, statusText: string): string {
 	if (!json) return statusText
 	const isJson = typeof json === 'object'
-	const hasError = isJson && 'error' in (json as { error: string })
+	const hasError = isJson && 'error' in <{ error: string }>json
 	const errorIsString =
-		hasError && typeof (json as { error: string }).error === 'string'
-	const hasMessage = isJson && 'message' in (json as { message: string })
+		hasError && typeof (<{ error: string }>json).error === 'string'
+	const hasMessage = isJson && 'message' in <{ message: string }>json
 	const messageIsArray =
-		hasMessage && Array.isArray((json as { message: string[] }).message)
+		hasMessage && Array.isArray((<{ message: string[] }>json).message)
 	const messageIsString =
-		hasMessage && typeof (json as { message: string }).message === 'string'
+		hasMessage && typeof (<{ message: string }>json).message === 'string'
 
 	if (!isJson) return statusText
-	if (hasError && errorIsString) return (json as { error: string }).error
+	if (hasError && errorIsString) return (<{ error: string }>json).error
 	if (hasMessage && messageIsArray)
-		return (json as { message: string[] }).message[0]
+		return (<{ message: string[] }>json).message.length
+			? (<{ message: string[] }>json).message[0]
+			: statusText
 	if (hasMessage && messageIsString)
-		return (json as { message: string }).message
+		return (<{ message: string }>json).message
 	return statusText
 }
 
-export async function getErrorMessage(err?: Response): Promise<string> {
-	if (!err) return ERROR_MESSAGE.ERROR_RESPONSE.replace('%url%', 'UNKNOWN')
-	const statusText = err.statusText
-	const json = (await err.json()) as null | string | Record<string, unknown>
-	const status = err.status
-	const url = err.url
+export async function getErrorMessage(error?: Response): Promise<string> {
+	if (!error) return ERROR_MESSAGE.ERROR_RESPONSE.replace('%url%', 'UNKNOWN')
+	const statusText = error.statusText
+	const json = <null | string | Record<string, unknown>>await error.json()
+	const status = error.status
+	const url = error.url
 	const data = getDataFromResponse(json, statusText)
 	return ERROR_MESSAGE.ERROR_RESPONSE.replace('%url%', url || 'UNKNOWN')
 		.replace('%error%', JSON.stringify(data))
@@ -108,7 +110,7 @@ export function useAuth(
 	if (authType === AUTH_TYPE.BASIC || authType === AUTH_TYPE.NONCE)
 		return true
 
-	const key = method.toUpperCase() as 'GET' | 'POST' | 'DELETE'
+	const key = <'GET' | 'POST' | 'DELETE'>method.toUpperCase()
 	const isProtected = !!protectedRoutes[key].some(uri => url.includes(uri))
 	const isPublic = !!publicRoutes[key].some(uri => url.includes(uri))
 

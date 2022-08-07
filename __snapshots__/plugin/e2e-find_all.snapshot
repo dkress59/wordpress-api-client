@@ -22,7 +22,7 @@ Array [
     "plugin_uri": "https://www.advancedcustomfields.com",
     "requires_php": "",
     "requires_wp": "",
-    "status": "active",
+    "status": "inactive",
     "textdomain": "acf",
     "version": "5.12.3",
   },

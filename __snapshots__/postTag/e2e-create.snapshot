@@ -22,18 +22,18 @@ Object {
     ],
     "self": Array [
       Object {
-        "href": "http://localhost:8080/wp-json/wp/v2/tags/6",
+        "href": "http://localhost:8080/wp-json/wp/v2/tags/3",
       },
     ],
     "wp:post_type": Array [
       Object {
-        "href": "http://localhost:8080/wp-json/wp/v2/posts?tags=6",
+        "href": "http://localhost:8080/wp-json/wp/v2/posts?tags=3",
       },
     ],
   },
   "count": 0,
   "description": "",
-  "id": 6,
+  "id": 3,
   "link": "http://localhost:8080/tag/mock-title/",
   "meta": Array [],
   "name": "Mock Title",

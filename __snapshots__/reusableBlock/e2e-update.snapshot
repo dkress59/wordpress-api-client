@@ -22,38 +22,37 @@ Object {
     ],
     "predecessor-version": Array [
       Object {
-        "href": "http://localhost:8080/wp-json/wp/v2/blocks/31/revisions/32",
-        "id": 32,
+        "href": "http://localhost:8080/wp-json/wp/v2/blocks/19/revisions/20",
+        "id": 20,
       },
     ],
     "self": Array [
       Object {
-        "href": "http://localhost:8080/wp-json/wp/v2/blocks/31",
+        "href": "http://localhost:8080/wp-json/wp/v2/blocks/19",
       },
     ],
     "version-history": Array [
       Object {
         "count": 1,
-        "href": "http://localhost:8080/wp-json/wp/v2/blocks/31/revisions",
+        "href": "http://localhost:8080/wp-json/wp/v2/blocks/19/revisions",
       },
     ],
     "wp:action-publish": Array [
       Object {
-        "href": "http://localhost:8080/wp-json/wp/v2/blocks/31",
+        "href": "http://localhost:8080/wp-json/wp/v2/blocks/19",
       },
     ],
     "wp:action-unfiltered-html": Array [
       Object {
-        "href": "http://localhost:8080/wp-json/wp/v2/blocks/31",
+        "href": "http://localhost:8080/wp-json/wp/v2/blocks/19",
       },
     ],
     "wp:attachment": Array [
       Object {
-        "href": "http://localhost:8080/wp-json/wp/v2/media?parent=31",
+        "href": "http://localhost:8080/wp-json/wp/v2/media?parent=19",
       },
     ],
   },
-  "acf": Array [],
   "content": Object {
     "block_version": 0,
     "protected": false,
@@ -63,7 +62,7 @@ Object {
     "raw": "http://localhost:8080/mock-title-2/",
     "rendered": "http://localhost:8080/mock-title-2/",
   },
-  "id": 31,
+  "id": 19,
   "link": "http://localhost:8080/mock-title-2/",
   "password": "",
   "slug": "mock-title-2",

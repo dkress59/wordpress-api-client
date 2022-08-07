@@ -52,12 +52,12 @@ Array [
       "replies": Array [
         Object {
           "embeddable": true,
-          "href": "http://localhost:8080/wp-json/wp/v2/comments?post=22",
+          "href": "http://localhost:8080/wp-json/wp/v2/comments?post=10",
         },
       ],
       "self": Array [
         Object {
-          "href": "http://localhost:8080/wp-json/wp/v2/media/22",
+          "href": "http://localhost:8080/wp-json/wp/v2/media/10",
         },
       ],
     },
@@ -74,7 +74,7 @@ Array [
     "guid": Object {
       "rendered": "http://localhost:8080/wp-content/uploads/filename.jpg",
     },
-    "id": 22,
+    "id": 10,
     "link": "http://localhost:8080/filename/",
     "media_details": Object {
       "file": "filename.jpg",

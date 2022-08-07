@@ -29,22 +29,22 @@ Object {
     "replies": Array [
       Object {
         "embeddable": true,
-        "href": "http://localhost:8080/wp-json/wp/v2/comments?post=18",
+        "href": "http://localhost:8080/wp-json/wp/v2/comments?post=6",
       },
     ],
     "self": Array [
       Object {
-        "href": "http://localhost:8080/wp-json/wp/v2/media/18",
+        "href": "http://localhost:8080/wp-json/wp/v2/media/6",
       },
     ],
     "wp:action-assign-author": Array [
       Object {
-        "href": "http://localhost:8080/wp-json/wp/v2/media/18",
+        "href": "http://localhost:8080/wp-json/wp/v2/media/6",
       },
     ],
     "wp:action-unfiltered-html": Array [
       Object {
-        "href": "http://localhost:8080/wp-json/wp/v2/media/18",
+        "href": "http://localhost:8080/wp-json/wp/v2/media/6",
       },
     ],
   },
@@ -65,7 +65,7 @@ Object {
     "raw": "http://localhost:8080/wp-content/uploads/filename.png",
     "rendered": "http://localhost:8080/wp-content/uploads/filename.png",
   },
-  "id": 18,
+  "id": 6,
   "link": "http://localhost:8080/filename/",
   "media_details": Object {
     "file": "filename.png",
@@ -92,7 +92,7 @@ Object {
   "meta": Array [],
   "mime_type": "image/png",
   "missing_image_sizes": Array [],
-  "permalink_template": "http://localhost:8080/?attachment_id=18",
+  "permalink_template": "http://localhost:8080/?attachment_id=6",
   "ping_status": "closed",
   "post": null,
   "slug": "filename",

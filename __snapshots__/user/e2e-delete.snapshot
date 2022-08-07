@@ -5,7 +5,6 @@ Array [
   Object {
     "deleted": true,
     "previous": Object {
-      "acf": Array [],
       "avatar_urls": Object {
         "24": "http://1.gravatar.com/avatar/7c981bca7cd49f8032cda228c9ec3dcc?s=24&d=mm&r=g",
         "48": "http://1.gravatar.com/avatar/7c981bca7cd49f8032cda228c9ec3dcc?s=48&d=mm&r=g",

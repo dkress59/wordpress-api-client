@@ -93,7 +93,7 @@ export class WpApiClient {
 			this.authHeader,
 			options.protected,
 			options.public,
-			options.auth?.type as AUTH_TYPE | undefined,
+			<AUTH_TYPE | undefined>options.auth?.type,
 		)
 	}
 
@@ -116,14 +116,14 @@ export class WpApiClient {
 				return (
 					(await this.http.get<P[] | undefined>(
 						`${endpoint}/${getDefaultQueryList(query)}`,
-					)) ?? ([] as P[])
+					)) ?? <P[]>[]
 				)
 			} else {
 				return Promise.all(
 					ids.map(async postId =>
 						this.http.get<P>(
 							`${endpoint}/${postId}/${getDefaultQuerySingle(
-								query as undefined | URLSearchParams,
+								<undefined | URLSearchParams>query,
 							)}`,
 						),
 					),
@@ -484,7 +484,7 @@ export class WpApiClient {
 				subtype: string
 			}>,
 	): Promise<S[]> {
-		if (search) params = { ...(params as Record<string, string>), search }
+		if (search) params = { ...(<Record<string, string>>params), search }
 		const query = new URLSearchParams(params).toString()
 		return this.http.get<S[]>(`${END_POINT.SEARCH}/?${query}`)
 	}
@@ -494,12 +494,12 @@ export class WpApiClient {
 		update: EndpointUpdatePartial<P>
 	} {
 		return {
-			find: this.createEndpointCustomGet<P, P>(
-				END_POINT.SETTINGS,
-			) as EndpointFindOnly<P>,
-			update: this.createEndpointCustomPost<Partial<P>, P>(
-				END_POINT.SETTINGS,
-			) as EndpointUpdatePartial<P>,
+			find: <EndpointFindOnly<P>>(
+				this.createEndpointCustomGet<P, P>(END_POINT.SETTINGS)
+			),
+			update: <EndpointUpdatePartial<P>>(
+				this.createEndpointCustomPost<Partial<P>, P>(END_POINT.SETTINGS)
+			),
 		}
 	}
 
@@ -588,7 +588,7 @@ export class WpApiClient {
 					`${END_POINT.TAXONOMIES}/${getDefaultQueryList(
 						new URLSearchParams(query),
 					)}`,
-				)) ?? ([] as P[])
+				)) ?? <P[]>[]
 			)
 		} else {
 			return Promise.all(

@@ -23,18 +23,18 @@ Array [
       ],
       "self": Array [
         Object {
-          "href": "http://localhost:8080/wp-json/wp/v2/tags/5",
+          "href": "http://localhost:8080/wp-json/wp/v2/tags/2",
         },
       ],
       "wp:post_type": Array [
         Object {
-          "href": "http://localhost:8080/wp-json/wp/v2/posts?tags=5",
+          "href": "http://localhost:8080/wp-json/wp/v2/posts?tags=2",
         },
       ],
     },
     "count": 0,
     "description": "",
-    "id": 5,
+    "id": 2,
     "link": "http://localhost:8080/tag/initial-tag/",
     "meta": Array [],
     "name": "Initial Tag",

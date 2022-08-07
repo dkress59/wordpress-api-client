@@ -14,7 +14,6 @@ Object {
       },
     ],
   },
-  "acf": Array [],
   "avatar_urls": Object {
     "24": "http://2.gravatar.com/avatar/5065aac0330a46af9b5308cc9e2a4796?s=24&d=mm&r=g",
     "48": "http://2.gravatar.com/avatar/5065aac0330a46af9b5308cc9e2a4796?s=48&d=mm&r=g",

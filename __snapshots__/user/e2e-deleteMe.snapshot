@@ -4,7 +4,6 @@ exports[`End-to-end test .user .deleteMe 1`] = `
 Object {
   "deleted": true,
   "previous": Object {
-    "acf": Array [],
     "avatar_urls": Object {
       "24": "http://1.gravatar.com/avatar/738c1748074481b9c1a5fcf8de604745?s=24&d=mm&r=g",
       "48": "http://1.gravatar.com/avatar/738c1748074481b9c1a5fcf8de604745?s=48&d=mm&r=g",

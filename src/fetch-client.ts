@@ -57,11 +57,11 @@ export class FetchClient {
 			})
 			if (response.status >= 400) throw response
 			return {
-				data: (await response.json()) as T,
+				data: <T>await response.json(),
 				headers: response.headers,
 			}
 		} catch (error) {
-			const message = await getErrorMessage(error as Response)
+			const message = await getErrorMessage(<Response>error)
 			await this.onError(message)
 			throw new Error(message)
 		}

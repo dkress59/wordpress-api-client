@@ -3,6 +3,7 @@ import { URLSearchParams } from 'url'
 import { AUTH_TYPE } from '../src'
 import { END_POINT, ERROR_MESSAGE } from '../src/constants'
 import {
+	getDataFromResponse,
 	getDefaultQueryList,
 	getDefaultQuerySingle,
 	getDeleteUri,
@@ -14,6 +15,73 @@ import {
 import { mockResponse, mockStatusText } from './util'
 
 describe('util', () => {
+	describe('getDataFromResponse', () => {
+		describe('handles response correctly', () => {
+			const mockStatusText = 'mock-status-text'
+			it('with error object', () => {
+				const mockData = 'mock-string'
+				expect(
+					getDataFromResponse({ error: mockData }, mockStatusText),
+				).toBe(mockData)
+			})
+			it('with message', () => {
+				const mockData = 'mock-string'
+				expect(
+					getDataFromResponse({ message: mockData }, mockStatusText),
+				).toBe(mockData)
+			})
+			it('with messages', () => {
+				const mockData = 'mock-string'
+				expect(
+					getDataFromResponse(
+						{ message: [mockData] },
+						mockStatusText,
+					),
+				).toBe(mockData)
+			})
+			it('with undefined data', () => {
+				expect(getDataFromResponse(undefined, mockStatusText)).toBe(
+					mockStatusText,
+				)
+			})
+			it('with string', () => {
+				expect(getDataFromResponse('mock-string', mockStatusText)).toBe(
+					mockStatusText,
+				)
+			})
+			it('with undefined error object', () => {
+				expect(
+					getDataFromResponse({ error: undefined }, mockStatusText),
+				).toBe(mockStatusText)
+			})
+			it('with error message', () => {
+				expect(
+					getDataFromResponse(
+						{ error: { message: 'mock-string' } },
+						mockStatusText,
+					),
+				).toBe(mockStatusText)
+			})
+			it('with undefined message', () => {
+				expect(
+					getDataFromResponse({ message: undefined }, mockStatusText),
+				).toBe(mockStatusText)
+			})
+			it('with empty messages', () => {
+				expect(
+					getDataFromResponse({ message: [] }, mockStatusText),
+				).toBe(mockStatusText)
+			})
+			it('with unmatched object', () => {
+				expect(
+					getDataFromResponse(
+						{ unmatched: 'mock-string' },
+						mockStatusText,
+					),
+				).toBe(mockStatusText)
+			})
+		})
+	})
 	describe('getErrorMessage', () => {
 		const mockError = 'mock_error'
 		const error1 = undefined

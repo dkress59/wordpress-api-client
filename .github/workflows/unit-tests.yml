@@ -23,7 +23,7 @@ jobs:
                   node-version: ${{ matrix.node-version }}
             - run: yarn
             - run: yarn build
-            - run: yarn test __tests__/*.spec.ts
+            - run: yarn test
     
     coverage:
         runs-on: ubuntu-latest
@@ -37,7 +37,7 @@ jobs:
             - name: Install Dependencies
               run: yarn
             - name: Run Tests
-              run: yarn test --ci __tests__/*.spec.ts
+              run: yarn test --ci
             - name: SonarCloud Scan
               uses: SonarSource/sonarcloud-github-action@master
               env:
@@ -61,6 +61,6 @@ jobs:
                 ./__tests__/e2e/wait-for-db-import.sh
                 echo 'un-pausing: mysql is now available'
             - name: Run end-to-end test
-              run: yarn test:e2e
+              run: yarn test:e2e --ci
             - name: Tear down WordPress
               run: yarn docker:down

@@ -22,7 +22,7 @@ Array [
         "raw": "http://localhost:8080/wp-content/uploads/filename.jpg",
         "rendered": "http://localhost:8080/wp-content/uploads/filename.jpg",
       },
-      "id": 20,
+      "id": 8,
       "link": "http://localhost:8080/filename/",
       "media_details": Object {
         "file": "filename.jpg",
@@ -49,7 +49,7 @@ Array [
       "meta": Array [],
       "mime_type": "image/jpeg",
       "missing_image_sizes": Array [],
-      "permalink_template": "http://localhost:8080/?attachment_id=20",
+      "permalink_template": "http://localhost:8080/?attachment_id=8",
       "ping_status": "closed",
       "post": null,
       "slug": "filename",

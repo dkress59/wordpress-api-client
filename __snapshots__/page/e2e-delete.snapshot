@@ -29,45 +29,45 @@ Array [
       ],
       "predecessor-version": Array [
         Object {
-          "href": "http://localhost:8080/wp-json/wp/v2/pages/15/revisions/16",
-          "id": 16,
+          "href": "http://localhost:8080/wp-json/wp/v2/pages/35/revisions/36",
+          "id": 36,
         },
       ],
       "replies": Array [
         Object {
           "embeddable": true,
-          "href": "http://localhost:8080/wp-json/wp/v2/comments?post=15",
+          "href": "http://localhost:8080/wp-json/wp/v2/comments?post=35",
         },
       ],
       "self": Array [
         Object {
-          "href": "http://localhost:8080/wp-json/wp/v2/pages/15",
+          "href": "http://localhost:8080/wp-json/wp/v2/pages/35",
         },
       ],
       "version-history": Array [
         Object {
           "count": 1,
-          "href": "http://localhost:8080/wp-json/wp/v2/pages/15/revisions",
+          "href": "http://localhost:8080/wp-json/wp/v2/pages/35/revisions",
         },
       ],
       "wp:action-assign-author": Array [
         Object {
-          "href": "http://localhost:8080/wp-json/wp/v2/pages/15",
+          "href": "http://localhost:8080/wp-json/wp/v2/pages/35",
         },
       ],
       "wp:action-publish": Array [
         Object {
-          "href": "http://localhost:8080/wp-json/wp/v2/pages/15",
+          "href": "http://localhost:8080/wp-json/wp/v2/pages/35",
         },
       ],
       "wp:action-unfiltered-html": Array [
         Object {
-          "href": "http://localhost:8080/wp-json/wp/v2/pages/15",
+          "href": "http://localhost:8080/wp-json/wp/v2/pages/35",
         },
       ],
       "wp:attachment": Array [
         Object {
-          "href": "http://localhost:8080/wp-json/wp/v2/media?parent=15",
+          "href": "http://localhost:8080/wp-json/wp/v2/media?parent=35",
         },
       ],
     },
@@ -89,11 +89,11 @@ Array [
     "featured_media": 0,
     "generated_slug": "mock-title",
     "guid": Object {
-      "raw": "http://localhost:8080/?page_id=15",
-      "rendered": "http://localhost:8080/?page_id=15",
+      "raw": "http://localhost:8080/?page_id=35",
+      "rendered": "http://localhost:8080/?page_id=35",
     },
-    "id": 15,
-    "link": "http://localhost:8080/?page_id=15",
+    "id": 35,
+    "link": "http://localhost:8080/?page_id=35",
     "menu_order": 0,
     "meta": Array [],
     "parent": 0,
