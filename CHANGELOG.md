@@ -2,6 +2,10 @@
 
 The current progress can be tracked [here](https://github.com/dkress59/wordpress-api-client/projects/1)
 
+- v0.4.8
+  - fixes typings for `.media.create()`, `.media.update()` and `.media.delete()`
+  - emits declaration files in order to suppress user-facing errors
+
 - v0.4.7
   - implements the `defaultQuery` argument on the `.{postType}.total()` methods
 
