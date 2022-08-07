@@ -37,7 +37,7 @@ jobs:
             - name: Install Dependencies
               run: yarn
             - name: Run Tests
-              run: yarn test --ci
+              run: yarn test
             - name: SonarCloud Scan
               uses: SonarSource/sonarcloud-github-action@master
               env:
@@ -61,6 +61,6 @@ jobs:
                 ./__tests__/e2e/wait-for-db-import.sh
                 echo 'un-pausing: mysql is now available'
             - name: Run end-to-end test
-              run: yarn test:e2e --ci
+              run: yarn test:e2e
             - name: Tear down WordPress
               run: yarn docker:down

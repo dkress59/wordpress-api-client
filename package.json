@@ -11,7 +11,7 @@
     "build": "tsc -p tsconfig.build.json",
     "check:script": "eslint src --ext .ts --fix-dry-run --report-unused-disable-directives",
     "lint:script": "eslint src --ext .ts --fix",
-    "test": "jest --selectProjects core --runInBand",
+    "test": "jest --selectProjects core",
     "test:e2e": "jest --selectProjects e2e --runInBand",
     "test:watch": "jest --selectProjects core --watchAll",
     "doctor": "yarn dlx @yarnpkg/doctor",

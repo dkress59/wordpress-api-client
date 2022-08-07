@@ -1,20 +1,9 @@
 import 'jest-specific-snapshot'
 
-import fs from 'fs'
-import path from 'path'
-
 import WpApiClient from '../../../src'
 
 const mockTitle = {
 	rendered: 'Mock Title',
-}
-const mockUpdatedTitle = { rendered: 'Updated Title' }
-
-const snapshotPath = path.resolve(process.cwd(), './__snapshots__')
-function fileName(name: string, dir?: string) {
-	const pathName = path.join(snapshotPath, dir ?? '')
-	if (dir && !fs.existsSync(pathName)) fs.mkdirSync(pathName)
-	return path.join(pathName, `e2e-${name}.snapshot`)
 }
 
 describe('End-to-end test', () => {
@@ -26,10 +15,6 @@ describe('End-to-end test', () => {
 		},
 	})
 
-	beforeAll(() => () => {
-		if (!fs.existsSync(snapshotPath)) fs.mkdirSync(snapshotPath)
-	})
-
 	describe('.postCategory', () => {
 		let newCategoryId: number | undefined
 
@@ -39,45 +24,50 @@ describe('End-to-end test', () => {
 		})
 
 		it('.create', async () => {
-			const response = await client.postCategory().create({
-				name: mockTitle.rendered,
-			})
+			const currentLength = (await client.postCategory().find()).length
+			const response = await client
+				.postCategory()
+				.create({ name: mockTitle.rendered })
 			newCategoryId = response?.id
-			expect(response).toMatchSpecificSnapshot(
-				fileName('create', 'postCategory'),
+			expect((await client.postCategory().find()).length).toBe(
+				currentLength + 1,
 			)
 		})
 		it('.delete', async () => {
-			const response = await client.postCategory().create({
-				name: mockTitle.rendered,
-			})
-			expect(
-				await client.postCategory().delete(response!.id),
-			).toMatchSpecificSnapshot(fileName('delete', 'postCategory'))
+			const response = await client
+				.postCategory()
+				.create({ name: mockTitle.rendered })
+			const currentLength = (await client.postCategory().find()).length
+			await client.postCategory().delete(response!.id)
+			expect((await client.postCategory().find()).length).toBe(
+				currentLength - 1,
+			)
 		})
 		it('.find (all)', async () => {
-			expect(await client.postCategory().find()).toMatchSpecificSnapshot(
-				fileName('find_all', 'postCategory'),
-			)
+			await client.postCategory().create({ name: mockTitle.rendered })
+			expect((await client.postCategory().find()).length > 1).toBe(true)
 		})
 		it('.find (one)', async () => {
-			expect(await client.postCategory().find(1)).toMatchSpecificSnapshot(
-				fileName('find_one', 'postCategory'),
-			)
+			const allCategories = await client.postCategory().find()
+			expect(
+				await client.postCategory().find(allCategories[0]!.id),
+			).toEqual([allCategories[0]])
 		})
 		it('.update', async () => {
+			const mockTitle2 = 'mock-title'
+			const mockUpdatedTitle2 = 'mock-title-2'
 			const response = await client.postCategory().create({
-				name: mockTitle.rendered,
+				name: mockTitle2,
 			})
 			newCategoryId = response?.id
 			expect(
-				await client.postCategory().update(
+				(await client.postCategory().update(
 					{
-						name: mockUpdatedTitle.rendered,
+						name: mockUpdatedTitle2,
 					},
 					response!.id,
-				),
-			).toMatchSpecificSnapshot(fileName('update', 'postCategory'))
+				))!.name,
+			).toEqual(mockUpdatedTitle2)
 		})
 	})
 })

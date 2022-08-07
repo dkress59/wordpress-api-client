@@ -1,8 +1,5 @@
 import 'jest-specific-snapshot'
 
-import fs from 'fs'
-import path from 'path'
-
 import WpApiClient from '../../../src'
 
 const mockTitle = {
@@ -14,13 +11,6 @@ const mockContent = {
 }
 const mockUpdatedTitle = { rendered: 'Updated Title' }
 
-const snapshotPath = path.resolve(process.cwd(), './__snapshots__')
-function fileName(name: string, dir?: string) {
-	const pathName = path.join(snapshotPath, dir ?? '')
-	if (dir && !fs.existsSync(pathName)) fs.mkdirSync(pathName)
-	return path.join(pathName, `e2e-${name}.snapshot`)
-}
-
 describe('End-to-end test', () => {
 	const client = new WpApiClient('http://localhost:8080', {
 		auth: {
@@ -30,35 +20,40 @@ describe('End-to-end test', () => {
 		},
 	})
 
-	beforeAll(() => () => {
-		if (!fs.existsSync(snapshotPath)) fs.mkdirSync(snapshotPath)
-	})
-
 	describe('.post', () => {
 		let newPostId: number | undefined
 
-		afterEach(async () => {
+		beforeEach(async () => {
 			if (newPostId) await client.post().delete(newPostId)
 			newPostId = 0
 		})
 
 		it('.find (all)', async () => {
-			expect(await client.post().find()).toMatchSpecificSnapshot(
-				fileName('find_all', 'post'),
-			)
+			const response = await client.post().create({
+				content: mockContent,
+				title: mockTitle,
+				status: 'publish',
+			})
+			newPostId = response!.id
+			const currentLength = (await client.post().find()).length
+			expect(currentLength > 1).toBe(true)
 		})
 		it('.find (one)', async () => {
-			expect(await client.post().find(1)).toMatchSpecificSnapshot(
-				fileName('find_one', 'post'),
-			)
+			const allPosts = await client.post().find()
+			expect(await client.post().find(allPosts[0]!.id)).toEqual([
+				allPosts[0],
+			])
 		})
 		it('.create', async () => {
 			const response = await client.post().create({
 				content: mockContent,
 				title: mockTitle,
 			})
-			newPostId = response?.id
-			expect(response).toMatchSpecificSnapshot(fileName('create', 'post'))
+			newPostId = response!.id
+			expect(response?.title).toEqual({
+				...mockTitle,
+				raw: mockTitle.rendered,
+			})
 		})
 		it('.update', async () => {
 			const response = await client.post().create({
@@ -67,19 +62,23 @@ describe('End-to-end test', () => {
 			})
 			newPostId = response?.id
 			expect(
-				await client
-					.post()
-					.update({ title: mockUpdatedTitle }, response!.id),
-			).toMatchSpecificSnapshot(fileName('update', 'post'))
+				(
+					await client
+						.post()
+						.update({ title: mockUpdatedTitle }, response!.id)
+				)?.title.raw,
+			).toEqual(mockUpdatedTitle.rendered)
 		})
 		it('.delete', async () => {
 			const response = await client.post().create({
 				content: mockContent,
 				title: mockTitle,
 			})
-			expect(
-				await client.post().delete(response!.id),
-			).toMatchSpecificSnapshot(fileName('delete', 'post'))
+			await client.post().delete(response!.id)
+			expect(response?.title).toEqual({
+				...mockTitle,
+				raw: mockTitle.rendered,
+			})
 		})
 	})
 })

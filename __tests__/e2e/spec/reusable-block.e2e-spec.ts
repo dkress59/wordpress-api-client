@@ -1,8 +1,5 @@
 import 'jest-specific-snapshot'
 
-import fs from 'fs'
-import path from 'path'
-
 import WpApiClient from '../../../src'
 
 const mockTitle = {
@@ -16,13 +13,6 @@ const mockUpdatedTitle = { rendered: 'Updated Title' }
 const mockRawContent = { raw: mockContent.rendered, protected: false }
 const mockRawTitle = { raw: mockTitle.rendered, protected: false }
 
-const snapshotPath = path.resolve(process.cwd(), './__snapshots__')
-function fileName(name: string, dir?: string) {
-	const pathName = path.join(snapshotPath, dir ?? '')
-	if (dir && !fs.existsSync(pathName)) fs.mkdirSync(pathName)
-	return path.join(pathName, `e2e-${name}.snapshot`)
-}
-
 describe('End-to-end test', () => {
 	const client = new WpApiClient('http://localhost:8080', {
 		auth: {
@@ -30,10 +20,6 @@ describe('End-to-end test', () => {
 			password: 'password',
 			username: 'admin',
 		},
-	})
-
-	beforeAll(() => () => {
-		if (!fs.existsSync(snapshotPath)) fs.mkdirSync(snapshotPath)
 	})
 
 	describe('.reusableBlock', () => {
@@ -54,14 +40,31 @@ describe('End-to-end test', () => {
 		})
 
 		it('.find (all)', async () => {
-			expect(await client.reusableBlock().find()).toMatchSpecificSnapshot(
-				fileName('find_all', 'reusableBlock'),
-			)
+			const response = await client.reusableBlock().create({
+				content: mockRawContent,
+				title: mockRawTitle,
+				status: 'publish',
+			})
+			const response2 = await client.reusableBlock().create({
+				content: mockRawContent,
+				title: mockRawTitle,
+				status: 'publish',
+			})
+			expect((await client.reusableBlock().find()).length > 1).toBe(true)
+
+			await client.reusableBlock().delete(response!.id)
+			await client.reusableBlock().delete(response2!.id)
 		})
 		it('.find (one)', async () => {
+			const response = await client.reusableBlock().create({
+				content: mockRawContent,
+				title: mockRawTitle,
+				status: 'publish',
+			})
+			newBlockId = response!.id
 			expect(
-				await client.reusableBlock().find(newBlockId),
-			).toMatchSpecificSnapshot(fileName('find_one', 'reusableBlock'))
+				(await client.reusableBlock().find(newBlockId))[0]!.slug,
+			).toEqual(response!.slug)
 		})
 		it('.create', async () => {
 			const response = await client.reusableBlock().create({
@@ -70,19 +73,25 @@ describe('End-to-end test', () => {
 				status: 'publish',
 			})
 			newBlockId = response!.id
-			expect(response).toMatchSpecificSnapshot(
-				fileName('create', 'reusableBlock'),
-			)
+			expect(response?.title.raw).toEqual(mockRawTitle.raw)
 		})
 		it('.update', async () => {
+			const response = await client.reusableBlock().create({
+				content: mockRawContent,
+				title: mockRawTitle,
+				status: 'publish',
+			})
+			newBlockId = response!.id
 			expect(
-				await client
+				(await client
 					.reusableBlock()
 					.update(
 						{ title: { raw: mockUpdatedTitle.rendered } },
 						newBlockId,
-					),
-			).toMatchSpecificSnapshot(fileName('update', 'reusableBlock'))
+					))!.title,
+			).toEqual({
+				raw: mockUpdatedTitle.rendered,
+			})
 		})
 		it('.delete', async () => {
 			const response = await client.reusableBlock().create({
@@ -91,8 +100,8 @@ describe('End-to-end test', () => {
 				status: 'publish',
 			})
 			expect(
-				await client.reusableBlock().delete(response!.id),
-			).toMatchSpecificSnapshot(fileName('delete', 'reusableBlock'))
+				(await client.reusableBlock().delete(response!.id))[0]!.id,
+			).toEqual(response!.id)
 		})
 	})
 })

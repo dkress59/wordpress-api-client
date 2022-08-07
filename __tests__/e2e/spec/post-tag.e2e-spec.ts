@@ -1,21 +1,11 @@
 import 'jest-specific-snapshot'
 
-import fs from 'fs'
-import path from 'path'
-
 import WpApiClient from '../../../src'
 
 const mockTitle = {
 	rendered: 'Mock Title',
 }
 const mockUpdatedTitle = { rendered: 'Updated Title' }
-
-const snapshotPath = path.resolve(process.cwd(), './__snapshots__')
-function fileName(name: string, dir?: string) {
-	const pathName = path.join(snapshotPath, dir ?? '')
-	if (dir && !fs.existsSync(pathName)) fs.mkdirSync(pathName)
-	return path.join(pathName, `e2e-${name}.snapshot`)
-}
 
 describe('End-to-end test', () => {
 	const client = new WpApiClient('http://localhost:8080', {
@@ -24,10 +14,6 @@ describe('End-to-end test', () => {
 			password: 'password',
 			username: 'admin',
 		},
-	})
-
-	beforeAll(() => () => {
-		if (!fs.existsSync(snapshotPath)) fs.mkdirSync(snapshotPath)
 	})
 
 	describe('.postTag', () => {
@@ -45,45 +31,51 @@ describe('End-to-end test', () => {
 		})
 
 		it('.create', async () => {
+			const currentLength = (await client.postTag().find()).length
 			const response = await client.postTag().create({
 				name: mockTitle.rendered,
 			})
-			newTagId = response?.id
-			expect(response).toMatchSpecificSnapshot(
-				fileName('create', 'postTag'),
+			newTagId = response!.id
+			expect((await client.postTag().find()).length).toBe(
+				currentLength + 1,
 			)
 		})
 		it('.delete', async () => {
 			const response = await client.postTag().create({
 				name: mockTitle.rendered,
 			})
-			expect(
-				await client.postTag().delete(response!.id),
-			).toMatchSpecificSnapshot(fileName('delete', 'postTag'))
+			const currentLength = (await client.postTag().find()).length
+			await client.postTag().delete(response!.id)
+			expect((await client.postTag().find()).length).toBe(
+				currentLength - 1,
+			)
 		})
 		it('.find (all)', async () => {
-			expect(await client.postTag().find()).toMatchSpecificSnapshot(
-				fileName('find_all', 'postTag'),
-			)
+			//await client.postTag().create({ name: mockTitle.rendered })
+			await client.postTag().create({ name: mockTitle.rendered })
+			expect((await client.postTag().find()).length > 1).toBe(true)
 		})
 		it('.find (one)', async () => {
-			expect(await client.postTag().find(2)).toMatchSpecificSnapshot(
-				fileName('find_one', 'postTag'),
-			)
+			const allTags = await client.postTag().find()
+			expect(await client.postTag().find(allTags[0]!.id)).toEqual([
+				allTags[0],
+			])
 		})
 		it('.update', async () => {
+			const mockName = 'mock-name-new'
+			const mockUpdatedName = 'mock-updated-name-new'
 			const response = await client.postTag().create({
-				name: mockTitle.rendered,
+				name: mockName,
 			})
 			newTagId = response?.id
 			expect(
-				await client.postTag().update(
+				(await client.postTag().update(
 					{
-						name: mockUpdatedTitle.rendered,
+						name: mockUpdatedName,
 					},
 					response!.id,
-				),
-			).toMatchSpecificSnapshot(fileName('update', 'postTag'))
+				))!.name,
+			).toEqual(mockUpdatedName)
 		})
 	})
 })

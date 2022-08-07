@@ -11,13 +11,6 @@ const mockTitle = {
 const mockPng = fs.readFileSync(path.resolve(__dirname, '../png.png'))
 const mockJpg = fs.readFileSync(path.resolve(__dirname, '../jpg.jpg'))
 
-const snapshotPath = path.resolve(process.cwd(), './__snapshots__')
-function fileName(name: string, dir?: string) {
-	const pathName = path.join(snapshotPath, dir ?? '')
-	if (dir && !fs.existsSync(pathName)) fs.mkdirSync(pathName)
-	return path.join(pathName, `e2e-${name}.snapshot`)
-}
-
 describe('End-to-end test', () => {
 	const client = new WpApiClient('http://localhost:8080', {
 		auth: {
@@ -25,10 +18,6 @@ describe('End-to-end test', () => {
 			password: 'password',
 			username: 'admin',
 		},
-	})
-
-	beforeAll(() => () => {
-		if (!fs.existsSync(snapshotPath)) fs.mkdirSync(snapshotPath)
 	})
 
 	describe('.media', () => {
@@ -47,8 +36,8 @@ describe('End-to-end test', () => {
 					.media()
 					.create(mockFilename, mockJpg)
 				newMediaId = response.id
-				expect(response).toMatchSpecificSnapshot(
-					fileName('create', 'media'),
+				expect(response.title.rendered).toEqual(
+					mockFilename.split('.')[0],
 				)
 			})
 			it('custom mime-type', async () => {
@@ -56,55 +45,55 @@ describe('End-to-end test', () => {
 					.media()
 					.create(mockFilename, mockPng, mockMimeType)
 				newMediaId = response.id
-				expect(response).toMatchSpecificSnapshot(
-					fileName('create_png', 'media'),
-				)
+				expect(response.media_type).toEqual(mockMimeType.split('/')[0])
 			})
 			it('with update', async () => {
+				const mockAlText = 'mock alt-text'
 				const response = await client
 					.media()
 					.create(mockFilename, mockJpg, undefined, {
-						alt_text: 'mock alt-text',
+						alt_text: mockAlText,
 						title: mockTitle,
 						slug: 'mock_slug',
 					})
 				newMediaId = response.id
-				expect(response).toMatchSpecificSnapshot(
-					fileName('create_populated', 'media'),
-				)
+				expect(response.alt_text).toEqual(mockAlText)
 			})
 		})
 		it('.delete', async () => {
 			const response = await client.media().create(mockFilename, mockJpg)
-			expect(
-				await client.media().delete(response.id),
-			).toMatchSpecificSnapshot(fileName('delete', 'media'))
+			const deleted = await client.media().delete(response.id)
+			// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+			// @ts-ignore
+			expect(deleted[0].deleted).toBe(true)
 		})
 		it('.find (all)', async () => {
 			const response = await client.media().create(mockFilename, mockJpg)
+			const response2 = await client
+				.media()
+				.create('2' + mockFilename, mockJpg)
 			newMediaId = response.id
-			expect(await client.media().find()).toMatchSpecificSnapshot(
-				fileName('find_all', 'media'),
-			)
+			expect((await client.media().find()).length > 1).toBe(true)
+
+			await client.media().delete(response2.id)
 		})
 		it('.find (one)', async () => {
 			const response = await client.media().create(mockFilename, mockJpg)
 			newMediaId = response.id
-			expect(
-				await client.media().find(response.id),
-			).toMatchSpecificSnapshot(fileName('find_one', 'media'))
+			expect((await client.media().find(response.id))[0]!.id).toEqual(
+				response.id,
+			)
 		})
 		it('.update', async () => {
-			const response = await client.media().create(mockFilename, mockJpg)
-			newMediaId = response.id
-			expect(
-				await client
-					.media()
-					.update(
-						{ caption: { rendered: 'Mock Caption' } },
-						response.id,
-					),
-			).toMatchSpecificSnapshot(fileName('update', 'media'))
+			const created = await client.media().create(mockFilename, mockJpg)
+			newMediaId = created.id
+			const mockCaption = 'Mock Caption'
+			const updated = await client
+				.media()
+				// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+				// @ts-ignore
+				.update({ caption: mockCaption }, created.id)
+			expect(updated!.caption.raw).toEqual(mockCaption)
 		})
 	})
 })

@@ -15,6 +15,7 @@ function createProject(
 	testMatch: string[],
 ): jest.Config {
 	return {
+		cacheDirectory: '.jest/cache',
 		clearMocks: true,
 		coveragePathIgnorePatterns,
 		displayName: {
@@ -27,7 +28,6 @@ function createProject(
 }
 
 const jestConfig: jest.Config = {
-	cacheDirectory: '.jest/cache',
 	collectCoverage: true,
 	coverageProvider: 'v8',
 	preset: 'ts-jest',
