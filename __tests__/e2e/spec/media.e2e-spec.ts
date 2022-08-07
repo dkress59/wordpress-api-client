@@ -63,9 +63,7 @@ describe('End-to-end test', () => {
 		it('.delete', async () => {
 			const response = await client.media().create(mockFilename, mockJpg)
 			const deleted = await client.media().delete(response.id)
-			// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-			// @ts-ignore
-			expect(deleted[0].deleted).toBe(true)
+			expect(deleted[0]!.deleted).toBe(true)
 		})
 		it('.find (all)', async () => {
 			const response = await client.media().create(mockFilename, mockJpg)
@@ -90,8 +88,6 @@ describe('End-to-end test', () => {
 			const mockCaption = 'Mock Caption'
 			const updated = await client
 				.media()
-				// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-				// @ts-ignore
 				.update({ caption: mockCaption }, created.id)
 			expect(updated!.caption.raw).toEqual(mockCaption)
 		})

@@ -1,7 +1,8 @@
 {
   "cSpell.language": "en_US,en_GB",
   "cSpell.words": [
-      "trashable"
+      "trashable",
+      "untrashable",
   ],
   "editor.codeActionsOnSave": {
     "source.fixAll": true

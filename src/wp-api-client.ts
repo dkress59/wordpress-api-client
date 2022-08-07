@@ -27,11 +27,13 @@ import {
 	DefaultEndpointWithRevision,
 	EndpointCreate,
 	EndpointDelete,
+	EndpointDeleteUntrashable,
 	EndpointFind,
 	EndpointFindAll,
 	EndpointFindOnly,
 	EndpointTotal,
 	EndpointUpdate,
+	EndpointUpdateMedia,
 	EndpointUpdatePartial,
 	RenderedBlockDto,
 	WpApiOptions,
@@ -310,12 +312,15 @@ export class WpApiClient {
 			file: Buffer,
 			mimeType?: string,
 			data?: Partial<P>,
+			caption?: string,
 		) => Promise<P>
-		delete: EndpointDelete<P>
-		update: EndpointUpdate<P>
+		delete: EndpointDeleteUntrashable<P>
+		update: EndpointUpdateMedia<P>
 	} {
 		const find = this.createEndpointGet<P>(END_POINT.MEDIA)
-		const update = this.createEndpointPost<P>(END_POINT.MEDIA)
+		const update = <EndpointUpdateMedia<P>>(
+			this.createEndpointPost<P>(END_POINT.MEDIA)
+		)
 		/**
 		 * @param {string} fileName Must include the file extension
 		 * @param {Buffer} file Takes a `Buffer` as input
@@ -328,8 +333,6 @@ export class WpApiClient {
 			mimeType = 'image/jpeg',
 			data?: Partial<P>,
 		): Promise<P> => {
-			// FIXME: .media.create caption.rendered
-			// caption: 'mock_caption',
 			if (!fileName.includes('.'))
 				throw new Error(
 					ERROR_MESSAGE.INVALID_FILENAME.replace(
@@ -346,12 +349,20 @@ export class WpApiClient {
 				headers,
 				file,
 			)
-			if (data) return update(data, result.id)
+			if (data)
+				return <Promise<P>>(
+					update(
+						<Omit<P, 'caption'> & { caption?: string }>data,
+						result.id,
+					)
+				)
 			return result
 		}
-		const deleteOne = this.createEndpointDelete<P>(
-			END_POINT.MEDIA,
-			new URLSearchParams({}),
+		const deleteOne = <EndpointDeleteUntrashable<P>>(
+			this.createEndpointDelete<P>(
+				END_POINT.MEDIA,
+				new URLSearchParams({}),
+			)
 		)
 		return {
 			find,

@@ -22,11 +22,19 @@ export type EndpointCreate<P> = (body: Partial<P>) => Promise<P | null>
 
 export type EndpointDelete<P> = (...ids: number[]) => Promise<(P | null)[]>
 
+export type EndpointDeleteUntrashable<P> = (
+	...ids: number[]
+) => Promise<({ deleted: boolean; previous: P } | null)[]>
+
 export type EndpointUpdate<P> = (
 	body: Partial<P>,
 	id: number,
 ) => Promise<P | null>
 
+export type EndpointUpdateMedia<P> = (
+	body: Partial<Omit<P, 'caption'> & { caption?: string }>,
+	id: number,
+) => Promise<P | null>
 export type EndpointTotal = () => Promise<number>
 
 export type EndpointUpdatePartial<P> = (body: Partial<P>) => Promise<P>
