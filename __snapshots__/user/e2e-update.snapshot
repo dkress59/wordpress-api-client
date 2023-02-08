@@ -34,7 +34,9 @@ Object {
   "last_name": "",
   "link": "http://localhost:8080/author/mockuser6/",
   "locale": "en_US",
-  "meta": Array [],
+  "meta": Object {
+    "persisted_preferences": Array [],
+  },
   "name": "Updated Title",
   "nickname": "mockuser6",
   "roles": Array [

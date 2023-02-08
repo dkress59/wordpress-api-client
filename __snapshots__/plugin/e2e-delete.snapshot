@@ -14,11 +14,11 @@ Object {
     "network_only": false,
     "plugin": "akismet/akismet",
     "plugin_uri": "https://akismet.com/",
-    "requires_php": "",
-    "requires_wp": "",
+    "requires_php": "5.2",
+    "requires_wp": "5.0",
     "status": "inactive",
     "textdomain": "akismet",
-    "version": "4.2.5",
+    "version": "5.0.1",
   },
 }
 `;

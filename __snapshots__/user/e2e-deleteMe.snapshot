@@ -83,7 +83,9 @@ Object {
     "last_name": "",
     "link": "http://localhost:8080/author/mockuser2/",
     "locale": "en_US",
-    "meta": Array [],
+    "meta": Object {
+      "persisted_preferences": Array [],
+    },
     "name": "Mock Title",
     "nickname": "mockuser2",
     "roles": Array [

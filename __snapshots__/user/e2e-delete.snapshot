@@ -25,7 +25,9 @@ Array [
       "last_name": "",
       "link": "http://localhost:8080/author/mockuser1/",
       "locale": "en_US",
-      "meta": Array [],
+      "meta": Object {
+        "persisted_preferences": Array [],
+      },
       "name": "Mock Title",
       "nickname": "mockuser1",
       "roles": Array [

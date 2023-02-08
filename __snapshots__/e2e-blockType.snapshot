@@ -18,6 +18,159 @@ Array [
       ],
       "self": Array [
         Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core/legacy-widget",
+        },
+      ],
+      "up": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core",
+        },
+      ],
+      "wp:render-block": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-renderer/core/legacy-widget?context=edit",
+        },
+      ],
+    },
+    "ancestor": null,
+    "api_version": 2,
+    "attributes": Object {
+      "id": Object {
+        "default": null,
+        "type": "string",
+      },
+      "idBase": Object {
+        "default": null,
+        "type": "string",
+      },
+      "instance": Object {
+        "default": null,
+        "type": "object",
+      },
+      "lock": Object {
+        "type": "object",
+      },
+    },
+    "category": "widgets",
+    "description": "Display a legacy widget.",
+    "editor_script": null,
+    "editor_script_handles": Array [],
+    "editor_style": null,
+    "editor_style_handles": Array [],
+    "example": null,
+    "icon": null,
+    "is_dynamic": true,
+    "keywords": Array [],
+    "name": "core/legacy-widget",
+    "parent": null,
+    "provides_context": Array [],
+    "script": null,
+    "script_handles": Array [],
+    "style": null,
+    "style_handles": Array [],
+    "styles": Array [],
+    "supports": Object {
+      "customClassName": false,
+      "html": false,
+      "reusable": false,
+    },
+    "textdomain": null,
+    "title": "Legacy Widget",
+    "uses_context": Array [],
+    "variations": Array [],
+    "view_script": null,
+    "view_script_handles": Array [],
+  },
+  Object {
+    "_links": Object {
+      "collection": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types",
+        },
+      ],
+      "curies": Array [
+        Object {
+          "href": "https://api.w.org/{rel}",
+          "name": "wp",
+          "templated": true,
+        },
+      ],
+      "self": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core/widget-group",
+        },
+      ],
+      "up": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core",
+        },
+      ],
+      "wp:render-block": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-renderer/core/widget-group?context=edit",
+        },
+      ],
+    },
+    "ancestor": null,
+    "api_version": 2,
+    "attributes": Object {
+      "className": Object {
+        "type": "string",
+      },
+      "lock": Object {
+        "type": "object",
+      },
+      "title": Object {
+        "type": "string",
+      },
+    },
+    "category": "widgets",
+    "description": "",
+    "editor_script": null,
+    "editor_script_handles": Array [],
+    "editor_style": null,
+    "editor_style_handles": Array [],
+    "example": null,
+    "icon": null,
+    "is_dynamic": true,
+    "keywords": Array [],
+    "name": "core/widget-group",
+    "parent": null,
+    "provides_context": Array [],
+    "script": null,
+    "script_handles": Array [],
+    "style": null,
+    "style_handles": Array [],
+    "styles": Array [],
+    "supports": Object {
+      "customClassName": true,
+      "html": false,
+      "inserter": true,
+      "reusable": false,
+    },
+    "textdomain": null,
+    "title": "",
+    "uses_context": Array [],
+    "variations": Array [],
+    "view_script": null,
+    "view_script_handles": Array [],
+  },
+  Object {
+    "_links": Object {
+      "collection": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types",
+        },
+      ],
+      "curies": Array [
+        Object {
+          "href": "https://api.w.org/{rel}",
+          "name": "wp",
+          "templated": true,
+        },
+      ],
+      "self": Array [
+        Object {
           "href": "http://localhost:8080/wp-json/wp/v2/block-types/core/archives",
         },
       ],
@@ -53,12 +206,25 @@ Array [
         "default": false,
         "type": "boolean",
       },
+      "fontFamily": Object {
+        "type": "string",
+      },
+      "fontSize": Object {
+        "type": "string",
+      },
       "lock": Object {
         "type": "object",
+      },
+      "showLabel": Object {
+        "default": true,
+        "type": "boolean",
       },
       "showPostCounts": Object {
         "default": false,
         "type": "boolean",
+      },
+      "style": Object {
+        "type": "object",
       },
       "type": Object {
         "default": "monthly",
@@ -68,7 +234,9 @@ Array [
     "category": "widgets",
     "description": "Display a date archive of your posts.",
     "editor_script": null,
+    "editor_script_handles": Array [],
     "editor_style": null,
+    "editor_style_handles": Array [],
     "example": null,
     "icon": null,
     "is_dynamic": true,
@@ -77,17 +245,37 @@ Array [
     "parent": null,
     "provides_context": Array [],
     "script": null,
+    "script_handles": Array [],
     "style": null,
+    "style_handles": Array [],
     "styles": Array [],
     "supports": Object {
       "align": true,
       "html": false,
+      "spacing": Object {
+        "margin": true,
+        "padding": true,
+      },
+      "typography": Object {
+        "__experimentalDefaultControls": Object {
+          "fontSize": true,
+        },
+        "__experimentalFontFamily": true,
+        "__experimentalFontStyle": true,
+        "__experimentalFontWeight": true,
+        "__experimentalLetterSpacing": true,
+        "__experimentalTextDecoration": true,
+        "__experimentalTextTransform": true,
+        "fontSize": true,
+        "lineHeight": true,
+      },
     },
     "textdomain": null,
     "title": "Archives",
     "uses_context": Array [],
     "variations": Array [],
     "view_script": null,
+    "view_script_handles": Array [],
   },
   Object {
     "_links": Object {
@@ -164,7 +352,9 @@ Array [
     "category": "theme",
     "description": "Add a user's avatar.",
     "editor_script": null,
+    "editor_script_handles": Array [],
     "editor_style": null,
+    "editor_style_handles": Array [],
     "example": null,
     "icon": null,
     "is_dynamic": true,
@@ -173,7 +363,9 @@ Array [
     "parent": null,
     "provides_context": Array [],
     "script": null,
+    "script_handles": Array [],
     "style": null,
+    "style_handles": Array [],
     "styles": Array [],
     "supports": Object {
       "__experimentalBorder": Object {
@@ -196,6 +388,7 @@ Array [
       "html": false,
       "spacing": Object {
         "margin": true,
+        "padding": true,
       },
     },
     "textdomain": null,
@@ -207,6 +400,7 @@ Array [
     ],
     "variations": Array [],
     "view_script": null,
+    "view_script_handles": Array [],
   },
   Object {
     "_links": Object {
@@ -251,7 +445,9 @@ Array [
     "category": "reusable",
     "description": "Create and save content to reuse across your site. Update the block, and the changes apply everywhere it’s used.",
     "editor_script": null,
+    "editor_script_handles": Array [],
     "editor_style": null,
+    "editor_style_handles": Array [],
     "example": null,
     "icon": null,
     "is_dynamic": true,
@@ -260,7 +456,9 @@ Array [
     "parent": null,
     "provides_context": Array [],
     "script": null,
+    "script_handles": Array [],
     "style": null,
+    "style_handles": Array [],
     "styles": Array [],
     "supports": Object {
       "customClassName": false,
@@ -272,6 +470,7 @@ Array [
     "uses_context": Array [],
     "variations": Array [],
     "view_script": null,
+    "view_script_handles": Array [],
   },
   Object {
     "_links": Object {
@@ -320,11 +519,20 @@ Array [
       "className": Object {
         "type": "string",
       },
+      "fontFamily": Object {
+        "type": "string",
+      },
+      "fontSize": Object {
+        "type": "string",
+      },
       "lock": Object {
         "type": "object",
       },
       "month": Object {
         "type": "integer",
+      },
+      "style": Object {
+        "type": "object",
       },
       "year": Object {
         "type": "integer",
@@ -333,7 +541,9 @@ Array [
     "category": "widgets",
     "description": "A calendar of your site’s posts.",
     "editor_script": null,
+    "editor_script_handles": Array [],
     "editor_style": null,
+    "editor_style_handles": Array [],
     "example": null,
     "icon": null,
     "is_dynamic": true,
@@ -345,16 +555,31 @@ Array [
     "parent": null,
     "provides_context": Array [],
     "script": null,
+    "script_handles": Array [],
     "style": null,
+    "style_handles": Array [],
     "styles": Array [],
     "supports": Object {
       "align": true,
+      "typography": Object {
+        "__experimentalDefaultControls": Object {
+          "fontSize": true,
+        },
+        "__experimentalFontFamily": true,
+        "__experimentalFontStyle": true,
+        "__experimentalFontWeight": true,
+        "__experimentalLetterSpacing": true,
+        "__experimentalTextTransform": true,
+        "fontSize": true,
+        "lineHeight": true,
+      },
     },
     "textdomain": null,
     "title": "Calendar",
     "uses_context": Array [],
     "variations": Array [],
     "view_script": null,
+    "view_script_handles": Array [],
   },
   Object {
     "_links": Object {
@@ -407,8 +632,18 @@ Array [
         "default": false,
         "type": "boolean",
       },
+      "fontFamily": Object {
+        "type": "string",
+      },
+      "fontSize": Object {
+        "type": "string",
+      },
       "lock": Object {
         "type": "object",
+      },
+      "showEmpty": Object {
+        "default": false,
+        "type": "boolean",
       },
       "showHierarchy": Object {
         "default": false,
@@ -422,11 +657,16 @@ Array [
         "default": false,
         "type": "boolean",
       },
+      "style": Object {
+        "type": "object",
+      },
     },
     "category": "widgets",
     "description": "Display a list of all categories.",
     "editor_script": null,
+    "editor_script_handles": Array [],
     "editor_style": null,
+    "editor_style_handles": Array [],
     "example": null,
     "icon": null,
     "is_dynamic": true,
@@ -435,17 +675,37 @@ Array [
     "parent": null,
     "provides_context": Array [],
     "script": null,
+    "script_handles": Array [],
     "style": null,
+    "style_handles": Array [],
     "styles": Array [],
     "supports": Object {
       "align": true,
       "html": false,
+      "spacing": Object {
+        "margin": true,
+        "padding": true,
+      },
+      "typography": Object {
+        "__experimentalDefaultControls": Object {
+          "fontSize": true,
+        },
+        "__experimentalFontFamily": true,
+        "__experimentalFontStyle": true,
+        "__experimentalFontWeight": true,
+        "__experimentalLetterSpacing": true,
+        "__experimentalTextDecoration": true,
+        "__experimentalTextTransform": true,
+        "fontSize": true,
+        "lineHeight": true,
+      },
     },
     "textdomain": null,
-    "title": "Categories",
+    "title": "Categories List",
     "uses_context": Array [],
     "variations": Array [],
     "view_script": null,
+    "view_script_handles": Array [],
   },
   Object {
     "_links": Object {
@@ -477,13 +737,18 @@ Array [
         },
       ],
     },
-    "ancestor": null,
+    "ancestor": Array [
+      "core/comment-template",
+    ],
     "api_version": 2,
     "attributes": Object {
       "backgroundColor": Object {
         "type": "string",
       },
       "className": Object {
+        "type": "string",
+      },
+      "fontFamily": Object {
         "type": "string",
       },
       "fontSize": Object {
@@ -516,7 +781,9 @@ Array [
     "category": "theme",
     "description": "Displays the name of the author of the comment.",
     "editor_script": null,
+    "editor_script_handles": Array [],
     "editor_style": null,
+    "editor_style_handles": Array [],
     "example": null,
     "icon": null,
     "is_dynamic": true,
@@ -525,7 +792,9 @@ Array [
     "parent": null,
     "provides_context": Array [],
     "script": null,
+    "script_handles": Array [],
     "style": null,
+    "style_handles": Array [],
     "styles": Array [],
     "supports": Object {
       "color": Object {
@@ -543,10 +812,14 @@ Array [
         "padding": true,
       },
       "typography": Object {
+        "__experimentalDefaultControls": Object {
+          "fontSize": true,
+        },
         "__experimentalFontFamily": true,
         "__experimentalFontStyle": true,
         "__experimentalFontWeight": true,
         "__experimentalLetterSpacing": true,
+        "__experimentalTextDecoration": true,
         "__experimentalTextTransform": true,
         "fontSize": true,
         "lineHeight": true,
@@ -559,6 +832,7 @@ Array [
     ],
     "variations": Array [],
     "view_script": null,
+    "view_script_handles": Array [],
   },
   Object {
     "_links": Object {
@@ -590,13 +864,18 @@ Array [
         },
       ],
     },
-    "ancestor": null,
+    "ancestor": Array [
+      "core/comment-template",
+    ],
     "api_version": 2,
     "attributes": Object {
       "backgroundColor": Object {
         "type": "string",
       },
       "className": Object {
+        "type": "string",
+      },
+      "fontFamily": Object {
         "type": "string",
       },
       "fontSize": Object {
@@ -621,7 +900,9 @@ Array [
     "category": "theme",
     "description": "Displays the contents of a comment.",
     "editor_script": null,
+    "editor_script_handles": Array [],
     "editor_style": null,
+    "editor_style_handles": Array [],
     "example": null,
     "icon": null,
     "is_dynamic": true,
@@ -630,7 +911,9 @@ Array [
     "parent": null,
     "provides_context": Array [],
     "script": null,
+    "script_handles": Array [],
     "style": null,
+    "style_handles": Array [],
     "styles": Array [],
     "supports": Object {
       "color": Object {
@@ -652,10 +935,14 @@ Array [
         ],
       },
       "typography": Object {
+        "__experimentalDefaultControls": Object {
+          "fontSize": true,
+        },
         "__experimentalFontFamily": true,
         "__experimentalFontStyle": true,
         "__experimentalFontWeight": true,
         "__experimentalLetterSpacing": true,
+        "__experimentalTextDecoration": true,
         "__experimentalTextTransform": true,
         "fontSize": true,
         "lineHeight": true,
@@ -668,6 +955,7 @@ Array [
     ],
     "variations": Array [],
     "view_script": null,
+    "view_script_handles": Array [],
   },
   Object {
     "_links": Object {
@@ -699,13 +987,18 @@ Array [
         },
       ],
     },
-    "ancestor": null,
+    "ancestor": Array [
+      "core/comment-template",
+    ],
     "api_version": 2,
     "attributes": Object {
       "backgroundColor": Object {
         "type": "string",
       },
       "className": Object {
+        "type": "string",
+      },
+      "fontFamily": Object {
         "type": "string",
       },
       "fontSize": Object {
@@ -734,7 +1027,9 @@ Array [
     "category": "theme",
     "description": "Displays the date on which the comment was posted.",
     "editor_script": null,
+    "editor_script_handles": Array [],
     "editor_style": null,
+    "editor_style_handles": Array [],
     "example": null,
     "icon": null,
     "is_dynamic": true,
@@ -743,7 +1038,9 @@ Array [
     "parent": null,
     "provides_context": Array [],
     "script": null,
+    "script_handles": Array [],
     "style": null,
+    "style_handles": Array [],
     "styles": Array [],
     "supports": Object {
       "color": Object {
@@ -756,6 +1053,10 @@ Array [
         "link": true,
       },
       "html": false,
+      "spacing": Object {
+        "margin": true,
+        "padding": true,
+      },
       "typography": Object {
         "__experimentalDefaultControls": Object {
           "fontSize": true,
@@ -764,6 +1065,7 @@ Array [
         "__experimentalFontStyle": true,
         "__experimentalFontWeight": true,
         "__experimentalLetterSpacing": true,
+        "__experimentalTextDecoration": true,
         "__experimentalTextTransform": true,
         "fontSize": true,
         "lineHeight": true,
@@ -776,6 +1078,7 @@ Array [
     ],
     "variations": Array [],
     "view_script": null,
+    "view_script_handles": Array [],
   },
   Object {
     "_links": Object {
@@ -807,13 +1110,18 @@ Array [
         },
       ],
     },
-    "ancestor": null,
+    "ancestor": Array [
+      "core/comment-template",
+    ],
     "api_version": 2,
     "attributes": Object {
       "backgroundColor": Object {
         "type": "string",
       },
       "className": Object {
+        "type": "string",
+      },
+      "fontFamily": Object {
         "type": "string",
       },
       "fontSize": Object {
@@ -839,7 +1147,9 @@ Array [
     "category": "theme",
     "description": "Displays a link to edit the comment in the WordPress Dashboard. This link is only visible to users with the edit comment capability.",
     "editor_script": null,
+    "editor_script_handles": Array [],
     "editor_style": null,
+    "editor_style_handles": Array [],
     "example": null,
     "icon": null,
     "is_dynamic": true,
@@ -848,7 +1158,9 @@ Array [
     "parent": null,
     "provides_context": Array [],
     "script": null,
+    "script_handles": Array [],
     "style": null,
+    "style_handles": Array [],
     "styles": Array [],
     "supports": Object {
       "color": Object {
@@ -861,11 +1173,19 @@ Array [
         "text": false,
       },
       "html": false,
+      "spacing": Object {
+        "margin": true,
+        "padding": true,
+      },
       "typography": Object {
+        "__experimentalDefaultControls": Object {
+          "fontSize": true,
+        },
         "__experimentalFontFamily": true,
         "__experimentalFontStyle": true,
         "__experimentalFontWeight": true,
         "__experimentalLetterSpacing": true,
+        "__experimentalTextDecoration": true,
         "__experimentalTextTransform": true,
         "fontSize": true,
         "lineHeight": true,
@@ -878,6 +1198,7 @@ Array [
     ],
     "variations": Array [],
     "view_script": null,
+    "view_script_handles": Array [],
   },
   Object {
     "_links": Object {
@@ -909,13 +1230,18 @@ Array [
         },
       ],
     },
-    "ancestor": null,
+    "ancestor": Array [
+      "core/comment-template",
+    ],
     "api_version": 2,
     "attributes": Object {
       "backgroundColor": Object {
         "type": "string",
       },
       "className": Object {
+        "type": "string",
+      },
+      "fontFamily": Object {
         "type": "string",
       },
       "fontSize": Object {
@@ -937,7 +1263,9 @@ Array [
     "category": "theme",
     "description": "Displays a link to reply to a comment.",
     "editor_script": null,
+    "editor_script_handles": Array [],
     "editor_style": null,
+    "editor_style_handles": Array [],
     "example": null,
     "icon": null,
     "is_dynamic": true,
@@ -946,7 +1274,9 @@ Array [
     "parent": null,
     "provides_context": Array [],
     "script": null,
+    "script_handles": Array [],
     "style": null,
+    "style_handles": Array [],
     "styles": Array [],
     "supports": Object {
       "color": Object {
@@ -959,11 +1289,19 @@ Array [
         "text": false,
       },
       "html": false,
+      "spacing": Object {
+        "margin": true,
+        "padding": true,
+      },
       "typography": Object {
+        "__experimentalDefaultControls": Object {
+          "fontSize": true,
+        },
         "__experimentalFontFamily": true,
         "__experimentalFontStyle": true,
         "__experimentalFontWeight": true,
         "__experimentalLetterSpacing": true,
+        "__experimentalTextDecoration": true,
         "__experimentalTextTransform": true,
         "fontSize": true,
         "lineHeight": true,
@@ -976,6 +1314,7 @@ Array [
     ],
     "variations": Array [],
     "view_script": null,
+    "view_script_handles": Array [],
   },
   Object {
     "_links": Object {
@@ -1024,30 +1363,56 @@ Array [
       "className": Object {
         "type": "string",
       },
+      "fontFamily": Object {
+        "type": "string",
+      },
+      "fontSize": Object {
+        "type": "string",
+      },
       "lock": Object {
+        "type": "object",
+      },
+      "style": Object {
         "type": "object",
       },
     },
     "category": "design",
     "description": "Contains the block elements used to display a comment, like the title, date, author, avatar and more.",
     "editor_script": null,
+    "editor_script_handles": Array [],
     "editor_style": null,
+    "editor_style_handles": Array [],
     "example": null,
     "icon": null,
     "is_dynamic": true,
     "keywords": Array [],
     "name": "core/comment-template",
     "parent": Array [
-      "core/comments-query-loop",
+      "core/comments",
     ],
     "provides_context": Array [],
     "script": null,
+    "script_handles": Array [],
     "style": null,
+    "style_handles": Array [],
     "styles": Array [],
     "supports": Object {
       "align": true,
       "html": false,
       "reusable": false,
+      "typography": Object {
+        "__experimentalDefaultControls": Object {
+          "fontSize": true,
+        },
+        "__experimentalFontFamily": true,
+        "__experimentalFontStyle": true,
+        "__experimentalFontWeight": true,
+        "__experimentalLetterSpacing": true,
+        "__experimentalTextDecoration": true,
+        "__experimentalTextTransform": true,
+        "fontSize": true,
+        "lineHeight": true,
+      },
     },
     "textdomain": null,
     "title": "Comment Template",
@@ -1056,6 +1421,7 @@ Array [
     ],
     "variations": Array [],
     "view_script": null,
+    "view_script_handles": Array [],
   },
   Object {
     "_links": Object {
@@ -1073,7 +1439,7 @@ Array [
       ],
       "self": Array [
         Object {
-          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core/comments-pagination-next",
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core/comments",
         },
       ],
       "up": Array [
@@ -1083,17 +1449,31 @@ Array [
       ],
       "wp:render-block": Array [
         Object {
-          "href": "http://localhost:8080/wp-json/wp/v2/block-renderer/core/comments-pagination-next?context=edit",
+          "href": "http://localhost:8080/wp-json/wp/v2/block-renderer/core/comments?context=edit",
         },
       ],
     },
     "ancestor": null,
     "api_version": 2,
     "attributes": Object {
+      "align": Object {
+        "enum": Array [
+          "left",
+          "center",
+          "right",
+          "wide",
+          "full",
+          "",
+        ],
+        "type": "string",
+      },
       "backgroundColor": Object {
         "type": "string",
       },
       "className": Object {
+        "type": "string",
+      },
+      "fontFamily": Object {
         "type": "string",
       },
       "fontSize": Object {
@@ -1102,8 +1482,9 @@ Array [
       "gradient": Object {
         "type": "string",
       },
-      "label": Object {
-        "type": "string",
+      "legacy": Object {
+        "default": false,
+        "type": "boolean",
       },
       "lock": Object {
         "type": "object",
@@ -1111,223 +1492,70 @@ Array [
       "style": Object {
         "type": "object",
       },
+      "tagName": Object {
+        "default": "div",
+        "type": "string",
+      },
+      "textColor": Object {
+        "type": "string",
+      },
     },
     "category": "theme",
-    "description": "Displays the next comment's page link.",
+    "description": "An advanced block that allows displaying post comments using different visual configurations.",
     "editor_script": null,
+    "editor_script_handles": Array [],
     "editor_style": null,
+    "editor_style_handles": Array [],
     "example": null,
     "icon": null,
     "is_dynamic": true,
     "keywords": Array [],
-    "name": "core/comments-pagination-next",
-    "parent": Array [
-      "core/comments-pagination",
-    ],
+    "name": "core/comments",
+    "parent": null,
     "provides_context": Array [],
     "script": null,
+    "script_handles": Array [],
     "style": null,
+    "style_handles": Array [],
     "styles": Array [],
     "supports": Object {
+      "align": Array [
+        "wide",
+        "full",
+      ],
       "color": Object {
         "__experimentalDefaultControls": Object {
           "background": true,
+          "link": true,
+          "text": true,
         },
         "gradients": true,
-        "text": false,
+        "link": true,
       },
       "html": false,
-      "reusable": false,
       "typography": Object {
         "__experimentalDefaultControls": Object {
           "fontSize": true,
         },
+        "__experimentalFontFamily": true,
         "__experimentalFontStyle": true,
         "__experimentalFontWeight": true,
         "__experimentalLetterSpacing": true,
+        "__experimentalTextDecoration": true,
         "__experimentalTextTransform": true,
         "fontSize": true,
         "lineHeight": true,
       },
     },
     "textdomain": null,
-    "title": "Next Page",
+    "title": "Comments",
     "uses_context": Array [
       "postId",
-      "comments/paginationArrow",
+      "postType",
     ],
     "variations": Array [],
     "view_script": null,
-  },
-  Object {
-    "_links": Object {
-      "collection": Array [
-        Object {
-          "href": "http://localhost:8080/wp-json/wp/v2/block-types",
-        },
-      ],
-      "curies": Array [
-        Object {
-          "href": "https://api.w.org/{rel}",
-          "name": "wp",
-          "templated": true,
-        },
-      ],
-      "self": Array [
-        Object {
-          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core/comments-pagination-numbers",
-        },
-      ],
-      "up": Array [
-        Object {
-          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core",
-        },
-      ],
-      "wp:render-block": Array [
-        Object {
-          "href": "http://localhost:8080/wp-json/wp/v2/block-renderer/core/comments-pagination-numbers?context=edit",
-        },
-      ],
-    },
-    "ancestor": null,
-    "api_version": 2,
-    "attributes": Object {
-      "className": Object {
-        "type": "string",
-      },
-      "lock": Object {
-        "type": "object",
-      },
-    },
-    "category": "theme",
-    "description": "Displays a list of page numbers for comments pagination.",
-    "editor_script": null,
-    "editor_style": null,
-    "example": null,
-    "icon": null,
-    "is_dynamic": true,
-    "keywords": Array [],
-    "name": "core/comments-pagination-numbers",
-    "parent": Array [
-      "core/comments-pagination",
-    ],
-    "provides_context": Array [],
-    "script": null,
-    "style": null,
-    "styles": Array [],
-    "supports": Object {
-      "html": false,
-      "reusable": false,
-    },
-    "textdomain": null,
-    "title": "Page Numbers",
-    "uses_context": Array [
-      "postId",
-    ],
-    "variations": Array [],
-    "view_script": null,
-  },
-  Object {
-    "_links": Object {
-      "collection": Array [
-        Object {
-          "href": "http://localhost:8080/wp-json/wp/v2/block-types",
-        },
-      ],
-      "curies": Array [
-        Object {
-          "href": "https://api.w.org/{rel}",
-          "name": "wp",
-          "templated": true,
-        },
-      ],
-      "self": Array [
-        Object {
-          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core/comments-pagination-previous",
-        },
-      ],
-      "up": Array [
-        Object {
-          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core",
-        },
-      ],
-      "wp:render-block": Array [
-        Object {
-          "href": "http://localhost:8080/wp-json/wp/v2/block-renderer/core/comments-pagination-previous?context=edit",
-        },
-      ],
-    },
-    "ancestor": null,
-    "api_version": 2,
-    "attributes": Object {
-      "backgroundColor": Object {
-        "type": "string",
-      },
-      "className": Object {
-        "type": "string",
-      },
-      "fontSize": Object {
-        "type": "string",
-      },
-      "gradient": Object {
-        "type": "string",
-      },
-      "label": Object {
-        "type": "string",
-      },
-      "lock": Object {
-        "type": "object",
-      },
-      "style": Object {
-        "type": "object",
-      },
-    },
-    "category": "theme",
-    "description": "Displays the previous comment's page link.",
-    "editor_script": null,
-    "editor_style": null,
-    "example": null,
-    "icon": null,
-    "is_dynamic": true,
-    "keywords": Array [],
-    "name": "core/comments-pagination-previous",
-    "parent": Array [
-      "core/comments-pagination",
-    ],
-    "provides_context": Array [],
-    "script": null,
-    "style": null,
-    "styles": Array [],
-    "supports": Object {
-      "color": Object {
-        "__experimentalDefaultControls": Object {
-          "background": true,
-        },
-        "gradients": true,
-        "text": false,
-      },
-      "html": false,
-      "reusable": false,
-      "typography": Object {
-        "__experimentalDefaultControls": Object {
-          "fontSize": true,
-        },
-        "__experimentalFontStyle": true,
-        "__experimentalFontWeight": true,
-        "__experimentalLetterSpacing": true,
-        "__experimentalTextTransform": true,
-        "fontSize": true,
-        "lineHeight": true,
-      },
-    },
-    "textdomain": null,
-    "title": "Previous Page",
-    "uses_context": Array [
-      "postId",
-      "comments/paginationArrow",
-    ],
-    "variations": Array [],
-    "view_script": null,
+    "view_script_handles": Array [],
   },
   Object {
     "_links": Object {
@@ -1379,6 +1607,12 @@ Array [
       "className": Object {
         "type": "string",
       },
+      "fontFamily": Object {
+        "type": "string",
+      },
+      "fontSize": Object {
+        "type": "string",
+      },
       "gradient": Object {
         "type": "string",
       },
@@ -1402,20 +1636,24 @@ Array [
     "category": "theme",
     "description": "Displays a paginated navigation to next/previous set of comments, when applicable.",
     "editor_script": null,
+    "editor_script_handles": Array [],
     "editor_style": null,
+    "editor_style_handles": Array [],
     "example": null,
     "icon": null,
     "is_dynamic": true,
     "keywords": Array [],
     "name": "core/comments-pagination",
     "parent": Array [
-      "core/comments-query-loop",
+      "core/comments",
     ],
     "provides_context": Object {
       "comments/paginationArrow": "paginationArrow",
     },
     "script": null,
+    "script_handles": Array [],
     "style": null,
+    "style_handles": Array [],
     "styles": Array [],
     "supports": Object {
       "__experimentalLayout": Object {
@@ -1437,12 +1675,345 @@ Array [
       },
       "html": false,
       "reusable": false,
+      "typography": Object {
+        "__experimentalDefaultControls": Object {
+          "fontSize": true,
+        },
+        "__experimentalFontFamily": true,
+        "__experimentalFontStyle": true,
+        "__experimentalFontWeight": true,
+        "__experimentalLetterSpacing": true,
+        "__experimentalTextDecoration": true,
+        "__experimentalTextTransform": true,
+        "fontSize": true,
+        "lineHeight": true,
+      },
     },
     "textdomain": null,
     "title": "Comments Pagination",
     "uses_context": Array [],
     "variations": Array [],
     "view_script": null,
+    "view_script_handles": Array [],
+  },
+  Object {
+    "_links": Object {
+      "collection": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types",
+        },
+      ],
+      "curies": Array [
+        Object {
+          "href": "https://api.w.org/{rel}",
+          "name": "wp",
+          "templated": true,
+        },
+      ],
+      "self": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core/comments-pagination-next",
+        },
+      ],
+      "up": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core",
+        },
+      ],
+      "wp:render-block": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-renderer/core/comments-pagination-next?context=edit",
+        },
+      ],
+    },
+    "ancestor": null,
+    "api_version": 2,
+    "attributes": Object {
+      "backgroundColor": Object {
+        "type": "string",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "fontFamily": Object {
+        "type": "string",
+      },
+      "fontSize": Object {
+        "type": "string",
+      },
+      "gradient": Object {
+        "type": "string",
+      },
+      "label": Object {
+        "type": "string",
+      },
+      "lock": Object {
+        "type": "object",
+      },
+      "style": Object {
+        "type": "object",
+      },
+    },
+    "category": "theme",
+    "description": "Displays the next comment's page link.",
+    "editor_script": null,
+    "editor_script_handles": Array [],
+    "editor_style": null,
+    "editor_style_handles": Array [],
+    "example": null,
+    "icon": null,
+    "is_dynamic": true,
+    "keywords": Array [],
+    "name": "core/comments-pagination-next",
+    "parent": Array [
+      "core/comments-pagination",
+    ],
+    "provides_context": Array [],
+    "script": null,
+    "script_handles": Array [],
+    "style": null,
+    "style_handles": Array [],
+    "styles": Array [],
+    "supports": Object {
+      "color": Object {
+        "__experimentalDefaultControls": Object {
+          "background": true,
+        },
+        "gradients": true,
+        "text": false,
+      },
+      "html": false,
+      "reusable": false,
+      "typography": Object {
+        "__experimentalDefaultControls": Object {
+          "fontSize": true,
+        },
+        "__experimentalFontFamily": true,
+        "__experimentalFontStyle": true,
+        "__experimentalFontWeight": true,
+        "__experimentalLetterSpacing": true,
+        "__experimentalTextDecoration": true,
+        "__experimentalTextTransform": true,
+        "fontSize": true,
+        "lineHeight": true,
+      },
+    },
+    "textdomain": null,
+    "title": "Comments Next Page",
+    "uses_context": Array [
+      "postId",
+      "comments/paginationArrow",
+    ],
+    "variations": Array [],
+    "view_script": null,
+    "view_script_handles": Array [],
+  },
+  Object {
+    "_links": Object {
+      "collection": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types",
+        },
+      ],
+      "curies": Array [
+        Object {
+          "href": "https://api.w.org/{rel}",
+          "name": "wp",
+          "templated": true,
+        },
+      ],
+      "self": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core/comments-pagination-numbers",
+        },
+      ],
+      "up": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core",
+        },
+      ],
+      "wp:render-block": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-renderer/core/comments-pagination-numbers?context=edit",
+        },
+      ],
+    },
+    "ancestor": null,
+    "api_version": 2,
+    "attributes": Object {
+      "className": Object {
+        "type": "string",
+      },
+      "fontFamily": Object {
+        "type": "string",
+      },
+      "fontSize": Object {
+        "type": "string",
+      },
+      "lock": Object {
+        "type": "object",
+      },
+      "style": Object {
+        "type": "object",
+      },
+    },
+    "category": "theme",
+    "description": "Displays a list of page numbers for comments pagination.",
+    "editor_script": null,
+    "editor_script_handles": Array [],
+    "editor_style": null,
+    "editor_style_handles": Array [],
+    "example": null,
+    "icon": null,
+    "is_dynamic": true,
+    "keywords": Array [],
+    "name": "core/comments-pagination-numbers",
+    "parent": Array [
+      "core/comments-pagination",
+    ],
+    "provides_context": Array [],
+    "script": null,
+    "script_handles": Array [],
+    "style": null,
+    "style_handles": Array [],
+    "styles": Array [],
+    "supports": Object {
+      "html": false,
+      "reusable": false,
+      "typography": Object {
+        "__experimentalDefaultControls": Object {
+          "fontSize": true,
+        },
+        "__experimentalFontFamily": true,
+        "__experimentalFontStyle": true,
+        "__experimentalFontWeight": true,
+        "__experimentalLetterSpacing": true,
+        "__experimentalTextDecoration": true,
+        "__experimentalTextTransform": true,
+        "fontSize": true,
+        "lineHeight": true,
+      },
+    },
+    "textdomain": null,
+    "title": "Comments Page Numbers",
+    "uses_context": Array [
+      "postId",
+    ],
+    "variations": Array [],
+    "view_script": null,
+    "view_script_handles": Array [],
+  },
+  Object {
+    "_links": Object {
+      "collection": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types",
+        },
+      ],
+      "curies": Array [
+        Object {
+          "href": "https://api.w.org/{rel}",
+          "name": "wp",
+          "templated": true,
+        },
+      ],
+      "self": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core/comments-pagination-previous",
+        },
+      ],
+      "up": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core",
+        },
+      ],
+      "wp:render-block": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-renderer/core/comments-pagination-previous?context=edit",
+        },
+      ],
+    },
+    "ancestor": null,
+    "api_version": 2,
+    "attributes": Object {
+      "backgroundColor": Object {
+        "type": "string",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "fontFamily": Object {
+        "type": "string",
+      },
+      "fontSize": Object {
+        "type": "string",
+      },
+      "gradient": Object {
+        "type": "string",
+      },
+      "label": Object {
+        "type": "string",
+      },
+      "lock": Object {
+        "type": "object",
+      },
+      "style": Object {
+        "type": "object",
+      },
+    },
+    "category": "theme",
+    "description": "Displays the previous comment's page link.",
+    "editor_script": null,
+    "editor_script_handles": Array [],
+    "editor_style": null,
+    "editor_style_handles": Array [],
+    "example": null,
+    "icon": null,
+    "is_dynamic": true,
+    "keywords": Array [],
+    "name": "core/comments-pagination-previous",
+    "parent": Array [
+      "core/comments-pagination",
+    ],
+    "provides_context": Array [],
+    "script": null,
+    "script_handles": Array [],
+    "style": null,
+    "style_handles": Array [],
+    "styles": Array [],
+    "supports": Object {
+      "color": Object {
+        "__experimentalDefaultControls": Object {
+          "background": true,
+        },
+        "gradients": true,
+        "text": false,
+      },
+      "html": false,
+      "reusable": false,
+      "typography": Object {
+        "__experimentalDefaultControls": Object {
+          "fontSize": true,
+        },
+        "__experimentalFontFamily": true,
+        "__experimentalFontStyle": true,
+        "__experimentalFontWeight": true,
+        "__experimentalLetterSpacing": true,
+        "__experimentalTextDecoration": true,
+        "__experimentalTextTransform": true,
+        "fontSize": true,
+        "lineHeight": true,
+      },
+    },
+    "textdomain": null,
+    "title": "Comments Previous Page",
+    "uses_context": Array [
+      "postId",
+      "comments/paginationArrow",
+    ],
+    "variations": Array [],
+    "view_script": null,
+    "view_script_handles": Array [],
   },
   Object {
     "_links": Object {
@@ -1474,7 +2045,9 @@ Array [
         },
       ],
     },
-    "ancestor": null,
+    "ancestor": Array [
+      "core/comments",
+    ],
     "api_version": 2,
     "attributes": Object {
       "align": Object {
@@ -1495,6 +2068,9 @@ Array [
         "type": "string",
       },
       "className": Object {
+        "type": "string",
+      },
+      "fontFamily": Object {
         "type": "string",
       },
       "fontSize": Object {
@@ -1531,7 +2107,9 @@ Array [
     "category": "theme",
     "description": "Displays a title with the number of comments",
     "editor_script": null,
+    "editor_script_handles": Array [],
     "editor_style": null,
+    "editor_style_handles": Array [],
     "example": null,
     "icon": null,
     "is_dynamic": true,
@@ -1540,7 +2118,9 @@ Array [
     "parent": null,
     "provides_context": Array [],
     "script": null,
+    "script_handles": Array [],
     "style": null,
+    "style_handles": Array [],
     "styles": Array [],
     "supports": Object {
       "__experimentalBorder": Object {
@@ -1573,6 +2153,8 @@ Array [
         "__experimentalFontFamily": true,
         "__experimentalFontStyle": true,
         "__experimentalFontWeight": true,
+        "__experimentalLetterSpacing": true,
+        "__experimentalTextDecoration": true,
         "__experimentalTextTransform": true,
         "fontSize": true,
         "lineHeight": true,
@@ -1586,6 +2168,7 @@ Array [
     ],
     "variations": Array [],
     "view_script": null,
+    "view_script_handles": Array [],
   },
   Object {
     "_links": Object {
@@ -1664,6 +2247,12 @@ Array [
       "focalPoint": Object {
         "type": "object",
       },
+      "fontFamily": Object {
+        "type": "string",
+      },
+      "fontSize": Object {
+        "type": "string",
+      },
       "gradient": Object {
         "type": "string",
       },
@@ -1701,6 +2290,7 @@ Array [
         "enum": Array [
           "all",
           "insert",
+          "contentOnly",
           false,
         ],
         "type": Array [
@@ -1719,7 +2309,9 @@ Array [
     "category": "media",
     "description": "Add an image or video with a text overlay — great for headers.",
     "editor_script": null,
+    "editor_script_handles": Array [],
     "editor_style": null,
+    "editor_style_handles": Array [],
     "example": null,
     "icon": null,
     "is_dynamic": true,
@@ -1728,7 +2320,9 @@ Array [
     "parent": null,
     "provides_context": Array [],
     "script": null,
+    "script_handles": Array [],
     "style": null,
+    "style_handles": Array [],
     "styles": Array [
       Object {
         "label": "Borders",
@@ -1748,7 +2342,24 @@ Array [
         "__experimentalDefaultControls": Object {
           "padding": true,
         },
+        "margin": Array [
+          "top",
+          "bottom",
+        ],
         "padding": true,
+      },
+      "typography": Object {
+        "__experimentalDefaultControls": Object {
+          "fontSize": true,
+        },
+        "__experimentalFontFamily": true,
+        "__experimentalFontStyle": true,
+        "__experimentalFontWeight": true,
+        "__experimentalLetterSpacing": true,
+        "__experimentalTextDecoration": true,
+        "__experimentalTextTransform": true,
+        "fontSize": true,
+        "lineHeight": true,
       },
     },
     "textdomain": null,
@@ -1759,6 +2370,7 @@ Array [
     ],
     "variations": Array [],
     "view_script": null,
+    "view_script_handles": Array [],
   },
   Object {
     "_links": Object {
@@ -1859,7 +2471,9 @@ Array [
     "category": "media",
     "description": "Add a link to a downloadable file.",
     "editor_script": null,
+    "editor_script_handles": Array [],
     "editor_style": null,
+    "editor_style_handles": Array [],
     "example": null,
     "icon": null,
     "is_dynamic": true,
@@ -1872,7 +2486,9 @@ Array [
     "parent": null,
     "provides_context": Array [],
     "script": null,
+    "script_handles": Array [],
     "style": null,
+    "style_handles": Array [],
     "styles": Array [],
     "supports": Object {
       "align": true,
@@ -1883,6 +2499,9 @@ Array [
     "uses_context": Array [],
     "variations": Array [],
     "view_script": "wp-block-file-view",
+    "view_script_handles": Array [
+      "wp-block-file-view",
+    ],
   },
   Object {
     "_links": Object {
@@ -1932,6 +2551,9 @@ Array [
         "default": false,
         "type": "boolean",
       },
+      "backgroundColor": Object {
+        "type": "string",
+      },
       "caption": Object {
         "selector": ".blocks-gallery-caption",
         "source": "html",
@@ -1948,6 +2570,9 @@ Array [
       "fixedHeight": Object {
         "default": true,
         "type": "boolean",
+      },
+      "gradient": Object {
+        "type": "string",
       },
       "ids": Object {
         "default": Array [],
@@ -2034,7 +2659,9 @@ Array [
     "category": "media",
     "description": "Display multiple images in a rich gallery.",
     "editor_script": null,
+    "editor_script_handles": Array [],
     "editor_style": null,
+    "editor_style_handles": Array [],
     "example": null,
     "icon": null,
     "is_dynamic": true,
@@ -2050,7 +2677,9 @@ Array [
       "imageCrop": "imageCrop",
     },
     "script": null,
+    "script_handles": Array [],
     "style": null,
+    "style_handles": Array [],
     "styles": Array [],
     "supports": Object {
       "__experimentalLayout": Object {
@@ -2063,6 +2692,11 @@ Array [
       },
       "align": true,
       "anchor": true,
+      "color": Object {
+        "background": true,
+        "gradients": true,
+        "text": false,
+      },
       "html": false,
       "spacing": Object {
         "__experimentalDefaultControls": Object {
@@ -2071,7 +2705,12 @@ Array [
         "__experimentalSkipSerialization": Array [
           "blockGap",
         ],
-        "blockGap": true,
+        "blockGap": Array [
+          "horizontal",
+          "vertical",
+        ],
+        "margin": true,
+        "padding": true,
       },
       "units": Array [
         "px",
@@ -2086,6 +2725,7 @@ Array [
     "uses_context": Array [],
     "variations": Array [],
     "view_script": null,
+    "view_script_handles": Array [],
   },
   Object {
     "_links": Object {
@@ -2123,17 +2763,28 @@ Array [
       "className": Object {
         "type": "string",
       },
+      "fontFamily": Object {
+        "type": "string",
+      },
+      "fontSize": Object {
+        "type": "string",
+      },
       "label": Object {
         "type": "string",
       },
       "lock": Object {
         "type": "object",
       },
+      "style": Object {
+        "type": "object",
+      },
     },
     "category": "design",
     "description": "Create a link that always points to the homepage of the site. Usually not necessary if there is already a site title link present in the header.",
     "editor_script": null,
+    "editor_script_handles": Array [],
     "editor_style": null,
+    "editor_style_handles": Array [],
     "example": null,
     "icon": null,
     "is_dynamic": true,
@@ -2144,11 +2795,26 @@ Array [
     ],
     "provides_context": Array [],
     "script": null,
+    "script_handles": Array [],
     "style": null,
+    "style_handles": Array [],
     "styles": Array [],
     "supports": Object {
       "html": false,
       "reusable": false,
+      "typography": Object {
+        "__experimentalDefaultControls": Object {
+          "fontSize": true,
+        },
+        "__experimentalFontFamily": true,
+        "__experimentalFontStyle": true,
+        "__experimentalFontWeight": true,
+        "__experimentalLetterSpacing": true,
+        "__experimentalTextDecoration": true,
+        "__experimentalTextTransform": true,
+        "fontSize": true,
+        "lineHeight": true,
+      },
     },
     "textdomain": null,
     "title": "Home Link",
@@ -2163,6 +2829,7 @@ Array [
     ],
     "variations": Array [],
     "view_script": null,
+    "view_script_handles": Array [],
   },
   Object {
     "_links": Object {
@@ -2201,13 +2868,18 @@ Array [
         "type": "string",
       },
       "alt": Object {
+        "__experimentalRole": "content",
         "attribute": "alt",
         "default": "",
         "selector": "img",
         "source": "attribute",
         "type": "string",
       },
+      "borderColor": Object {
+        "type": "string",
+      },
       "caption": Object {
+        "__experimentalRole": "content",
         "selector": "figcaption",
         "source": "html",
         "type": "string",
@@ -2219,12 +2891,14 @@ Array [
         "type": "number",
       },
       "href": Object {
+        "__experimentalRole": "content",
         "attribute": "href",
         "selector": "figure > a",
         "source": "attribute",
         "type": "string",
       },
       "id": Object {
+        "__experimentalRole": "content",
         "type": "number",
       },
       "linkClass": Object {
@@ -2258,12 +2932,14 @@ Array [
         "type": "object",
       },
       "title": Object {
+        "__experimentalRole": "content",
         "attribute": "title",
         "selector": "img",
         "source": "attribute",
         "type": "string",
       },
       "url": Object {
+        "__experimentalRole": "content",
         "attribute": "src",
         "selector": "img",
         "source": "attribute",
@@ -2276,7 +2952,9 @@ Array [
     "category": "media",
     "description": "Insert an image to make a visual statement.",
     "editor_script": null,
+    "editor_script_handles": Array [],
     "editor_style": null,
+    "editor_style_handles": Array [],
     "example": null,
     "icon": null,
     "is_dynamic": true,
@@ -2289,7 +2967,9 @@ Array [
     "parent": null,
     "provides_context": Array [],
     "script": null,
+    "script_handles": Array [],
     "style": null,
+    "style_handles": Array [],
     "styles": Array [
       Object {
         "isDefault": true,
@@ -2312,13 +2992,19 @@ Array [
     "supports": Object {
       "__experimentalBorder": Object {
         "__experimentalDefaultControls": Object {
+          "color": true,
           "radius": true,
+          "width": true,
         },
+        "__experimentalSelector": "img, .wp-block-image__crop-area",
+        "__experimentalSkipSerialization": true,
+        "color": true,
         "radius": true,
+        "width": true,
       },
       "anchor": true,
       "color": Object {
-        "__experimentalDuotone": "img",
+        "__experimentalDuotone": "img, .components-placeholder",
         "background": false,
         "text": false,
       },
@@ -2332,6 +3018,7 @@ Array [
     ],
     "variations": Array [],
     "view_script": null,
+    "view_script_handles": Array [],
   },
   Object {
     "_links": Object {
@@ -2405,7 +3092,9 @@ Array [
     "category": "widgets",
     "description": "Display a list of your most recent comments.",
     "editor_script": null,
+    "editor_script_handles": Array [],
     "editor_style": null,
+    "editor_style_handles": Array [],
     "example": null,
     "icon": null,
     "is_dynamic": true,
@@ -2416,7 +3105,9 @@ Array [
     "parent": null,
     "provides_context": Array [],
     "script": null,
+    "script_handles": Array [],
     "style": null,
+    "style_handles": Array [],
     "styles": Array [],
     "supports": Object {
       "align": true,
@@ -2427,6 +3118,7 @@ Array [
     "uses_context": Array [],
     "variations": Array [],
     "view_script": null,
+    "view_script_handles": Array [],
   },
   Object {
     "_links": Object {
@@ -2533,6 +3225,12 @@ Array [
         "default": null,
         "type": "number",
       },
+      "fontFamily": Object {
+        "type": "string",
+      },
+      "fontSize": Object {
+        "type": "string",
+      },
       "lock": Object {
         "type": "object",
       },
@@ -2555,11 +3253,16 @@ Array [
       "selectedAuthor": Object {
         "type": "number",
       },
+      "style": Object {
+        "type": "object",
+      },
     },
     "category": "widgets",
     "description": "Display a list of your most recent posts.",
     "editor_script": null,
+    "editor_script_handles": Array [],
     "editor_style": null,
+    "editor_style_handles": Array [],
     "example": null,
     "icon": null,
     "is_dynamic": true,
@@ -2570,7 +3273,9 @@ Array [
     "parent": null,
     "provides_context": Array [],
     "script": null,
+    "script_handles": Array [],
     "style": null,
+    "style_handles": Array [],
     "styles": Array [
       Object {
         "label": "Dividers",
@@ -2584,86 +3289,26 @@ Array [
     "supports": Object {
       "align": true,
       "html": false,
+      "typography": Object {
+        "__experimentalDefaultControls": Object {
+          "fontSize": true,
+        },
+        "__experimentalFontFamily": true,
+        "__experimentalFontStyle": true,
+        "__experimentalFontWeight": true,
+        "__experimentalLetterSpacing": true,
+        "__experimentalTextDecoration": true,
+        "__experimentalTextTransform": true,
+        "fontSize": true,
+        "lineHeight": true,
+      },
     },
     "textdomain": null,
     "title": "Latest Posts",
     "uses_context": Array [],
     "variations": Array [],
     "view_script": null,
-  },
-  Object {
-    "_links": Object {
-      "collection": Array [
-        Object {
-          "href": "http://localhost:8080/wp-json/wp/v2/block-types",
-        },
-      ],
-      "curies": Array [
-        Object {
-          "href": "https://api.w.org/{rel}",
-          "name": "wp",
-          "templated": true,
-        },
-      ],
-      "self": Array [
-        Object {
-          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core/legacy-widget",
-        },
-      ],
-      "up": Array [
-        Object {
-          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core",
-        },
-      ],
-      "wp:render-block": Array [
-        Object {
-          "href": "http://localhost:8080/wp-json/wp/v2/block-renderer/core/legacy-widget?context=edit",
-        },
-      ],
-    },
-    "ancestor": null,
-    "api_version": 2,
-    "attributes": Object {
-      "id": Object {
-        "default": null,
-        "type": "string",
-      },
-      "idBase": Object {
-        "default": null,
-        "type": "string",
-      },
-      "instance": Object {
-        "default": null,
-        "type": "object",
-      },
-      "lock": Object {
-        "type": "object",
-      },
-    },
-    "category": "widgets",
-    "description": "Display a legacy widget.",
-    "editor_script": null,
-    "editor_style": null,
-    "example": null,
-    "icon": null,
-    "is_dynamic": true,
-    "keywords": Array [],
-    "name": "core/legacy-widget",
-    "parent": null,
-    "provides_context": Array [],
-    "script": null,
-    "style": null,
-    "styles": Array [],
-    "supports": Object {
-      "customClassName": false,
-      "html": false,
-      "reusable": false,
-    },
-    "textdomain": null,
-    "title": "Legacy Widget",
-    "uses_context": Array [],
-    "variations": Array [],
-    "view_script": null,
+    "view_script_handles": Array [],
   },
   Object {
     "_links": Object {
@@ -2716,7 +3361,9 @@ Array [
     "category": "theme",
     "description": "Show login & logout links.",
     "editor_script": null,
+    "editor_script_handles": Array [],
     "editor_style": null,
+    "editor_style_handles": Array [],
     "example": null,
     "icon": null,
     "is_dynamic": true,
@@ -2729,7 +3376,9 @@ Array [
     "parent": null,
     "provides_context": Array [],
     "script": null,
+    "script_handles": Array [],
     "style": null,
+    "style_handles": Array [],
     "styles": Array [],
     "supports": Object {
       "className": true,
@@ -2742,6 +3391,232 @@ Array [
     "uses_context": Array [],
     "variations": Array [],
     "view_script": null,
+    "view_script_handles": Array [],
+  },
+  Object {
+    "_links": Object {
+      "collection": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types",
+        },
+      ],
+      "curies": Array [
+        Object {
+          "href": "https://api.w.org/{rel}",
+          "name": "wp",
+          "templated": true,
+        },
+      ],
+      "self": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core/navigation",
+        },
+      ],
+      "up": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core",
+        },
+      ],
+      "wp:render-block": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-renderer/core/navigation?context=edit",
+        },
+      ],
+    },
+    "ancestor": null,
+    "api_version": 2,
+    "attributes": Object {
+      "__unstableLocation": Object {
+        "type": "string",
+      },
+      "align": Object {
+        "enum": Array [
+          "left",
+          "center",
+          "right",
+          "wide",
+          "full",
+          "",
+        ],
+        "type": "string",
+      },
+      "backgroundColor": Object {
+        "type": "string",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "customBackgroundColor": Object {
+        "type": "string",
+      },
+      "customOverlayBackgroundColor": Object {
+        "type": "string",
+      },
+      "customOverlayTextColor": Object {
+        "type": "string",
+      },
+      "customTextColor": Object {
+        "type": "string",
+      },
+      "fontFamily": Object {
+        "type": "string",
+      },
+      "fontSize": Object {
+        "type": "string",
+      },
+      "hasIcon": Object {
+        "default": true,
+        "type": "boolean",
+      },
+      "icon": Object {
+        "default": "handle",
+        "type": "string",
+      },
+      "layout": Object {
+        "type": "object",
+      },
+      "lock": Object {
+        "type": "object",
+      },
+      "maxNestingLevel": Object {
+        "default": 5,
+        "type": "number",
+      },
+      "openSubmenusOnClick": Object {
+        "default": false,
+        "type": "boolean",
+      },
+      "overlayBackgroundColor": Object {
+        "type": "string",
+      },
+      "overlayMenu": Object {
+        "default": "mobile",
+        "type": "string",
+      },
+      "overlayTextColor": Object {
+        "type": "string",
+      },
+      "ref": Object {
+        "type": "number",
+      },
+      "rgbBackgroundColor": Object {
+        "type": "string",
+      },
+      "rgbTextColor": Object {
+        "type": "string",
+      },
+      "showSubmenuIcon": Object {
+        "default": true,
+        "type": "boolean",
+      },
+      "style": Object {
+        "type": "object",
+      },
+      "textColor": Object {
+        "type": "string",
+      },
+    },
+    "category": "theme",
+    "description": "A collection of blocks that allow visitors to get around your site.",
+    "editor_script": null,
+    "editor_script_handles": Array [],
+    "editor_style": null,
+    "editor_style_handles": Array [],
+    "example": null,
+    "icon": null,
+    "is_dynamic": true,
+    "keywords": Array [
+      "menu",
+      "navigation",
+      "links",
+    ],
+    "name": "core/navigation",
+    "parent": null,
+    "provides_context": Object {
+      "backgroundColor": "backgroundColor",
+      "customBackgroundColor": "customBackgroundColor",
+      "customFontSize": "customFontSize",
+      "customOverlayBackgroundColor": "customOverlayBackgroundColor",
+      "customOverlayTextColor": "customOverlayTextColor",
+      "customTextColor": "customTextColor",
+      "fontSize": "fontSize",
+      "maxNestingLevel": "maxNestingLevel",
+      "openSubmenusOnClick": "openSubmenusOnClick",
+      "orientation": "orientation",
+      "overlayBackgroundColor": "overlayBackgroundColor",
+      "overlayTextColor": "overlayTextColor",
+      "showSubmenuIcon": "showSubmenuIcon",
+      "style": "style",
+      "textColor": "textColor",
+    },
+    "script": null,
+    "script_handles": Array [],
+    "style": null,
+    "style_handles": Array [],
+    "styles": Array [],
+    "supports": Object {
+      "__experimentalLayout": Object {
+        "allowInheriting": false,
+        "allowSwitching": false,
+        "allowVerticalAlignment": false,
+        "default": Object {
+          "type": "flex",
+        },
+      },
+      "__experimentalStyle": Object {
+        "elements": Object {
+          "link": Object {
+            "color": Object {
+              "text": "inherit",
+            },
+          },
+        },
+      },
+      "align": Array [
+        "wide",
+        "full",
+      ],
+      "html": false,
+      "inserter": true,
+      "spacing": Object {
+        "__experimentalDefaultControls": Object {
+          "blockGap": true,
+        },
+        "blockGap": true,
+        "units": Array [
+          "px",
+          "em",
+          "rem",
+          "vh",
+          "vw",
+        ],
+      },
+      "typography": Object {
+        "__experimentalDefaultControls": Object {
+          "fontSize": true,
+        },
+        "__experimentalFontFamily": true,
+        "__experimentalFontStyle": true,
+        "__experimentalFontWeight": true,
+        "__experimentalLetterSpacing": true,
+        "__experimentalSkipSerialization": Array [
+          "textDecoration",
+        ],
+        "__experimentalTextDecoration": true,
+        "__experimentalTextTransform": true,
+        "fontSize": true,
+        "lineHeight": true,
+      },
+    },
+    "textdomain": null,
+    "title": "Navigation",
+    "uses_context": Array [],
+    "variations": Array [],
+    "view_script": "wp-block-navigation-view",
+    "view_script_handles": Array [
+      "wp-block-navigation-view",
+      "wp-block-navigation-view-2",
+    ],
   },
   Object {
     "_links": Object {
@@ -2782,6 +3657,12 @@ Array [
       "description": Object {
         "type": "string",
       },
+      "fontFamily": Object {
+        "type": "string",
+      },
+      "fontSize": Object {
+        "type": "string",
+      },
       "id": Object {
         "type": "number",
       },
@@ -2804,6 +3685,9 @@ Array [
       "rel": Object {
         "type": "string",
       },
+      "style": Object {
+        "type": "object",
+      },
       "title": Object {
         "type": "string",
       },
@@ -2817,7 +3701,9 @@ Array [
     "category": "design",
     "description": "Add a page, link, or another item to your navigation.",
     "editor_script": null,
+    "editor_script_handles": Array [],
     "editor_style": null,
+    "editor_style_handles": Array [],
     "example": null,
     "icon": null,
     "is_dynamic": true,
@@ -2828,12 +3714,27 @@ Array [
     ],
     "provides_context": Array [],
     "script": null,
+    "script_handles": Array [],
     "style": null,
+    "style_handles": Array [],
     "styles": Array [],
     "supports": Object {
       "__experimentalSlashInserter": true,
       "html": false,
       "reusable": false,
+      "typography": Object {
+        "__experimentalDefaultControls": Object {
+          "fontSize": true,
+        },
+        "__experimentalFontFamily": true,
+        "__experimentalFontStyle": true,
+        "__experimentalFontWeight": true,
+        "__experimentalLetterSpacing": true,
+        "__experimentalTextDecoration": true,
+        "__experimentalTextTransform": true,
+        "fontSize": true,
+        "lineHeight": true,
+      },
     },
     "textdomain": null,
     "title": "Custom Link",
@@ -2900,6 +3801,7 @@ Array [
       },
     ],
     "view_script": null,
+    "view_script_handles": Array [],
   },
   Object {
     "_links": Object {
@@ -2975,7 +3877,9 @@ Array [
     "category": "design",
     "description": "Add a submenu to your navigation.",
     "editor_script": null,
+    "editor_script_handles": Array [],
     "editor_style": null,
+    "editor_style_handles": Array [],
     "example": null,
     "icon": null,
     "is_dynamic": true,
@@ -2986,7 +3890,9 @@ Array [
     ],
     "provides_context": Array [],
     "script": null,
+    "script_handles": Array [],
     "style": null,
+    "style_handles": Array [],
     "styles": Array [],
     "supports": Object {
       "html": false,
@@ -3012,207 +3918,7 @@ Array [
     ],
     "variations": Array [],
     "view_script": null,
-  },
-  Object {
-    "_links": Object {
-      "collection": Array [
-        Object {
-          "href": "http://localhost:8080/wp-json/wp/v2/block-types",
-        },
-      ],
-      "curies": Array [
-        Object {
-          "href": "https://api.w.org/{rel}",
-          "name": "wp",
-          "templated": true,
-        },
-      ],
-      "self": Array [
-        Object {
-          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core/navigation",
-        },
-      ],
-      "up": Array [
-        Object {
-          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core",
-        },
-      ],
-      "wp:render-block": Array [
-        Object {
-          "href": "http://localhost:8080/wp-json/wp/v2/block-renderer/core/navigation?context=edit",
-        },
-      ],
-    },
-    "ancestor": null,
-    "api_version": 2,
-    "attributes": Object {
-      "__unstableLocation": Object {
-        "type": "string",
-      },
-      "align": Object {
-        "enum": Array [
-          "left",
-          "center",
-          "right",
-          "wide",
-          "full",
-          "",
-        ],
-        "type": "string",
-      },
-      "backgroundColor": Object {
-        "type": "string",
-      },
-      "className": Object {
-        "type": "string",
-      },
-      "customBackgroundColor": Object {
-        "type": "string",
-      },
-      "customOverlayBackgroundColor": Object {
-        "type": "string",
-      },
-      "customOverlayTextColor": Object {
-        "type": "string",
-      },
-      "customTextColor": Object {
-        "type": "string",
-      },
-      "fontSize": Object {
-        "type": "string",
-      },
-      "hasIcon": Object {
-        "default": true,
-        "type": "boolean",
-      },
-      "layout": Object {
-        "type": "object",
-      },
-      "lock": Object {
-        "type": "object",
-      },
-      "maxNestingLevel": Object {
-        "default": 5,
-        "type": "number",
-      },
-      "openSubmenusOnClick": Object {
-        "default": false,
-        "type": "boolean",
-      },
-      "overlayBackgroundColor": Object {
-        "type": "string",
-      },
-      "overlayMenu": Object {
-        "default": "mobile",
-        "type": "string",
-      },
-      "overlayTextColor": Object {
-        "type": "string",
-      },
-      "ref": Object {
-        "type": "number",
-      },
-      "rgbBackgroundColor": Object {
-        "type": "string",
-      },
-      "rgbTextColor": Object {
-        "type": "string",
-      },
-      "showSubmenuIcon": Object {
-        "default": true,
-        "type": "boolean",
-      },
-      "style": Object {
-        "type": "object",
-      },
-      "textColor": Object {
-        "type": "string",
-      },
-    },
-    "category": "theme",
-    "description": "A collection of blocks that allow visitors to get around your site.",
-    "editor_script": null,
-    "editor_style": null,
-    "example": null,
-    "icon": null,
-    "is_dynamic": true,
-    "keywords": Array [
-      "menu",
-      "navigation",
-      "links",
-    ],
-    "name": "core/navigation",
-    "parent": null,
-    "provides_context": Object {
-      "backgroundColor": "backgroundColor",
-      "customBackgroundColor": "customBackgroundColor",
-      "customFontSize": "customFontSize",
-      "customOverlayBackgroundColor": "customOverlayBackgroundColor",
-      "customOverlayTextColor": "customOverlayTextColor",
-      "customTextColor": "customTextColor",
-      "fontSize": "fontSize",
-      "maxNestingLevel": "maxNestingLevel",
-      "openSubmenusOnClick": "openSubmenusOnClick",
-      "orientation": "orientation",
-      "overlayBackgroundColor": "overlayBackgroundColor",
-      "overlayTextColor": "overlayTextColor",
-      "showSubmenuIcon": "showSubmenuIcon",
-      "style": "style",
-      "textColor": "textColor",
-    },
-    "script": null,
-    "style": null,
-    "styles": Array [],
-    "supports": Object {
-      "__experimentalLayout": Object {
-        "allowInheriting": false,
-        "allowSwitching": false,
-        "allowVerticalAlignment": false,
-        "default": Object {
-          "type": "flex",
-        },
-      },
-      "align": Array [
-        "wide",
-        "full",
-      ],
-      "anchor": true,
-      "html": false,
-      "inserter": true,
-      "spacing": Object {
-        "__experimentalDefaultControls": Object {
-          "blockGap": true,
-        },
-        "blockGap": true,
-        "units": Array [
-          "px",
-          "em",
-          "rem",
-          "vh",
-          "vw",
-        ],
-      },
-      "typography": Object {
-        "__experimentalDefaultControls": Object {
-          "fontSize": true,
-        },
-        "__experimentalFontFamily": true,
-        "__experimentalFontStyle": true,
-        "__experimentalFontWeight": true,
-        "__experimentalSkipSerialization": Array [
-          "textDecoration",
-        ],
-        "__experimentalTextDecoration": true,
-        "__experimentalTextTransform": true,
-        "fontSize": true,
-        "lineHeight": true,
-      },
-    },
-    "textdomain": null,
-    "title": "Navigation",
-    "uses_context": Array [],
-    "variations": Array [],
-    "view_script": "wp-block-navigation-view",
+    "view_script_handles": Array [],
   },
   Object {
     "_links": Object {
@@ -3247,9 +3953,6 @@ Array [
     "ancestor": null,
     "api_version": 2,
     "attributes": Object {
-      "__unstableMaxPages": Object {
-        "type": "number",
-      },
       "className": Object {
         "type": "string",
       },
@@ -3260,7 +3963,9 @@ Array [
     "category": "widgets",
     "description": "Display a list of all pages.",
     "editor_script": null,
+    "editor_script_handles": Array [],
     "editor_style": null,
+    "editor_style_handles": Array [],
     "example": null,
     "icon": null,
     "is_dynamic": true,
@@ -3272,7 +3977,9 @@ Array [
     "parent": null,
     "provides_context": Array [],
     "script": null,
+    "script_handles": Array [],
     "style": null,
+    "style_handles": Array [],
     "styles": Array [],
     "supports": Object {
       "html": false,
@@ -3297,6 +4004,7 @@ Array [
     ],
     "variations": Array [],
     "view_script": null,
+    "view_script_handles": Array [],
   },
   Object {
     "_links": Object {
@@ -3344,7 +4052,9 @@ Array [
     "category": "theme",
     "description": "Show a block pattern.",
     "editor_script": null,
+    "editor_script_handles": Array [],
     "editor_style": null,
+    "editor_style_handles": Array [],
     "example": null,
     "icon": null,
     "is_dynamic": true,
@@ -3353,7 +4063,9 @@ Array [
     "parent": null,
     "provides_context": Array [],
     "script": null,
+    "script_handles": Array [],
     "style": null,
+    "style_handles": Array [],
     "styles": Array [],
     "supports": Object {
       "html": false,
@@ -3364,113 +4076,7 @@ Array [
     "uses_context": Array [],
     "variations": Array [],
     "view_script": null,
-  },
-  Object {
-    "_links": Object {
-      "collection": Array [
-        Object {
-          "href": "http://localhost:8080/wp-json/wp/v2/block-types",
-        },
-      ],
-      "curies": Array [
-        Object {
-          "href": "https://api.w.org/{rel}",
-          "name": "wp",
-          "templated": true,
-        },
-      ],
-      "self": Array [
-        Object {
-          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core/post-author-biography",
-        },
-      ],
-      "up": Array [
-        Object {
-          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core",
-        },
-      ],
-      "wp:render-block": Array [
-        Object {
-          "href": "http://localhost:8080/wp-json/wp/v2/block-renderer/core/post-author-biography?context=edit",
-        },
-      ],
-    },
-    "ancestor": null,
-    "api_version": 2,
-    "attributes": Object {
-      "backgroundColor": Object {
-        "type": "string",
-      },
-      "className": Object {
-        "type": "string",
-      },
-      "fontSize": Object {
-        "type": "string",
-      },
-      "gradient": Object {
-        "type": "string",
-      },
-      "lock": Object {
-        "type": "object",
-      },
-      "style": Object {
-        "type": "object",
-      },
-      "textAlign": Object {
-        "type": "string",
-      },
-      "textColor": Object {
-        "type": "string",
-      },
-    },
-    "category": "theme",
-    "description": "The author biography.",
-    "editor_script": null,
-    "editor_style": null,
-    "example": null,
-    "icon": null,
-    "is_dynamic": true,
-    "keywords": Array [],
-    "name": "core/post-author-biography",
-    "parent": null,
-    "provides_context": Array [],
-    "script": null,
-    "style": null,
-    "styles": Array [],
-    "supports": Object {
-      "color": Object {
-        "__experimentalDefaultControls": Object {
-          "background": true,
-          "text": true,
-        },
-        "gradients": true,
-        "link": true,
-      },
-      "spacing": Object {
-        "margin": true,
-        "padding": true,
-      },
-      "typography": Object {
-        "__experimentalDefaultControls": Object {
-          "fontSize": true,
-        },
-        "__experimentalFontFamily": true,
-        "__experimentalFontStyle": true,
-        "__experimentalFontWeight": true,
-        "__experimentalLetterSpacing": true,
-        "__experimentalTextTransform": true,
-        "fontSize": true,
-        "lineHeight": true,
-      },
-    },
-    "textdomain": null,
-    "title": "Post Author Biography",
-    "uses_context": Array [
-      "postType",
-      "postId",
-    ],
-    "variations": Array [],
-    "view_script": null,
+    "view_script_handles": Array [],
   },
   Object {
     "_links": Object {
@@ -3518,6 +4124,9 @@ Array [
       "className": Object {
         "type": "string",
       },
+      "fontFamily": Object {
+        "type": "string",
+      },
       "fontSize": Object {
         "type": "string",
       },
@@ -3547,7 +4156,9 @@ Array [
     "category": "theme",
     "description": "Display post author details such as name, avatar, and bio.",
     "editor_script": null,
+    "editor_script_handles": Array [],
     "editor_style": null,
+    "editor_style_handles": Array [],
     "example": null,
     "icon": null,
     "is_dynamic": true,
@@ -3556,7 +4167,9 @@ Array [
     "parent": null,
     "provides_context": Array [],
     "script": null,
+    "script_handles": Array [],
     "style": null,
+    "style_handles": Array [],
     "styles": Array [],
     "supports": Object {
       "color": Object {
@@ -3577,9 +4190,11 @@ Array [
         "__experimentalDefaultControls": Object {
           "fontSize": true,
         },
+        "__experimentalFontFamily": true,
         "__experimentalFontStyle": true,
         "__experimentalFontWeight": true,
         "__experimentalLetterSpacing": true,
+        "__experimentalTextDecoration": true,
         "__experimentalTextTransform": true,
         "fontSize": true,
         "lineHeight": true,
@@ -3594,6 +4209,7 @@ Array [
     ],
     "variations": Array [],
     "view_script": null,
+    "view_script_handles": Array [],
   },
   Object {
     "_links": Object {
@@ -3611,7 +4227,7 @@ Array [
       ],
       "self": Array [
         Object {
-          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core/post-comments",
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core/post-author-biography",
         },
       ],
       "up": Array [
@@ -3621,28 +4237,20 @@ Array [
       ],
       "wp:render-block": Array [
         Object {
-          "href": "http://localhost:8080/wp-json/wp/v2/block-renderer/core/post-comments?context=edit",
+          "href": "http://localhost:8080/wp-json/wp/v2/block-renderer/core/post-author-biography?context=edit",
         },
       ],
     },
     "ancestor": null,
     "api_version": 2,
     "attributes": Object {
-      "align": Object {
-        "enum": Array [
-          "left",
-          "center",
-          "right",
-          "wide",
-          "full",
-          "",
-        ],
-        "type": "string",
-      },
       "backgroundColor": Object {
         "type": "string",
       },
       "className": Object {
+        "type": "string",
+      },
+      "fontFamily": Object {
         "type": "string",
       },
       "fontSize": Object {
@@ -3665,24 +4273,24 @@ Array [
       },
     },
     "category": "theme",
-    "description": "This block is deprecated. Please use the Comments Query Loop block instead.",
+    "description": "The author biography.",
     "editor_script": null,
+    "editor_script_handles": Array [],
     "editor_style": null,
+    "editor_style_handles": Array [],
     "example": null,
     "icon": null,
     "is_dynamic": true,
     "keywords": Array [],
-    "name": "core/post-comments",
+    "name": "core/post-author-biography",
     "parent": null,
     "provides_context": Array [],
     "script": null,
+    "script_handles": Array [],
     "style": null,
+    "style_handles": Array [],
     "styles": Array [],
     "supports": Object {
-      "align": Array [
-        "wide",
-        "full",
-      ],
       "color": Object {
         "__experimentalDefaultControls": Object {
           "background": true,
@@ -3691,28 +4299,33 @@ Array [
         "gradients": true,
         "link": true,
       },
-      "html": false,
-      "inserter": false,
+      "spacing": Object {
+        "margin": true,
+        "padding": true,
+      },
       "typography": Object {
         "__experimentalDefaultControls": Object {
           "fontSize": true,
         },
+        "__experimentalFontFamily": true,
         "__experimentalFontStyle": true,
         "__experimentalFontWeight": true,
         "__experimentalLetterSpacing": true,
+        "__experimentalTextDecoration": true,
         "__experimentalTextTransform": true,
         "fontSize": true,
         "lineHeight": true,
       },
     },
     "textdomain": null,
-    "title": "Post Comments (deprecated)",
+    "title": "Post Author Biography",
     "uses_context": Array [
-      "postId",
       "postType",
+      "postId",
     ],
     "variations": Array [],
     "view_script": null,
+    "view_script_handles": Array [],
   },
   Object {
     "_links": Object {
@@ -3775,7 +4388,9 @@ Array [
     "category": "theme",
     "description": "Display a post's comments form.",
     "editor_script": null,
+    "editor_script_handles": Array [],
     "editor_style": null,
+    "editor_style_handles": Array [],
     "example": null,
     "icon": null,
     "is_dynamic": true,
@@ -3784,7 +4399,9 @@ Array [
     "parent": null,
     "provides_context": Array [],
     "script": null,
+    "script_handles": Array [],
     "style": null,
+    "style_handles": Array [],
     "styles": Array [],
     "supports": Object {
       "color": Object {
@@ -3816,6 +4433,7 @@ Array [
     ],
     "variations": Array [],
     "view_script": null,
+    "view_script_handles": Array [],
   },
   Object {
     "_links": Object {
@@ -3864,17 +4482,28 @@ Array [
       "className": Object {
         "type": "string",
       },
+      "fontFamily": Object {
+        "type": "string",
+      },
+      "fontSize": Object {
+        "type": "string",
+      },
       "layout": Object {
         "type": "object",
       },
       "lock": Object {
         "type": "object",
       },
+      "style": Object {
+        "type": "object",
+      },
     },
     "category": "theme",
     "description": "Displays the contents of a post or page.",
     "editor_script": null,
+    "editor_script_handles": Array [],
     "editor_style": null,
+    "editor_style_handles": Array [],
     "example": null,
     "icon": null,
     "is_dynamic": true,
@@ -3883,7 +4512,9 @@ Array [
     "parent": null,
     "provides_context": Array [],
     "script": null,
+    "script_handles": Array [],
     "style": null,
+    "style_handles": Array [],
     "styles": Array [],
     "supports": Object {
       "__experimentalLayout": true,
@@ -3892,6 +4523,19 @@ Array [
         "full",
       ],
       "html": false,
+      "typography": Object {
+        "__experimentalDefaultControls": Object {
+          "fontSize": true,
+        },
+        "__experimentalFontFamily": true,
+        "__experimentalFontStyle": true,
+        "__experimentalFontWeight": true,
+        "__experimentalLetterSpacing": true,
+        "__experimentalTextDecoration": true,
+        "__experimentalTextTransform": true,
+        "fontSize": true,
+        "lineHeight": true,
+      },
     },
     "textdomain": null,
     "title": "Post Content",
@@ -3902,6 +4546,7 @@ Array [
     ],
     "variations": Array [],
     "view_script": null,
+    "view_script_handles": Array [],
   },
   Object {
     "_links": Object {
@@ -3942,6 +4587,13 @@ Array [
       "className": Object {
         "type": "string",
       },
+      "displayType": Object {
+        "default": "date",
+        "type": "string",
+      },
+      "fontFamily": Object {
+        "type": "string",
+      },
       "fontSize": Object {
         "type": "string",
       },
@@ -3971,7 +4623,9 @@ Array [
     "category": "theme",
     "description": "Add the date of this post.",
     "editor_script": null,
+    "editor_script_handles": Array [],
     "editor_style": null,
+    "editor_style_handles": Array [],
     "example": null,
     "icon": null,
     "is_dynamic": true,
@@ -3980,7 +4634,9 @@ Array [
     "parent": null,
     "provides_context": Array [],
     "script": null,
+    "script_handles": Array [],
     "style": null,
+    "style_handles": Array [],
     "styles": Array [],
     "supports": Object {
       "color": Object {
@@ -3993,6 +4649,10 @@ Array [
         "link": true,
       },
       "html": false,
+      "spacing": Object {
+        "margin": true,
+        "padding": true,
+      },
       "typography": Object {
         "__experimentalDefaultControls": Object {
           "fontSize": true,
@@ -4001,6 +4661,7 @@ Array [
         "__experimentalFontStyle": true,
         "__experimentalFontWeight": true,
         "__experimentalLetterSpacing": true,
+        "__experimentalTextDecoration": true,
         "__experimentalTextTransform": true,
         "fontSize": true,
         "lineHeight": true,
@@ -4015,6 +4676,7 @@ Array [
     ],
     "variations": Array [],
     "view_script": null,
+    "view_script_handles": Array [],
   },
   Object {
     "_links": Object {
@@ -4055,6 +4717,9 @@ Array [
       "className": Object {
         "type": "string",
       },
+      "fontFamily": Object {
+        "type": "string",
+      },
       "fontSize": Object {
         "type": "string",
       },
@@ -4084,7 +4749,9 @@ Array [
     "category": "theme",
     "description": "Display a post's excerpt.",
     "editor_script": null,
+    "editor_script_handles": Array [],
     "editor_style": null,
+    "editor_style_handles": Array [],
     "example": null,
     "icon": null,
     "is_dynamic": true,
@@ -4093,7 +4760,9 @@ Array [
     "parent": null,
     "provides_context": Array [],
     "script": null,
+    "script_handles": Array [],
     "style": null,
+    "style_handles": Array [],
     "styles": Array [],
     "supports": Object {
       "color": Object {
@@ -4114,9 +4783,11 @@ Array [
         "__experimentalDefaultControls": Object {
           "fontSize": true,
         },
+        "__experimentalFontFamily": true,
         "__experimentalFontStyle": true,
         "__experimentalFontWeight": true,
         "__experimentalLetterSpacing": true,
+        "__experimentalTextDecoration": true,
         "__experimentalTextTransform": true,
         "fontSize": true,
         "lineHeight": true,
@@ -4131,6 +4802,7 @@ Array [
     ],
     "variations": Array [],
     "view_script": null,
+    "view_script_handles": Array [],
   },
   Object {
     "_links": Object {
@@ -4176,7 +4848,23 @@ Array [
         ],
         "type": "string",
       },
+      "borderColor": Object {
+        "type": "string",
+      },
       "className": Object {
+        "type": "string",
+      },
+      "customGradient": Object {
+        "type": "string",
+      },
+      "customOverlayColor": Object {
+        "type": "string",
+      },
+      "dimRatio": Object {
+        "default": 0,
+        "type": "number",
+      },
+      "gradient": Object {
         "type": "string",
       },
       "height": Object {
@@ -4186,8 +4874,20 @@ Array [
         "default": false,
         "type": "boolean",
       },
+      "linkTarget": Object {
+        "default": "_self",
+        "type": "string",
+      },
       "lock": Object {
         "type": "object",
+      },
+      "overlayColor": Object {
+        "type": "string",
+      },
+      "rel": Object {
+        "attribute": "rel",
+        "default": "",
+        "type": "string",
       },
       "scale": Object {
         "default": "cover",
@@ -4206,7 +4906,9 @@ Array [
     "category": "theme",
     "description": "Display a post's featured image.",
     "editor_script": null,
+    "editor_script_handles": Array [],
     "editor_style": null,
+    "editor_style_handles": Array [],
     "example": null,
     "icon": null,
     "is_dynamic": true,
@@ -4215,9 +4917,23 @@ Array [
     "parent": null,
     "provides_context": Array [],
     "script": null,
+    "script_handles": Array [],
     "style": null,
+    "style_handles": Array [],
     "styles": Array [],
     "supports": Object {
+      "__experimentalBorder": Object {
+        "__experimentalDefaultControls": Object {
+          "color": true,
+          "radius": true,
+          "width": true,
+        },
+        "__experimentalSelector": "img, .block-editor-media-placeholder, .wp-block-post-featured-image__overlay",
+        "__experimentalSkipSerialization": true,
+        "color": true,
+        "radius": true,
+        "width": true,
+      },
       "align": Array [
         "left",
         "right",
@@ -4245,6 +4961,7 @@ Array [
     ],
     "variations": Array [],
     "view_script": null,
+    "view_script_handles": Array [],
   },
   Object {
     "_links": Object {
@@ -4279,7 +4996,13 @@ Array [
     "ancestor": null,
     "api_version": 2,
     "attributes": Object {
+      "backgroundColor": Object {
+        "type": "string",
+      },
       "className": Object {
+        "type": "string",
+      },
+      "fontFamily": Object {
         "type": "string",
       },
       "fontSize": Object {
@@ -4305,6 +5028,9 @@ Array [
       "textAlign": Object {
         "type": "string",
       },
+      "textColor": Object {
+        "type": "string",
+      },
       "type": Object {
         "default": "next",
         "type": "string",
@@ -4313,7 +5039,9 @@ Array [
     "category": "theme",
     "description": "Displays the next or previous post link that is adjacent to the current post.",
     "editor_script": null,
+    "editor_script_handles": Array [],
     "editor_style": null,
+    "editor_style_handles": Array [],
     "example": null,
     "icon": null,
     "is_dynamic": true,
@@ -4322,18 +5050,25 @@ Array [
     "parent": null,
     "provides_context": Array [],
     "script": null,
+    "script_handles": Array [],
     "style": null,
+    "style_handles": Array [],
     "styles": Array [],
     "supports": Object {
+      "color": Object {
+        "link": true,
+      },
       "html": false,
       "reusable": false,
       "typography": Object {
         "__experimentalDefaultControls": Object {
           "fontSize": true,
         },
+        "__experimentalFontFamily": true,
         "__experimentalFontStyle": true,
         "__experimentalFontWeight": true,
         "__experimentalLetterSpacing": true,
+        "__experimentalTextDecoration": true,
         "__experimentalTextTransform": true,
         "fontSize": true,
         "lineHeight": true,
@@ -4344,6 +5079,7 @@ Array [
     "uses_context": Array [],
     "variations": Array [],
     "view_script": null,
+    "view_script_handles": Array [],
   },
   Object {
     "_links": Object {
@@ -4392,17 +5128,28 @@ Array [
       "className": Object {
         "type": "string",
       },
+      "fontFamily": Object {
+        "type": "string",
+      },
+      "fontSize": Object {
+        "type": "string",
+      },
       "layout": Object {
         "type": "object",
       },
       "lock": Object {
         "type": "object",
       },
+      "style": Object {
+        "type": "object",
+      },
     },
     "category": "theme",
     "description": "Contains the block elements used to render a post, like the title, date, featured image, content or excerpt, and more.",
     "editor_script": null,
+    "editor_script_handles": Array [],
     "editor_style": null,
+    "editor_style_handles": Array [],
     "example": null,
     "icon": null,
     "is_dynamic": true,
@@ -4413,7 +5160,9 @@ Array [
     ],
     "provides_context": Array [],
     "script": null,
+    "script_handles": Array [],
     "style": null,
+    "style_handles": Array [],
     "styles": Array [],
     "supports": Object {
       "__experimentalLayout": Object {
@@ -4422,6 +5171,19 @@ Array [
       "align": true,
       "html": false,
       "reusable": false,
+      "typography": Object {
+        "__experimentalDefaultControls": Object {
+          "fontSize": true,
+        },
+        "__experimentalFontFamily": true,
+        "__experimentalFontStyle": true,
+        "__experimentalFontWeight": true,
+        "__experimentalLetterSpacing": true,
+        "__experimentalTextDecoration": true,
+        "__experimentalTextTransform": true,
+        "fontSize": true,
+        "lineHeight": true,
+      },
     },
     "textdomain": null,
     "title": "Post Template",
@@ -4431,9 +5193,11 @@ Array [
       "queryContext",
       "displayLayout",
       "templateSlug",
+      "previewPostType",
     ],
     "variations": Array [],
     "view_script": null,
+    "view_script_handles": Array [],
   },
   Object {
     "_links": Object {
@@ -4474,6 +5238,9 @@ Array [
       "className": Object {
         "type": "string",
       },
+      "fontFamily": Object {
+        "type": "string",
+      },
       "fontSize": Object {
         "type": "string",
       },
@@ -4483,12 +5250,20 @@ Array [
       "lock": Object {
         "type": "object",
       },
+      "prefix": Object {
+        "default": "",
+        "type": "string",
+      },
       "separator": Object {
         "default": ", ",
         "type": "string",
       },
       "style": Object {
         "type": "object",
+      },
+      "suffix": Object {
+        "default": "",
+        "type": "string",
       },
       "term": Object {
         "type": "string",
@@ -4503,7 +5278,9 @@ Array [
     "category": "theme",
     "description": "Post terms.",
     "editor_script": null,
+    "editor_script_handles": Array [],
     "editor_style": null,
+    "editor_style_handles": Array [],
     "example": null,
     "icon": null,
     "is_dynamic": true,
@@ -4512,7 +5289,9 @@ Array [
     "parent": null,
     "provides_context": Array [],
     "script": null,
+    "script_handles": Array [],
     "style": null,
+    "style_handles": Array [],
     "styles": Array [],
     "supports": Object {
       "color": Object {
@@ -4529,9 +5308,11 @@ Array [
         "__experimentalDefaultControls": Object {
           "fontSize": true,
         },
+        "__experimentalFontFamily": true,
         "__experimentalFontStyle": true,
         "__experimentalFontWeight": true,
         "__experimentalLetterSpacing": true,
+        "__experimentalTextDecoration": true,
         "__experimentalTextTransform": true,
         "fontSize": true,
         "lineHeight": true,
@@ -4543,8 +5324,33 @@ Array [
       "postId",
       "postType",
     ],
-    "variations": Array [],
+    "variations": Array [
+      Object {
+        "attributes": Object {
+          "term": "category",
+        },
+        "description": "Display the assigned taxonomy: Categories",
+        "isActive": Array [
+          "term",
+        ],
+        "isDefault": true,
+        "name": "category",
+        "title": "Categories",
+      },
+      Object {
+        "attributes": Object {
+          "term": "post_tag",
+        },
+        "description": "Display the assigned taxonomy: Tags",
+        "isActive": Array [
+          "term",
+        ],
+        "name": "post_tag",
+        "title": "Tags",
+      },
+    ],
     "view_script": null,
+    "view_script_handles": Array [],
   },
   Object {
     "_links": Object {
@@ -4596,6 +5402,9 @@ Array [
       "className": Object {
         "type": "string",
       },
+      "fontFamily": Object {
+        "type": "string",
+      },
       "fontSize": Object {
         "type": "string",
       },
@@ -4635,7 +5444,9 @@ Array [
     "category": "theme",
     "description": "Displays the title of a post, page, or any other content-type.",
     "editor_script": null,
+    "editor_script_handles": Array [],
     "editor_style": null,
+    "editor_style_handles": Array [],
     "example": null,
     "icon": null,
     "is_dynamic": true,
@@ -4644,7 +5455,9 @@ Array [
     "parent": null,
     "provides_context": Array [],
     "script": null,
+    "script_handles": Array [],
     "style": null,
+    "style_handles": Array [],
     "styles": Array [],
     "supports": Object {
       "align": Array [
@@ -4663,6 +5476,7 @@ Array [
       "html": false,
       "spacing": Object {
         "margin": true,
+        "padding": true,
       },
       "typography": Object {
         "__experimentalDefaultControls": Object {
@@ -4674,6 +5488,7 @@ Array [
         "__experimentalFontStyle": true,
         "__experimentalFontWeight": true,
         "__experimentalLetterSpacing": true,
+        "__experimentalTextDecoration": true,
         "__experimentalTextTransform": true,
         "fontSize": true,
         "lineHeight": true,
@@ -4688,653 +5503,7 @@ Array [
     ],
     "variations": Array [],
     "view_script": null,
-  },
-  Object {
-    "_links": Object {
-      "collection": Array [
-        Object {
-          "href": "http://localhost:8080/wp-json/wp/v2/block-types",
-        },
-      ],
-      "curies": Array [
-        Object {
-          "href": "https://api.w.org/{rel}",
-          "name": "wp",
-          "templated": true,
-        },
-      ],
-      "self": Array [
-        Object {
-          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core/query-no-results",
-        },
-      ],
-      "up": Array [
-        Object {
-          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core",
-        },
-      ],
-      "wp:render-block": Array [
-        Object {
-          "href": "http://localhost:8080/wp-json/wp/v2/block-renderer/core/query-no-results?context=edit",
-        },
-      ],
-    },
-    "ancestor": null,
-    "api_version": 2,
-    "attributes": Object {
-      "align": Object {
-        "enum": Array [
-          "left",
-          "center",
-          "right",
-          "wide",
-          "full",
-          "",
-        ],
-        "type": "string",
-      },
-      "backgroundColor": Object {
-        "type": "string",
-      },
-      "className": Object {
-        "type": "string",
-      },
-      "gradient": Object {
-        "type": "string",
-      },
-      "lock": Object {
-        "type": "object",
-      },
-      "style": Object {
-        "type": "object",
-      },
-      "textColor": Object {
-        "type": "string",
-      },
-    },
-    "category": "theme",
-    "description": "Contains the block elements used to render content when no query results are found.",
-    "editor_script": null,
-    "editor_style": null,
-    "example": null,
-    "icon": null,
-    "is_dynamic": true,
-    "keywords": Array [],
-    "name": "core/query-no-results",
-    "parent": Array [
-      "core/query",
-    ],
-    "provides_context": Array [],
-    "script": null,
-    "style": null,
-    "styles": Array [],
-    "supports": Object {
-      "align": true,
-      "color": Object {
-        "gradients": true,
-        "link": true,
-      },
-      "html": false,
-      "reusable": false,
-    },
-    "textdomain": null,
-    "title": "No results",
-    "uses_context": Array [
-      "queryId",
-      "query",
-    ],
-    "variations": Array [],
-    "view_script": null,
-  },
-  Object {
-    "_links": Object {
-      "collection": Array [
-        Object {
-          "href": "http://localhost:8080/wp-json/wp/v2/block-types",
-        },
-      ],
-      "curies": Array [
-        Object {
-          "href": "https://api.w.org/{rel}",
-          "name": "wp",
-          "templated": true,
-        },
-      ],
-      "self": Array [
-        Object {
-          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core/query-pagination-next",
-        },
-      ],
-      "up": Array [
-        Object {
-          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core",
-        },
-      ],
-      "wp:render-block": Array [
-        Object {
-          "href": "http://localhost:8080/wp-json/wp/v2/block-renderer/core/query-pagination-next?context=edit",
-        },
-      ],
-    },
-    "ancestor": null,
-    "api_version": 2,
-    "attributes": Object {
-      "backgroundColor": Object {
-        "type": "string",
-      },
-      "className": Object {
-        "type": "string",
-      },
-      "fontSize": Object {
-        "type": "string",
-      },
-      "gradient": Object {
-        "type": "string",
-      },
-      "label": Object {
-        "type": "string",
-      },
-      "lock": Object {
-        "type": "object",
-      },
-      "style": Object {
-        "type": "object",
-      },
-    },
-    "category": "theme",
-    "description": "Displays the next posts page link.",
-    "editor_script": null,
-    "editor_style": null,
-    "example": null,
-    "icon": null,
-    "is_dynamic": true,
-    "keywords": Array [],
-    "name": "core/query-pagination-next",
-    "parent": Array [
-      "core/query-pagination",
-    ],
-    "provides_context": Array [],
-    "script": null,
-    "style": null,
-    "styles": Array [],
-    "supports": Object {
-      "color": Object {
-        "__experimentalDefaultControls": Object {
-          "background": true,
-        },
-        "gradients": true,
-        "text": false,
-      },
-      "html": false,
-      "reusable": false,
-      "typography": Object {
-        "__experimentalDefaultControls": Object {
-          "fontSize": true,
-        },
-        "__experimentalFontStyle": true,
-        "__experimentalFontWeight": true,
-        "__experimentalLetterSpacing": true,
-        "__experimentalTextTransform": true,
-        "fontSize": true,
-        "lineHeight": true,
-      },
-    },
-    "textdomain": null,
-    "title": "Next Page",
-    "uses_context": Array [
-      "queryId",
-      "query",
-      "paginationArrow",
-    ],
-    "variations": Array [],
-    "view_script": null,
-  },
-  Object {
-    "_links": Object {
-      "collection": Array [
-        Object {
-          "href": "http://localhost:8080/wp-json/wp/v2/block-types",
-        },
-      ],
-      "curies": Array [
-        Object {
-          "href": "https://api.w.org/{rel}",
-          "name": "wp",
-          "templated": true,
-        },
-      ],
-      "self": Array [
-        Object {
-          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core/query-pagination-numbers",
-        },
-      ],
-      "up": Array [
-        Object {
-          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core",
-        },
-      ],
-      "wp:render-block": Array [
-        Object {
-          "href": "http://localhost:8080/wp-json/wp/v2/block-renderer/core/query-pagination-numbers?context=edit",
-        },
-      ],
-    },
-    "ancestor": null,
-    "api_version": 2,
-    "attributes": Object {
-      "backgroundColor": Object {
-        "type": "string",
-      },
-      "className": Object {
-        "type": "string",
-      },
-      "fontSize": Object {
-        "type": "string",
-      },
-      "gradient": Object {
-        "type": "string",
-      },
-      "lock": Object {
-        "type": "object",
-      },
-      "style": Object {
-        "type": "object",
-      },
-    },
-    "category": "theme",
-    "description": "Displays a list of page numbers for pagination",
-    "editor_script": null,
-    "editor_style": null,
-    "example": null,
-    "icon": null,
-    "is_dynamic": true,
-    "keywords": Array [],
-    "name": "core/query-pagination-numbers",
-    "parent": Array [
-      "core/query-pagination",
-    ],
-    "provides_context": Array [],
-    "script": null,
-    "style": null,
-    "styles": Array [],
-    "supports": Object {
-      "color": Object {
-        "__experimentalDefaultControls": Object {
-          "background": true,
-        },
-        "gradients": true,
-        "text": false,
-      },
-      "html": false,
-      "reusable": false,
-      "typography": Object {
-        "__experimentalDefaultControls": Object {
-          "fontSize": true,
-        },
-        "__experimentalFontStyle": true,
-        "__experimentalFontWeight": true,
-        "__experimentalLetterSpacing": true,
-        "__experimentalTextTransform": true,
-        "fontSize": true,
-        "lineHeight": true,
-      },
-    },
-    "textdomain": null,
-    "title": "Page Numbers",
-    "uses_context": Array [
-      "queryId",
-      "query",
-    ],
-    "variations": Array [],
-    "view_script": null,
-  },
-  Object {
-    "_links": Object {
-      "collection": Array [
-        Object {
-          "href": "http://localhost:8080/wp-json/wp/v2/block-types",
-        },
-      ],
-      "curies": Array [
-        Object {
-          "href": "https://api.w.org/{rel}",
-          "name": "wp",
-          "templated": true,
-        },
-      ],
-      "self": Array [
-        Object {
-          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core/query-pagination-previous",
-        },
-      ],
-      "up": Array [
-        Object {
-          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core",
-        },
-      ],
-      "wp:render-block": Array [
-        Object {
-          "href": "http://localhost:8080/wp-json/wp/v2/block-renderer/core/query-pagination-previous?context=edit",
-        },
-      ],
-    },
-    "ancestor": null,
-    "api_version": 2,
-    "attributes": Object {
-      "backgroundColor": Object {
-        "type": "string",
-      },
-      "className": Object {
-        "type": "string",
-      },
-      "fontSize": Object {
-        "type": "string",
-      },
-      "gradient": Object {
-        "type": "string",
-      },
-      "label": Object {
-        "type": "string",
-      },
-      "lock": Object {
-        "type": "object",
-      },
-      "style": Object {
-        "type": "object",
-      },
-    },
-    "category": "theme",
-    "description": "Displays the previous posts page link.",
-    "editor_script": null,
-    "editor_style": null,
-    "example": null,
-    "icon": null,
-    "is_dynamic": true,
-    "keywords": Array [],
-    "name": "core/query-pagination-previous",
-    "parent": Array [
-      "core/query-pagination",
-    ],
-    "provides_context": Array [],
-    "script": null,
-    "style": null,
-    "styles": Array [],
-    "supports": Object {
-      "color": Object {
-        "__experimentalDefaultControls": Object {
-          "background": true,
-        },
-        "gradients": true,
-        "text": false,
-      },
-      "html": false,
-      "reusable": false,
-      "typography": Object {
-        "__experimentalDefaultControls": Object {
-          "fontSize": true,
-        },
-        "__experimentalFontStyle": true,
-        "__experimentalFontWeight": true,
-        "__experimentalLetterSpacing": true,
-        "__experimentalTextTransform": true,
-        "fontSize": true,
-        "lineHeight": true,
-      },
-    },
-    "textdomain": null,
-    "title": "Previous Page",
-    "uses_context": Array [
-      "queryId",
-      "query",
-      "paginationArrow",
-    ],
-    "variations": Array [],
-    "view_script": null,
-  },
-  Object {
-    "_links": Object {
-      "collection": Array [
-        Object {
-          "href": "http://localhost:8080/wp-json/wp/v2/block-types",
-        },
-      ],
-      "curies": Array [
-        Object {
-          "href": "https://api.w.org/{rel}",
-          "name": "wp",
-          "templated": true,
-        },
-      ],
-      "self": Array [
-        Object {
-          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core/query-pagination",
-        },
-      ],
-      "up": Array [
-        Object {
-          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core",
-        },
-      ],
-      "wp:render-block": Array [
-        Object {
-          "href": "http://localhost:8080/wp-json/wp/v2/block-renderer/core/query-pagination?context=edit",
-        },
-      ],
-    },
-    "ancestor": null,
-    "api_version": 2,
-    "attributes": Object {
-      "align": Object {
-        "enum": Array [
-          "left",
-          "center",
-          "right",
-          "wide",
-          "full",
-          "",
-        ],
-        "type": "string",
-      },
-      "backgroundColor": Object {
-        "type": "string",
-      },
-      "className": Object {
-        "type": "string",
-      },
-      "gradient": Object {
-        "type": "string",
-      },
-      "layout": Object {
-        "type": "object",
-      },
-      "lock": Object {
-        "type": "object",
-      },
-      "paginationArrow": Object {
-        "default": "none",
-        "type": "string",
-      },
-      "style": Object {
-        "type": "object",
-      },
-      "textColor": Object {
-        "type": "string",
-      },
-    },
-    "category": "theme",
-    "description": "Displays a paginated navigation to next/previous set of posts, when applicable.",
-    "editor_script": null,
-    "editor_style": null,
-    "example": null,
-    "icon": null,
-    "is_dynamic": true,
-    "keywords": Array [],
-    "name": "core/query-pagination",
-    "parent": Array [
-      "core/query",
-    ],
-    "provides_context": Object {
-      "paginationArrow": "paginationArrow",
-    },
-    "script": null,
-    "style": null,
-    "styles": Array [],
-    "supports": Object {
-      "__experimentalLayout": Object {
-        "allowInheriting": false,
-        "allowSwitching": false,
-        "default": Object {
-          "type": "flex",
-        },
-      },
-      "align": true,
-      "color": Object {
-        "__experimentalDefaultControls": Object {
-          "background": true,
-          "link": true,
-          "text": true,
-        },
-        "gradients": true,
-        "link": true,
-      },
-      "html": false,
-      "reusable": false,
-    },
-    "textdomain": null,
-    "title": "Pagination",
-    "uses_context": Array [
-      "queryId",
-      "query",
-    ],
-    "variations": Array [],
-    "view_script": null,
-  },
-  Object {
-    "_links": Object {
-      "collection": Array [
-        Object {
-          "href": "http://localhost:8080/wp-json/wp/v2/block-types",
-        },
-      ],
-      "curies": Array [
-        Object {
-          "href": "https://api.w.org/{rel}",
-          "name": "wp",
-          "templated": true,
-        },
-      ],
-      "self": Array [
-        Object {
-          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core/query-title",
-        },
-      ],
-      "up": Array [
-        Object {
-          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core",
-        },
-      ],
-      "wp:render-block": Array [
-        Object {
-          "href": "http://localhost:8080/wp-json/wp/v2/block-renderer/core/query-title?context=edit",
-        },
-      ],
-    },
-    "ancestor": null,
-    "api_version": 2,
-    "attributes": Object {
-      "align": Object {
-        "enum": Array [
-          "left",
-          "center",
-          "right",
-          "wide",
-          "full",
-          "",
-        ],
-        "type": "string",
-      },
-      "backgroundColor": Object {
-        "type": "string",
-      },
-      "className": Object {
-        "type": "string",
-      },
-      "fontSize": Object {
-        "type": "string",
-      },
-      "gradient": Object {
-        "type": "string",
-      },
-      "level": Object {
-        "default": 1,
-        "type": "number",
-      },
-      "lock": Object {
-        "type": "object",
-      },
-      "style": Object {
-        "type": "object",
-      },
-      "textAlign": Object {
-        "type": "string",
-      },
-      "textColor": Object {
-        "type": "string",
-      },
-      "type": Object {
-        "type": "string",
-      },
-    },
-    "category": "theme",
-    "description": "Display the query title.",
-    "editor_script": null,
-    "editor_style": null,
-    "example": null,
-    "icon": null,
-    "is_dynamic": true,
-    "keywords": Array [],
-    "name": "core/query-title",
-    "parent": null,
-    "provides_context": Array [],
-    "script": null,
-    "style": null,
-    "styles": Array [],
-    "supports": Object {
-      "align": Array [
-        "wide",
-        "full",
-      ],
-      "color": Object {
-        "__experimentalDefaultControls": Object {
-          "background": true,
-          "text": true,
-        },
-        "gradients": true,
-      },
-      "html": false,
-      "spacing": Object {
-        "margin": true,
-      },
-      "typography": Object {
-        "__experimentalDefaultControls": Object {
-          "fontAppearance": true,
-          "fontSize": true,
-          "textTransform": true,
-        },
-        "__experimentalFontFamily": true,
-        "__experimentalFontStyle": true,
-        "__experimentalFontWeight": true,
-        "__experimentalLetterSpacing": true,
-        "__experimentalTextTransform": true,
-        "fontSize": true,
-        "lineHeight": true,
-      },
-    },
-    "textdomain": null,
-    "title": "Query Title",
-    "uses_context": Array [],
-    "variations": Array [],
-    "view_script": null,
+    "view_script_handles": Array [],
   },
   Object {
     "_links": Object {
@@ -5389,6 +5558,9 @@ Array [
       "lock": Object {
         "type": "object",
       },
+      "namespace": Object {
+        "type": "string",
+      },
       "query": Object {
         "default": Object {
           "author": "",
@@ -5398,6 +5570,7 @@ Array [
           "order": "desc",
           "orderBy": "date",
           "pages": 0,
+          "parents": Array [],
           "perPage": null,
           "postType": "post",
           "search": "",
@@ -5423,7 +5596,9 @@ Array [
     "category": "theme",
     "description": "An advanced block that allows displaying post types based on different query parameters and visual configurations.",
     "editor_script": null,
+    "editor_script_handles": Array [],
     "editor_style": null,
+    "editor_style_handles": Array [],
     "example": null,
     "icon": null,
     "is_dynamic": false,
@@ -5436,7 +5611,9 @@ Array [
       "queryId": "queryId",
     },
     "script": null,
+    "script_handles": Array [],
     "style": null,
+    "style_handles": Array [],
     "styles": Array [],
     "supports": Object {
       "__experimentalLayout": true,
@@ -5459,6 +5636,750 @@ Array [
     "uses_context": Array [],
     "variations": Array [],
     "view_script": null,
+    "view_script_handles": Array [],
+  },
+  Object {
+    "_links": Object {
+      "collection": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types",
+        },
+      ],
+      "curies": Array [
+        Object {
+          "href": "https://api.w.org/{rel}",
+          "name": "wp",
+          "templated": true,
+        },
+      ],
+      "self": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core/query-no-results",
+        },
+      ],
+      "up": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core",
+        },
+      ],
+      "wp:render-block": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-renderer/core/query-no-results?context=edit",
+        },
+      ],
+    },
+    "ancestor": null,
+    "api_version": 2,
+    "attributes": Object {
+      "align": Object {
+        "enum": Array [
+          "left",
+          "center",
+          "right",
+          "wide",
+          "full",
+          "",
+        ],
+        "type": "string",
+      },
+      "backgroundColor": Object {
+        "type": "string",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "fontFamily": Object {
+        "type": "string",
+      },
+      "fontSize": Object {
+        "type": "string",
+      },
+      "gradient": Object {
+        "type": "string",
+      },
+      "lock": Object {
+        "type": "object",
+      },
+      "style": Object {
+        "type": "object",
+      },
+      "textColor": Object {
+        "type": "string",
+      },
+    },
+    "category": "theme",
+    "description": "Contains the block elements used to render content when no query results are found.",
+    "editor_script": null,
+    "editor_script_handles": Array [],
+    "editor_style": null,
+    "editor_style_handles": Array [],
+    "example": null,
+    "icon": null,
+    "is_dynamic": true,
+    "keywords": Array [],
+    "name": "core/query-no-results",
+    "parent": Array [
+      "core/query",
+    ],
+    "provides_context": Array [],
+    "script": null,
+    "script_handles": Array [],
+    "style": null,
+    "style_handles": Array [],
+    "styles": Array [],
+    "supports": Object {
+      "align": true,
+      "color": Object {
+        "gradients": true,
+        "link": true,
+      },
+      "html": false,
+      "reusable": false,
+      "typography": Object {
+        "__experimentalDefaultControls": Object {
+          "fontSize": true,
+        },
+        "__experimentalFontFamily": true,
+        "__experimentalFontStyle": true,
+        "__experimentalFontWeight": true,
+        "__experimentalLetterSpacing": true,
+        "__experimentalTextDecoration": true,
+        "__experimentalTextTransform": true,
+        "fontSize": true,
+        "lineHeight": true,
+      },
+    },
+    "textdomain": null,
+    "title": "No results",
+    "uses_context": Array [
+      "queryId",
+      "query",
+    ],
+    "variations": Array [],
+    "view_script": null,
+    "view_script_handles": Array [],
+  },
+  Object {
+    "_links": Object {
+      "collection": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types",
+        },
+      ],
+      "curies": Array [
+        Object {
+          "href": "https://api.w.org/{rel}",
+          "name": "wp",
+          "templated": true,
+        },
+      ],
+      "self": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core/query-pagination",
+        },
+      ],
+      "up": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core",
+        },
+      ],
+      "wp:render-block": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-renderer/core/query-pagination?context=edit",
+        },
+      ],
+    },
+    "ancestor": null,
+    "api_version": 2,
+    "attributes": Object {
+      "align": Object {
+        "enum": Array [
+          "left",
+          "center",
+          "right",
+          "wide",
+          "full",
+          "",
+        ],
+        "type": "string",
+      },
+      "backgroundColor": Object {
+        "type": "string",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "fontFamily": Object {
+        "type": "string",
+      },
+      "fontSize": Object {
+        "type": "string",
+      },
+      "gradient": Object {
+        "type": "string",
+      },
+      "layout": Object {
+        "type": "object",
+      },
+      "lock": Object {
+        "type": "object",
+      },
+      "paginationArrow": Object {
+        "default": "none",
+        "type": "string",
+      },
+      "style": Object {
+        "type": "object",
+      },
+      "textColor": Object {
+        "type": "string",
+      },
+    },
+    "category": "theme",
+    "description": "Displays a paginated navigation to next/previous set of posts, when applicable.",
+    "editor_script": null,
+    "editor_script_handles": Array [],
+    "editor_style": null,
+    "editor_style_handles": Array [],
+    "example": null,
+    "icon": null,
+    "is_dynamic": true,
+    "keywords": Array [],
+    "name": "core/query-pagination",
+    "parent": Array [
+      "core/query",
+    ],
+    "provides_context": Object {
+      "paginationArrow": "paginationArrow",
+    },
+    "script": null,
+    "script_handles": Array [],
+    "style": null,
+    "style_handles": Array [],
+    "styles": Array [],
+    "supports": Object {
+      "__experimentalLayout": Object {
+        "allowInheriting": false,
+        "allowSwitching": false,
+        "default": Object {
+          "type": "flex",
+        },
+      },
+      "align": true,
+      "color": Object {
+        "__experimentalDefaultControls": Object {
+          "background": true,
+          "link": true,
+          "text": true,
+        },
+        "gradients": true,
+        "link": true,
+      },
+      "html": false,
+      "reusable": false,
+      "typography": Object {
+        "__experimentalDefaultControls": Object {
+          "fontSize": true,
+        },
+        "__experimentalFontFamily": true,
+        "__experimentalFontStyle": true,
+        "__experimentalFontWeight": true,
+        "__experimentalLetterSpacing": true,
+        "__experimentalTextDecoration": true,
+        "__experimentalTextTransform": true,
+        "fontSize": true,
+        "lineHeight": true,
+      },
+    },
+    "textdomain": null,
+    "title": "Pagination",
+    "uses_context": Array [
+      "queryId",
+      "query",
+    ],
+    "variations": Array [],
+    "view_script": null,
+    "view_script_handles": Array [],
+  },
+  Object {
+    "_links": Object {
+      "collection": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types",
+        },
+      ],
+      "curies": Array [
+        Object {
+          "href": "https://api.w.org/{rel}",
+          "name": "wp",
+          "templated": true,
+        },
+      ],
+      "self": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core/query-pagination-next",
+        },
+      ],
+      "up": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core",
+        },
+      ],
+      "wp:render-block": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-renderer/core/query-pagination-next?context=edit",
+        },
+      ],
+    },
+    "ancestor": null,
+    "api_version": 2,
+    "attributes": Object {
+      "backgroundColor": Object {
+        "type": "string",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "fontFamily": Object {
+        "type": "string",
+      },
+      "fontSize": Object {
+        "type": "string",
+      },
+      "gradient": Object {
+        "type": "string",
+      },
+      "label": Object {
+        "type": "string",
+      },
+      "lock": Object {
+        "type": "object",
+      },
+      "style": Object {
+        "type": "object",
+      },
+    },
+    "category": "theme",
+    "description": "Displays the next posts page link.",
+    "editor_script": null,
+    "editor_script_handles": Array [],
+    "editor_style": null,
+    "editor_style_handles": Array [],
+    "example": null,
+    "icon": null,
+    "is_dynamic": true,
+    "keywords": Array [],
+    "name": "core/query-pagination-next",
+    "parent": Array [
+      "core/query-pagination",
+    ],
+    "provides_context": Array [],
+    "script": null,
+    "script_handles": Array [],
+    "style": null,
+    "style_handles": Array [],
+    "styles": Array [],
+    "supports": Object {
+      "color": Object {
+        "__experimentalDefaultControls": Object {
+          "background": true,
+        },
+        "gradients": true,
+        "text": false,
+      },
+      "html": false,
+      "reusable": false,
+      "typography": Object {
+        "__experimentalDefaultControls": Object {
+          "fontSize": true,
+        },
+        "__experimentalFontFamily": true,
+        "__experimentalFontStyle": true,
+        "__experimentalFontWeight": true,
+        "__experimentalLetterSpacing": true,
+        "__experimentalTextDecoration": true,
+        "__experimentalTextTransform": true,
+        "fontSize": true,
+        "lineHeight": true,
+      },
+    },
+    "textdomain": null,
+    "title": "Next Page",
+    "uses_context": Array [
+      "queryId",
+      "query",
+      "paginationArrow",
+    ],
+    "variations": Array [],
+    "view_script": null,
+    "view_script_handles": Array [],
+  },
+  Object {
+    "_links": Object {
+      "collection": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types",
+        },
+      ],
+      "curies": Array [
+        Object {
+          "href": "https://api.w.org/{rel}",
+          "name": "wp",
+          "templated": true,
+        },
+      ],
+      "self": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core/query-pagination-numbers",
+        },
+      ],
+      "up": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core",
+        },
+      ],
+      "wp:render-block": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-renderer/core/query-pagination-numbers?context=edit",
+        },
+      ],
+    },
+    "ancestor": null,
+    "api_version": 2,
+    "attributes": Object {
+      "backgroundColor": Object {
+        "type": "string",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "fontFamily": Object {
+        "type": "string",
+      },
+      "fontSize": Object {
+        "type": "string",
+      },
+      "gradient": Object {
+        "type": "string",
+      },
+      "lock": Object {
+        "type": "object",
+      },
+      "style": Object {
+        "type": "object",
+      },
+    },
+    "category": "theme",
+    "description": "Displays a list of page numbers for pagination",
+    "editor_script": null,
+    "editor_script_handles": Array [],
+    "editor_style": null,
+    "editor_style_handles": Array [],
+    "example": null,
+    "icon": null,
+    "is_dynamic": true,
+    "keywords": Array [],
+    "name": "core/query-pagination-numbers",
+    "parent": Array [
+      "core/query-pagination",
+    ],
+    "provides_context": Array [],
+    "script": null,
+    "script_handles": Array [],
+    "style": null,
+    "style_handles": Array [],
+    "styles": Array [],
+    "supports": Object {
+      "color": Object {
+        "__experimentalDefaultControls": Object {
+          "background": true,
+        },
+        "gradients": true,
+        "text": false,
+      },
+      "html": false,
+      "reusable": false,
+      "typography": Object {
+        "__experimentalDefaultControls": Object {
+          "fontSize": true,
+        },
+        "__experimentalFontFamily": true,
+        "__experimentalFontStyle": true,
+        "__experimentalFontWeight": true,
+        "__experimentalLetterSpacing": true,
+        "__experimentalTextDecoration": true,
+        "__experimentalTextTransform": true,
+        "fontSize": true,
+        "lineHeight": true,
+      },
+    },
+    "textdomain": null,
+    "title": "Page Numbers",
+    "uses_context": Array [
+      "queryId",
+      "query",
+    ],
+    "variations": Array [],
+    "view_script": null,
+    "view_script_handles": Array [],
+  },
+  Object {
+    "_links": Object {
+      "collection": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types",
+        },
+      ],
+      "curies": Array [
+        Object {
+          "href": "https://api.w.org/{rel}",
+          "name": "wp",
+          "templated": true,
+        },
+      ],
+      "self": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core/query-pagination-previous",
+        },
+      ],
+      "up": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core",
+        },
+      ],
+      "wp:render-block": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-renderer/core/query-pagination-previous?context=edit",
+        },
+      ],
+    },
+    "ancestor": null,
+    "api_version": 2,
+    "attributes": Object {
+      "backgroundColor": Object {
+        "type": "string",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "fontFamily": Object {
+        "type": "string",
+      },
+      "fontSize": Object {
+        "type": "string",
+      },
+      "gradient": Object {
+        "type": "string",
+      },
+      "label": Object {
+        "type": "string",
+      },
+      "lock": Object {
+        "type": "object",
+      },
+      "style": Object {
+        "type": "object",
+      },
+    },
+    "category": "theme",
+    "description": "Displays the previous posts page link.",
+    "editor_script": null,
+    "editor_script_handles": Array [],
+    "editor_style": null,
+    "editor_style_handles": Array [],
+    "example": null,
+    "icon": null,
+    "is_dynamic": true,
+    "keywords": Array [],
+    "name": "core/query-pagination-previous",
+    "parent": Array [
+      "core/query-pagination",
+    ],
+    "provides_context": Array [],
+    "script": null,
+    "script_handles": Array [],
+    "style": null,
+    "style_handles": Array [],
+    "styles": Array [],
+    "supports": Object {
+      "color": Object {
+        "__experimentalDefaultControls": Object {
+          "background": true,
+        },
+        "gradients": true,
+        "text": false,
+      },
+      "html": false,
+      "reusable": false,
+      "typography": Object {
+        "__experimentalDefaultControls": Object {
+          "fontSize": true,
+        },
+        "__experimentalFontFamily": true,
+        "__experimentalFontStyle": true,
+        "__experimentalFontWeight": true,
+        "__experimentalLetterSpacing": true,
+        "__experimentalTextDecoration": true,
+        "__experimentalTextTransform": true,
+        "fontSize": true,
+        "lineHeight": true,
+      },
+    },
+    "textdomain": null,
+    "title": "Previous Page",
+    "uses_context": Array [
+      "queryId",
+      "query",
+      "paginationArrow",
+    ],
+    "variations": Array [],
+    "view_script": null,
+    "view_script_handles": Array [],
+  },
+  Object {
+    "_links": Object {
+      "collection": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types",
+        },
+      ],
+      "curies": Array [
+        Object {
+          "href": "https://api.w.org/{rel}",
+          "name": "wp",
+          "templated": true,
+        },
+      ],
+      "self": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core/query-title",
+        },
+      ],
+      "up": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core",
+        },
+      ],
+      "wp:render-block": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-renderer/core/query-title?context=edit",
+        },
+      ],
+    },
+    "ancestor": null,
+    "api_version": 2,
+    "attributes": Object {
+      "align": Object {
+        "enum": Array [
+          "left",
+          "center",
+          "right",
+          "wide",
+          "full",
+          "",
+        ],
+        "type": "string",
+      },
+      "backgroundColor": Object {
+        "type": "string",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "fontFamily": Object {
+        "type": "string",
+      },
+      "fontSize": Object {
+        "type": "string",
+      },
+      "gradient": Object {
+        "type": "string",
+      },
+      "level": Object {
+        "default": 1,
+        "type": "number",
+      },
+      "lock": Object {
+        "type": "object",
+      },
+      "showPrefix": Object {
+        "default": true,
+        "type": "boolean",
+      },
+      "showSearchTerm": Object {
+        "default": true,
+        "type": "boolean",
+      },
+      "style": Object {
+        "type": "object",
+      },
+      "textAlign": Object {
+        "type": "string",
+      },
+      "textColor": Object {
+        "type": "string",
+      },
+      "type": Object {
+        "type": "string",
+      },
+    },
+    "category": "theme",
+    "description": "Display the query title.",
+    "editor_script": null,
+    "editor_script_handles": Array [],
+    "editor_style": null,
+    "editor_style_handles": Array [],
+    "example": null,
+    "icon": null,
+    "is_dynamic": true,
+    "keywords": Array [],
+    "name": "core/query-title",
+    "parent": null,
+    "provides_context": Array [],
+    "script": null,
+    "script_handles": Array [],
+    "style": null,
+    "style_handles": Array [],
+    "styles": Array [],
+    "supports": Object {
+      "align": Array [
+        "wide",
+        "full",
+      ],
+      "color": Object {
+        "__experimentalDefaultControls": Object {
+          "background": true,
+          "text": true,
+        },
+        "gradients": true,
+      },
+      "html": false,
+      "spacing": Object {
+        "margin": true,
+        "padding": true,
+      },
+      "typography": Object {
+        "__experimentalDefaultControls": Object {
+          "fontAppearance": true,
+          "fontSize": true,
+          "textTransform": true,
+        },
+        "__experimentalFontFamily": true,
+        "__experimentalFontStyle": true,
+        "__experimentalFontWeight": true,
+        "__experimentalLetterSpacing": true,
+        "__experimentalTextDecoration": true,
+        "__experimentalTextTransform": true,
+        "fontSize": true,
+        "lineHeight": true,
+      },
+    },
+    "textdomain": null,
+    "title": "Query Title",
+    "uses_context": Array [],
+    "variations": Array [],
+    "view_script": null,
+    "view_script_handles": Array [],
   },
   Object {
     "_links": Object {
@@ -5505,6 +6426,9 @@ Array [
       "content": Object {
         "type": "string",
       },
+      "fontFamily": Object {
+        "type": "string",
+      },
       "fontSize": Object {
         "type": "string",
       },
@@ -5528,7 +6452,9 @@ Array [
     "category": "theme",
     "description": "Displays the link of a post, page, or any other content-type.",
     "editor_script": null,
+    "editor_script_handles": Array [],
     "editor_style": null,
+    "editor_style_handles": Array [],
     "example": null,
     "icon": null,
     "is_dynamic": true,
@@ -5537,7 +6463,9 @@ Array [
     "parent": null,
     "provides_context": Array [],
     "script": null,
+    "script_handles": Array [],
     "style": null,
+    "style_handles": Array [],
     "styles": Array [],
     "supports": Object {
       "__experimentalBorder": Object {
@@ -5585,6 +6513,7 @@ Array [
     ],
     "variations": Array [],
     "view_script": null,
+    "view_script_handles": Array [],
   },
   Object {
     "_links": Object {
@@ -5672,7 +6601,9 @@ Array [
     "category": "widgets",
     "description": "Display entries from any RSS or Atom feed.",
     "editor_script": null,
+    "editor_script_handles": Array [],
     "editor_style": null,
+    "editor_style_handles": Array [],
     "example": null,
     "icon": null,
     "is_dynamic": true,
@@ -5684,7 +6615,9 @@ Array [
     "parent": null,
     "provides_context": Array [],
     "script": null,
+    "script_handles": Array [],
     "style": null,
+    "style_handles": Array [],
     "styles": Array [],
     "supports": Object {
       "align": true,
@@ -5695,6 +6628,7 @@ Array [
     "uses_context": Array [],
     "variations": Array [],
     "view_script": null,
+    "view_script_handles": Array [],
   },
   Object {
     "_links": Object {
@@ -5761,6 +6695,12 @@ Array [
       "className": Object {
         "type": "string",
       },
+      "fontFamily": Object {
+        "type": "string",
+      },
+      "fontSize": Object {
+        "type": "string",
+      },
       "gradient": Object {
         "type": "string",
       },
@@ -5775,6 +6715,10 @@ Array [
         "__experimentalRole": "content",
         "default": "",
         "type": "string",
+      },
+      "query": Object {
+        "default": Array [],
+        "type": "object",
       },
       "showLabel": Object {
         "default": true,
@@ -5796,7 +6740,9 @@ Array [
     "category": "widgets",
     "description": "Help visitors find your content.",
     "editor_script": null,
+    "editor_script_handles": Array [],
     "editor_style": null,
+    "editor_style_handles": Array [],
     "example": null,
     "icon": null,
     "is_dynamic": true,
@@ -5807,7 +6753,9 @@ Array [
     "parent": null,
     "provides_context": Array [],
     "script": null,
+    "script_handles": Array [],
     "style": null,
+    "style_handles": Array [],
     "styles": Array [],
     "supports": Object {
       "__experimentalBorder": Object {
@@ -5835,12 +6783,28 @@ Array [
         "gradients": true,
       },
       "html": false,
+      "typography": Object {
+        "__experimentalDefaultControls": Object {
+          "fontSize": true,
+        },
+        "__experimentalFontFamily": true,
+        "__experimentalFontStyle": true,
+        "__experimentalFontWeight": true,
+        "__experimentalLetterSpacing": true,
+        "__experimentalSelector": ".wp-block-search__label, .wp-block-search__input, .wp-block-search__button",
+        "__experimentalSkipSerialization": true,
+        "__experimentalTextDecoration": true,
+        "__experimentalTextTransform": true,
+        "fontSize": true,
+        "lineHeight": true,
+      },
     },
     "textdomain": null,
     "title": "Search",
     "uses_context": Array [],
     "variations": Array [],
     "view_script": null,
+    "view_script_handles": Array [],
   },
   Object {
     "_links": Object {
@@ -5886,7 +6850,9 @@ Array [
     "category": "widgets",
     "description": "Insert additional custom elements with a WordPress shortcode.",
     "editor_script": null,
+    "editor_script_handles": Array [],
     "editor_style": null,
+    "editor_style_handles": Array [],
     "example": null,
     "icon": null,
     "is_dynamic": true,
@@ -5895,7 +6861,9 @@ Array [
     "parent": null,
     "provides_context": Array [],
     "script": null,
+    "script_handles": Array [],
     "style": null,
+    "style_handles": Array [],
     "styles": Array [],
     "supports": Object {
       "className": false,
@@ -5907,6 +6875,7 @@ Array [
     "uses_context": Array [],
     "variations": Array [],
     "view_script": null,
+    "view_script_handles": Array [],
   },
   Object {
     "_links": Object {
@@ -5979,7 +6948,9 @@ Array [
     "category": "theme",
     "description": "Display a graphic to represent this site. Update the block, and the changes apply everywhere it’s used. This is different than the site icon, which is the smaller image visible in your dashboard, browser tabs, etc used to help others recognize this site.",
     "editor_script": null,
+    "editor_script_handles": Array [],
     "editor_style": null,
+    "editor_style_handles": Array [],
     "example": Object {
       "attributes": Object {
         "className": "block-editor-block-types-list__site-logo-example",
@@ -5994,7 +6965,9 @@ Array [
     "parent": null,
     "provides_context": Array [],
     "script": null,
+    "script_handles": Array [],
     "style": null,
+    "style_handles": Array [],
     "styles": Array [
       Object {
         "isDefault": true,
@@ -6015,12 +6988,17 @@ Array [
         "text": false,
       },
       "html": false,
+      "spacing": Object {
+        "margin": true,
+        "padding": true,
+      },
     },
     "textdomain": null,
     "title": "Site Logo",
     "uses_context": Array [],
     "variations": Array [],
     "view_script": null,
+    "view_script_handles": Array [],
   },
   Object {
     "_links": Object {
@@ -6072,6 +7050,9 @@ Array [
       "className": Object {
         "type": "string",
       },
+      "fontFamily": Object {
+        "type": "string",
+      },
       "fontSize": Object {
         "type": "string",
       },
@@ -6094,7 +7075,9 @@ Array [
     "category": "theme",
     "description": "Describe in a few words what the site is about. The tagline can be used in search results or when sharing on social networks even if it's not displayed in the theme design.",
     "editor_script": null,
+    "editor_script_handles": Array [],
     "editor_style": null,
+    "editor_style_handles": Array [],
     "example": null,
     "icon": null,
     "is_dynamic": true,
@@ -6105,7 +7088,9 @@ Array [
     "parent": null,
     "provides_context": Array [],
     "script": null,
+    "script_handles": Array [],
     "style": null,
+    "style_handles": Array [],
     "styles": Array [],
     "supports": Object {
       "align": Array [
@@ -6132,6 +7117,7 @@ Array [
         "__experimentalFontStyle": true,
         "__experimentalFontWeight": true,
         "__experimentalLetterSpacing": true,
+        "__experimentalTextDecoration": true,
         "__experimentalTextTransform": true,
         "fontSize": true,
         "lineHeight": true,
@@ -6142,6 +7128,7 @@ Array [
     "uses_context": Array [],
     "variations": Array [],
     "view_script": null,
+    "view_script_handles": Array [],
   },
   Object {
     "_links": Object {
@@ -6193,6 +7180,9 @@ Array [
       "className": Object {
         "type": "string",
       },
+      "fontFamily": Object {
+        "type": "string",
+      },
       "fontSize": Object {
         "type": "string",
       },
@@ -6227,7 +7217,9 @@ Array [
     "category": "theme",
     "description": "Displays the name of this site. Update the block, and the changes apply everywhere it’s used. This will also appear in the browser title bar and in search results.",
     "editor_script": null,
+    "editor_script_handles": Array [],
     "editor_style": null,
+    "editor_style_handles": Array [],
     "example": Object {
       "viewportWidth": 500,
     },
@@ -6238,7 +7230,9 @@ Array [
     "parent": null,
     "provides_context": Array [],
     "script": null,
+    "script_handles": Array [],
     "style": null,
+    "style_handles": Array [],
     "styles": Array [],
     "supports": Object {
       "align": Array [
@@ -6271,6 +7265,7 @@ Array [
         "__experimentalFontStyle": true,
         "__experimentalFontWeight": true,
         "__experimentalLetterSpacing": true,
+        "__experimentalTextDecoration": true,
         "__experimentalTextTransform": true,
         "fontSize": true,
         "lineHeight": true,
@@ -6281,6 +7276,7 @@ Array [
     "uses_context": Array [],
     "variations": Array [],
     "view_script": null,
+    "view_script_handles": Array [],
   },
   Object {
     "_links": Object {
@@ -6334,7 +7330,9 @@ Array [
     "category": "widgets",
     "description": "Display an icon linking to a social media profile or site.",
     "editor_script": null,
+    "editor_script_handles": Array [],
     "editor_style": null,
+    "editor_style_handles": Array [],
     "example": null,
     "icon": null,
     "is_dynamic": true,
@@ -6345,7 +7343,9 @@ Array [
     ],
     "provides_context": Array [],
     "script": null,
+    "script_handles": Array [],
     "style": null,
+    "style_handles": Array [],
     "styles": Array [],
     "supports": Object {
       "html": false,
@@ -6361,6 +7361,7 @@ Array [
     ],
     "variations": Array [],
     "view_script": null,
+    "view_script_handles": Array [],
   },
   Object {
     "_links": Object {
@@ -6430,6 +7431,9 @@ Array [
         "default": "8pt",
         "type": "string",
       },
+      "style": Object {
+        "type": "object",
+      },
       "taxonomy": Object {
         "default": "post_tag",
         "type": "string",
@@ -6438,7 +7442,9 @@ Array [
     "category": "widgets",
     "description": "A cloud of your most used tags.",
     "editor_script": null,
+    "editor_script_handles": Array [],
     "editor_style": null,
+    "editor_style_handles": Array [],
     "example": null,
     "icon": null,
     "is_dynamic": true,
@@ -6447,7 +7453,9 @@ Array [
     "parent": null,
     "provides_context": Array [],
     "script": null,
+    "script_handles": Array [],
     "style": null,
+    "style_handles": Array [],
     "styles": Array [
       Object {
         "isDefault": true,
@@ -6462,12 +7470,17 @@ Array [
     "supports": Object {
       "align": true,
       "html": false,
+      "spacing": Object {
+        "margin": true,
+        "padding": true,
+      },
     },
     "textdomain": null,
     "title": "Tag Cloud",
     "uses_context": Array [],
     "variations": Array [],
     "view_script": null,
+    "view_script_handles": Array [],
   },
   Object {
     "_links": Object {
@@ -6535,7 +7548,9 @@ Array [
     "category": "theme",
     "description": "Edit the different global regions of your site, like the header, footer, sidebar, or create your own.",
     "editor_script": null,
+    "editor_script_handles": Array [],
     "editor_style": null,
+    "editor_style_handles": Array [],
     "example": null,
     "icon": null,
     "is_dynamic": true,
@@ -6544,7 +7559,9 @@ Array [
     "parent": null,
     "provides_context": Array [],
     "script": null,
+    "script_handles": Array [],
     "style": null,
+    "style_handles": Array [],
     "styles": Array [],
     "supports": Object {
       "align": true,
@@ -6581,6 +7598,7 @@ Array [
       },
     ],
     "view_script": null,
+    "view_script_handles": Array [],
   },
   Object {
     "_links": Object {
@@ -6632,6 +7650,9 @@ Array [
       "className": Object {
         "type": "string",
       },
+      "fontFamily": Object {
+        "type": "string",
+      },
       "fontSize": Object {
         "type": "string",
       },
@@ -6651,7 +7672,9 @@ Array [
     "category": "theme",
     "description": "Display the description of categories, tags and custom taxonomies when viewing an archive.",
     "editor_script": null,
+    "editor_script_handles": Array [],
     "editor_style": null,
+    "editor_style_handles": Array [],
     "example": null,
     "icon": null,
     "is_dynamic": true,
@@ -6660,7 +7683,9 @@ Array [
     "parent": null,
     "provides_context": Array [],
     "script": null,
+    "script_handles": Array [],
     "style": null,
+    "style_handles": Array [],
     "styles": Array [],
     "supports": Object {
       "align": Array [
@@ -6675,10 +7700,20 @@ Array [
         "link": true,
       },
       "html": false,
+      "spacing": Object {
+        "margin": true,
+        "padding": true,
+      },
       "typography": Object {
         "__experimentalDefaultControls": Object {
           "fontSize": true,
         },
+        "__experimentalFontFamily": true,
+        "__experimentalFontStyle": true,
+        "__experimentalFontWeight": true,
+        "__experimentalLetterSpacing": true,
+        "__experimentalTextDecoration": true,
+        "__experimentalTextTransform": true,
         "fontSize": true,
         "lineHeight": true,
       },
@@ -6688,75 +7723,7 @@ Array [
     "uses_context": Array [],
     "variations": Array [],
     "view_script": null,
-  },
-  Object {
-    "_links": Object {
-      "collection": Array [
-        Object {
-          "href": "http://localhost:8080/wp-json/wp/v2/block-types",
-        },
-      ],
-      "curies": Array [
-        Object {
-          "href": "https://api.w.org/{rel}",
-          "name": "wp",
-          "templated": true,
-        },
-      ],
-      "self": Array [
-        Object {
-          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core/widget-group",
-        },
-      ],
-      "up": Array [
-        Object {
-          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core",
-        },
-      ],
-      "wp:render-block": Array [
-        Object {
-          "href": "http://localhost:8080/wp-json/wp/v2/block-renderer/core/widget-group?context=edit",
-        },
-      ],
-    },
-    "ancestor": null,
-    "api_version": 2,
-    "attributes": Object {
-      "className": Object {
-        "type": "string",
-      },
-      "lock": Object {
-        "type": "object",
-      },
-      "title": Object {
-        "type": "string",
-      },
-    },
-    "category": "widgets",
-    "description": "",
-    "editor_script": null,
-    "editor_style": null,
-    "example": null,
-    "icon": null,
-    "is_dynamic": true,
-    "keywords": Array [],
-    "name": "core/widget-group",
-    "parent": null,
-    "provides_context": Array [],
-    "script": null,
-    "style": null,
-    "styles": Array [],
-    "supports": Object {
-      "customClassName": true,
-      "html": false,
-      "inserter": true,
-      "reusable": false,
-    },
-    "textdomain": null,
-    "title": "",
-    "uses_context": Array [],
-    "variations": Array [],
-    "view_script": null,
+    "view_script_handles": Array [],
   },
   Object {
     "_links": Object {
@@ -6797,6 +7764,7 @@ Array [
         "type": "boolean",
       },
       "caption": Object {
+        "__experimentalRole": "content",
         "selector": "figcaption",
         "source": "html",
         "type": "string",
@@ -6805,6 +7773,7 @@ Array [
         "type": "string",
       },
       "id": Object {
+        "__experimentalRole": "content",
         "type": "number",
       },
       "lock": Object {
@@ -6823,16 +7792,22 @@ Array [
         "type": "string",
       },
       "src": Object {
+        "__experimentalRole": "content",
         "attribute": "src",
         "selector": "audio",
         "source": "attribute",
         "type": "string",
       },
+      "style": Object {
+        "type": "object",
+      },
     },
     "category": "media",
     "description": "Embed a simple audio player.",
     "editor_script": null,
+    "editor_script_handles": Array [],
     "editor_style": null,
+    "editor_style_handles": Array [],
     "example": null,
     "icon": null,
     "is_dynamic": false,
@@ -6846,17 +7821,24 @@ Array [
     "parent": null,
     "provides_context": Array [],
     "script": null,
+    "script_handles": Array [],
     "style": null,
+    "style_handles": Array [],
     "styles": Array [],
     "supports": Object {
       "align": true,
       "anchor": true,
+      "spacing": Object {
+        "margin": true,
+        "padding": true,
+      },
     },
     "textdomain": null,
     "title": "Audio",
     "uses_context": Array [],
     "variations": Array [],
     "view_script": null,
+    "view_script_handles": Array [],
   },
   Object {
     "_links": Object {
@@ -6894,6 +7876,9 @@ Array [
         "type": "string",
       },
       "className": Object {
+        "type": "string",
+      },
+      "fontFamily": Object {
         "type": "string",
       },
       "fontSize": Object {
@@ -6950,7 +7935,9 @@ Array [
     "category": "design",
     "description": "Prompt visitors to take action with a button-style link.",
     "editor_script": null,
+    "editor_script_handles": Array [],
     "editor_style": null,
+    "editor_style_handles": Array [],
     "example": null,
     "icon": null,
     "is_dynamic": false,
@@ -6963,7 +7950,9 @@ Array [
     ],
     "provides_context": Array [],
     "script": null,
+    "script_handles": Array [],
     "style": null,
+    "style_handles": Array [],
     "styles": Array [
       Object {
         "isDefault": true,
@@ -6983,7 +7972,7 @@ Array [
         "__experimentalSkipSerialization": true,
         "radius": true,
       },
-      "__experimentalSelector": ".wp-block-button__link",
+      "__experimentalSelector": ".wp-block-button .wp-block-button__link",
       "align": true,
       "alignWide": false,
       "anchor": true,
@@ -7011,7 +8000,13 @@ Array [
           "fontSize": true,
         },
         "__experimentalFontFamily": true,
+        "__experimentalFontStyle": true,
+        "__experimentalFontWeight": true,
+        "__experimentalLetterSpacing": true,
+        "__experimentalTextDecoration": true,
+        "__experimentalTextTransform": true,
         "fontSize": true,
+        "lineHeight": true,
       },
     },
     "textdomain": null,
@@ -7019,6 +8014,7 @@ Array [
     "uses_context": Array [],
     "variations": Array [],
     "view_script": null,
+    "view_script_handles": Array [],
   },
   Object {
     "_links": Object {
@@ -7055,6 +8051,12 @@ Array [
       "className": Object {
         "type": "string",
       },
+      "fontFamily": Object {
+        "type": "string",
+      },
+      "fontSize": Object {
+        "type": "string",
+      },
       "layout": Object {
         "type": "object",
       },
@@ -7068,7 +8070,9 @@ Array [
     "category": "design",
     "description": "Prompt visitors to take action with a group of button-style links.",
     "editor_script": null,
+    "editor_script_handles": Array [],
     "editor_style": null,
+    "editor_style_handles": Array [],
     "example": null,
     "icon": null,
     "is_dynamic": false,
@@ -7079,7 +8083,9 @@ Array [
     "parent": null,
     "provides_context": Array [],
     "script": null,
+    "script_handles": Array [],
     "style": null,
+    "style_handles": Array [],
     "styles": Array [],
     "supports": Object {
       "__experimentalExposeControlsToChildren": true,
@@ -7105,12 +8111,26 @@ Array [
           "bottom",
         ],
       },
+      "typography": Object {
+        "__experimentalDefaultControls": Object {
+          "fontSize": true,
+        },
+        "__experimentalFontFamily": true,
+        "__experimentalFontStyle": true,
+        "__experimentalFontWeight": true,
+        "__experimentalLetterSpacing": true,
+        "__experimentalTextDecoration": true,
+        "__experimentalTextTransform": true,
+        "fontSize": true,
+        "lineHeight": true,
+      },
     },
     "textdomain": null,
     "title": "Buttons",
     "uses_context": Array [],
     "variations": Array [],
     "view_script": null,
+    "view_script_handles": Array [],
   },
   Object {
     "_links": Object {
@@ -7147,6 +8167,9 @@ Array [
         "source": "html",
         "type": "string",
       },
+      "fontFamily": Object {
+        "type": "string",
+      },
       "fontSize": Object {
         "type": "string",
       },
@@ -7166,7 +8189,9 @@ Array [
     "category": "text",
     "description": "Display code snippets that respect your spacing and tabs.",
     "editor_script": null,
+    "editor_script_handles": Array [],
     "editor_style": null,
+    "editor_style_handles": Array [],
     "example": null,
     "icon": null,
     "is_dynamic": false,
@@ -7175,7 +8200,9 @@ Array [
     "parent": null,
     "provides_context": Array [],
     "script": null,
+    "script_handles": Array [],
     "style": null,
+    "style_handles": Array [],
     "styles": Array [],
     "supports": Object {
       "__experimentalBorder": Object {
@@ -7209,9 +8236,11 @@ Array [
         "__experimentalDefaultControls": Object {
           "fontSize": true,
         },
+        "__experimentalFontFamily": true,
         "__experimentalFontStyle": true,
         "__experimentalFontWeight": true,
         "__experimentalLetterSpacing": true,
+        "__experimentalTextDecoration": true,
         "__experimentalTextTransform": true,
         "fontSize": true,
         "lineHeight": true,
@@ -7222,6 +8251,7 @@ Array [
     "uses_context": Array [],
     "variations": Array [],
     "view_script": null,
+    "view_script_handles": Array [],
   },
   Object {
     "_links": Object {
@@ -7250,7 +8280,16 @@ Array [
       "backgroundColor": Object {
         "type": "string",
       },
+      "borderColor": Object {
+        "type": "string",
+      },
       "className": Object {
+        "type": "string",
+      },
+      "fontFamily": Object {
+        "type": "string",
+      },
+      "fontSize": Object {
         "type": "string",
       },
       "gradient": Object {
@@ -7269,6 +8308,7 @@ Array [
         "enum": Array [
           "all",
           "insert",
+          "contentOnly",
           false,
         ],
         "type": Array [
@@ -7289,7 +8329,9 @@ Array [
     "category": "text",
     "description": "A single column within a columns block.",
     "editor_script": null,
+    "editor_script_handles": Array [],
     "editor_style": null,
+    "editor_style_handles": Array [],
     "example": null,
     "icon": null,
     "is_dynamic": false,
@@ -7300,9 +8342,21 @@ Array [
     ],
     "provides_context": Array [],
     "script": null,
+    "script_handles": Array [],
     "style": null,
+    "style_handles": Array [],
     "styles": Array [],
     "supports": Object {
+      "__experimentalBorder": Object {
+        "__experimentalDefaultControls": Object {
+          "color": true,
+          "style": true,
+          "width": true,
+        },
+        "color": true,
+        "style": true,
+        "width": true,
+      },
       "__experimentalLayout": true,
       "anchor": true,
       "color": Object {
@@ -7322,12 +8376,26 @@ Array [
         "blockGap": true,
         "padding": true,
       },
+      "typography": Object {
+        "__experimentalDefaultControls": Object {
+          "fontSize": true,
+        },
+        "__experimentalFontFamily": true,
+        "__experimentalFontStyle": true,
+        "__experimentalFontWeight": true,
+        "__experimentalLetterSpacing": true,
+        "__experimentalTextDecoration": true,
+        "__experimentalTextTransform": true,
+        "fontSize": true,
+        "lineHeight": true,
+      },
     },
     "textdomain": null,
     "title": "Column",
     "uses_context": Array [],
     "variations": Array [],
     "view_script": null,
+    "view_script_handles": Array [],
   },
   Object {
     "_links": Object {
@@ -7370,6 +8438,12 @@ Array [
       "className": Object {
         "type": "string",
       },
+      "fontFamily": Object {
+        "type": "string",
+      },
+      "fontSize": Object {
+        "type": "string",
+      },
       "gradient": Object {
         "type": "string",
       },
@@ -7396,7 +8470,9 @@ Array [
     "category": "design",
     "description": "Display content in multiple columns, with blocks added to each column.",
     "editor_script": null,
+    "editor_script_handles": Array [],
     "editor_style": null,
+    "editor_style_handles": Array [],
     "example": null,
     "icon": null,
     "is_dynamic": false,
@@ -7405,7 +8481,9 @@ Array [
     "parent": null,
     "provides_context": Array [],
     "script": null,
+    "script_handles": Array [],
     "style": null,
+    "style_handles": Array [],
     "styles": Array [
       Object {
         "label": "Overlap",
@@ -7454,6 +8532,10 @@ Array [
         },
         "blockGap": Object {
           "__experimentalDefault": "2em",
+          "sides": Array [
+            "horizontal",
+            "vertical",
+          ],
         },
         "margin": Array [
           "top",
@@ -7461,103 +8543,26 @@ Array [
         ],
         "padding": true,
       },
+      "typography": Object {
+        "__experimentalDefaultControls": Object {
+          "fontSize": true,
+        },
+        "__experimentalFontFamily": true,
+        "__experimentalFontStyle": true,
+        "__experimentalFontWeight": true,
+        "__experimentalLetterSpacing": true,
+        "__experimentalTextDecoration": true,
+        "__experimentalTextTransform": true,
+        "fontSize": true,
+        "lineHeight": true,
+      },
     },
     "textdomain": null,
     "title": "Columns",
     "uses_context": Array [],
     "variations": Array [],
     "view_script": null,
-  },
-  Object {
-    "_links": Object {
-      "collection": Array [
-        Object {
-          "href": "http://localhost:8080/wp-json/wp/v2/block-types",
-        },
-      ],
-      "self": Array [
-        Object {
-          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core/comments-query-loop",
-        },
-      ],
-      "up": Array [
-        Object {
-          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core",
-        },
-      ],
-    },
-    "ancestor": null,
-    "api_version": 2,
-    "attributes": Object {
-      "align": Object {
-        "enum": Array [
-          "left",
-          "center",
-          "right",
-          "wide",
-          "full",
-          "",
-        ],
-        "type": "string",
-      },
-      "backgroundColor": Object {
-        "type": "string",
-      },
-      "className": Object {
-        "type": "string",
-      },
-      "gradient": Object {
-        "type": "string",
-      },
-      "lock": Object {
-        "type": "object",
-      },
-      "style": Object {
-        "type": "object",
-      },
-      "tagName": Object {
-        "default": "div",
-        "type": "string",
-      },
-      "textColor": Object {
-        "type": "string",
-      },
-    },
-    "category": "theme",
-    "description": "An advanced block that allows displaying post comments using different visual configurations.",
-    "editor_script": null,
-    "editor_style": null,
-    "example": null,
-    "icon": null,
-    "is_dynamic": false,
-    "keywords": Array [],
-    "name": "core/comments-query-loop",
-    "parent": null,
-    "provides_context": Array [],
-    "script": null,
-    "style": null,
-    "styles": Array [],
-    "supports": Object {
-      "align": Array [
-        "wide",
-        "full",
-      ],
-      "color": Object {
-        "__experimentalDefaultControls": Object {
-          "background": true,
-          "link": true,
-          "text": true,
-        },
-        "gradients": true,
-        "link": true,
-      },
-      "html": false,
-    },
-    "textdomain": null,
-    "title": "Comments Query Loop",
-    "uses_context": Array [],
-    "variations": Array [],
-    "view_script": null,
+    "view_script_handles": Array [],
   },
   Object {
     "_links": Object {
@@ -7627,7 +8632,9 @@ Array [
     "category": "embed",
     "description": "Add a block that displays content pulled from other sites, like Twitter or YouTube.",
     "editor_script": null,
+    "editor_script_handles": Array [],
     "editor_style": null,
+    "editor_style_handles": Array [],
     "example": null,
     "icon": null,
     "is_dynamic": false,
@@ -7636,7 +8643,9 @@ Array [
     "parent": null,
     "provides_context": Array [],
     "script": null,
+    "script_handles": Array [],
     "style": null,
+    "style_handles": Array [],
     "styles": Array [],
     "supports": Object {
       "align": true,
@@ -7646,6 +8655,7 @@ Array [
     "uses_context": Array [],
     "variations": Array [],
     "view_script": null,
+    "view_script_handles": Array [],
   },
   Object {
     "_links": Object {
@@ -7679,7 +8689,9 @@ Array [
     "category": "text",
     "description": "Use the classic WordPress editor.",
     "editor_script": null,
+    "editor_script_handles": Array [],
     "editor_style": null,
+    "editor_style_handles": Array [],
     "example": null,
     "icon": null,
     "is_dynamic": false,
@@ -7688,7 +8700,9 @@ Array [
     "parent": null,
     "provides_context": Array [],
     "script": null,
+    "script_handles": Array [],
     "style": null,
+    "style_handles": Array [],
     "styles": Array [],
     "supports": Object {
       "className": false,
@@ -7700,6 +8714,7 @@ Array [
     "uses_context": Array [],
     "variations": Array [],
     "view_script": null,
+    "view_script_handles": Array [],
   },
   Object {
     "_links": Object {
@@ -7742,6 +8757,9 @@ Array [
       "className": Object {
         "type": "string",
       },
+      "fontFamily": Object {
+        "type": "string",
+      },
       "fontSize": Object {
         "type": "string",
       },
@@ -7765,6 +8783,7 @@ Array [
         "enum": Array [
           "all",
           "insert",
+          "contentOnly",
           false,
         ],
         "type": Array [
@@ -7779,7 +8798,9 @@ Array [
     "category": "design",
     "description": "Gather blocks in a layout container.",
     "editor_script": null,
+    "editor_script_handles": Array [],
     "editor_style": null,
+    "editor_style_handles": Array [],
     "example": null,
     "icon": null,
     "is_dynamic": false,
@@ -7793,7 +8814,9 @@ Array [
     "parent": null,
     "provides_context": Array [],
     "script": null,
+    "script_handles": Array [],
     "style": null,
+    "style_handles": Array [],
     "styles": Array [
       Object {
         "label": "Borders",
@@ -7814,11 +8837,14 @@ Array [
         "width": true,
       },
       "__experimentalLayout": true,
+      "__experimentalOnEnter": true,
+      "__experimentalSettings": true,
       "align": Array [
         "wide",
         "full",
       ],
       "anchor": true,
+      "ariaLabel": true,
       "color": Object {
         "__experimentalDefaultControls": Object {
           "background": true,
@@ -7844,9 +8870,11 @@ Array [
         "__experimentalDefaultControls": Object {
           "fontSize": true,
         },
+        "__experimentalFontFamily": true,
         "__experimentalFontStyle": true,
         "__experimentalFontWeight": true,
         "__experimentalLetterSpacing": true,
+        "__experimentalTextDecoration": true,
         "__experimentalTextTransform": true,
         "fontSize": true,
         "lineHeight": true,
@@ -7857,6 +8885,7 @@ Array [
     "uses_context": Array [],
     "variations": Array [],
     "view_script": null,
+    "view_script_handles": Array [],
   },
   Object {
     "_links": Object {
@@ -7903,7 +8932,13 @@ Array [
         "source": "html",
         "type": "string",
       },
+      "fontFamily": Object {
+        "type": "string",
+      },
       "fontSize": Object {
+        "type": "string",
+      },
+      "gradient": Object {
         "type": "string",
       },
       "level": Object {
@@ -7929,7 +8964,9 @@ Array [
     "category": "text",
     "description": "Introduce new sections and organize content to help visitors (and search engines) understand the structure of your content.",
     "editor_script": null,
+    "editor_script_handles": Array [],
     "editor_style": null,
+    "editor_style_handles": Array [],
     "example": null,
     "icon": null,
     "is_dynamic": false,
@@ -7941,7 +8978,9 @@ Array [
     "parent": null,
     "provides_context": Array [],
     "script": null,
+    "script_handles": Array [],
     "style": null,
+    "style_handles": Array [],
     "styles": Array [],
     "supports": Object {
       "__experimentalSelector": "h1,h2,h3,h4,h5,h6",
@@ -7958,10 +8997,12 @@ Array [
           "background": true,
           "text": true,
         },
+        "gradients": true,
         "link": true,
       },
       "spacing": Object {
         "margin": true,
+        "padding": true,
       },
       "typography": Object {
         "__experimentalDefaultControls": Object {
@@ -7969,9 +9010,11 @@ Array [
           "fontSize": true,
           "textTransform": true,
         },
+        "__experimentalFontFamily": true,
         "__experimentalFontStyle": true,
         "__experimentalFontWeight": true,
         "__experimentalLetterSpacing": true,
+        "__experimentalTextDecoration": true,
         "__experimentalTextTransform": true,
         "fontSize": true,
         "lineHeight": true,
@@ -7982,6 +9025,7 @@ Array [
     "uses_context": Array [],
     "variations": Array [],
     "view_script": null,
+    "view_script_handles": Array [],
   },
   Object {
     "_links": Object {
@@ -8015,7 +9059,9 @@ Array [
     "category": "widgets",
     "description": "Add custom HTML code and preview it as you edit.",
     "editor_script": null,
+    "editor_script_handles": Array [],
     "editor_style": null,
+    "editor_style_handles": Array [],
     "example": null,
     "icon": null,
     "is_dynamic": false,
@@ -8026,7 +9072,9 @@ Array [
     "parent": null,
     "provides_context": Array [],
     "script": null,
+    "script_handles": Array [],
     "style": null,
+    "style_handles": Array [],
     "styles": Array [],
     "supports": Object {
       "className": false,
@@ -8038,6 +9086,7 @@ Array [
     "uses_context": Array [],
     "variations": Array [],
     "view_script": null,
+    "view_script_handles": Array [],
   },
   Object {
     "_links": Object {
@@ -8064,6 +9113,9 @@ Array [
         "type": "string",
       },
       "className": Object {
+        "type": "string",
+      },
+      "fontFamily": Object {
         "type": "string",
       },
       "fontSize": Object {
@@ -8114,7 +9166,9 @@ Array [
     "category": "text",
     "description": "Create a bulleted or numbered list.",
     "editor_script": null,
+    "editor_script_handles": Array [],
     "editor_style": null,
+    "editor_style_handles": Array [],
     "example": null,
     "icon": null,
     "is_dynamic": false,
@@ -8127,7 +9181,9 @@ Array [
     "parent": null,
     "provides_context": Array [],
     "script": null,
+    "script_handles": Array [],
     "style": null,
+    "style_handles": Array [],
     "styles": Array [],
     "supports": Object {
       "__experimentalSelector": "ol,ul",
@@ -8143,6 +9199,10 @@ Array [
         "gradients": true,
         "link": true,
       },
+      "spacing": Object {
+        "margin": true,
+        "padding": true,
+      },
       "typography": Object {
         "__experimentalDefaultControls": Object {
           "fontSize": true,
@@ -8151,6 +9211,7 @@ Array [
         "__experimentalFontStyle": true,
         "__experimentalFontWeight": true,
         "__experimentalLetterSpacing": true,
+        "__experimentalTextDecoration": true,
         "__experimentalTextTransform": true,
         "fontSize": true,
         "lineHeight": true,
@@ -8161,6 +9222,76 @@ Array [
     "uses_context": Array [],
     "variations": Array [],
     "view_script": null,
+    "view_script_handles": Array [],
+  },
+  Object {
+    "_links": Object {
+      "collection": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types",
+        },
+      ],
+      "self": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core/list-item",
+        },
+      ],
+      "up": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core",
+        },
+      ],
+    },
+    "ancestor": null,
+    "api_version": 2,
+    "attributes": Object {
+      "className": Object {
+        "type": "string",
+      },
+      "content": Object {
+        "__experimentalRole": "content",
+        "default": "",
+        "selector": "li",
+        "source": "html",
+        "type": "string",
+      },
+      "lock": Object {
+        "type": "object",
+      },
+      "placeholder": Object {
+        "type": "string",
+      },
+    },
+    "category": "text",
+    "description": "Create a list item.",
+    "editor_script": null,
+    "editor_script_handles": Array [],
+    "editor_style": null,
+    "editor_style_handles": Array [],
+    "example": null,
+    "icon": null,
+    "is_dynamic": false,
+    "keywords": Array [],
+    "name": "core/list-item",
+    "parent": Array [
+      "core/list",
+    ],
+    "provides_context": Array [],
+    "script": null,
+    "script_handles": Array [],
+    "style": null,
+    "style_handles": Array [],
+    "styles": Array [],
+    "supports": Object {
+      "__experimentalSelector": "li",
+      "className": false,
+    },
+    "textdomain": null,
+    "title": "List item",
+    "uses_context": Array [],
+    "variations": Array [],
+    "view_script": null,
+    "view_script_handles": Array [],
   },
   Object {
     "_links": Object {
@@ -8196,10 +9327,17 @@ Array [
       "focalPoint": Object {
         "type": "object",
       },
+      "fontFamily": Object {
+        "type": "string",
+      },
+      "fontSize": Object {
+        "type": "string",
+      },
       "gradient": Object {
         "type": "string",
       },
       "href": Object {
+        "__experimentalRole": "content",
         "attribute": "href",
         "selector": "figure a",
         "source": "attribute",
@@ -8231,6 +9369,7 @@ Array [
         "type": "object",
       },
       "mediaAlt": Object {
+        "__experimentalRole": "content",
         "attribute": "alt",
         "default": "",
         "selector": "figure img",
@@ -8238,6 +9377,7 @@ Array [
         "type": "string",
       },
       "mediaId": Object {
+        "__experimentalRole": "content",
         "type": "number",
       },
       "mediaLink": Object {
@@ -8251,9 +9391,11 @@ Array [
         "type": "string",
       },
       "mediaType": Object {
+        "__experimentalRole": "content",
         "type": "string",
       },
       "mediaUrl": Object {
+        "__experimentalRole": "content",
         "attribute": "src",
         "selector": "figure video,figure img",
         "source": "attribute",
@@ -8282,7 +9424,9 @@ Array [
     "category": "media",
     "description": "Set media and words side-by-side for a richer layout.",
     "editor_script": null,
+    "editor_script_handles": Array [],
     "editor_style": null,
+    "editor_style_handles": Array [],
     "example": null,
     "icon": null,
     "is_dynamic": false,
@@ -8294,7 +9438,9 @@ Array [
     "parent": null,
     "provides_context": Array [],
     "script": null,
+    "script_handles": Array [],
     "style": null,
+    "style_handles": Array [],
     "styles": Array [
       Object {
         "label": "Borders",
@@ -8316,12 +9462,30 @@ Array [
         "link": true,
       },
       "html": false,
+      "spacing": Object {
+        "margin": true,
+        "padding": true,
+      },
+      "typography": Object {
+        "__experimentalDefaultControls": Object {
+          "fontSize": true,
+        },
+        "__experimentalFontFamily": true,
+        "__experimentalFontStyle": true,
+        "__experimentalFontWeight": true,
+        "__experimentalLetterSpacing": true,
+        "__experimentalTextDecoration": true,
+        "__experimentalTextTransform": true,
+        "fontSize": true,
+        "lineHeight": true,
+      },
     },
     "textdomain": null,
     "title": "Media & Text",
     "uses_context": Array [],
     "variations": Array [],
     "view_script": null,
+    "view_script_handles": Array [],
   },
   Object {
     "_links": Object {
@@ -8361,7 +9525,9 @@ Array [
     "category": "text",
     "description": "Your site doesn’t include support for this block.",
     "editor_script": null,
+    "editor_script_handles": Array [],
     "editor_style": null,
+    "editor_style_handles": Array [],
     "example": null,
     "icon": null,
     "is_dynamic": false,
@@ -8370,7 +9536,9 @@ Array [
     "parent": null,
     "provides_context": Array [],
     "script": null,
+    "script_handles": Array [],
     "style": null,
+    "style_handles": Array [],
     "styles": Array [],
     "supports": Object {
       "className": false,
@@ -8384,6 +9552,7 @@ Array [
     "uses_context": Array [],
     "variations": Array [],
     "view_script": null,
+    "view_script_handles": Array [],
   },
   Object {
     "_links": Object {
@@ -8420,7 +9589,9 @@ Array [
     "category": "design",
     "description": "Content before this block will be shown in the excerpt on your archives page.",
     "editor_script": null,
+    "editor_script_handles": Array [],
     "editor_style": null,
+    "editor_style_handles": Array [],
     "example": null,
     "icon": null,
     "is_dynamic": false,
@@ -8431,7 +9602,9 @@ Array [
     "parent": null,
     "provides_context": Array [],
     "script": null,
+    "script_handles": Array [],
     "style": null,
+    "style_handles": Array [],
     "styles": Array [],
     "supports": Object {
       "className": false,
@@ -8444,6 +9617,7 @@ Array [
     "uses_context": Array [],
     "variations": Array [],
     "view_script": null,
+    "view_script_handles": Array [],
   },
   Object {
     "_links": Object {
@@ -8473,7 +9647,9 @@ Array [
     "category": "design",
     "description": "Separate your content into a multi-page experience.",
     "editor_script": null,
+    "editor_script_handles": Array [],
     "editor_style": null,
+    "editor_style_handles": Array [],
     "example": null,
     "icon": null,
     "is_dynamic": false,
@@ -8487,7 +9663,9 @@ Array [
     ],
     "provides_context": Array [],
     "script": null,
+    "script_handles": Array [],
     "style": null,
+    "style_handles": Array [],
     "styles": Array [],
     "supports": Object {
       "className": false,
@@ -8499,6 +9677,7 @@ Array [
     "uses_context": Array [],
     "variations": Array [],
     "view_script": null,
+    "view_script_handles": Array [],
   },
   Object {
     "_links": Object {
@@ -8548,7 +9727,13 @@ Array [
         "default": false,
         "type": "boolean",
       },
+      "fontFamily": Object {
+        "type": "string",
+      },
       "fontSize": Object {
+        "type": "string",
+      },
+      "gradient": Object {
         "type": "string",
       },
       "lock": Object {
@@ -8567,7 +9752,9 @@ Array [
     "category": "text",
     "description": "Start with the basic building block of all narrative.",
     "editor_script": null,
+    "editor_script_handles": Array [],
     "editor_style": null,
+    "editor_style_handles": Array [],
     "example": null,
     "icon": null,
     "is_dynamic": false,
@@ -8578,7 +9765,9 @@ Array [
     "parent": null,
     "provides_context": Array [],
     "script": null,
+    "script_handles": Array [],
     "style": null,
+    "style_handles": Array [],
     "styles": Array [],
     "supports": Object {
       "__experimentalSelector": "p",
@@ -8590,15 +9779,22 @@ Array [
           "background": true,
           "text": true,
         },
+        "gradients": true,
         "link": true,
+      },
+      "spacing": Object {
+        "margin": true,
+        "padding": true,
       },
       "typography": Object {
         "__experimentalDefaultControls": Object {
           "fontSize": true,
         },
+        "__experimentalFontFamily": true,
         "__experimentalFontStyle": true,
         "__experimentalFontWeight": true,
         "__experimentalLetterSpacing": true,
+        "__experimentalTextDecoration": true,
         "__experimentalTextTransform": true,
         "fontSize": true,
         "lineHeight": true,
@@ -8609,6 +9805,7 @@ Array [
     "uses_context": Array [],
     "variations": Array [],
     "view_script": null,
+    "view_script_handles": Array [],
   },
   Object {
     "_links": Object {
@@ -8645,6 +9842,9 @@ Array [
         "source": "html",
         "type": "string",
       },
+      "fontFamily": Object {
+        "type": "string",
+      },
       "fontSize": Object {
         "type": "string",
       },
@@ -8664,7 +9864,9 @@ Array [
     "category": "text",
     "description": "Add text that respects your spacing and tabs, and also allows styling.",
     "editor_script": null,
+    "editor_script_handles": Array [],
     "editor_style": null,
+    "editor_style_handles": Array [],
     "example": null,
     "icon": null,
     "is_dynamic": false,
@@ -8673,7 +9875,9 @@ Array [
     "parent": null,
     "provides_context": Array [],
     "script": null,
+    "script_handles": Array [],
     "style": null,
+    "style_handles": Array [],
     "styles": Array [],
     "supports": Object {
       "anchor": true,
@@ -8688,9 +9892,11 @@ Array [
         "__experimentalDefaultControls": Object {
           "fontSize": true,
         },
+        "__experimentalFontFamily": true,
         "__experimentalFontStyle": true,
         "__experimentalFontWeight": true,
         "__experimentalLetterSpacing": true,
+        "__experimentalTextDecoration": true,
         "__experimentalTextTransform": true,
         "fontSize": true,
         "lineHeight": true,
@@ -8701,6 +9907,7 @@ Array [
     "uses_context": Array [],
     "variations": Array [],
     "view_script": null,
+    "view_script_handles": Array [],
   },
   Object {
     "_links": Object {
@@ -8750,6 +9957,9 @@ Array [
       "className": Object {
         "type": "string",
       },
+      "fontFamily": Object {
+        "type": "string",
+      },
       "fontSize": Object {
         "type": "string",
       },
@@ -8770,8 +9980,7 @@ Array [
       },
       "value": Object {
         "__experimentalRole": "content",
-        "multiline": "p",
-        "selector": "blockquote",
+        "selector": "p",
         "source": "html",
         "type": "string",
       },
@@ -8779,7 +9988,9 @@ Array [
     "category": "text",
     "description": "Give special visual emphasis to a quote from your text.",
     "editor_script": null,
+    "editor_script_handles": Array [],
     "editor_style": null,
+    "editor_style_handles": Array [],
     "example": null,
     "icon": null,
     "is_dynamic": false,
@@ -8788,7 +9999,9 @@ Array [
     "parent": null,
     "provides_context": Array [],
     "script": null,
+    "script_handles": Array [],
     "style": null,
+    "style_handles": Array [],
     "styles": Array [],
     "supports": Object {
       "__experimentalBorder": Object {
@@ -8802,6 +10015,12 @@ Array [
         "radius": true,
         "style": true,
         "width": true,
+      },
+      "__experimentalStyle": Object {
+        "typography": Object {
+          "fontSize": "1.5em",
+          "lineHeight": "1.6",
+        },
       },
       "align": Array [
         "left",
@@ -8824,9 +10043,11 @@ Array [
           "fontAppearance": true,
           "fontSize": true,
         },
+        "__experimentalFontFamily": true,
         "__experimentalFontStyle": true,
         "__experimentalFontWeight": true,
         "__experimentalLetterSpacing": true,
+        "__experimentalTextDecoration": true,
         "__experimentalTextTransform": true,
         "fontSize": true,
         "lineHeight": true,
@@ -8837,6 +10058,7 @@ Array [
     "uses_context": Array [],
     "variations": Array [],
     "view_script": null,
+    "view_script_handles": Array [],
   },
   Object {
     "_links": Object {
@@ -8875,6 +10097,9 @@ Array [
       "className": Object {
         "type": "string",
       },
+      "fontFamily": Object {
+        "type": "string",
+      },
       "fontSize": Object {
         "type": "string",
       },
@@ -8902,7 +10127,9 @@ Array [
     "category": "text",
     "description": "Give quoted text visual emphasis. \\"In quoting others, we cite ourselves.\\" — Julio Cortázar",
     "editor_script": null,
+    "editor_script_handles": Array [],
     "editor_style": null,
+    "editor_style_handles": Array [],
     "example": null,
     "icon": null,
     "is_dynamic": false,
@@ -8914,7 +10141,9 @@ Array [
     "parent": null,
     "provides_context": Array [],
     "script": null,
+    "script_handles": Array [],
     "style": null,
+    "style_handles": Array [],
     "styles": Array [
       Object {
         "isDefault": true,
@@ -8927,7 +10156,7 @@ Array [
       },
     ],
     "supports": Object {
-      "__experimentalSlashInserter": true,
+      "__experimentalOnEnter": true,
       "anchor": true,
       "color": Object {
         "__experimentalDefaultControls": Object {
@@ -8942,9 +10171,11 @@ Array [
           "fontAppearance": true,
           "fontSize": true,
         },
+        "__experimentalFontFamily": true,
         "__experimentalFontStyle": true,
         "__experimentalFontWeight": true,
         "__experimentalLetterSpacing": true,
+        "__experimentalTextDecoration": true,
         "__experimentalTextTransform": true,
         "fontSize": true,
         "lineHeight": true,
@@ -8955,6 +10186,7 @@ Array [
     "uses_context": Array [],
     "variations": Array [],
     "view_script": null,
+    "view_script_handles": Array [],
   },
   Object {
     "_links": Object {
@@ -9011,7 +10243,9 @@ Array [
     "category": "design",
     "description": "Create a break between ideas or sections with a horizontal separator.",
     "editor_script": null,
+    "editor_script_handles": Array [],
     "editor_style": null,
+    "editor_style_handles": Array [],
     "example": null,
     "icon": null,
     "is_dynamic": false,
@@ -9024,7 +10258,9 @@ Array [
     "parent": null,
     "provides_context": Array [],
     "script": null,
+    "script_handles": Array [],
     "style": null,
+    "style_handles": Array [],
     "styles": Array [
       Object {
         "isDefault": true,
@@ -9057,8 +10293,15 @@ Array [
         },
         "__experimentalSkipSerialization": true,
         "background": true,
+        "enableContrastChecker": false,
         "gradients": true,
         "text": false,
+      },
+      "spacing": Object {
+        "margin": Array [
+          "top",
+          "bottom",
+        ],
       },
     },
     "textdomain": null,
@@ -9066,6 +10309,7 @@ Array [
     "uses_context": Array [],
     "variations": Array [],
     "view_script": null,
+    "view_script_handles": Array [],
   },
   Object {
     "_links": Object {
@@ -9099,6 +10343,9 @@ Array [
         ],
         "type": "string",
       },
+      "backgroundColor": Object {
+        "type": "string",
+      },
       "className": Object {
         "type": "string",
       },
@@ -9106,6 +10353,9 @@ Array [
         "type": "string",
       },
       "customIconColor": Object {
+        "type": "string",
+      },
+      "gradient": Object {
         "type": "string",
       },
       "iconBackgroundColor": Object {
@@ -9144,7 +10394,9 @@ Array [
     "category": "widgets",
     "description": "Display icons linking to your social media profiles or sites.",
     "editor_script": null,
+    "editor_script_handles": Array [],
     "editor_style": null,
+    "editor_style_handles": Array [],
     "example": null,
     "icon": null,
     "is_dynamic": false,
@@ -9160,7 +10412,9 @@ Array [
       "showLabels": "showLabels",
     },
     "script": null,
+    "script_handles": Array [],
     "style": null,
+    "style_handles": Array [],
     "styles": Array [
       Object {
         "isDefault": true,
@@ -9196,6 +10450,15 @@ Array [
         "right",
       ],
       "anchor": true,
+      "color": Object {
+        "__experimentalDefaultControls": Object {
+          "background": false,
+        },
+        "background": true,
+        "enableContrastChecker": false,
+        "gradients": true,
+        "text": false,
+      },
       "spacing": Object {
         "__experimentalDefaultControls": Object {
           "blockGap": true,
@@ -9204,10 +10467,8 @@ Array [
           "horizontal",
           "vertical",
         ],
-        "margin": Array [
-          "top",
-          "bottom",
-        ],
+        "margin": true,
+        "padding": true,
         "units": Array [
           "px",
           "em",
@@ -9222,6 +10483,7 @@ Array [
     "uses_context": Array [],
     "variations": Array [],
     "view_script": null,
+    "view_script_handles": Array [],
   },
   Object {
     "_links": Object {
@@ -9254,6 +10516,9 @@ Array [
       "lock": Object {
         "type": "object",
       },
+      "style": Object {
+        "type": "object",
+      },
       "width": Object {
         "type": "string",
       },
@@ -9261,7 +10526,9 @@ Array [
     "category": "design",
     "description": "Add white space between blocks and customize its height.",
     "editor_script": null,
+    "editor_script_handles": Array [],
     "editor_style": null,
+    "editor_style_handles": Array [],
     "example": null,
     "icon": null,
     "is_dynamic": false,
@@ -9270,10 +10537,21 @@ Array [
     "parent": null,
     "provides_context": Array [],
     "script": null,
+    "script_handles": Array [],
     "style": null,
+    "style_handles": Array [],
     "styles": Array [],
     "supports": Object {
       "anchor": true,
+      "spacing": Object {
+        "__experimentalDefaultControls": Object {
+          "margin": true,
+        },
+        "margin": Array [
+          "top",
+          "bottom",
+        ],
+      },
     },
     "textdomain": null,
     "title": "Spacer",
@@ -9282,6 +10560,7 @@ Array [
     ],
     "variations": Array [],
     "view_script": null,
+    "view_script_handles": Array [],
   },
   Object {
     "_links": Object {
@@ -9363,6 +10642,9 @@ Array [
         "type": "string",
       },
       "className": Object {
+        "type": "string",
+      },
+      "fontFamily": Object {
         "type": "string",
       },
       "fontSize": Object {
@@ -9458,7 +10740,9 @@ Array [
     "category": "text",
     "description": "Create structured content in rows and columns to display information.",
     "editor_script": null,
+    "editor_script_handles": Array [],
     "editor_style": null,
+    "editor_style_handles": Array [],
     "example": null,
     "icon": null,
     "is_dynamic": false,
@@ -9467,7 +10751,9 @@ Array [
     "parent": null,
     "provides_context": Array [],
     "script": null,
+    "script_handles": Array [],
     "style": null,
+    "style_handles": Array [],
     "styles": Array [
       Object {
         "isDefault": true,
@@ -9502,13 +10788,19 @@ Array [
         "__experimentalSkipSerialization": true,
         "gradients": true,
       },
+      "spacing": Object {
+        "margin": true,
+        "padding": true,
+      },
       "typography": Object {
         "__experimentalDefaultControls": Object {
           "fontSize": true,
         },
+        "__experimentalFontFamily": true,
         "__experimentalFontStyle": true,
         "__experimentalFontWeight": true,
         "__experimentalLetterSpacing": true,
+        "__experimentalTextDecoration": true,
         "__experimentalTextTransform": true,
         "fontSize": true,
         "lineHeight": true,
@@ -9519,6 +10811,7 @@ Array [
     "uses_context": Array [],
     "variations": Array [],
     "view_script": null,
+    "view_script_handles": Array [],
   },
   Object {
     "_links": Object {
@@ -9573,7 +10866,9 @@ Array [
     "category": "design",
     "description": "This block is deprecated. Please use the Columns block instead.",
     "editor_script": null,
+    "editor_script_handles": Array [],
     "editor_style": null,
+    "editor_style_handles": Array [],
     "example": null,
     "icon": "columns",
     "is_dynamic": false,
@@ -9582,7 +10877,9 @@ Array [
     "parent": null,
     "provides_context": Array [],
     "script": null,
+    "script_handles": Array [],
     "style": null,
+    "style_handles": Array [],
     "styles": Array [],
     "supports": Object {
       "inserter": false,
@@ -9592,6 +10889,7 @@ Array [
     "uses_context": Array [],
     "variations": Array [],
     "view_script": null,
+    "view_script_handles": Array [],
   },
   Object {
     "_links": Object {
@@ -9628,6 +10926,9 @@ Array [
         "source": "html",
         "type": "string",
       },
+      "fontFamily": Object {
+        "type": "string",
+      },
       "fontSize": Object {
         "type": "string",
       },
@@ -9650,7 +10951,9 @@ Array [
     "category": "text",
     "description": "Insert poetry. Use special spacing formats. Or quote song lyrics.",
     "editor_script": null,
+    "editor_script_handles": Array [],
     "editor_style": null,
+    "editor_style_handles": Array [],
     "example": null,
     "icon": null,
     "is_dynamic": false,
@@ -9662,7 +10965,9 @@ Array [
     "parent": null,
     "provides_context": Array [],
     "script": null,
+    "script_handles": Array [],
     "style": null,
+    "style_handles": Array [],
     "styles": Array [],
     "supports": Object {
       "anchor": true,
@@ -9675,6 +10980,7 @@ Array [
         "link": true,
       },
       "spacing": Object {
+        "margin": true,
         "padding": true,
       },
       "typography": Object {
@@ -9686,6 +10992,7 @@ Array [
         "__experimentalFontStyle": true,
         "__experimentalFontWeight": true,
         "__experimentalLetterSpacing": true,
+        "__experimentalTextDecoration": true,
         "__experimentalTextTransform": true,
         "fontSize": true,
         "lineHeight": true,
@@ -9696,6 +11003,7 @@ Array [
     "uses_context": Array [],
     "variations": Array [],
     "view_script": null,
+    "view_script_handles": Array [],
   },
   Object {
     "_links": Object {
@@ -9736,6 +11044,7 @@ Array [
         "type": "boolean",
       },
       "caption": Object {
+        "__experimentalRole": "content",
         "selector": "figcaption",
         "source": "html",
         "type": "string",
@@ -9751,6 +11060,7 @@ Array [
         "type": "boolean",
       },
       "id": Object {
+        "__experimentalRole": "content",
         "type": "number",
       },
       "lock": Object {
@@ -9788,12 +11098,17 @@ Array [
         "type": "string",
       },
       "src": Object {
+        "__experimentalRole": "content",
         "attribute": "src",
         "selector": "video",
         "source": "attribute",
         "type": "string",
       },
+      "style": Object {
+        "type": "object",
+      },
       "tracks": Object {
+        "__experimentalRole": "content",
         "default": Array [],
         "items": Object {
           "type": "object",
@@ -9804,7 +11119,9 @@ Array [
     "category": "media",
     "description": "Embed a video from your media library or upload a new one.",
     "editor_script": null,
+    "editor_script_handles": Array [],
     "editor_style": null,
+    "editor_style_handles": Array [],
     "example": null,
     "icon": null,
     "is_dynamic": false,
@@ -9815,17 +11132,152 @@ Array [
     "parent": null,
     "provides_context": Array [],
     "script": null,
+    "script_handles": Array [],
     "style": null,
+    "style_handles": Array [],
     "styles": Array [],
     "supports": Object {
       "align": true,
       "anchor": true,
+      "spacing": Object {
+        "margin": true,
+        "padding": true,
+      },
     },
     "textdomain": null,
     "title": "Video",
     "uses_context": Array [],
     "variations": Array [],
     "view_script": null,
+    "view_script_handles": Array [],
+  },
+  Object {
+    "_links": Object {
+      "collection": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types",
+        },
+      ],
+      "curies": Array [
+        Object {
+          "href": "https://api.w.org/{rel}",
+          "name": "wp",
+          "templated": true,
+        },
+      ],
+      "self": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core/post-comments",
+        },
+      ],
+      "up": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-types/core",
+        },
+      ],
+      "wp:render-block": Array [
+        Object {
+          "href": "http://localhost:8080/wp-json/wp/v2/block-renderer/core/post-comments?context=edit",
+        },
+      ],
+    },
+    "ancestor": null,
+    "api_version": 1,
+    "attributes": Object {
+      "align": Object {
+        "enum": Array [
+          "left",
+          "center",
+          "right",
+          "wide",
+          "full",
+          "",
+        ],
+        "type": "string",
+      },
+      "backgroundColor": Object {
+        "type": "string",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "fontSize": Object {
+        "type": "string",
+      },
+      "gradient": Object {
+        "type": "string",
+      },
+      "lock": Object {
+        "type": "object",
+      },
+      "style": Object {
+        "type": "object",
+      },
+      "textAlign": Object {
+        "type": "string",
+      },
+      "textColor": Object {
+        "type": "string",
+      },
+    },
+    "category": "theme",
+    "description": "",
+    "editor_script": null,
+    "editor_script_handles": Array [],
+    "editor_style": null,
+    "editor_style_handles": Array [],
+    "example": null,
+    "icon": null,
+    "is_dynamic": true,
+    "keywords": Array [],
+    "name": "core/post-comments",
+    "parent": null,
+    "provides_context": Array [],
+    "script": null,
+    "script_handles": Array [],
+    "style": "wp-block-post-comments",
+    "style_handles": Array [
+      "wp-block-post-comments",
+      "wp-block-buttons",
+      "wp-block-button",
+    ],
+    "styles": Array [],
+    "supports": Object {
+      "align": Array [
+        "wide",
+        "full",
+      ],
+      "color": Object {
+        "__experimentalDefaultControls": Object {
+          "background": true,
+          "text": true,
+        },
+        "gradients": true,
+        "link": true,
+      },
+      "html": false,
+      "inserter": false,
+      "typography": Object {
+        "__experimentalDefaultControls": Object {
+          "fontSize": true,
+        },
+        "__experimentalFontStyle": true,
+        "__experimentalFontWeight": true,
+        "__experimentalLetterSpacing": true,
+        "__experimentalTextTransform": true,
+        "fontSize": true,
+        "lineHeight": true,
+      },
+    },
+    "textdomain": null,
+    "title": "",
+    "uses_context": Array [
+      "postId",
+      "postType",
+    ],
+    "variations": Array [],
+    "view_script": null,
+    "view_script_handles": Array [],
   },
 ]
 `;

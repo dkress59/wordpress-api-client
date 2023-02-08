@@ -10,11 +10,11 @@ Array [
         },
       ],
     },
-    "author": "Delicious Brains",
-    "author_uri": "https://www.advancedcustomfields.com",
+    "author": "WP Engine",
+    "author_uri": "https://wpengine.com/?utm_source=wordpress.org&#038;utm_medium=referral&#038;utm_campaign=plugin_directory&#038;utm_content=advanced_custom_fields",
     "description": Object {
       "raw": "Customize WordPress with powerful, professional and intuitive fields.",
-      "rendered": "Customize WordPress with powerful, professional and intuitive fields. <cite>By <a href=\\"https://www.advancedcustomfields.com\\">Delicious Brains</a>.</cite>",
+      "rendered": "Customize WordPress with powerful, professional and intuitive fields. <cite>By <a href=\\"https://wpengine.com/?utm_source=wordpress.org&#038;utm_medium=referral&#038;utm_campaign=plugin_directory&#038;utm_content=advanced_custom_fields\\">WP Engine</a>.</cite>",
     },
     "name": "Advanced Custom Fields",
     "network_only": false,
@@ -24,7 +24,7 @@ Array [
     "requires_wp": "",
     "status": "inactive",
     "textdomain": "acf",
-    "version": "5.12.3",
+    "version": "6.0.7",
   },
   Object {
     "_links": Object {
