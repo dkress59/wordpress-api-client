@@ -8,6 +8,7 @@ __tests__/
 .yarn/
 .all-contributorsrc
 .codecov.yaml
+.pnp.*js
 coverage/
 jest.config.ts
 sonar-project.properties
